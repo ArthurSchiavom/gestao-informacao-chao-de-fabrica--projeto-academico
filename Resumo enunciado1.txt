@@ -1,0 +1,264 @@
+Considerar como sendo apenas uma fábrica
+A fábrica tem:
+ - um catálogo de produtos
+ - um catálogo de matérias primas
+ - imensas máquinas para produzir os diferentes produtos organizadas em linhas de produção
+As máquinas comunicam através de ficheiros de texto como CSV e JSON. No entanto, isto vai mudar para um protocolo de transmissão simples (em rede?) posteriormente
+
+Matéria prima:
+ - Especifica:
+    * Código interno
+    * Descrição
+    * Categoria
+    * Ficha técnica (em pdf)
+    
+Produto:
+ - Especifica:
+    * Código único
+    * Código comercial
+    * Descrição breve
+    * Descrição completa
+?    * Ficha de produção -> "A inexistência de uma ficha de produção inviabiliza a produção do produto". Isto quer dizer que é opcional? Qual o impacto na aplicação se não tiver tal ficha?
+
+Ordem de produção:
+ - Especifica:
+    * Identificador
+    * Data de emissão
+    * Data de execução
+    * Identificação do produto a produzir
+    * Identificação da encomenda
+    * Estado:
+?       º Pendente - ?
+       º Em Execução - Atribuído automaticamente ao analisar mensagens de máquinas
+       º Execução Parada Temporariamente - Atribuído automaticamente ao analisar mensagens de máquinas
+       º Concluída - Atribuído automaticamente ao analisar mensagens de máquinas
+       º Suspensa - Atribuído por um utilizador
+ - Pode ser criado por um utilizador na UI ou importado através de um ficheiro
+
+Comunicados das máquinas:
+ - Através desta informação, devem ser atualizados:
+    * Consumos e respetivos desvios
+?    * Tempos de atividade -> é necessário guardar o tempo de emissão da mensagem ou basta registar os tempos bruto e efetivo de execução
+    * Lotes produzidos
+    
+Encomenda:
+ - Especifica:
+    * Identificador
+    
+Máquina:
+ - Especifica:
+    * Identificador (aka código interno)
+?    * Número de série -> há regras apra este numéro?
+    * Descrição
+?    * Data de instalação -> Qual a precisão? Dia, hora, minuto..?
+    * Marca
+    * Modelo
+    * Ficheiro de configuração associado a uma descrição -> A edição e manutenção destes ficheiros não faz parte da nossa aplicação
+!    * Poderão ser adicionados mais -> Identificador de protocolo
+    
+Linha de produção:
+ - Sequência contínua de máquinas
+ 
+Depósito:
+ - Especifica:
+?    * Código alfanumérico -> Regras? Deve ser único?
+    * Descrição
+    
+Processamento de mensagens:
+? - Pode ser ativado e desativado para linhas de produção *específicas*
+? - Para a ativação, é especificado: -> o que quer dizer "de forma recorrente"? -> o que quer dizer "de forma recorrente"? -> Diferença entre o ponto 4a, 5 e 1c?
+?    * Duração + Momento de início OU data/hora de início e de fim OU de X em X minutos + momento de início -> Isto é o mesmo que processamento de mensagens ou algo à parte?
+
+
+Erros de processamento de mensagens:
+ - Especifica:
+    * Estado - Ativo/Arquivado
+    * Tipo
+ - A mudança de estado deve ser feita por um utilizador
+ 
+Mensagens:
+ - Ficheiros de texto em diferentes formatos
+ - Os ficheiros são importados MAS no futuro a informação será recebida através de um protocolo
+ - Devem ser pré-validadas relativamente a:
+    * Formatos/estruturas desconhecidas
+    * Data no futuro (com diferença de 1+ dias)
+    * Duplicação
+    * Tipo de dados inválidos
+? - A rejeição de mensagens deve ser logada para um ficheiro -> Estes ficheiros devem ser mostrados no modelo domínio?
+ - Após aceitação, ficam no sistema até serem processadas
+ - Durante o processamento deve ser validado:
+    * Tipo de dados inválidos
+    * Referência a elementos não especificados no sistema
+ - A informação deve ser complementada com:
+    * Linha de produção
+    * Ordem de produção
+    * Opcionalmente referência a outras mensagens
+ 
+Configuração de máquinas:
+ - Utilizadores podem especificar ficheiros de configuração de máquinas para serem enviados para as máquinas
+
+Utilizador:
+ - Especifica:
+?    * Password -> Regras?
+    * Funções
+    * Estado - ativado/desativado
+    * Email
+    * Tipo - Pessoa/Serviço Externo
+ - Pode fazer login
+? - Ao alterar o estado de um utilizador, este deve ser notificado e a causa de desativação deve ser registada. O motivo de desativação é pré-definido (constantes) -> Mais alguma informação, como a data de desativação, devem ser registados?
+ - A password pode ser alterada. Neste caso uma nova password aleatória é gerada e enviada por email ao utilizador
+ - Listagem de utilizadores distingue utilizados ativos/não ativos e pessoa/serviço externo -> Poderão ser listados com filtro de estado e/ou tipo
+ 
+Motivo de desativação:
+ - Especifica:
+    * Motivo
+
+Função de utilizador:
+ - Especifica:
+    * Funcionalidades disponíveis
+ - Podem representar pessoas ou sistemas externos. Sistemas externos não utilizam a UI.
+
+
+_________________________________________________________________________________________________________
+
+
+Catálogo de produtos:
+ - Pode ser inserida manualmente por um utilizador ou importada de um ficheiro
+ 
+Comunicados das máquinas:
+ - É garantido ter ordem sequencial para cada máquina
+ - Pode não ter ordem sequencial para conjuntos de mensagens de diferentes máquinas
+ - Carregam uma timestamp que indica a hora de criação da mensagem
+ - Devem ser analisadas por período e tendo a garantia de todas as mensagens desse período já foram recebidas
+ - Não contêm toda a informação necessária para o processamento, pelo que devem ser deduzidas
+ - Devem ser validados
+ - Fornecidos por cada máquina e por uma máquina que gera informação relativa a toda a linha de produção
+ - Nem todas as máquinas (excluindo a da linha de produção) conseguem identificar a ordem de produção, pelo que é preciso inferir pela primeira máquina da mesma linha de produção
+ - A assumir que cada linha de produção apenas produz um produto de cada vez
+ - Quando acontecer uma menção a informação não presente no sistema (e.g. ordem de produção, produto, matéria-prima), os utilizadores devem ser notificados para a poderem introduzir. O processamento deve ocorrer (refeito ou continuado) posteriormente.
+ - Erros numa linha de produção não afeta as restantes
+ - Podem ser do tipo:
+    * Início de atividade - Enviada sempre que começam a trabalhar numa nova ordem de produção (contexto). Nem sempre presente.
+    * Fim de atividade - Indica que a máquina parou de trabalhar numa ordem de produção. Poderá ou não mencionar a ordem
+    * Paragem forçada - Indica que a máquina parou temporariamente. Inclui a razão de paragem sob forma de um código.
+    * Retoma de atividade - Indica que a máquina voltou a operar após uma paragem forçada
+    * Consumo - Indica que a máquina recebeu mais matéria prima:
+        º Informa a matéria prima e a quantidade
+        º Se a origem foi um depósito, informa a identificação do depósito. Se foi outra máquina, não indica nada.
+    * Produção - Indica que foi produzida uma certa quantidade de produto. Identifica o produto, a quantidade e opcionalmente informação sobre o lote
+    * Entrega de produção - Indica que uma máquina depositou uma certa quantidade de produto. Identifica o produto, a quantidade, o identificador do depósito e opcionalmente informação sobre o lote.
+    * Estorno - Indica que deu saída da máquina uma determinada quantidade de matéria-prima cujo destino é um depósito. É especificada a matéria prima, a quantidade e a identificação do depósito. Este tipo de mensagem distingue-se de “Entrega de Produção” por ser gerada em resultado de um consumo prévio e excessivo de matéria-prima ou em resultado de “desperdícios” gerados aquando da produção do produto pretendido e que são posteriormente reutilizáveis.
+ - Todos os tipos de mensagens especificam:
+    * Identificador da máquina
+    * Identificador do tipo de mensagem
+    * Data/hora de geração com precisão ao segundo
+    * Informação específica ao tipo de mensagem. Se esta informação não for uma das descritas anteriormente, deverá ser ignorada.
+ - São consideradas como duplicadas as mensagens que possuírem a mesma máquina de origem, mesmo tipo de mensagem e mesma data/hora de geração. Estas devem ser ignoradas.
+ - Os tipos de mensagem apresentados são referentes a tipos de mensagens aplicacionais e que não devem ser confundidos com os tipos de mensagens subjacente ao protocolo de comunicação do sistema com as máquinas (cf. descrito em Parte III – Protocolo de Comunicação).
+Ordens de produção:
+ - Têm um identificador string
+ - Relativas a um produto
+ - Relativas a 1+ encomendas recebidas pela empresa
+ - Parâmetros que devem ser conhecidos:
+    * Está ou não em execução
+?    * Hora início de execução -> Qual a precisão?
+?    * Hora fim de execução -> Qual a precisão?
+?    * Máquinas -> No momento considero que cada ordem está associada a uma linha de produção. Devo considerar o caso de apenas certas máquinas da linha trabalharem e registar essas máquinas ou posso associar apenas a linha de produção
+    * [Deduzível] Linha de produção
+    * Tempo bruto de execução por máquina
+    * Tempo efetivo de execução por máquina
+    ** [Deduzível] Tempo bruto de execução relativo a cada máquina (todo o tempo decorrido)
+    * Tempo efetivo de execução relativo a cada máquina (não considerado paragens devido a falhas)
+    * Consumos de matéria
+    * [ Deduzível ] Potenciais desvios no consumo de matéria relativamente à ficha de produção (bill of materials)
+    * Lotes e respetivas quantidades de produto resultantes
+ - Produzem múltiplos lotes com X unidades de produto
+Ficha de produção:
+? - Em quê consiste?
+ - Prevê quantidade de matéria prima gasta na produção de um produto
+Ordens e encomendas:
+ - Geridas por um sistema externo e apenas é fornecido à aplicação o que necessita
+ - Podem ser introduzidas manualmente
+Sistemas externos:
+ - Fornecem informação sobre:
+    * Produtos finais
+    * Ordens de produção
+?   * Outras -> Quais?
+?- A informação será fornecida através de ficheiros (csv, json,...), mas o sistema deve estar preparado para a implementação de outras fontes como serviços web e estruturas/esquemas -> Exemplos de ficheiros?
+ - Nem toda a informação fornecida é relevante, necessário filtrar.
+O sistema será capaz de exportar a informação para ficheiros em diferentes formatos e esquemas:
+?-Quais?
+Gestão da informação:
+? - O sistema deve permitir a remoção, edição e adição da informação guardada através da UI e a partir de ficheiros -> é suposto suportar remoção e edição a partir de ficheiros? Se sim, como? Comandos?
+
+Matéria prima:
+ - Têm IDs string
+ 
+Após a análise das mensagens, o sistema deve associar a cada ordem de produção:
+? - Movimentos de stock (entrada/saída) de produtos e matérias-primas ocorridos (diferente do dado na ficha de produção) -> Devo incluir a hora? Se sim, com que precisão?
+? - Desvio de gastos relativamente à ficha de produção devem ser discriminados -> o enunciado diz "quantificadas". Isto refere-se a indicar a quantidade apenas ou outros valores como percentagem?
+ - Período de execução
+ - Máquinas utilizadas e durante quanto tempo cada uma esteve em atividade e/ou parada
+ - Produtos e quantidades obtidas bem como os respetivos lotes
+Produtos têm IDs string
+Utilizadores:
+ - Não é necessário um sistema de autenticação e gestão de utilizadores.
+ - Podem ser de vários tipos (gestor de produção, gestor de chão de fábrica, administrador) e possuem perfis.
+ - As funcionalidades disponíveis dependem do tipo de utilizador.
+ - Perfis conhecidos:
+    * Gestor de Produção - Responsável tanto pela manutenção da informação relativa a produtos e matérias-primas usados como pelo controlo e gestão de informação associada às ordens de produção.
+    * Gestor de Chão de Fábrica - responsável pela especificação das linhas de produção da fábrica e respetivas máquinas
+    * Administrador - responsável pela gestão (e.g. criar, desativar) dos diversos utilizadores do sistema e respetivas permissões bem como pela configuração geral do sistema
+
+    
+    
+    
+    
+    
+
+
+GLOSSÁRIO:
+3. Glossário
+No âmbito simplificado deste projeto utilizam-se as seguintes definições:
+• Chão de Fábrica: expressão genérica usada para designar (parte ou o todo) dos elementos (e.g.
+máquinas, funcionários, atividades) que participam nas tarefas produtivas de uma indústria, por
+contraponto com os elementos dedicados à gestão e administração do processo.
+• Depósito: corresponde a um local onde são armazenados os produtos e as matérias-primas. Estes
+    locais são comuns a todas as linhas de produção existentes na fábrica.
+• Fábrica: é um local estruturado em linhas de produção com vista ao fabrico de um ou mais
+    produtos.
+• Ficha de Produção: corresponde à lista de matérias-primas e respetivas quantidades usadas para
+    produzir uma quantidade standard (e.g. 1 tonelada; 100 unidades) de um dado produto.
+• Linha de Produção: organização sequencial de um conjunto de máquinas.
+• Lote: corresponde a uma característica atribuída a um conjunto de exemplares de um produto.
+• Máquina: é um equipamento produtivo capaz de realizar operações com vista a produzir um
+    produto.
+• Matéria-Prima: corresponde a um material e/ou produto usado no processo de fabrico de um ou
+    mais produtos.
+• Mensagem (no âmbito de Máquina): corresponde a um conjunto de dados gerado pela máquina
+    e devidamente estruturado de acordo com um determinado tipo de mensagem.
+• Movimento de Stock: corresponde à informação que regista a saída ou entrada de uma
+    determinada quantidade de matéria-prima ou produto (em conformidade com uma unidade de
+    medida) num determinado depósito em consequência da execução de uma dada ordem de
+    produção.
+• Ordem de Produção: documento em que se autoriza/solicita a produção de um produto numa
+    determinada quantidade (a pretendida) através de um conjunto de matérias-primas e respetivas
+    quantidades (de referência).
+• Produto: corresponde a um item que uma fábrica é capaz de produzir. Nalguns casos, um produto
+    pode ser utilizado como matéria-prima para a produção de outro produto.
+• Tempo Bruto (de execução): corresponde à diferença entre a data/hora indicada numa mensagem
+    de “Fim de Atividade” (e.g. 10h13) e a data/hora indicada numa outra mensagem de “Inicio de
+Atividade” (e.g. 10h00). Neste exemplo, o tempo bruto seria de 13 minutos.
+• Tempo Efetivo (de execução): corresponde ao tempo bruto (de execução) subtraído do somatório
+    do tempo despendido em paragens. O tempo de paragem corresponde à diferença entre a
+    data/hora indicada numa mensagem de “Retoma de Atividade” (e.g. 10h09) e a data/hora
+    indicada numa outra mensagem de “Paragem Forçada” (e.g. 10h07). Neste exemplo, o tempo de
+    paragem seria de 2 minutos. Assim, considerando um tempo bruto de 13 minutos, o tempo efetivo
+    seria de 11 minutos.
+• Tipo de Mensagem (no âmbito de Máquina): corresponde a um valor que permite
+    determinar/classificar que género de conteúdo e estrutura consta de uma mensagem.
+• Unidade de Medida: alguns exemplos são: (i) unidades; (ii) quilogramas; (iii) metro cúbico.
+• Unidade Industrial: refere-se uma entidade e local dedicado à transformação de matérias-primas
+    em produtos.
+    
+    

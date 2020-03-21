@@ -1,0 +1,36 @@
+Cada commit deve estar associado a um issue.
+
+exemplos:
+"UC-D-002: (...)" (use case)
+"IS-D-002: (...)" (issue não relacionado com use cases específicos)
+
+A - Análise
+  Conversar com o cliente para perceber os seus requisitos e o seu
+vocabulário. Construir glossário de conceitos. Perceber o contexto do caso de
+uso e quais os invariantes de domínio. Que tipo de interacção existirá com o
+utilizador? Que tipo de utilizador pode executar este caso de uso?
+
+
+De - Design
+  Criar testes unitários que capturem os invariantes de domínio. Decidir
+que classes criar, onde as colocar, que responsabilides lhe atribuir, quais as
+interações existentes entre objetos para realizar o caso de uso.
+
+
+P - Planeamento de testes
+  Que casos de testes devem ser efetuados para validar
+a funcionalidade a entregar ao cliente (funcionalidade end-to-end; testes
+funcionais manuais)? Que dados de entrada são necessários para os testes? Que
+(dados de) resultados são esperados em cada caso de teste de acordo com os
+dados de entrada?
+
+
+DT - Desenvolvimento e testes
+  Codificação de acordo com o design e execução de
+testes de desenvolvimento (unitários e funcionais).
+
+
+I - Integração
+  Junção do código na base de código comum do repositório,
+execução de testes unitários a todo o sistema. Execução dos testes funcionais
+principais.
