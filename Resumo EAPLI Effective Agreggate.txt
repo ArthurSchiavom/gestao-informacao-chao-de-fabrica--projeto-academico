@@ -1,4 +1,4 @@
-Use small aggregates. Each aggregate should only include those that must consistent with eachother
+Use small aggregates. Each aggregate should only include those that must be consistent with eachother
 When a transaction commits, everything must be consistent
 To design aggreagates, we must use transactional analysis (part 1, p. 4)
 Only one aggregate can be modified per transaction as a thumb rule, but rare exceptions are possible.
