@@ -18,7 +18,7 @@ Produto:
     * Código comercial
     * Descrição breve
     * Descrição completa
-?    * Ficha de produção -> "A inexistência de uma ficha de produção inviabiliza a produção do produto". Isto quer dizer que é opcional? Qual o impacto na aplicação se não tiver tal ficha?
+?    * Ficha de produção -> "A inexistência de uma ficha de produção inviabiliza a produção do produto". Isto quer dizer que é opcional? Qual o impacto na aplicação se não tiver tal ficha? -> Em que consiste?
 
 Ordem de produção:
  - Especifica:
