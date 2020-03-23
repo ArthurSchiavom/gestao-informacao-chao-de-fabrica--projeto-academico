@@ -177,7 +177,7 @@ Ficha de produção:
 ? - Em quê consiste?
  - Prevê quantidade de matéria prima gasta na produção de um produto
 Ordens e encomendas:
- - Geridas por um sistema externo e apenas é fornecido à aplicação o que necessita
+? - Geridas por um sistema externo e apenas é fornecido à aplicação o que necessita -> o quê?
  - Podem ser introduzidas manualmente
 Sistemas externos:
  - Fornecem informação sobre:
