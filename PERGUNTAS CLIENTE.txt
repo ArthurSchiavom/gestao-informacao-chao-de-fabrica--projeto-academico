@@ -1,39 +1,39 @@
-1. As mensagens devem ser guardadas indefinitivamente, até serem eliminadas por um utilizador? --> "é importante que o sistema a desenvolver permita a gestão (e.g. inserir, editar, apagar) de
-toda a informação necessária ao seu bom funcionamento"
+[Postphoned as not relative to MD] - 1. As mensagens devem ser guardadas indefinitivamente, até serem eliminadas por um utilizador? --> "é importante que o sistema a desenvolver permita a gestão (e.g. inserir, editar, apagar) de toda a informação necessária ao seu bom funcionamento"
 
-2. "é importante que o sistema a desenvolver permita a gestão (e.g. inserir, editar, apagar) de
+[Postphoned as not relative to MD] - 2. "é importante que o sistema a desenvolver permita a gestão (e.g. inserir, editar, apagar) de
 toda a informação necessária ao seu bom funcionamento, seja por introdução direta da mesma (via
 UI) seja por mecanismos de importação dessa informação." --> devemos permitir a remoção e edição através de ficheiros também? Nesse caso como, através de comandos no ficheiro?
 
-3. p. 5 -> "Opcionalmente, pode constar informação sobre o lote" -> Mas nesse caso o lote deve ser deduzido ou simplesmente não tem lote?
+& 3. p. 5 -> "Opcionalmente, pode constar informação sobre o lote" -> Mas nesse caso o lote deve ser deduzido ou simplesmente não tem lote?
+        -> algumas podem não ter lote
 
-4. Tenho já uma uma entidade que guarda o registo de todas as matérias primas. Pensei que esta entidade poderia funcionar como catálogo. No entanto, se a informação for removida do catálogo, certos registos passam a referenciar coisas que não existem. Exemplo: Foi produzido aço do tipo 1122, mas o aço 1122 foi removido do sistema. O movimento "saída de 2kg de aço 1122 do depósito 344" passa a ser inválido, pois o sistema já não conhece o aço 1122. Então a minha questão é: é possível a remoção de uma matéria prima do catálogo?
+& 4. Tenho já uma uma entidade que guarda o registo de todas as matérias primas. Pensei que esta entidade poderia funcionar como catálogo. No entanto, se a informação for removida do catálogo, certos registos passam a referenciar coisas que não existem. Exemplo: Foi produzido aço do tipo 1122, mas o aço 1122 foi removido do sistema. O movimento "saída de 2kg de aço 1122 do depósito 344" passa a ser inválido, pois o sistema já não conhece o aço 1122. Então a minha questão é: é possível a remoção de uma matéria prima do catálogo?
 Essa resposta também se aplica ao catálogo de produtos?
+        -> no nosso projeto o catálogo apresenta todos os produtos do sistema, logo é desnecessário, pois temos já a tabela de produtos
 
-5. "A inexistência de uma ficha de produção inviabiliza a produção do produto". Isto quer dizer que é opcional? Qual o impacto na aplicação se não tiver tal ficha? -> Em que consiste?
+& 5. Confirmação: "A inexistência de uma ficha de produção inviabiliza a produção do produto". Isto quer dizer que é opcional?
+        -> pode não ter ficha de produção. Nesse caso deve ser emitido um erro.
 
-6. Em certas partes do enunciado é dito que os tempos bruto e efetivo de execução são relativos a máquinas (p.3 "detalhe de
+& 6. Em certas partes do enunciado é dito que os tempos bruto e efetivo de execução são relativos a máquinas (página 3, 2º parágrafo: "detalhe de
 tempos (brutos e efetivos) por máquina") enquanto que em outras partes é dito que são relativos a ordems de execução (p.8 ponto 5b). Qual é o correto ou qual é a relação entre os 2?
+        -> Conta como tempo de execução da ordem quando há pelo menos 1 máquina a trabalhar.
 
-7. Há regras para o número de série das máquinas?
+& 7. Novas regras -> Não existem máquinas com o mesmo número de série; Os códigos dos depósitos não excedem os 10 caracteres; Password: os critérios variam de cliente para cliente e assentam sempre na número de caracteres, uso de minúsculas e maisculas e números; A descrição breve de uma produto tem no máximo 30 caracteres.
 
-8. Há regras para o código alfanumérico dos depósitos?
+& 9. p.8-9 Confirmação: O processamento de mensagens é ativado e desativado para linhas de produção específicas, pelo que é necessário saber a linha para agendamento, para além daqueles indetificados, correto?
+        -> Sim, é necessário a linha de produção
 
-9. Confirmação: O processamento de mensagens é ativado e desativado para linhas de produção específicas, pelo que é necessário saber a linha para agendamento, correto?
+& 10. p. 8 -> "Ativar consiste em informar o sistema que o processamento de mensagens deve ocorrer de forma recorrente para uma determinada linha de produção." - O que quer dizer de forma recorrente? Pode clarificar?
+        -> fez referência ao dicionário, mas vou assumir que é apenas que as mensagens são continuamente processadas
 
-10. p. 8 -> "Ativar consiste em informar o sistema que o processamento de mensagens deve ocorrer de forma recorrente para uma determinada linha de produção." - O que quer dizer de forma recorrente?
+[postphoned] - 12. p.10 ponto 4.5.3 - Mais alguma informação sobre a desativação deve ser guardada, como a data de desativação?
 
-11. regras para password do utilizador?
+& 13. Uma ordem de produção pode estar associada a múltiplas linhas de produção? ------- Não, 1 ordem de produção apenas usa uma linha de produção
 
-12. p.10 ponto 4.5.3 - Mais alguma informação sobre a desativação deve ser guardada, como a data de desativação?
+& 14. p.3 Como é que os sistemas externos relativos às ordens e encomendas enviam informação para o sistema?
+        -> Importação de ficheiros
 
-13. Uma ordem de produção pode estar associada a múltiplas linhas de produção?
-
-14. p.3 Como é que os sistemas externo relativos às ordens e encomendas envia informação para o sistema?
-
-15. Devemos guardar todas as mensagens mesmo após serem analisadas?
-
-16. p.5 No enunciado é dito que o desvio de gastos relativamente à ficha de produção devem ser quantificados. Quantificadas como exatamente? exemplos: percentagem; quantidade a mais/menos utilizada
+[Postphoned as not relative to MD] - 16. p.5 No enunciado é dito que o desvio de gastos relativamente à ficha de produção devem ser quantificados. Quantificadas como exatamente? exemplos: percentagem; quantidade a mais/menos utilizada
 
 
 ???????? processamento de mensagens de X em X minutos + momento de início -> confirmar que é relativo ao processamento de mensagens no enunciado

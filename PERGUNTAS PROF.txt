@@ -1,5 +1,5 @@
-1. Pedir ao prof para ver o caso dos processadores no nosso MD. Os processadores efetuam ações, não são contentores. Nesse caso fazem parte do MD?
+!!! 1. Pedir ao prof para ver o caso dos processadores no nosso MD. Os processadores efetuam ações, não são contentores. Nesse caso fazem parte do MD? ------ fazem
 
-2. Quando usar composição, agregação ou associação. Uma máquina possui um ID, ou seja, o ID não existe sem a máquina, logo deveria ser por composição, mas o professor das teóricas deu a entender que não, o que pôs os nossos conceitos em causa.
+!! 2. Quando usar composição, agregação ou associação. Uma máquina possui um código único, ou seja, o ID não existe sem a máquina, logo deveria ser por composição, mas o professor das teóricas deu a entender que não, o que pôs os nossos conceitos em causa. -> apenas usar associações
 
-3. Devemos incluir funcionalidades? São escritas com verbos e um dos emails disse que tal seria raro.
+!! 3. Devemos incluir funcionalidades? São escritas com verbos e um dos emails disse que tal seria raro. ---- não
