@@ -1,0 +1,9 @@
+quase todos os atributos de uma classe devem ser públicos
+
+a classe não deve ter getters e setters (regra geral)
+
+em vez de retornar os seus valores, a classe deve pedir a informação e retornar um resultado, atendendo então ao negócio
+
+usar eventos no modelo domínio -> watchdog, listener (observer, subscriber) e something
+
+usar serviços no modelo domínio

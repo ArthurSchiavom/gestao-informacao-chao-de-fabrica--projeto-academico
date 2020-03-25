@@ -18,7 +18,7 @@ Produto:
     * Código comercial
     * Descrição breve
     * Descrição completa
-?    * Ficha de produção -> "A inexistência de uma ficha de produção inviabiliza a produção do produto". Isto quer dizer que é opcional? Qual o impacto na aplicação se não tiver tal ficha? -> Em que consiste?
+?!    * Ficha de produção -> "A inexistência de uma ficha de produção inviabiliza a produção do produto". Isto quer dizer que é opcional? Qual o impacto na aplicação se não tiver tal ficha? -> Em que consiste?
 
 Ordem de produção:
  - Especifica:
@@ -28,7 +28,7 @@ Ordem de produção:
     * Identificação do produto a produzir
     * Identificação da encomenda
     * Estado:
-?       º Pendente - ?
+       º Pendente - Atribuído automaticamente como estado inicial
        º Em Execução - Atribuído automaticamente ao analisar mensagens de máquinas
        º Execução Parada Temporariamente - Atribuído automaticamente ao analisar mensagens de máquinas
        º Concluída - Atribuído automaticamente ao analisar mensagens de máquinas
@@ -38,7 +38,7 @@ Ordem de produção:
 Comunicados das máquinas:
  - Através desta informação, devem ser atualizados:
     * Consumos e respetivos desvios
-?    * Tempos de atividade -> é necessário guardar o tempo de emissão da mensagem ou basta registar os tempos bruto e efetivo de execução
+    * Tempos de atividade
     * Lotes produzidos
     
 Encomenda:
@@ -48,9 +48,9 @@ Encomenda:
 Máquina:
  - Especifica:
     * Identificador (aka código interno)
-?    * Número de série -> há regras apra este numéro?
+?!    * Número de série -> há regras apra este numéro?
     * Descrição
-?    * Data de instalação -> Qual a precisão? Dia, hora, minuto..?
+    * Data de instalação
     * Marca
     * Modelo
     * Ficheiro de configuração associado a uma descrição -> A edição e manutenção destes ficheiros não faz parte da nossa aplicação
@@ -61,13 +61,15 @@ Linha de produção:
  
 Depósito:
  - Especifica:
-?    * Código alfanumérico -> Regras? Deve ser único?
+?!    * Código alfanumérico -> Regras? Deve ser único?
     * Descrição
     
 Processamento de mensagens:
-? - Pode ser ativado e desativado para linhas de produção *específicas*
+ - Pode ser ativado e desativado para linhas de produção *específicas*
 ? - Para a ativação, é especificado: -> o que quer dizer "de forma recorrente"? -> o que quer dizer "de forma recorrente"? -> Diferença entre o ponto 4a, 5 e 1c?
-?    * Duração + Momento de início OU data/hora de início e de fim OU de X em X minutos + momento de início -> Isto é o mesmo que processamento de mensagens ou algo à parte?
+?    * Duração + Momento de início 
+          OU data/hora de início e de fim 
+          OU de X em X minutos + momento de início -> Isto é o mesmo que processamento de mensagens ou algo à parte?
 
 
 Erros de processamento de mensagens:
@@ -84,7 +86,7 @@ Mensagens:
     * Data no futuro (com diferença de 1+ dias)
     * Duplicação
     * Tipo de dados inválidos
-? - A rejeição de mensagens deve ser logada para um ficheiro -> Estes ficheiros devem ser mostrados no modelo domínio?
+ - A rejeição de mensagens deve ser logada para um ficheiro -> Estes ficheiros devem ser mostrados no modelo domínio?
  - Após aceitação, ficam no sistema até serem processadas
  - Durante o processamento deve ser validado:
     * Tipo de dados inválidos
@@ -99,13 +101,13 @@ Configuração de máquinas:
 
 Utilizador:
  - Especifica:
-?    * Password -> Regras?
+?!    * Password -> Regras?
     * Funções
     * Estado - ativado/desativado
     * Email
     * Tipo - Pessoa/Serviço Externo
  - Pode fazer login
-? - Ao alterar o estado de um utilizador, este deve ser notificado e a causa de desativação deve ser registada. O motivo de desativação é pré-definido (constantes) -> Mais alguma informação, como a data de desativação, devem ser registados?
+?! - Ao alterar o estado de um utilizador, este deve ser notificado e a causa de desativação deve ser registada. O motivo de desativação é pré-definido (constantes) -> Mais alguma informação, como a data de desativação, devem ser registados?
  - A password pode ser alterada. Neste caso uma nova password aleatória é gerada e enviada por email ao utilizador
  - Listagem de utilizadores distingue utilizados ativos/não ativos e pessoa/serviço externo -> Poderão ser listados com filtro de estado e/ou tipo
  
@@ -161,9 +163,9 @@ Ordens de produção:
  - Relativas a 1+ encomendas recebidas pela empresa
  - Parâmetros que devem ser conhecidos:
     * Está ou não em execução
-?    * Hora início de execução -> Qual a precisão?
-?    * Hora fim de execução -> Qual a precisão?
-?    * Máquinas -> No momento considero que cada ordem está associada a uma linha de produção. Devo considerar o caso de apenas certas máquinas da linha trabalharem e registar essas máquinas ou posso associar apenas a linha de produção
+    * Hora início de execução
+    * Hora fim de execução
+?!    * Máquinas -> Uma ordem pode utilizar várias linhas de producão?
     * [Deduzível] Linha de produção
     * Tempo bruto de execução por máquina
     * Tempo efetivo de execução por máquina
@@ -174,20 +176,20 @@ Ordens de produção:
     * Lotes e respetivas quantidades de produto resultantes
  - Produzem múltiplos lotes com X unidades de produto
 Ficha de produção:
-? - Em quê consiste?
  - Prevê quantidade de matéria prima gasta na produção de um produto
 Ordens e encomendas:
-? - Geridas por um sistema externo e apenas é fornecido à aplicação o que necessita -> o quê?
+?! - Geridas por um sistema externo e apenas é fornecido à aplicação o que necessita -> como?
  - Podem ser introduzidas manualmente
 Sistemas externos:
  - Fornecem informação sobre:
     * Produtos finais
     * Ordens de produção
 ?   * Outras -> Quais?
-?- A informação será fornecida através de ficheiros (csv, json,...), mas o sistema deve estar preparado para a implementação de outras fontes como serviços web e estruturas/esquemas -> Exemplos de ficheiros?
+ - A informação será fornecida através de ficheiros (csv, json,...), mas o sistema deve estar preparado para a implementação de outras fontes como serviços web e estruturas/esquemas
  - Nem toda a informação fornecida é relevante, necessário filtrar.
+ 
 O sistema será capaz de exportar a informação para ficheiros em diferentes formatos e esquemas:
-?-Quais?
+ - Quais?
 Gestão da informação:
 ? - O sistema deve permitir a remoção, edição e adição da informação guardada através da UI e a partir de ficheiros -> é suposto suportar remoção e edição a partir de ficheiros? Se sim, como? Comandos?
 
@@ -195,7 +197,7 @@ Matéria prima:
  - Têm IDs string
  
 Após a análise das mensagens, o sistema deve associar a cada ordem de produção:
-? - Movimentos de stock (entrada/saída) de produtos e matérias-primas ocorridos (diferente do dado na ficha de produção) -> Devo incluir a hora? Se sim, com que precisão?
+ - Movimentos de stock (entrada/saída) de produtos e matérias-primas ocorridos (diferente do dado na ficha de produção)
 ? - Desvio de gastos relativamente à ficha de produção devem ser discriminados -> o enunciado diz "quantificadas". Isto refere-se a indicar a quantidade apenas ou outros valores como percentagem?
  - Período de execução
  - Máquinas utilizadas e durante quanto tempo cada uma esteve em atividade e/ou parada

@@ -1,12 +1,22 @@
 Use small aggregates. Each aggregate should only include those that must be consistent with eachother
+
 When a transaction commits, everything must be consistent
+
 To design aggreagates, we must use transactional analysis (part 1, p. 4)
+
 Only one aggregate can be modified per transaction as a thumb rule, but rare exceptions are possible.
+
 Multiple transactions must be used for multiple aggregate modification, by having a reference to another aggregate's identity.
+
 To manage multiple transactions, use Services such as ProductBacklogItemService, which can then contact multiple repositories
+
 Any rule that spans AGGREGATES will not be expected to be up-to-date at all times.
+
 eventual consistency - it can take a while for multiple aggregates to become consistent (seconds, minutes, hours, days..) -> Domain Event Publisher publishes a domain event such as DomainEventPublisher.instance().publish(new BacklogItemCommited(...)). Each event subscriber receives a copy of the aggregate and performs their (asynchronous) task based on it.
+
 what if some fails due to concurrency ^ -> keep retrying until a limit is reached then try to compensate or report the error
+
 use transactional consistency or eventual consistency? -> if it's executing user's responsibility to maintain consistency, then transactional consistency. If it's the system or another user, then allow eventual consistency
 exception: using direct references to aggregates rather than their ID can be used to improve performance
+
 Always check if it's not the user's responsibility to perform some task instead of the system (and specially before using eventual consistency)
