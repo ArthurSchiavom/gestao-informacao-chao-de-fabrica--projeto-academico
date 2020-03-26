@@ -1,0 +1,26 @@
+@startuml Exemplo Básico
+
+hide circle
+skinparam Linetype ortho
+skinparam class {
+    BackgroundColor #7ACFF5
+    ArrowColor Black
+    BorderColor Black
+}
+/'Isto em cima é para o estilo do diagrama, ignorem
+https://plantuml.com/class-diagram -> Esta página responde literalmente tudo'/
+
+/'Exemplo de um agregado, pode-se dar um nome ao agregado'/
+package "" <<Rectangle>> { 
+    class "Matéria Prima" as MATPRIM <<Root>>{
+        - String ola
+    }
+}
+
+class "Produto" as PROD <<Value Object>> {
+    - String teste
+}
+
+MATPRIM "0..*" --> "*" PROD : exemplo >
+
+@enduml

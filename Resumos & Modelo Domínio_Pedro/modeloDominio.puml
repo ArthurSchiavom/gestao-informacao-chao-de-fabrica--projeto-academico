@@ -1,0 +1,32 @@
+@startuml Modelo de Dominio
+
+hide circle
+skinparam Linetype ortho
+skinparam IconPrivateColor Black
+skinparam IconPublicColor Black
+skinparam IconProtectedColor Black
+skinparam class {
+    BackgroundColor #7ACFF5
+    ArrowColor Black
+    BorderColor Black
+}
+
+package "Agregado Produto" <<Rectangle>> {
+    class "Produto" as PROD <<Root>> {
+    }
+
+
+    class "Código Fabrico" as PRODCODFAB <<Value Object>> {
+        - código
+    }
+
+    class "Código Comercial" as PRODCODCOM <<Value Object>> {
+        - codigo
+    }
+}
+
+PROD "1" --> "1" PRODCODCOM : é identificado por >
+PROD "1" --> "1" PRODCODFAB : é identificado por >
+
+
+@enduml
