@@ -23,6 +23,8 @@ Produto:
 Ordem de produção:
  - Especifica:
     * Identificador
+    * Produto
+    * Quantidade de produto
     * Data de emissão
     * Data de execução
     * Identificação do produto a produzir
