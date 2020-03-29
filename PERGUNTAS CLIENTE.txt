@@ -35,4 +35,4 @@ tempos (brutos e efetivos) por máquina") enquanto que em outras partes é dito qu
 
 [Postphoned as not relative to MD] - 16. p.5 No enunciado é dito que o desvio de gastos relativamente à ficha de produção devem ser quantificados. Quantificadas como exatamente? exemplos: percentagem; quantidade a mais/menos utilizada
 
-15. p. 10, ponto 4.4.c - "Em intervalos de tempo (e.g. 10 minutos) a contar de um dado momento (e.g. 10h00)", processo todas as mensagens a cada x minutos?
+& 15. p. 10, ponto 4.4.c - "Em intervalos de tempo (e.g. 10 minutos) a contar de um dado momento (e.g. 10h00)", processo todas as mensagens a cada x minutos? -> não cheguei a perguntar, mas interpretei mal. Não é de X em X minutos mas um único intervalo.
