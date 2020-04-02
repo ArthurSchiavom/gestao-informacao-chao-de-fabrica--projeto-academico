@@ -3,3 +3,8 @@
 !! 2. Quando usar composição, agregação ou associação. Uma máquina possui um código único, ou seja, o ID não existe sem a máquina, logo deveria ser por composição, mas o professor das teóricas deu a entender que não, o que pôs os nossos conceitos em causa. -> apenas usar associações
 
 !! 3. Devemos incluir funcionalidades? São escritas com verbos e um dos emails disse que tal seria raro. ---- não
+
+4. - Devemos processar as mensagens em blocos apenas? "Processar bloco de mensagens: de forma a atualizar e gerar nova informação no sistema, é
+necessário processar as mensagens recolhidas e já disponíveis no sistema. Este processamento
+deve ser realizado de forma independente e no limite em paralelo por linha de produção de modo
+a que a existência de erros que im"
