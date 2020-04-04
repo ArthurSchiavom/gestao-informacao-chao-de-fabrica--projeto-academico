@@ -1,3 +1,6 @@
+! -> perguntada mas ainda não respondida
+& -> respondida
+
 [Postphoned as not relative to MD] - 1. As mensagens devem ser guardadas indefinitivamente, até serem eliminadas por um utilizador? --> "é importante que o sistema a desenvolver permita a gestão (e.g. inserir, editar, apagar) de toda a informação necessária ao seu bom funcionamento"
 
 [Postphoned as not relative to MD] - 2. "é importante que o sistema a desenvolver permita a gestão (e.g. inserir, editar, apagar) de
@@ -36,3 +39,5 @@ tempos (brutos e efetivos) por máquina") enquanto que em outras partes é dito qu
 [Postphoned as not relative to MD] - 16. p.5 No enunciado é dito que o desvio de gastos relativamente à ficha de produção devem ser quantificados. Quantificadas como exatamente? exemplos: percentagem; quantidade a mais/menos utilizada
 
 & 15. p. 10, ponto 4.4.c - "Em intervalos de tempo (e.g. 10 minutos) a contar de um dado momento (e.g. 10h00)", processo todas as mensagens a cada x minutos? -> não cheguei a perguntar, mas interpretei mal. Não é de X em X minutos mas um único intervalo.
+
+& 4. - Na página 9 do enunciado, ponto 4.4, é dito "Processar bloco de mensagens". Isto quer dizer que apenas podemos processar as mensagens bloco a bloco? -> Não, os blocos não interessam aqui
