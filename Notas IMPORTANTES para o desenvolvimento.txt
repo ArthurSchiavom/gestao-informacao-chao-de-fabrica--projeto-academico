@@ -1,0 +1,15 @@
+requisitos - não devem repetir o caso de uso descrito no caderno de encargos, nem devem inventar o texto de caso de uso. devem indicar aqui a informação adicional que obtiveram do cliente sobre esse requisito. se conversaram com o cliente e elaboraram com o cliente o caso de uso, aí sim, deverão colocar o caso de uso nesta secção.
+
+análise - nesta secção importa essencialmente indicar se o modelo de dominio dá ou não respotsa ao requisito do caso de uso ou se há necessidade de estender o modelo de dominio 
+
+design - um caso de uso "Listagem de X" será praticamente igual a todos os outros casos de uso "Listagem ...", pelo que não faz sentido repetir em cada um um diagrama de sequencia, diagrama de classes, etc. É preferivel que tenham uma area global onde descrevem genericamente os casos de uso de listagem e em cada user story concreta apenas indiquem as especificidades desse caso de uso se existirem. devem indicar que testes unitários estão pensados que capturem os requisitos e invariantes de negócio. Testes planeiam-se antes da implementação.
+
+implementação - apenas colocar detalhes que mereçam destaque. não coisas corriqueiras sobre a implementação. assumam que quem lê o vosso código sabe programar por isso apenas devemos explicar as decisões de implementação que sejam menos obvias
+
+integração - provavelmente haverá depências entre esta user story e as classes de dominio e outras user stories. devem aqui indicar como é que essas dependências foram mitigadas. especial atenção nos casos em que se dependa de outros subsistemas ou de aplicações externas.
+
+
+
+No caso da Ordem de Produção, o enunciado refere que nem todas as máquinas poderão conseguir identificar a ordem, e que nesse caso teriam de deduzir a partir de mensagens de outras máquinas. A primeira máquina consegue sempre identificar a ordem.
+
+No caso da Linha de Produção, o enunciado refere que essa informação estará sempre no sistema. Nenhuma mensagem gerada pela máquina conterá inicialmente a informação sobre a linha de produção, e é sempre adicionada durante o processamento desta.

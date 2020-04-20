@@ -1,3 +1,0 @@
-No caso da Ordem de Produção, o enunciado refere que nem todas as máquinas poderão conseguir identificar a ordem, e que nesse caso teriam de deduzir a partir de mensagens de outras máquinas. A primeira máquina consegue sempre identificar a ordem.
-
-No caso da Linha de Produção, o enunciado refere que essa informação estará sempre no sistema. Nenhuma mensagem gerada pela máquina conterá inicialmente a informação sobre a linha de produção, e é sempre adicionada durante o processamento desta.
