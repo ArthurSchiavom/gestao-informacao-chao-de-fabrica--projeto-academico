@@ -1,0 +1,78 @@
+Quase todos os atributos de uma classe devem ser públicos
+
+A classe não deve ter getters e setters (regra geral)
+
+Em vez de retornar os seus valores, a classe deve pedir a informação e retornar um resultado, atendendo então ao negócio
+
+Usar eventos se aplicável -> watchdog, listener (observer, subscriber)
+
+Usar serviços se aplicável
+
+Horizontal slicing - organizar packages por tecnologia (UI, application layer, bussiness logic layer, data access layer (base de dados)) e dentro desses organizar por feature
+
+Group of patterns, patterns and principles: 
+    SOLID, 
+    GRASP, 
+    GoF, 
+    Controller, 
+    Repository, 
+    Factory, 
+    HC, 
+    LC, 
+    IE  Single responsibility principle, 
+    Dependency inversion (SOLID), 
+    Dndirection (GRASP), 
+    Façade, strategy, 
+    Decorator, 
+    Degistry
+
+
+Dependency injection
+
+Acoplamento dentro de packages é normal, devemos minimizar é o acoplamento entre packages.
+
+Gerir modificadores de acesso a **classes**. Não é necessário serem públicas.
+Ports & adapters
+
+
+
+
+Repositories: 
+    * Fazem parte da cama de persistência.
+    * Devem implementar uma interface, que permite a mudança de tecnologia sem impacto no funcionamento da aplicação.
+    * Devem ter os métodos de pesquisa lá dentro, como findByMonth e getAverageRetailPrice. O repositório é capaz de efetuar estas pesquisas de maneira eficiente. No entanto, não devemos ter lógica de negócio na camada de persistência. Por exemplo, se tivermos o cálculo de idade, é discutível se deve estar na camada de persistência ou na de domínio. 
+
+Factories:
+    * Fazem parte da camada de dominío.
+    * Permitem garantir a consistência do domínio e esconder as especificações da criação de objetos.
+    * Devemos ter a fábrica a decidir se estamos em cenário de mock ou real.
+    * Há vários tipos de fábricas (como para UI e persistência), mas só vamos usar o de entidades do domínio.
+    * Nem todos as classes necessitam de fábrica. "Senso comum". A maior parte dos objetos são simples de criar e não necessitam de fábrica.
+    * GRASP Creator:  Em geral, uma classe B deve ser responsável por criar instâncias de classe A se uma, ou preferencialmente mais, das seguintes afirmações se aplicam:
+        * Instâncias de B contêm ou agregam instâncias de A;
+        * Instâncias de B gravam instâncias de A;
+        * Instâncias de B utilizam de perto instâncias de A;
+        * Instâncias de B têm as informações de iniciação das instâncias de A e passam isso na criação.
+    * É possível ter métodos de fábrica dentro da própia classe se for uma melhor alternativa, mas temos maior versatibilidade numa classe separada.
+
+
+
+Simple factory: Classe com apenas métodos de fábrica. As classes que tenham uma fábrica devem então ter o seu construtor privado, protected ou package private.
+
+Abstract factory: Permite instanciar, conjuntamente, instâncias de diferentes classes. Por exemplo, temos um sistema de UI que utiliza widgets e podemos ter widgets de diferentes estilos. Então podemos utilizar uma abstract factory que utiliza as factories dos diferentes estilos de widgets (WidgetFactory -> DarkWidgetFactory & LightWidgetFactory). Exemplo 2: numa situação em que aquando da criação de uma turma devem ser criados alunos e professores. Todos os alunos devem estar no mesmo ano e o professor capaz de ensinar esse ano.
+
+Builder: Permite construir um objeto com apenas certas características -> .addX() | .setX() | .build()
+
+
+
+    * Protected variation - Identificar sistemas que têm maior ou menor probabilidade de variação. Construir interfaces à volta dos que têm alta probabilidade, para não ter que modificar o resto do código ao adicionar novas implementações.
+    * Open/Closed principle - Classes são abertas para extensão mas fechada para modificação (alteração de comportamento).
+    * Dependency inversion principle - O código depende de abstrações, não de classes concretas. Diminui o acoplamento.
+
+Relação dos comportamentos anteriores com fábricas - Fábricas podem escolher a classe para criar a instância apropriada.
+
+    * Polimorfismo - Herança. Usado para criar um caso particular de algo, não necessáriamente para reutilizar código.
+    * Liskov Substitution principle - Subclasses devem seguir o contrato e todos os invariantes da classe base, ou seja, a subclasse deve sempre ser capaz de atuar, em todos os aspetos, como a classe base.
+    * Template method - Template que tem certas coisas especificas não implementadas que podem ser definidas posteriormente.
+    * Strategy - Intefaces > Classe que apenas define comportamentos sem os implementar, sendo que podem ser implementados de diferentes por outras classes. As classes que implementam podem ser utilizadas como a classe que define. Factories podem ser usadas para selecionar a implementação correta.
+    * Decorator - Adiciona comportamentos extra às funcionalidades de uma interface A ao fazer wrapping da classe e criar métodos que usam os métodos da interface A mas fazem também algo mais. O decorator **implementa** a interface que está a decorar e tem uma instância de outra classe que implementa a intarface (representada por uma instância da interface), assim garante-se a implementação de todos os métodos.
