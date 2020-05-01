@@ -1,78 +1,80 @@
-Quase todos os atributos de uma classe devem ser públicos
+Nota: apesar de por links para sites, a maior parte desta matéria faz parte da aula teórica 6 ou 7
 
-A classe não deve ter getters e setters (regra geral)
+Em regra geral, getters e setters não devem existir. Se existirem, têm outro nome. Se existir um getter e um setter, considerar tornar a variável pública.
 
-Em vez de retornar os seus valores, a classe deve pedir a informação e retornar um resultado, atendendo então ao negócio
+Uma classe não deve retornar um objeto para se fazer uma cadeia de operações, mas sim receber a informação de que necessita e retornar logo o resultado. Por exemplo, deve ser Utilizador.encontrarDepartamentos em vez de Utilizador.getFuncoes + filtrar. Exemplo 2: Mobiliario.contarParafusos() em vez de Mobiliario.getPecas() + peca.contarParafusos() + somar tudo (esta segundo lógica deve ficar dentro da classe Mobiliario, no método getPecas(). Ou seja, a classe fornece logo a informação alvo pronta a usar.
 
-Usar eventos se aplicável -> watchdog, listener (observer, subscriber)
+Controller - Intermediário entre funcionalidades e UI -> retorna apenas o resultado para a UI apresentar.
 
-Usar serviços se aplicável
+Polimorfismo - Herança. Usado para criar um caso particular de algo, não necessáriamente para reutilizar código. >>> T7
 
-Horizontal slicing - organizar packages por tecnologia (UI, application layer, bussiness logic layer, data access layer (base de dados)) e dentro desses organizar por feature
+!!!Dependency inversion principle - O código depende de abstrações, não de classes concretas. Diminui o acoplamento. >>> T7
 
-Group of patterns, patterns and principles: 
-    SOLID, 
-    GRASP, 
-    GoF, 
-    Controller, 
-    Repository, 
-    Factory, 
-    HC, 
-    LC, 
-    IE  Single responsibility principle, 
-    Dependency inversion (SOLID), 
-    Dndirection (GRASP), 
-    Façade, strategy, 
-    Decorator, 
-    Degistry
+!!!Open/Closed principle - Classes são abertas para extensão mas fechada para modificação (alteração de comportamento). >>> T7
 
+!!!Protected variation - Identificar sistemas que têm maior probabilidade de variação e construir interfaces à volta dos mesmos, para não ter que modificar o resto do código ao adicionar novas implementações (assim não precisamos modificar a classe, porque podemos criar uma nova e manter as duas implementações diferentes. Podemos assim aplicar o open/closed principle). >>> T7
 
-Dependency injection
+Liskov Substitution principle - Subclasses devem seguir o contrato e todos os invariantes da classe base, ou seja, a subclasse deve sempre ser capaz de atuar, em todos os aspetos, como a classe base. >>> T7
 
-Acoplamento dentro de packages é normal, devemos minimizar é o acoplamento entre packages.
+Dependency inversion - Superclasses/interfaces não podem depender das subclasses/implementações. As entidades devem depender de abstrações.
 
-Gerir modificadores de acesso a **classes**. Não é necessário serem públicas.
-Ports & adapters
+Pure fabrication - Criação de uma classe que não faz parte do modelo de domínio apenas para atingir menor acoplamento e maior coesão. Estas classes são chamadas de serviços. (UI e Controller)
 
+IE - Uma classe tem uma função clara, específica e bem delimitada, que reflete a informação que guarda.
 
+Adapter - Classe que faz wrapping de um serviço e implementa as suas funcionalidades para um tipo diferente de dados. Se o serviço precisar de dados em formato 1 mas tivermos dados em formato 2, então podemos fazer um adapter que tenha lá dentro uma instância do serviço mas receba dados no formato 2. O adapter então converte os dados para o formato 1 e usa os métodos da instância wrapped. >>> https://refactoring.guru/design-patterns/adapter
 
+Observer|Pusblisher|Subscriber - Publicação e subscrição de eventos. O publicador tem uma lista de subscritores e notifica-os quando o evento ocorre. Os subscritores implementam uma interface, que é o que o publicador usa para os notificar. >>> https://refactoring.guru/design-patterns/observer
 
-Repositories: 
-    * Fazem parte da cama de persistência.
-    * Devem implementar uma interface, que permite a mudança de tecnologia sem impacto no funcionamento da aplicação.
-    * Devem ter os métodos de pesquisa lá dentro, como findByMonth e getAverageRetailPrice. O repositório é capaz de efetuar estas pesquisas de maneira eficiente. No entanto, não devemos ter lógica de negócio na camada de persistência. Por exemplo, se tivermos o cálculo de idade, é discutível se deve estar na camada de persistência ou na de domínio. 
+Singleton - Single instance class. Private constructor and static method that instantiates the class and returns it. Following invocations to the static method return the already created object. >>> https://refactoring.guru/design-patterns/singleton
 
-Factories:
-    * Fazem parte da camada de dominío.
-    * Permitem garantir a consistência do domínio e esconder as especificações da criação de objetos.
-    * Devemos ter a fábrica a decidir se estamos em cenário de mock ou real.
-    * Há vários tipos de fábricas (como para UI e persistência), mas só vamos usar o de entidades do domínio.
-    * Nem todos as classes necessitam de fábrica. "Senso comum". A maior parte dos objetos são simples de criar e não necessitam de fábrica.
-    * GRASP Creator:  Em geral, uma classe B deve ser responsável por criar instâncias de classe A se uma, ou preferencialmente mais, das seguintes afirmações se aplicam:
+Facade - Classe que fornece uma interface simples para uma framework complexa (por interface não quero dizer necessáriamente UI). >>> https://refactoring.guru/design-patterns/facade
+
+Template - Classe template que tem certas coisas especificas não implementadas que podem ser definidas em subclasses. >>> https://refactoring.guru/design-patterns/template-method
+
+Decorator - Adiciona comportamentos extra às funcionalidades de uma interface A ao fazer wrapping da classe e criar métodos que usam os métodos da interface A, mas que fazem também algo mais (comportamento extra). O decorator **implementa** a interface que está a decorar e tem uma instância de outra classe que implementa a intarface (representada por uma instância da interface), assim garante-se a implementação de todos os métodos. >>> https://refactoring.guru/design-patterns/decorator
+
+Strategy - Simplesmente uso de interfaces -> Classe que apenas define comportamentos sem os implementar, sendo que podem ser implementados de diferentes por outras classes. As classes que implementam podem ser utilizadas como uma instância da superclasse SEMPRE (deve obedecer aos propósitos da interface). Factories podem ser usadas para selecionar a implementação correta. >>> https://refactoring.guru/design-patterns/strategy
+
+Builder - Para quando têm que construir algo que tem partes opcionais. Por exemplo, querem um objeto do tipo Casa mas uma casa pode como pode não ter uma garagem, um jardim, uma piscina, múltiplos pisos, etc. Uma boa maneira de construir o objeto casa poderá ser com um builder. Nesse caso, usamos a classe CasaBuilder e os seus métodos consoante necessário: .addPiso(), .addGaragem(), .setColor(), .setHeight(),... e no final usamos casaBuilder.build() que nos retorna o objeto Casa tal como queremos. Quaisquer interligações e cálculos dependentes das configurações podem ser realizados quando o Build() é feito. !!! Neste caso o builder pode também selecionar o construtor correto se aplicável. >>> https://refactoring.guru/design-patterns/builder
+
+Creator - Em geral, uma classe B deve ser responsável por criar instâncias de classe A se uma, ou preferencialmente mais, das seguintes afirmações se aplicam:
         * Instâncias de B contêm ou agregam instâncias de A;
         * Instâncias de B gravam instâncias de A;
         * Instâncias de B utilizam de perto instâncias de A;
         * Instâncias de B têm as informações de iniciação das instâncias de A e passam isso na criação.
-    * É possível ter métodos de fábrica dentro da própia classe se for uma melhor alternativa, mas temos maior versatibilidade numa classe separada.
+        Ou seja, B gere A.
+    >>> Teórica
 
+Simple factory - Classe com apenas métodos de fábrica. As classes que tenham uma fábrica devem então ter o seu construtor privado, protected ou package private. As fábricas fornecem métodos que facilitam a instanciação de classe(s) através do seu supertipo. Por exemplo, imaginemos que temos uma empresa de transportes que utiliza Navios e Camiões. Neste caso, podemos usar uma factory que instancie um Veiculo do tipo Navio ou Camião dependendo do contexto e retorne esse Veiculo. Exemplo de um contexto: O utilizador a utilizar o sistema é o gestor de transportes maritmos, logo o veiculo será do tipo Navio. Quando usar? Quando temos diferentes tipos e contextos. Quando temos bastante lógica de construção, como no caso de pools (lista de objetos reutilizáveis quando disponíveis): Quando objetos podem ser reutilizados, então a factory retorna o objeto correto. >>> https://refactoring.guru/design-patterns/factory-method
 
+Abstract factory - Interface [genérica] para factories. Útil quando queremos consistência entre conjuntos de diferentes tipos usados por simple factories. Por exemplo, temos mobiliário do tipo moderno e vitange. Cada um destes grupos tem o seu tipo de cadeira, de mesa, de roupeiro,... E queremos tê-los **agrupados** para, por exemplo, simular um design consistente de uma casa. Então usamos uma abstract factory. A interface MobiliarioFactory define os métodos criarCadeira(), criarMesa() e criarRoupeiro(). A classe MobiliarioVintageFactory implementa esta interface e os seus métodos para instanciarem classes de mobiliário do tipo vintage, tal como a MobiliarioModernoFactory implementa para mobiliário do tipo moderno. >>> https://refactoring.guru/design-patterns/abstract-factory
 
-Simple factory: Classe com apenas métodos de fábrica. As classes que tenham uma fábrica devem então ter o seu construtor privado, protected ou package private.
+Factories:
+    * Fazem parte da camada de dominío.
+    * Permitem garantir a consistência do domínio e esconder as especificações da criação de objetos.
+    * Podemos ter uma fábrica a decidir se estamos em cenário de mock ou real.
+    * Há vários tipos de fábricas (como para UI e persistência), mas só vamos usar o de entidades do domínio.
+    * Nem todos as classes necessitam de fábrica. "Senso comum". A maior parte dos objetos são simples de criar e não necessitam de fábrica.
+    >>> Teórica
+    
+Repository pattern - Temos uma interface que abstrai a persistência de objetos, com métodos como findById(), save(), delete(),...
 
-Abstract factory: Permite instanciar, conjuntamente, instâncias de diferentes classes. Por exemplo, temos um sistema de UI que utiliza widgets e podemos ter widgets de diferentes estilos. Então podemos utilizar uma abstract factory que utiliza as factories dos diferentes estilos de widgets (WidgetFactory -> DarkWidgetFactory & LightWidgetFactory). Exemplo 2: numa situação em que aquando da criação de uma turma devem ser criados alunos e professores. Todos os alunos devem estar no mesmo ano e o professor capaz de ensinar esse ano.
+Nota importante: Devemos usar e abusar de queries. Para uma situação como pesquisa de um objeto na base de dados, devemos fazê-lo através de uma query e não, por exemplo, ao buscar todos os objetos e filtrar no código. Ou seja, usar queries quando aplicável.
+    >>> Teórica
 
-Builder: Permite construir um objeto com apenas certas características -> .addX() | .setX() | .build()
+Repositories:
+    * Fazem parte da cama de persistência.
+    * Devem implementar uma interface, que permite a mudança de tecnologia sem impacto no funcionamento da aplicação.
+    * Devem ter os métodos de pesquisa lá dentro, como findByMonth e getAverageRetailPrice. O repositório é capaz de efetuar estas pesquisas de maneira eficiente. No entanto, não devemos ter lógica de negócio na camada de persistência. Por exemplo, se tivermos o cálculo de idade, é discutível se deve estar na camada de persistência ou na de domínio. 
+    >>> Teórica
+    
+Vertical slicing - Dividimos os packages por funcionalidade (registar utilizador, bloquear utilizador,...) e dentro desses por tecnologia (UI, data access layer, business logic later,...)
 
+HC/LC - Cada pedaço de código deve ser o mais independente possível e ter responsabilidades claramente definidas. Acoplamento (interdependência) dentro de packages é normal, devemos minimizar é o acoplamento entre packages.
 
+----------------------------------------------------------------------
 
-    * Protected variation - Identificar sistemas que têm maior ou menor probabilidade de variação. Construir interfaces à volta dos que têm alta probabilidade, para não ter que modificar o resto do código ao adicionar novas implementações.
-    * Open/Closed principle - Classes são abertas para extensão mas fechada para modificação (alteração de comportamento).
-    * Dependency inversion principle - O código depende de abstrações, não de classes concretas. Diminui o acoplamento.
+Usar eventos se aplicável -> watchdog, listener (observer, subscriber) -- Ver moodle, está em baixo no momento
 
-Relação dos comportamentos anteriores com fábricas - Fábricas podem escolher a classe para criar a instância apropriada.
-
-    * Polimorfismo - Herança. Usado para criar um caso particular de algo, não necessáriamente para reutilizar código.
-    * Liskov Substitution principle - Subclasses devem seguir o contrato e todos os invariantes da classe base, ou seja, a subclasse deve sempre ser capaz de atuar, em todos os aspetos, como a classe base.
-    * Template method - Template que tem certas coisas especificas não implementadas que podem ser definidas posteriormente.
-    * Strategy - Intefaces > Classe que apenas define comportamentos sem os implementar, sendo que podem ser implementados de diferentes por outras classes. As classes que implementam podem ser utilizadas como a classe que define. Factories podem ser usadas para selecionar a implementação correta.
-    * Decorator - Adiciona comportamentos extra às funcionalidades de uma interface A ao fazer wrapping da classe e criar métodos que usam os métodos da interface A mas fazem também algo mais. O decorator **implementa** a interface que está a decorar e tem uma instância de outra classe que implementa a intarface (representada por uma instância da interface), assim garante-se a implementação de todos os métodos.
+Usar serviços se aplicável -- Ver moodle, está em baixo no momento
