@@ -4,6 +4,8 @@ Em regra geral, getters e setters não devem existir. Se existirem, têm outro nom
 
 Uma classe não deve retornar um objeto para se fazer uma cadeia de operações, mas sim receber a informação de que necessita e retornar logo o resultado. Por exemplo, deve ser Utilizador.encontrarDepartamentos em vez de Utilizador.getFuncoes + filtrar. Exemplo 2: Mobiliario.contarParafusos() em vez de Mobiliario.getPecas() + peca.contarParafusos() + somar tudo (esta segundo lógica deve ficar dentro da classe Mobiliario, no método getPecas(). Ou seja, a classe fornece logo a informação alvo pronta a usar.
 
+Service - Objeto intermediário para quando uma relação não se encaixa no domínio. Por exemplo, numa tranferência de dinheiro entre contas bancárias, não faz sentido ser uma conta a mandar dinheiro para outra, porquê não é a conta que faz a transferência, quem faz é o serviço de transferência/banco. Então podemos ter um objeto intermediário chamado servicoDeTranferência que fica encarregue das tranferências.
+
 Controller - Intermediário entre funcionalidades e UI -> retorna apenas o resultado para a UI apresentar.
 
 Polimorfismo - Herança. Usado para criar um caso particular de algo, não necessáriamente para reutilizar código. >>> T7
@@ -24,7 +26,7 @@ IE - Uma classe tem uma função clara, específica e bem delimitada, que reflete a
 
 Adapter - Classe que faz wrapping de um serviço e implementa as suas funcionalidades para um tipo diferente de dados. Se o serviço precisar de dados em formato 1 mas tivermos dados em formato 2, então podemos fazer um adapter que tenha lá dentro uma instância do serviço mas receba dados no formato 2. O adapter então converte os dados para o formato 1 e usa os métodos da instância wrapped. >>> https://refactoring.guru/design-patterns/adapter
 
-Observer|Pusblisher|Subscriber - Publicação e subscrição de eventos. O publicador tem uma lista de subscritores e notifica-os quando o evento ocorre. Os subscritores implementam uma interface, que é o que o publicador usa para os notificar. >>> https://refactoring.guru/design-patterns/observer
+Observer - Publicação e subscrição de eventos. O publicador tem uma lista de subscritores e notifica-os quando o evento ocorre. Os subscritores implementam uma interface, que é o que o publicador usa para os notificar. >>> https://refactoring.guru/design-patterns/observer
 
 Singleton - Single instance class. Private constructor and static method that instantiates the class and returns it. Following invocations to the static method return the already created object. >>> https://refactoring.guru/design-patterns/singleton
 
@@ -74,7 +76,5 @@ Vertical slicing - Dividimos os packages por funcionalidade (registar utilizador
 HC/LC - Cada pedaço de código deve ser o mais independente possível e ter responsabilidades claramente definidas. Acoplamento (interdependência) dentro de packages é normal, devemos minimizar é o acoplamento entre packages.
 
 ----------------------------------------------------------------------
-
-Usar eventos se aplicável -> watchdog, listener (observer, subscriber) -- Ver moodle, está em baixo no momento
 
 Usar serviços se aplicável -- Ver moodle, está em baixo no momento
