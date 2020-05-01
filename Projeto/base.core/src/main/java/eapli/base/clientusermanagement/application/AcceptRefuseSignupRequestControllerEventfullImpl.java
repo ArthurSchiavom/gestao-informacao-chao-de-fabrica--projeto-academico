@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.usermanagement.domain.BaseRoles;
-import eapli.framework.application.Controller;
+import eapli.framework.application.UseCaseController;
 import eapli.framework.domain.events.DomainEvent;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
@@ -46,12 +46,13 @@ import eapli.framework.validations.Preconditions;
  * this implementation makes use of domain events to (1) follow the rule that
  * one controller should only modify one aggregate, and (2) notify other parts
  * of the system to react accordingly. For an alternative transactional approach
- * see {@link AcceptRefuseSignupRequestTransactionalController}
+ * see {@link AcceptRefuseSignupRequestControllerTxImpl}
  *
  * @author Paulo Gandra de Sousa
  */
+@UseCaseController
 public class AcceptRefuseSignupRequestControllerEventfullImpl
-        implements AcceptRefuseSignupRequestController, Controller {
+        implements AcceptRefuseSignupRequestController{
 
     private final SignupRequestRepository signupRequestsRepository = PersistenceContext
             .repositories().signupRequests();

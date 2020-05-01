@@ -6,7 +6,7 @@ package eapli.base.clientusermanagement.domain.events;
 import eapli.base.clientusermanagement.domain.MecanographicNumber;
 import eapli.base.clientusermanagement.domain.SignupRequest;
 import eapli.framework.domain.events.DomainEventBase;
-import eapli.framework.domain.model.general.EmailAddress;
+import eapli.framework.general.domain.model.EmailAddress;
 import eapli.framework.infrastructure.authz.domain.model.Name;
 import eapli.framework.infrastructure.authz.domain.model.Password;
 import eapli.framework.infrastructure.authz.domain.model.Username;

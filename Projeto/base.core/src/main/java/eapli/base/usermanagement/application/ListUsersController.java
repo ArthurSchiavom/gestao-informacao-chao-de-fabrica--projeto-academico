@@ -26,7 +26,7 @@ package eapli.base.usermanagement.application;
 import java.util.Optional;
 
 import eapli.base.usermanagement.domain.BaseRoles;
-import eapli.framework.application.Controller;
+import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.application.UserManagementService;
@@ -37,7 +37,8 @@ import eapli.framework.infrastructure.authz.domain.model.Username;
  *
  * @author losa
  */
-public class ListUsersController implements Controller {
+@UseCaseController
+public class ListUsersController{
 
     private final AuthorizationService authz = AuthzRegistry.authorizationService();
     private final UserManagementService userSvc = AuthzRegistry.userService();

@@ -63,7 +63,7 @@ public class FrontMenu extends AbstractUI {
         }));
         //TODO: instead of leaving the app, return to the main menu again
         menu.addItem(SIGNUP_OPTION, "Sign up", new SignupRequestAction());
-        menu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction());
+        menu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
         final MenuRenderer renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
         return renderer.render();

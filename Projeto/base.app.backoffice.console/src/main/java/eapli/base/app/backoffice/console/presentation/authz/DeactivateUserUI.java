@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import eapli.base.usermanagement.application.DeactivateUserController;
-import eapli.framework.application.Controller;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
@@ -28,10 +27,6 @@ public class DeactivateUserUI extends AbstractUI {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeactivateUserUI.class);
 
 	private final DeactivateUserController theController = new DeactivateUserController();
-
-	protected Controller controller() {
-		return this.theController;
-	}
 
 	@Override
 	protected boolean doShow() {

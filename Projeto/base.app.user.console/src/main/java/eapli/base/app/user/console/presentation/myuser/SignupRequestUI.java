@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import eapli.base.myclientuser.application.SignupController;
-import eapli.framework.application.Controller;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
@@ -19,10 +18,6 @@ public class SignupRequestUI extends AbstractUI {
     private static final Logger LOGGER = LoggerFactory.getLogger(SignupRequestUI.class);
 
     private final SignupController theController = new SignupController();
-
-    protected Controller controller() {
-        return this.theController;
-    }
 
     @Override
     protected boolean doShow() {

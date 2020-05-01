@@ -7,17 +7,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="base.bootstrappers" />
-        <module name="base.persistence.impl" />
         <module name="base.app.bootstrap" />
         <module name="base.app.common.console" />
         <module name="base.core" />
         <module name="base.app.other.console" />
-        <module name="base.app.user.console" />
+        <module name="base.persistence.impl" />
         <module name="base.app.backoffice.console" />
+        <module name="base.app.user.console" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="base" target="1.8" />
       <module name="base.app.backoffice.console" target="1.8" />
       <module name="base.app.bootstrap" target="1.8" />
       <module name="base.app.common.console" target="1.8" />
@@ -26,6 +25,7 @@
       <module name="base.bootstrappers" target="1.8" />
       <module name="base.core" target="1.8" />
       <module name="base.persistence.impl" target="1.8" />
+      <module name="lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

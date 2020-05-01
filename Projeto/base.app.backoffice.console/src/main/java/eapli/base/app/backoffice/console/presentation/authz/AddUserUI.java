@@ -30,7 +30,6 @@ import eapli.base.usermanagement.application.AddUserController;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
-import eapli.framework.application.Controller;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.authz.domain.model.Role;
@@ -48,10 +47,6 @@ import eapli.framework.util.Console;
 public class AddUserUI extends AbstractUI {
 
     private final AddUserController theController = new AddUserController();
-
-    protected Controller controller() {
-        return this.theController;
-    }
 
     @Override
     protected boolean doShow() {

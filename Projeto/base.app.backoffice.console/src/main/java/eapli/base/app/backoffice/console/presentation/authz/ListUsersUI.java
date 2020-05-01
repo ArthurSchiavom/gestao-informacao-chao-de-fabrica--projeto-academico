@@ -42,6 +42,11 @@ public class ListUsersUI extends AbstractListUI<SystemUser> {
     }
 
     @Override
+    protected String emptyMessage() {
+        return "No data.";
+    }
+
+    @Override
     protected Iterable<SystemUser> elements() {
         return theController.allUsers();
     }

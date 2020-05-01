@@ -2,7 +2,7 @@ package eapli.base.infrastructure.bootstrapers;
 
 import java.util.Calendar;
 
-import eapli.framework.util.Calendars;
+import eapli.framework.time.util.Calendars;
 
 public final class TestDataConstants {
 

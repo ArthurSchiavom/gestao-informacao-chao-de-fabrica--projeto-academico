@@ -4,11 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>eapli</groupId>
-	<artifactId>lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477</artifactId>
+	<artifactId>base</artifactId>
 	<version>1.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
+        <eapli.framework.version>11.0.0</eapli.framework.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -30,19 +31,19 @@
 		<dependency>
 			<groupId>eapli</groupId>
 			<artifactId>eapli.framework.core</artifactId>
-			<version>9.1.0</version>
+			<version>${eapli.framework.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>eapli</groupId>
 			<artifactId>eapli.framework.infrastructure.authz</artifactId>
-			<version>9.1.0</version>
+			<version>${eapli.framework.version}</version>
 		</dependency>
                 <dependency>
                         <groupId>eapli</groupId>
                         <artifactId>
                                 eapli.framework.infrastructure.pubsub
                         </artifactId>
-                        <version>9.1.0</version>
+                        <version>${eapli.framework.version}</version>
                 </dependency>
         <dependency>
             <groupId>junit</groupId>

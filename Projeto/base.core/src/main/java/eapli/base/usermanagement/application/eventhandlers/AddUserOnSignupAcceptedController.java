@@ -28,7 +28,7 @@ import eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.base.usermanagement.domain.UserBuilderHelper;
-import eapli.framework.application.Controller;
+import eapli.framework.application.UseCaseController;
 import eapli.framework.domain.events.DomainEvent;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
@@ -42,7 +42,8 @@ import eapli.framework.infrastructure.eventpubsub.impl.inprocess.InProcessPubSub
  *
  * @author Paulo Gandra de Sousa
  */
-/* package */ class AddUserOnSignupAcceptedController implements Controller {
+@UseCaseController
+/* package */ class AddUserOnSignupAcceptedController {
     private final UserRepository userRepository = PersistenceContext.repositories().users();
     private final EventPublisher dispatcher = InProcessPubSub.publisher();
 

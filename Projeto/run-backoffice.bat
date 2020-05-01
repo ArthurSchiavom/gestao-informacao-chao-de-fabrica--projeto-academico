@@ -4,4 +4,3 @@ SET BASE_CP=base.app.backoffice.console\target\base.app.backoffice.console-1.3.0
 
 REM call the java VM, e.g, 
 java -cp %BASE_CP% eapli.base.app.backoffice.console.BaseBackoffice
-PAUSE
