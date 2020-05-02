@@ -1,0 +1,6 @@
+
+s	java:S116"WRename this field "CODIGO_UNICO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Å¨àÛ8Ó—‹±.
+K
+java:S1128".Remove this unused import 'java.util.Objects'.(¼¸õ›8şíş°.
+u
+java:S1104"XMake CODIGO_UNICO a static final constant or non-public and provide accessors if needed.(Å¨àÛ8Ó—‹±.

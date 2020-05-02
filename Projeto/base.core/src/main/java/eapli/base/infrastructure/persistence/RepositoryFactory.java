@@ -6,13 +6,10 @@ package eapli.base.infrastructure.persistence;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.base.producao.materiaprima.persistence.produto.ProdutoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
-/**
- * @author Paulo Gandra Sousa
- *
- */
 public interface RepositoryFactory {
 
 	/**
@@ -63,5 +60,20 @@ public interface RepositoryFactory {
 	 * @return
 	 */
 	SignupRequestRepository signupRequests();
+
+
+	/**
+	 * repository will be created in auto transaction mode
+	 *
+	 * @return
+	 */
+	ProdutoRepository produto();
+
+	/**
+	 * repository will be created in auto transaction mode
+	 *
+	 * @return
+	 */
+	ProdutoRepository produto(TransactionalContext autoTx);
 
 }

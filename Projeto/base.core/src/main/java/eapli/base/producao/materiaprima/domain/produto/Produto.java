@@ -1,6 +1,5 @@
 package eapli.base.producao.materiaprima.domain.produto;
 
-import eapli.base.clientusermanagement.domain.MecanographicNumber;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
@@ -10,14 +9,16 @@ import javax.persistence.Entity;
 import javax.persistence.Version;
 
 @Entity
-public class Produto implements AggregateRoot<> {
+public class Produto implements AggregateRoot<CodigoUnico> {
 
     @Version
     private Long version;
 
     @EmbeddedId
-    private MecanographicNumber mecanographicNumber;
-
+    private CodigoUnico codigoUnico;
+    public static String identityAttributeName() {
+        return "codigoUnico";
+    }
 
     @Override
     public boolean equals(final Object o) {
@@ -35,7 +36,7 @@ public class Produto implements AggregateRoot<> {
     }
 
     @Override
-    public MecanographicNumber identity() {
-        return this.mecanographicNumber;
+    public CodigoUnico identity() {
+        return this.codigoUnico;
     }
 }
