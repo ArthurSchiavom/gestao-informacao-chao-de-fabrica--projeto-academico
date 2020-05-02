@@ -1,0 +1,14 @@
+QUANDO CRIAREM VALUE OBJECTS OU ATRIBUTOS, PROCUREM INFORMAÇÃO SOBRE ESSE ATRIBUTO NOS EMAILS
+
+Na criação de produtos (US 2005 e US 2006), os produtos são criados sem Ficha de Produção.
+Posteriormente, através da US 2004, o Gestor de Produção procederá à especificação da Ficha de Produção desses produtos.
+
+É suposto fazer uma aplicação de UI por área (Gestão de Produção, Gestão de Chão de Fábrica e Administração), ou é para consolidar as componentes de gestão numa única aplicação de UI?
+Resposta: As duas alternativas são aceites. A parte relativa à Administração não é necessária desenvolver. (optamos por desenvolver só 1)
+
+Avisar utilizador se registar na ficha de produção um produto sem ficha de produção (extra)
+
+Após a US2006 pode ser sugerida a US2004 (extra)
+
+Se alguma linha do ficheiro tiver um erro ou a importação falhar,
+No final da importação de um ficheiro deve ser apresentado ao utilizador um resumo quantitativo dos resultados da importação (nº de linhas importadas com sucesso).
