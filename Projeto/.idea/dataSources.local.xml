@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="BD" uuid="a17a0f85-42b4-4ccf-aba6-f5224aa765f8">
+    <data-source name="base" uuid="c1fb9b6a-cca3-4aeb-b77f-7af7bc6cf817">
       <database-info product="H2" version="1.4.200 (2019-10-14)" jdbc-version="4.1" driver-name="H2 JDBC Driver" driver-version="1.4.200 (2019-10-14)" dbms="H2" exact-version="1.4.200" exact-driver-version="1.4">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>sa</user-name>
-      <schema-mapping />
+      <introspection-schemas>@:@|BASE:*</introspection-schemas>
     </data-source>
   </component>
 </project>

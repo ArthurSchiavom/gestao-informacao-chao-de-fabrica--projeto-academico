@@ -4,6 +4,7 @@ import eapli.base.Application;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.producao.materiaprima.persistence.produto.ProdutoRepository;
+import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.JpaAutoTxUserRepository;
@@ -57,12 +58,19 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 		return new JpaProdutoRepository(autoTx);
 	}
 
+	@Override
+	public LinhaProducaoRepository productionLines() {
+		return new JpaLinhaProducaoRepository(Application.settings().getPersistenceUnitName());
+	}
+
+	@Override
+	public LinhaProducaoRepository productionLines(TransactionalContext autoTx) {
+		return new JpaLinhaProducaoRepository(autoTx);
+	}
 
 	@Override
 	public TransactionalContext newTransactionalContext() {
 		return JpaAutoTxRepository.buildTransactionalContext(Application.settings().getPersistenceUnitName(),
 				Application.settings().getExtendedPersistenceProperties());
 	}
-
-
 }
