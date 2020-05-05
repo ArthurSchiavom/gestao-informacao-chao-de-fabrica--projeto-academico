@@ -6,7 +6,7 @@ import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
 
 public class AddLinhaProducaoController {
 	//TODO add authz maybe
-	private final LinhaProducaoRepository repository = PersistenceContext.repositories().productionLines();
+	private final LinhaProducaoRepository repository = PersistenceContext.repositories().linhasProducao();
 
 	/**
 	 * Regista uma nova linha de produção no repositório

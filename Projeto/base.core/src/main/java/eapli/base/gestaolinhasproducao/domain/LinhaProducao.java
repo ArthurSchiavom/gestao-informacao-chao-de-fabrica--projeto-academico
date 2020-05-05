@@ -14,8 +14,8 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 	private Long version;
 
 	@EmbeddedId
-	private IdentificadorLinhaProducao identifier;
-	private EstadoProcessamentoMensagens estado;
+	private final IdentificadorLinhaProducao identifier;
+	private final EstadoProcessamentoMensagens estado;
 
 	public LinhaProducao(final String identifier) {
 		this.identifier = new IdentificadorLinhaProducao(identifier);
@@ -24,6 +24,8 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 
 	public LinhaProducao() {
 		//FOR ORM
+		this.identifier = null;
+		this.estado = null;
 	}
 
 	public static String identityAttributeName() {

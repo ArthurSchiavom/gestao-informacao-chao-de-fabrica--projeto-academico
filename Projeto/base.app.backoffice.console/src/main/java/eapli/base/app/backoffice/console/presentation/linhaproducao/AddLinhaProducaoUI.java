@@ -1,14 +1,18 @@
-package eapli.base.app.backoffice.console.presentation.authz;
+package eapli.base.app.backoffice.console.presentation.linhaproducao;
 
 import eapli.base.gestaolinhasproducao.application.AddLinhaProducaoController;
+import eapli.framework.domain.repositories.ConcurrencyException;
+import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Menu para adicionar uma nova linha de produção
  */
 public class AddLinhaProducaoUI extends AbstractUI {
-
+	private static final Logger LOGGER = LogManager.getLogger(AddLinhaProducaoUI.class);
 	private final AddLinhaProducaoController theController = new AddLinhaProducaoController();
 
 	@Override
@@ -18,8 +22,11 @@ public class AddLinhaProducaoUI extends AbstractUI {
 		//TODO verificar o retorno aqui
 		try {
 			this.theController.registarLinhaProducao(identifier);
-		} catch (IllegalArgumentException ex) {
-			System.out.println("Identificador inválido");
+		} catch (final IllegalArgumentException ex) {
+			LOGGER.warn("Identificador inválido");
+		} catch (final IntegrityViolationException | ConcurrencyException e) {
+			LOGGER.warn("Assuming {} already exists (activate trace log for details)", identifier);
+			LOGGER.trace("Assuming existing record", e);
 		}
 		return false;
 	}
