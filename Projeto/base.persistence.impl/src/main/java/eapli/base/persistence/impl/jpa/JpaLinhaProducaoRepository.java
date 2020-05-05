@@ -29,6 +29,6 @@ public class JpaLinhaProducaoRepository
 		final Map<String, Object> params = new HashMap<>();
 		params.put(LinhaProducao.identityAttributeName(), identifier);
 		return matchOne("e."+ LinhaProducao.identityAttributeName()+"=:identifier", params);
-		//TODO verificar se isto funciona
+		//visto pelo dos profs
 	}
 }

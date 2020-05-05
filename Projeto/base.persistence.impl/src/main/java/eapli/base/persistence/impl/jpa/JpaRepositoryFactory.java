@@ -2,6 +2,7 @@ package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.producao.materiaprima.persistence.produto.ProdutoRepository;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
@@ -66,6 +67,16 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	@Override
 	public LinhaProducaoRepository productionLines(TransactionalContext autoTx) {
 		return new JpaLinhaProducaoRepository(autoTx);
+	}
+
+	@Override
+	public CategoriaRepository categoria() {
+		return new JpaCategoriaRepository(Application.settings().getPersistenceUnitName());
+	}
+
+	@Override
+	public CategoriaRepository categoria(TransactionalContext autoTx) {
+		return new JpaCategoriaRepository(autoTx);
 	}
 
 	@Override

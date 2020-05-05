@@ -2,6 +2,7 @@ package eapli.base.persistence.impl.inmemory;
 
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.producao.materiaprima.persistence.produto.ProdutoRepository;
@@ -66,6 +67,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public LinhaProducaoRepository productionLines(final TransactionalContext autoTx) {
 		return new InMemoryLinhaProducaoRepository();
+	}
+
+	@Override
+	public CategoriaRepository categoria() {
+		return this.categoria(null);
+	}
+
+	@Override
+	public CategoriaRepository categoria(final TransactionalContext autoTx) {
+		return new InMemoryCategoriaRepository();
 	}
 
 	@Override
