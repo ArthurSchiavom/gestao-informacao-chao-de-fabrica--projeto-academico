@@ -4,6 +4,9 @@ import eapli.base.gestaolinhasproducao.application.AddLinhaProducaoController;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
+/**
+ * Menu para adicionar uma nova linha de produção
+ */
 public class AddLinhaProducaoUI extends AbstractUI {
 
 	private final AddLinhaProducaoController theController = new AddLinhaProducaoController();
