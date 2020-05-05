@@ -1,8 +1,10 @@
 # Smart Shop Floor Management
+
 * Especializada na área de gestão e controlo de produção industrial.
 * Distintas áreas de negócio(e.g. cortiças, calçado, cutelaria).
 
 Tem de poder fazer:
+
 * Controlo das ordens de produção e execução
 * Gestão do tempo de atividade e paragem de máquinas
 * Gestão de consumos de matérias-primas
@@ -13,10 +15,12 @@ Tem de poder fazer:
 ## Resumo
 
 ### Unidade Industrial
+
 * Grupo de uma ou mais [fábricas](#Fábrica).
 
 ### Fábrica
-*PARA ESTE PROJETO SÓ VAI EXISTIR UMA FÁBRICA*
+
+    *PARA ESTE PROJETO SÓ VAI EXISTIR UMA FÁBRICA*
 
 * Dedica-se exclusivamente á produção de um [catálogo de produtos](#Catálogo%20de%20Produtos).
 * Possui um conjunto diversificado de [linhas de produção](#Linha%20de%20Produção).
@@ -38,13 +42,13 @@ Tem de poder fazer:
 
 * Formas de comunicação entre o sistema e as [máquinas](#Máquina).
 * Ordem e sequência de todas as mensagens não está garantida.
-    * Por causa de problemas tais como:
-    1. Falhas *momentárias* de rede.
-    1. Atrasos no envio das mensagens (modos de funcionamento distintos) .
+  * Por causa de problemas tais como:
+  1. Falhas *momentárias* de rede.
+  2. Atrasos no envio das mensagens (modos de funcionamento distintos) .
 * São distinguidos por:
-    * Data/Hora de **geração** da mensagem
-        * Atribuido pela máquina automaticamente.
-    * Data/Hora de **envio/receção** para/no sistema.
+  * Data/Hora de **geração** da mensagem
+    * Atribuido pela máquina automaticamente.
+  * Data/Hora de **envio/receção** para/no sistema.
 * Todas as mensagens geradas por uma [máquina](#Máquina) estão garantidas de estar no sistema desde que tenham sido emitidas antes da última mensagem relativa á máquina presente no sistema.
 
 #### Mensagem Bruta
@@ -57,10 +61,10 @@ Tem de poder fazer:
 
 * Podem ter várias causas.
 * **POR AGORA** devem focar-se em falhas de **falta de informação no sistema**
-    * Falta de informação sobre [ordem de produção](#Ordem%20de%20Produção).
-    * Falta de informação sobre [produto](#Produto).
-    * Falta de informação sobre [matéria prima](#Matéria%20Prima).
-    * etc...
+  * Falta de informação sobre [ordem de produção](#Ordem%20de%20Produção).
+  * Falta de informação sobre [produto](#Produto).
+  * Falta de informação sobre [matéria prima](#Matéria%20Prima).
+  * etc...
 * Falhas devem ser notificadas aos [utilizadores](#Atores) para que estes corrijam o erro.
 * As mensagens devem poder ser posteriormente reprocessadas.
 * Falhas ocorrem numa única [linha de produção](#Linha%20de%20Produção) e não afetam outras linhas na fábrica.
@@ -68,25 +72,25 @@ Tem de poder fazer:
 ### Ordem de Produção
 
 * O Controlo da execução das ordens é **automatizado** pelo sistema.
-    * O sistema utiliza as [mensagens](#Mensagem) para automatizar as ordens de produção.
+  * O sistema utiliza as [mensagens](#Mensagem) para automatizar as ordens de produção.
 * É sempre referente a um [produto](#Produto) e a uma ou mais [encomendas](#Encomenda).
 * A informação é ***gerida*** em [sistemas externos](#Sistemas%20Externos) e vai ser disponibilizada ao sistema conforme necessário.
 * A informação *pode* ser inserida **manualmente**.
 * É **importante** saber se:
-    * A ordem se encontra em execução.
-    * Quando se iniciou a sua execução.
-    * Quando se concluiu a sua execução.
-    * Em que [linha de produção](#Linha%20de%20Produção) se decorreu.
-    * Em que [máquinas](#Máquina) se decorreu.
-    * Tempo bruto de execução.
-    * Tempo efetivo de execução.(Sem contar com pausas devido a falhas).
-    * Detalhe de tempos **por [máquina](#Máquina)**:
-        * Tempo Bruto.
-        * Tempo Efetivo.
-    * Consumos reais das [matérias primas](#Matéria%20Prima):
-        * Do Produto em Causa.
-        * Desvios do que está na [ficha de produção](#Ficha%20de%20Produção).
-    * [Lotes](#Lote) e respetivas quantidades de [produto](#Produto) resultante.
+  * A ordem se encontra em execução.
+  * Quando se iniciou a sua execução.
+  * Quando se concluiu a sua execução.
+  * Em que [linha de produção](#Linha%20de%20Produção) se decorreu.
+  * Em que [máquinas](#Máquina) se decorreu.
+  * Tempo bruto de execução.
+  * Tempo efetivo de execução.(Sem contar com pausas devido a falhas).
+  * Detalhe de tempos **por [máquina](#Máquina)**:
+    * Tempo Bruto.
+    * Tempo Efetivo.
+  * Consumos reais das [matérias primas](#Matéria%20Prima):
+    * Do Produto em Causa.
+    * Desvios do que está na [ficha de produção](#Ficha%20de%20Produção).
+  * [Lotes](#Lote) e respetivas quantidades de [produto](#Produto) resultante.
 
 ### Catálogo de Produtos
 
@@ -94,7 +98,7 @@ Tem de poder fazer:
 
 ### Produto
 
-*  Corresponde a um item que uma [fábrica](#Fábrica) é capaz de produzir. Nalguns casos, um produto pode ser utilizado como [matéria-prima](#Matéria%20Prima) para a produção de outro produto.
+* Corresponde a um item que uma [fábrica](#Fábrica) é capaz de produzir. Nalguns casos, um produto pode ser utilizado como [matéria-prima](#Matéria%20Prima) para a produção de outro produto.
 
 ### Encomenda
 
@@ -115,28 +119,29 @@ mais [produtos](#Produto).
 * Corresponde a uma característica atribuída a um conjunto de exemplares de um [produto](#Produto).
 
 ## Sistemas Externos
+
 Cada linha descreve um sistema mencionado nos requisitos:
 
 * *Gere* a informação relativamente a [ordens de produção](#Ordem%20de%20Produção) e disponibiliza ao sistema conforme o necessário.
 * *Controla* a informação relativamente a [encomendas](#Encomenda) e disponibiliza ao sistema conforme o necessário.
 * *Alimenta* o sistema com informação sobre: 
-    * [Produtos finais](#Produto).
-    * [Ordens de produção](#Ordem%20de%20Produção).
-    * Entre outros...
-    * Formas de disponibilização:
-        * Serviços Web.
-        * CSV, JSON, XML 
+  * [Produtos finais](#Produto).
+  * [Ordens de produção](#Ordem%20de%20Produção).
+  * Entre outros...
+  * Formas de disponibilização:
+    * Serviços Web.
+    * CSV, JSON, XML
 
 ## Serviços Necessários
 
 * Serviço de *validação* e *enriquecimento* de [mensagens](#Mensagem).
-    * É importante tomar conta aos casos relacionados com:
-    1. [Linhas de produção.](#Linha%20de%20Produção)
-        * Informação deve estar diretamente no sistema.
-    1. [Ordem de produção](#Ordem%20de%20Produção).
-        * As [máquinas](#Máquina) *podem* não saber identificar em que [ordem de produção](#Ordem%20de%20Produção) estão a operar.
-            * Será necessário inferir a [ordem de produção](#Ordem%20de%20Produção) através de mensagens disponibilizadas **pela primeira** [máquina](#Máquina) na mesma [linha de produção](#Linha%20de%20Produção).
-    * Têm de ser resiliente a [falhas](#Falhas) e facilitar uma resolução.
+  * É importante tomar conta aos casos relacionados com:
+  1. [Linhas de produção.](#Linha%20de%20Produção)
+      * Informação deve estar diretamente no sistema.
+  2. [Ordem de produção](#Ordem%20de%20Produção).
+      * As [máquinas](#Máquina) *podem* não saber identificar em que [ordem de produção](#Ordem%20de%20Produção) estão a operar.
+          * Será necessário inferir a [ordem de produção](#Ordem%20de%20Produção) através de mensagens disponibilizadas **pela primeira** [máquina](#Máquina) na mesma [linha de produção](#Linha%20de%20Produção).
+  * Têm de ser resiliente a [falhas](#Falhas) e facilitar uma resolução.
 
 ## Atores
 

@@ -25,12 +25,18 @@ public class LinhaProducaoTest {
 
 	@Test
 	public void garantirNomeAtributoIdentidadeExiste() {
+		boolean found = false;
 		String identificador = LinhaProducao.identityAttributeName();
 		for (Field field : LinhaProducao.class.getDeclaredFields()) {
 			if (identificador.equals(field.getName())) {
-				assertTrue(true);
+				found = true;
+				break;
 			}
 		}
-		fail();
+		if(found) {
+			assertTrue(true);
+		} else {
+			fail("Verificar metodo identityAttributeName");
+		}
 	}
 }

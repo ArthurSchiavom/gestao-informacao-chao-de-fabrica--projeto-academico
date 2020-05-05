@@ -16,7 +16,7 @@ public class IdentificadorLinhaProducao implements ValueObject, Comparable<Ident
 	private String identifier;
 
 	public IdentificadorLinhaProducao(String identifier) {
-		if(!StringPredicates.isNullOrEmpty(identifier) || identifier.trim().isEmpty()) {
+		if(identifier == null || identifier.trim().isEmpty()) {
 			throw new IllegalArgumentException("Production Line Identifier can't be null");
 		}
 		this.identifier = identifier;
