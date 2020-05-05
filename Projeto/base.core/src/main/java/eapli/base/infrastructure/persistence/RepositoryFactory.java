@@ -7,6 +7,7 @@ import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
+import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.producao.materiaprima.persistence.produto.ProdutoRepository;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -83,14 +84,14 @@ public interface RepositoryFactory {
 	 *
 	 * @return
 	 */
-	LinhaProducaoRepository productionLines();
+	LinhaProducaoRepository linhasProducao();
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
 	 * @return
 	 */
-	LinhaProducaoRepository productionLines(TransactionalContext autoTx);
+	LinhaProducaoRepository linhasProducao(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
@@ -105,4 +106,8 @@ public interface RepositoryFactory {
 	 * @return
 	 */
 	CategoriaRepository categoria(TransactionalContext autoTx);
+
+	DepositoRepository depositos();
+
+	DepositoRepository depositos(TransactionalContext autoTx);
 }

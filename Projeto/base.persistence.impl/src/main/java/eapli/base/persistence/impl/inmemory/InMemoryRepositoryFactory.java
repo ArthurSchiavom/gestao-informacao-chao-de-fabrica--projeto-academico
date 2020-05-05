@@ -3,6 +3,7 @@ package eapli.base.persistence.impl.inmemory;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
+import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.producao.materiaprima.persistence.produto.ProdutoRepository;
@@ -60,12 +61,12 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	}
 
 	@Override
-	public LinhaProducaoRepository productionLines() {
-		return productionLines(null);
+	public LinhaProducaoRepository linhasProducao() {
+		return linhasProducao(null);
 	}
 
 	@Override
-	public LinhaProducaoRepository productionLines(final TransactionalContext autoTx) {
+	public LinhaProducaoRepository linhasProducao(final TransactionalContext autoTx) {
 		return new InMemoryLinhaProducaoRepository();
 	}
 
@@ -78,12 +79,19 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	public CategoriaRepository categoria(final TransactionalContext autoTx) {
 		return new InMemoryCategoriaRepository();
 	}
+	public DepositoRepository depositos() {
+		return depositos(null);
+	}
+
+	@Override
+	public DepositoRepository depositos(final TransactionalContext autoTx) {
+		return new InMemoryDepositRepository();
+	}
 
 	@Override
 	public SignupRequestRepository signupRequests(final TransactionalContext tx) {
 		return new InMemorySignupRequestRepository();
 	}
-
 
 	@Override
 	public TransactionalContext newTransactionalContext() {

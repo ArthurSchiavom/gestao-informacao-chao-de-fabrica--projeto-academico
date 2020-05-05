@@ -24,19 +24,26 @@ public class LinhaProducaoTest {
 	}
 
 	@Test
+	public void garantirLinhaProducaoComIdentificador() {
+		new LinhaProducao("Linha Produção 01");
+		assertTrue(true);
+	}
+
+	@Test
 	public void garantirNomeAtributoIdentidadeExiste() {
 		boolean found = false;
 		String identificador = LinhaProducao.identityAttributeName();
 		for (Field field : LinhaProducao.class.getDeclaredFields()) {
-			if (identificador.equals(field.getName())) {
+			if (identificador.equals(field.getName()) &&
+					field.getType().isAssignableFrom(IdentificadorLinhaProducao.class)) {
 				found = true;
 				break;
 			}
 		}
-		if(found) {
+		if (found) {
 			assertTrue(true);
 		} else {
-			fail("Verificar metodo identityAttributeName");
+			fail("Verificar valor de retorno do metodo identityAttributeName");
 		}
 	}
 }

@@ -13,7 +13,7 @@ public class IdentificadorLinhaProducao implements ValueObject, Comparable<Ident
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String identifier;
+	private final String identifier;
 
 	public IdentificadorLinhaProducao(String identifier) {
 		if(identifier == null || identifier.trim().isEmpty()) {
