@@ -6,6 +6,8 @@
     -->
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+    <class>eapli.base.gestaolinhasproducao.domain.LinhaProducao</class>
+    <class>eapli.base.gestaodepositos.domain.Deposito</class>
     <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
     <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
     <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
