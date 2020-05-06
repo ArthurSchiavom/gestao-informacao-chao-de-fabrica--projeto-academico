@@ -23,9 +23,9 @@
  */
 package eapli.base.app.backoffice.console;
 
+import eapli.base.app.backoffice.console.presentation.MainMenu;
 import eapli.base.app.common.console.BaseApplication;
 import eapli.base.app.common.console.presentation.authz.LoginUI;
-import eapli.base.app.backoffice.console.presentation.MainMenu;
 import eapli.base.clientusermanagement.application.eventhandlers.NewUserRegisteredFromSignupWatchDog;
 import eapli.base.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;

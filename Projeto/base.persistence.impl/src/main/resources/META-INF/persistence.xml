@@ -15,6 +15,8 @@
     <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
     <class>eapli.base.clientusermanagement.domain.ClientUser</class>
     <class>eapli.base.clientusermanagement.domain.SignupRequest</class>
+    <class>eapli.base.producao.materiaprima.produto.domain.Produto</class>
+    <class>eapli.base.producao.materiaprima.material.domain.Material</class>
 
     <properties>
 		<property name="javax.persistence.jdbc.url" value="jdbc:h2:.\db\base;MV_STORE=FALSE"/>

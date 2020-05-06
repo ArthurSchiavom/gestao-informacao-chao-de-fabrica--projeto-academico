@@ -1,0 +1,36 @@
+
+    <class>eapli.base.producao.materiaprima.produto.domain.Produto</class>
+    <class>eapli.base.producao.materiaprima.material.domain.Material</class>
+	
+	
+	
+	repo factory
+
+	/**
+	 * repository will be created in auto transaction mode
+	 *
+	 * @return
+	 */
+	ProdutoRepository produto();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return
+	 */
+	ProdutoRepository produto(TransactionalContext autoTx);
+	
+	
+	
+	
+	jpa repo factory
+
+	@Override
+	public ProdutoRepository produto() {
+		return new JpaProdutoRepository(Application.settings().getPersistenceUnitName());
+	}
+
+	@Override
+	public ProdutoRepository produto(final TransactionalContext autoTx) {
+		return new JpaProdutoRepository(autoTx);
+	}

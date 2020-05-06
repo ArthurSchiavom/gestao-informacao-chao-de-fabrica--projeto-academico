@@ -24,9 +24,6 @@
 package eapli.base.infrastructure.bootstrapers;
 
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.base.usermanagement.domain.UserBuilderHelper;
 import eapli.framework.actions.Action;
@@ -40,6 +37,8 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.util.Strings;
 import eapli.framework.validations.Invariants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Base Bootstrapping data app
@@ -61,7 +60,8 @@ public class BaseBootstrapper implements Action {
     @Override
     public boolean execute() {
         // declare bootstrap actions
-        final Action[] actions = { new MasterUsersBootstrapper(), };
+        // Using a List because arrays don't allow arrays of generic types
+        Action actions[] = {new MasterUsersBootstrapper(), };
 
         registerPowerUser();
         authenticateForBootstrapping();

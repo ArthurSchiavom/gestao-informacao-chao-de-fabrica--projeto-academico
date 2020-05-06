@@ -30,6 +30,7 @@ hs_err_pid*
 ##############################
 # everything - Arthur
 .idea/*
+Projeto/.idea/*
 
 # Generated files
 .idea/**/contentModel.xml

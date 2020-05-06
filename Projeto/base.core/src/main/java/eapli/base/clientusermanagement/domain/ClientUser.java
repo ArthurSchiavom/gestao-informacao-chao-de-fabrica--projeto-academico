@@ -23,14 +23,14 @@
  */
 package eapli.base.clientusermanagement.domain;
 
+import eapli.framework.domain.model.AggregateRoot;
+import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
-
-import eapli.framework.domain.model.AggregateRoot;
-import eapli.framework.domain.model.DomainEntities;
-import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
 /**
  * A Client User.

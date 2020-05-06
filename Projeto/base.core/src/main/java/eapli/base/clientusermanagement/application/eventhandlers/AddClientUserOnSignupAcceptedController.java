@@ -23,8 +23,6 @@
  */
 package eapli.base.clientusermanagement.application.eventhandlers;
 
-import java.util.Optional;
-
 import eapli.base.clientusermanagement.domain.ClientUser;
 import eapli.base.clientusermanagement.domain.ClientUserBuilder;
 import eapli.base.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
@@ -33,6 +31,8 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.framework.functional.Functions;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
+
+import java.util.Optional;
 
 /**
  *

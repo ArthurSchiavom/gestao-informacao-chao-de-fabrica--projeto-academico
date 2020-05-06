@@ -6,23 +6,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="base.app.other.console" />
-        <module name="maven-archiver (7)" />
-        <module name="maven-archiver (1)" />
-        <module name="maven-archiver (8)" />
-        <module name="maven-archiver (2)" />
         <module name="base.bootstrappers" />
-        <module name="maven-archiver (3)" />
         <module name="base.persistence.impl" />
-        <module name="maven-archiver (4)" />
-        <module name="base.app.user.console" />
-        <module name="maven-archiver (5)" />
-        <module name="base.app.common.console" />
-        <module name="base.app.backoffice.console" />
         <module name="base.app.bootstrap" />
-        <module name="maven-archiver (6)" />
+        <module name="base.app.common.console" />
         <module name="base.core" />
+        <module name="base.app.other.console" />
+        <module name="base.app.user.console" />
+        <module name="base.app.backoffice.console" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="base" target="1.8" />
+      <module name="base.app.backoffice.console" target="1.8" />
+      <module name="base.app.bootstrap" target="1.8" />
+      <module name="base.app.common.console" target="1.8" />
+      <module name="base.app.other.console" target="1.8" />
+      <module name="base.app.user.console" target="1.8" />
+      <module name="base.bootstrappers" target="1.8" />
+      <module name="base.core" target="1.8" />
+      <module name="base.persistence.impl" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,14 +1,25 @@
 QUANDO CRIAREM VALUE OBJECTS OU ATRIBUTOS, PROCUREM INFORMAÇÃO SOBRE ESSE ATRIBUTO NOS EMAILS
 
-Na criação de produtos (US 2005 e US 2006), os produtos são criados sem Ficha de Produção.
+PRODUTOS - Na criação de produtos (US 2005 e US 2006), os produtos são criados sem Ficha de Produção.
 Posteriormente, através da US 2004, o Gestor de Produção procederá à especificação da Ficha de Produção desses produtos.
 
-É suposto fazer uma aplicação de UI por área (Gestão de Produção, Gestão de Chão de Fábrica e Administração), ou é para consolidar as componentes de gestão numa única aplicação de UI?
+TODOS - É suposto fazer uma aplicação de UI por área (Gestão de Produção, Gestão de Chão de Fábrica e Administração), ou é para consolidar as componentes de gestão numa única aplicação de UI?
 Resposta: As duas alternativas são aceites. A parte relativa à Administração não é necessária desenvolver. (optamos por desenvolver só 1)
 
-Avisar utilizador se registar na ficha de produção um produto sem ficha de produção (extra)
+PRODUTO - Avisar utilizador se registar na ficha de produção um produto sem ficha de produção (extra)
 
-Após a US2006 pode ser sugerida a US2004 (extra)
+PRODUTOS - Após a US2006 pode ser sugerida a US2004 (extra)
 
-Se alguma linha do ficheiro tiver um erro ou a importação falhar,
-No final da importação de um ficheiro deve ser apresentado ao utilizador um resumo quantitativo dos resultados da importação (nº de linhas importadas com sucesso).
+FICHEIROS - Se alguma linha do ficheiro tiver um erro ou a importação falhar, no final da importação de um ficheiro deve ser apresentado ao utilizador um resumo quantitativo dos resultados da importação (nº de linhas importadas com sucesso).
+
+PRODUTOS - Registo de produtos com o CSV Questionar o utilizador, se em caso de algum produto já existir se pretende que a informação seja ou atualizada ou ignorada.
+
+	
+MÁQUINAS - Tendo em conta as respostas a dúvidas anteriores, imaginando que temos uma máquina na posição 1 e outra máquina na posição 2, é possível inserir uma nova máquina na posição 2, e a máquina que estava na posição 2 avança uma posição?
+Sim, esse é o comportamento pretendido.
+
+MÁQUINAS - Para além disso, será possível inserir uma máquina na posição 1 e outra máquina na posição 10, ficando as outras posições vagas?
+Uma linha de produção é um sequência contínua de máquinas e, portanto, o normal é a adotar-se uma sequência do género 1, 2, 3, ..., N. A adoção doutro género de sequência não deve significar que existem "lugares" vagos. Estes números (1, 2, 3, 10, 20, 30) devem servir apenas para definir a ordem das máquinas na linha de produção (e não mais do que isso).
+
+MÁQUINAS - É possível que estas duas máquinas (máquina na posição 1 e máquina na posição 10, caso não exista máquinas entre elas) comuniquem entre elas, ou apenas quando se encontram em posições consecutivas (1 para 2, 4 para 5, por exemplo)?
+No exemplo dado, existiria uma linha com 2 máquinas. A máquina 10 aparece imediatamente após a máquina 1. Neste caso, as matérias-primas fluem da máquina 1 para a máquina 10.

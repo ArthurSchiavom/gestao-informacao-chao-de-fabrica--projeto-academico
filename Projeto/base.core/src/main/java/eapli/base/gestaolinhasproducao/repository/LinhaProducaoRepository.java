@@ -1,7 +1,7 @@
 package eapli.base.gestaolinhasproducao.repository;
 
-import eapli.base.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
+import eapli.base.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.framework.domain.repositories.DomainRepository;
 
 import java.util.Optional;

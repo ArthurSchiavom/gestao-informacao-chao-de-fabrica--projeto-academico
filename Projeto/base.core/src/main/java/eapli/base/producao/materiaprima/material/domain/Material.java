@@ -1,24 +1,27 @@
-package eapli.base.producao.materiaprima.domain.produto;
+package eapli.base.producao.materiaprima.material.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
 import javax.persistence.EmbeddedId;
-import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Version;
 
 @Entity
-public class Produto implements AggregateRoot<CodigoUnico> {
+public class Material implements AggregateRoot<CodigoInterno> {
+
+    private static final long serialVersionUID = 1L;
 
     @Version
     private Long version;
 
-    @EmbeddedId
-    private CodigoUnico codigoUnico;
     public static String identityAttributeName() {
-        return "codigoUnico";
+        return "codigoInterno";
     }
+
+    @EmbeddedId
+    private CodigoInterno codigoInterno;
+
 
     @Override
     public boolean equals(final Object o) {
@@ -36,7 +39,7 @@ public class Produto implements AggregateRoot<CodigoUnico> {
     }
 
     @Override
-    public CodigoUnico identity() {
-        return this.codigoUnico;
+    public CodigoInterno identity() {
+        return this.codigoInterno;
     }
 }

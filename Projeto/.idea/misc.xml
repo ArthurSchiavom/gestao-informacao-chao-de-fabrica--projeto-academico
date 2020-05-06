@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../.." />
-  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/base.core/target/maven-archiver/pom.properties" />
-        <option value="$PROJECT_DIR$/base.app.bootstrap/target/maven-archiver/pom.properties" />
-        <option value="$PROJECT_DIR$/base.bootstrappers/target/maven-archiver/pom.properties" />
-        <option value="$PROJECT_DIR$/base.app.user.console/target/maven-archiver/pom.properties" />
-        <option value="$PROJECT_DIR$/base.persistence.impl/target/maven-archiver/pom.properties" />
-        <option value="$PROJECT_DIR$/base.app.other.console/target/maven-archiver/pom.properties" />
-        <option value="$PROJECT_DIR$/base.app.common.console/target/maven-archiver/pom.properties" />
-        <option value="$PROJECT_DIR$/base.app.backoffice.console/target/maven-archiver/pom.properties" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

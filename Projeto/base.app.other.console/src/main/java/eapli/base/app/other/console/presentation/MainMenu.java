@@ -23,8 +23,8 @@
  */
 package eapli.base.app.other.console.presentation;
 
-import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.Application;
+import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;

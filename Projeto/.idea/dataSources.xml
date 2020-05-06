@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="base" uuid="c1fb9b6a-cca3-4aeb-b77f-7af7bc6cf817">
+    <data-source source="LOCAL" name="BD" uuid="b1cbc91b-6078-4ab9-a860-596c4e5379ba">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>
-      <jdbc-url>jdbc:h2:.\db\base;MV_STORE=FALSE</jdbc-url>
+      <jdbc-url>jdbc:h2:C:\Users\Arthur\Desktop\ISEP\2º ano\2º Semestre\EAPLI\Projeto\Codigo\Projeto\db\base</jdbc-url>
     </data-source>
   </component>
 </project>

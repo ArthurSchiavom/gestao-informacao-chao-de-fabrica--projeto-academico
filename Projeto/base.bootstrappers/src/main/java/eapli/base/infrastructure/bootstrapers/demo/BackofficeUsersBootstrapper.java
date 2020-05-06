@@ -5,13 +5,13 @@
  */
 package eapli.base.infrastructure.bootstrapers.demo;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import eapli.base.infrastructure.bootstrapers.UsersBootstrapperBase;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.domain.model.Role;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Paulo Gandra Sousa

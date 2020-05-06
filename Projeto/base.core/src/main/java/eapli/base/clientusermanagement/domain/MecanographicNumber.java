@@ -5,10 +5,10 @@
  */
 package eapli.base.clientusermanagement.domain;
 
-import javax.persistence.Embeddable;
-
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.validations.StringPredicates;
+
+import javax.persistence.Embeddable;
 
 /**
  *

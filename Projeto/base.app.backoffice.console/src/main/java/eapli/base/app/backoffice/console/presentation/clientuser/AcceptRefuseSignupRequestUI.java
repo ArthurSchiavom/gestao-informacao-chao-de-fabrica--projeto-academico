@@ -5,9 +5,6 @@
  */
 package eapli.base.app.backoffice.console.presentation.clientuser;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import eapli.base.clientusermanagement.application.AcceptRefuseSignupFactory;
 import eapli.base.clientusermanagement.application.AcceptRefuseSignupRequestController;
 import eapli.base.clientusermanagement.domain.SignupRequest;
@@ -16,6 +13,8 @@ import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *

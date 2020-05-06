@@ -1,12 +1,11 @@
 package eapli.base.usermanagement.application.eventhandlers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;
 import eapli.framework.domain.events.DomainEvent;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.eventpubsub.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SignupAcceptedWatchDog implements EventHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(SignupAcceptedWatchDog.class);

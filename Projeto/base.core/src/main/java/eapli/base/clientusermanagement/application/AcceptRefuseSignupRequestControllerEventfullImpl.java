@@ -25,8 +25,6 @@ package eapli.base.clientusermanagement.application;
 
 import eapli.base.clientusermanagement.domain.SignupRequest;
 import eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;
-import org.springframework.transaction.annotation.Transactional;
-
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.usermanagement.domain.BaseRoles;
@@ -39,6 +37,7 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.eventpubsub.EventPublisher;
 import eapli.framework.infrastructure.eventpubsub.impl.inprocess.InProcessPubSub;
 import eapli.framework.validations.Preconditions;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * the controller for the use case "Accept or refuse signup request"

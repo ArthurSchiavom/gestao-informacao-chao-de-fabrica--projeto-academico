@@ -23,11 +23,6 @@
  */
 package eapli.base.clientusermanagement.domain;
 
-import java.util.Calendar;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
-
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.general.domain.model.EmailAddress;
 import eapli.framework.infrastructure.authz.application.PasswordPolicy;
@@ -35,6 +30,10 @@ import eapli.framework.infrastructure.authz.domain.model.Name;
 import eapli.framework.infrastructure.authz.domain.model.Password;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.time.util.Calendars;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
 
 /**
  * A factory for Signup Requests.
