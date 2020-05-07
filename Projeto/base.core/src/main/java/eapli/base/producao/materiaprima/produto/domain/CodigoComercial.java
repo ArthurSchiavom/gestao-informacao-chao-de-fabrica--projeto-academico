@@ -15,10 +15,10 @@ public class CodigoComercial implements ValueObject, Serializable, Comparable<Co
 
     private static final long serialVersionUID = 1L;
 
-    protected final String codigoComercial;
+    public final String codigoComercialValor;
 
     protected CodigoComercial() {
-        codigoComercial = null;
+        codigoComercialValor = null;
     }
 
     public static CodigoComercial valueOf(String codigoComercial) throws IllegalDomainValue {
@@ -33,7 +33,7 @@ public class CodigoComercial implements ValueObject, Serializable, Comparable<Co
         if (produtoRepository.produtoOfCodigoComercial(codigoComercial).isPresent()) {
             throw new IllegalDomainValue("O código comercial indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
         }
-        this.codigoComercial = codigoComercial;
+        this.codigoComercialValor = codigoComercial;
     }
 
     @Override
@@ -47,22 +47,22 @@ public class CodigoComercial implements ValueObject, Serializable, Comparable<Co
 
         final CodigoComercial that = (CodigoComercial) o;
 
-        return this.codigoComercial.equals(that.codigoComercial);
+        return this.codigoComercialValor.equals(that.codigoComercialValor);
     }
 
     @Override
     public int hashCode() {
-        return codigoComercial.hashCode();
+        return codigoComercialValor.hashCode();
     }
 
     @Override
     public String toString() {
-        return codigoComercial;
+        return codigoComercialValor;
     }
 
     @Override
     public int compareTo(CodigoComercial obj) {
-        return this.codigoComercial.compareTo(obj.codigoComercial);
+        return this.codigoComercialValor.compareTo(obj.codigoComercialValor);
     }
 }
 

@@ -5,7 +5,7 @@ import eapli.base.producao.materiaprima.domain.UnidadeDeMedida;
 import eapli.base.producao.materiaprima.produto.domain.*;
 
 /**
- * Facilita a atribuição gradual de valores, podendo então tratar os possíveis erros para cada atributo individualmente.
+ * Facilita a leitura do código no controller e a atribuição gradual de valores, podendo então tratar os possíveis erros para cada atributo individualmente.
  */
 public class ProdutoBuilder {
     private CodigoUnico codigoUnico = null;

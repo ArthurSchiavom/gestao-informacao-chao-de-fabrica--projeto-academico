@@ -42,13 +42,13 @@ public class RegistarProdutosDeCsvController implements RegistarProdutosDeFichei
             next = scanner.next();
 
             if (next.length != N_CAMPOS) {
-                transformer.addFalha(nLinha, "A linha não tem o número de campos esperado0");
+                transformer.addFalha(nLinha, "A linha não tem o número de campos esperado");
                 continue;
             }
 
             try {
-                registarProdutoController.setCategoriaDeProduto(next[INDEX_CATEGORIA]);
                 registarProdutoController.setCodigoUnico(next[INDEX_CODIGO_FABRICO]);
+                registarProdutoController.setCategoriaDeProduto(next[INDEX_CATEGORIA]);
                 registarProdutoController.setCodigoComercial(next[INDEX_CODIGO_COMERCIAL]);
                 registarProdutoController.setDescricaoBreve(next[INDEX_DESCRICAO_BREVE]);
                 registarProdutoController.setDescricaoCompleta(next[INDEX_DESCRICAO_COMPLETA]);

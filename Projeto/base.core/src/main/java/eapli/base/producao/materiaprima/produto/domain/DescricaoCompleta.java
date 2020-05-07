@@ -10,17 +10,17 @@ public class DescricaoCompleta implements ValueObject, Serializable, Comparable<
 
     private static final long serialVersionUID = 1L;
 
-    private final String descricaoCompleta;
+    public final String descricaoCompletaValor;
 
     protected DescricaoCompleta() {
-        descricaoCompleta = null;
+        descricaoCompletaValor = null;
     }
 
     protected DescricaoCompleta(String descricaoCompleta) {
         if (descricaoCompleta == null || descricaoCompleta.isEmpty()) {
             throw new IllegalArgumentException("A descrição completa não pode ser vazia.");
         }
-        this.descricaoCompleta = descricaoCompleta;
+        this.descricaoCompletaValor = descricaoCompleta;
     }
 
     public static DescricaoCompleta valueOf(String descricaoCompleta) {
@@ -38,22 +38,22 @@ public class DescricaoCompleta implements ValueObject, Serializable, Comparable<
 
         final DescricaoCompleta that = (DescricaoCompleta) o;
 
-        return this.descricaoCompleta.equals(that.descricaoCompleta);
+        return this.descricaoCompletaValor.equals(that.descricaoCompletaValor);
     }
 
     @Override
     public int hashCode() {
-        return descricaoCompleta.hashCode();
+        return descricaoCompletaValor.hashCode();
     }
 
     @Override
     public String toString() {
-        return descricaoCompleta;
+        return descricaoCompletaValor;
     }
 
     @Override
     public int compareTo(DescricaoCompleta obj) {
-        return this.descricaoCompleta.compareTo(obj.descricaoCompleta);
+        return this.descricaoCompletaValor.compareTo(obj.descricaoCompletaValor);
     }
 }
 
