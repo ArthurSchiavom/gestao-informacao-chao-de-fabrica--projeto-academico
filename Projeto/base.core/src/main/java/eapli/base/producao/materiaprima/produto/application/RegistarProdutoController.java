@@ -19,6 +19,12 @@ public class RegistarProdutoController {
         this.subtituir = subtituir;
     }
 
+    /**
+     * Para que o sistema de substituição funcione corretamente, este deverá ser o primeiro método a ser invocado
+     *
+     * @param codigoUnico
+     * @throws IllegalDomainValue
+     */
     public void setCodigoUnico(String codigoUnico) throws IllegalDomainValue {
         if (subtituir) {
             Optional<Produto> antigo = repo.produtoOfCodigoUnico(codigoUnico);

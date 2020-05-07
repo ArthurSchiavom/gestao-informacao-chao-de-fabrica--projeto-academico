@@ -18,18 +18,18 @@ public class Produto implements AggregateRoot<CodigoUnico> {
     private Long version;
 
     @EmbeddedId
-    private CodigoUnico codigoUnico;
+    public final CodigoUnico codigoUnico;
 
     public static String identityAttributeName() {
         return Reflection.retrieveAttributeName(Produto.class, CodigoUnico.class);
     }
 
-    private final CategoriaDeProduto categoriaDeProduto;
-    private final CodigoComercial codigoComercial;
-    private final DescricaoBreve descricaoBreve;
-    private final DescricaoCompleta descricaoCompleta;
-    private final FichaDeProducao fichaDeProducao;
-    private final UnidadeDeMedida unidadeDeMedida;
+    public final CategoriaDeProduto categoriaDeProduto;
+    public final CodigoComercial codigoComercial;
+    public final DescricaoBreve descricaoBreve;
+    public final DescricaoCompleta descricaoCompleta;
+    public final FichaDeProducao fichaDeProducao;
+    public final UnidadeDeMedida unidadeDeMedida;
 
     protected Produto() {
         this.codigoUnico = null;
@@ -49,7 +49,7 @@ public class Produto implements AggregateRoot<CodigoUnico> {
         this.codigoComercial = codigoComercial;
         this.descricaoBreve = descricaoBreve;
         this.descricaoCompleta = descricaoCompleta;
-        this.fichaDeProducao = FichaDeProducao.valueOf();
+        this.fichaDeProducao = null;
         this.unidadeDeMedida = unidadeDeMedida;
     }
 

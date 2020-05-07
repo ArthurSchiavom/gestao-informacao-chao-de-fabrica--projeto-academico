@@ -10,14 +10,14 @@ public class CategoriaDeProduto implements ValueObject, Serializable, Comparable
 
     private static final long serialVersionUID = 1L;
 
-    private final String categoria;
+    public final String categoriaValor;
 
     protected CategoriaDeProduto() {
-        categoria = null;
+        categoriaValor = null;
     }
 
     protected CategoriaDeProduto(String categoria) {
-        this.categoria = categoria;
+        this.categoriaValor = categoria;
     }
 
     public static CategoriaDeProduto valueOf(String categoria) {
@@ -35,22 +35,22 @@ public class CategoriaDeProduto implements ValueObject, Serializable, Comparable
 
         final CategoriaDeProduto that = (CategoriaDeProduto) o;
 
-        return this.categoria.equalsIgnoreCase(that.categoria);
+        return this.categoriaValor.equalsIgnoreCase(that.categoriaValor);
     }
 
     @Override
     public int hashCode() {
-        return categoria.hashCode();
+        return categoriaValor.hashCode();
     }
 
     @Override
     public String toString() {
-        return categoria;
+        return categoriaValor;
     }
 
     @Override
     public int compareTo(CategoriaDeProduto obj) {
-        return categoria.toLowerCase().compareTo(obj.categoria.toLowerCase());
+        return categoriaValor.toLowerCase().compareTo(obj.categoriaValor.toLowerCase());
     }
 }
 

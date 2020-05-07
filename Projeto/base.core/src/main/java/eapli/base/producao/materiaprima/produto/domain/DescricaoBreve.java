@@ -13,10 +13,10 @@ public class DescricaoBreve implements ValueObject, Serializable, Comparable<Des
     private static final long serialVersionUID = 1L;
     private static final int MAX_CARACTERES_DESCRICAO_BREVE = 30;
 
-    private final String descricaoBreve;
+    public final String descricaoBreveValor;
 
     protected DescricaoBreve() {
-        descricaoBreve = null;
+        descricaoBreveValor = null;
     }
 
     protected DescricaoBreve(String descricaoBreve) throws IllegalDomainValue {
@@ -26,7 +26,7 @@ public class DescricaoBreve implements ValueObject, Serializable, Comparable<Des
         if (descricaoBreve.length() > MAX_CARACTERES_DESCRICAO_BREVE) {
             throw new IllegalDomainValue("A descrição breve deve ter no máximo " + MAX_CARACTERES_DESCRICAO_BREVE + " caractéres", IllegalDomainValueType.TOO_MANY_CHARACTERS);
         }
-        this.descricaoBreve = descricaoBreve;
+        this.descricaoBreveValor = descricaoBreve;
     }
 
     public static DescricaoBreve valueOf(String descricaoBreve) throws IllegalDomainValue {
@@ -44,22 +44,22 @@ public class DescricaoBreve implements ValueObject, Serializable, Comparable<Des
 
         final DescricaoBreve that = (DescricaoBreve) o;
 
-        return this.descricaoBreve.equals(that.descricaoBreve);
+        return this.descricaoBreveValor.equals(that.descricaoBreveValor);
     }
 
     @Override
     public int hashCode() {
-        return descricaoBreve.hashCode();
+        return descricaoBreveValor.hashCode();
     }
 
     @Override
     public String toString() {
-        return descricaoBreve;
+        return descricaoBreveValor;
     }
 
     @Override
     public int compareTo(DescricaoBreve obj) {
-        return this.descricaoBreve.compareTo(obj.descricaoBreve);
+        return this.descricaoBreveValor.compareTo(obj.descricaoBreveValor);
     }
 }
 
