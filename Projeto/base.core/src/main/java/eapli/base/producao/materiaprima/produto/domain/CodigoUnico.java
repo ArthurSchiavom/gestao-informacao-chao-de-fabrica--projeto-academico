@@ -15,11 +15,11 @@ public class CodigoUnico implements ValueObject, Serializable, Comparable<Codigo
 
     private static final long serialVersionUID = 1L;
 
-    private final String codigoUnico;
+    public final String codigoUnicoValor;
 
     // Embeddable constructor
     protected CodigoUnico() {
-        codigoUnico = null;
+        codigoUnicoValor = null;
     }
 
     protected CodigoUnico(String codigoUnico) throws IllegalDomainValue {
@@ -30,7 +30,7 @@ public class CodigoUnico implements ValueObject, Serializable, Comparable<Codigo
         if (produtoRepository.produtoOfCodigoUnico(codigoUnico).isPresent()) {
             throw new IllegalDomainValue("O código único indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
         }
-        this.codigoUnico = codigoUnico;
+        this.codigoUnicoValor = codigoUnico;
     }
 
     public static CodigoUnico valueOf(String codigoUnico) throws IllegalDomainValue {
@@ -48,22 +48,22 @@ public class CodigoUnico implements ValueObject, Serializable, Comparable<Codigo
 
         final CodigoUnico that = (CodigoUnico) o;
 
-        return this.codigoUnico.equals(that.codigoUnico);
+        return this.codigoUnicoValor.equals(that.codigoUnicoValor);
     }
 
     @Override
     public int hashCode() {
-        return codigoUnico.hashCode();
+        return codigoUnicoValor.hashCode();
     }
 
     @Override
     public String toString() {
-        return codigoUnico;
+        return codigoUnicoValor;
     }
 
     @Override
     public int compareTo(CodigoUnico obj) {
-        return this.codigoUnico.compareTo(obj.codigoUnico);
+        return this.codigoUnicoValor.compareTo(obj.codigoUnicoValor);
     }
 }
 

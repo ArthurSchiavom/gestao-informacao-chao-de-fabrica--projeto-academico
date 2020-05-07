@@ -2,13 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0cd505a8-bd17-4d2a-a5f5-cabd09040d35" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/base.h2.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/base.h2.db" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/application/ProdutoBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/application/ProdutoBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/application/RegistarProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/application/RegistarProdutoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/application/RegistarProdutosDeCsvController.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/application/RegistarProdutosDeCsvController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/base.mv.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_material/registarProduto/Produtos3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/test_material/registarProduto/Produtos3.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/CategoriaDeProduto.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/CategoriaDeProduto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/CodigoComercial.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/CodigoComercial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/CodigoUnico.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/CodigoUnico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/DescricaoBreve.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/DescricaoBreve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/DescricaoCompleta.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/DescricaoCompleta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/Produto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/base.h2.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/base.h2.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_Notas/__LER - Resumo de alguns design patterns.txt" beforeDir="false" />
+>>>>>>> 1d2b92b950618d72c8fdcf620d9e15c3dbae07c8
     </list>
+    <ignored path="$PROJECT_DIR$/base.app.backoffice.console/target/" />
+    <ignored path="$PROJECT_DIR$/base.bootstrappers/target/" />
+    <ignored path="$PROJECT_DIR$/base.app.other.console/target/" />
+    <ignored path="$PROJECT_DIR$/base.app.bootstrap/target/" />
+    <ignored path="$PROJECT_DIR$/base.persistence.impl/target/" />
+    <ignored path="$PROJECT_DIR$/base.app.common.console/target/" />
+    <ignored path="$PROJECT_DIR$/base.core/target/" />
+    <ignored path="$PROJECT_DIR$/base.app.user.console/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +44,87 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/BaseBackoffice.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#3417#0" expanded="true" />
+                <element signature="e#2112#2143#0" expanded="true" />
+                <element signature="e#3072#3102#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base.persistence.impl/src/main/resources/META-INF/persistence.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/Produto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaodepositos/domain/Deposito.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/CategoriaDeProduto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base.app.common.console/src/main/java/eapli/base/app/common/console/BaseApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1046">
+              <caret line="81" column="28" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/MainMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="557">
+              <caret line="208" column="97" selection-start-line="208" selection-start-column="97" selection-end-line="208" selection-end-column="97" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="118" column="14" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -33,21 +142,168 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryDepositRepository.java" />
+        <option value="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/MainMenu.java" />
+        <option value="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java" />
+      </list>
+    </option>
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
         <option name="lookForNested" value="true" />
       </MavenImportingSettings>
     </option>
   </component>
+<<<<<<< HEAD
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="base" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="base" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="260" />
+    <option name="y" value="20" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+=======
+  <component name="ProjectId" id="1bZtQcLL4IrBjm5eBUwfjO9bXO9" />
+>>>>>>> 1d2b92b950618d72c8fdcf620d9e15c3dbae07c8
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="PackagesPane" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Projeto" type="58d84e3e:PackageViewProjectNode" />
+              <item name="base" type="eaaa3913:PackageViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="58d84e3e:PackageViewProjectNode" />
+              <item name="base" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="app" type="eaaa3913:PackageViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="58d84e3e:PackageViewProjectNode" />
+              <item name="base" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="app" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="backoffice" type="eaaa3913:PackageViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="58d84e3e:PackageViewProjectNode" />
+              <item name="base" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="app" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="backoffice" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="base.app.backoffice.console" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="58d84e3e:PackageViewProjectNode" />
+              <item name="base" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="app" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="backoffice" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="base.app.backoffice.console" type="616d4139:PackageViewModuleNode" />
+              <item name="eapli.base.app" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="58d84e3e:PackageViewProjectNode" />
+              <item name="base" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="app" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="backoffice" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="base.app.backoffice.console" type="616d4139:PackageViewModuleNode" />
+              <item name="eapli.base.app" type="1f31426a:PackageElementNode" />
+              <item name="backoffice.console" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="58d84e3e:PackageViewProjectNode" />
+              <item name="base" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="app" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="backoffice" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="base.app.backoffice.console" type="616d4139:PackageViewModuleNode" />
+              <item name="eapli.base.app" type="1f31426a:PackageElementNode" />
+              <item name="backoffice.console" type="1f31426a:PackageElementNode" />
+              <item name="presentation" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="58d84e3e:PackageViewProjectNode" />
+              <item name="base" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="app" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="backoffice" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="base.app.backoffice.console" type="616d4139:PackageViewModuleNode" />
+              <item name="eapli.base.app" type="1f31426a:PackageElementNode" />
+              <item name="other.console" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Projeto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projeto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projeto" type="462c0819:PsiDirectoryNode" />
+              <item name="base.app.backoffice.console" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projeto" type="462c0819:PsiDirectoryNode" />
+              <item name="base.app.backoffice.console" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projeto" type="462c0819:PsiDirectoryNode" />
+              <item name="base.app.backoffice.console" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Projeto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projeto" type="462c0819:PsiDirectoryNode" />
+              <item name="base.app.backoffice.console" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="h2" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -55,6 +311,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/base.core/src/main/java/eapli/base" />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -77,7 +334,51 @@
       <recent name="eapli.base.persistence.impl.jpa" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DepositoTest.garantirDepositoComCodigoDescricao">
+<<<<<<< HEAD
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.BaseBackoffice">
+    <configuration name="BaseBackoffice" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="eapli.base.app.backoffice.console.BaseBackoffice" />
+      <module name="base.app.backoffice.console" />
+=======
+  <component name="RunManager" selected="JUnit.DepositoTest">
+    <configuration name="DepositoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="base.core" />
+>>>>>>> 1d2b92b950618d72c8fdcf620d9e15c3dbae07c8
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="eapli.base.app.backoffice.console.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BaseBootstrap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="eapli.base.app.bootstrap.BaseBootstrap" />
+      <module name="base.app.bootstrap" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="eapli.base.app.bootstrap.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DepositoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="base.core" />
       <extension name="coverage">
@@ -109,22 +410,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DepositoTest.garantirQueCodigoNaoContemMaisQueUmaPalavra" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="base.core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="eapli.base.gestaodepositos.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="eapli.base.gestaodepositos.domain" />
-      <option name="MAIN_CLASS_NAME" value="eapli.base.gestaodepositos.domain.DepositoTest" />
-      <option name="METHOD_NAME" value="garantirQueCodigoNaoContemMaisQueUmaPalavra" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LinhaProducaoTest.garantirLinhaProducaoComIdentificador" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="base.core" />
       <extension name="coverage">
@@ -141,31 +426,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LinhaProducaoTest.garantirNomeAtributoIdentidadeExiste" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="base.core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="eapli.base.gestaolinhasproducao.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="eapli.base.gestaolinhasproducao.domain" />
-      <option name="MAIN_CLASS_NAME" value="eapli.base.gestaolinhasproducao.domain.LinhaProducaoTest" />
-      <option name="METHOD_NAME" value="garantirNomeAtributoIdentidadeExiste" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+<<<<<<< HEAD
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BaseBackoffice" />
+        <item itemvalue="Application.BaseBootstrap" />
         <item itemvalue="JUnit.DepositoTest.garantirDepositoComCodigoDescricao" />
         <item itemvalue="JUnit.LinhaProducaoTest.garantirLinhaProducaoComIdentificador" />
         <item itemvalue="JUnit.DepositoTest" />
-        <item itemvalue="JUnit.DepositoTest.garantirQueCodigoNaoContemMaisQueUmaPalavra" />
-        <item itemvalue="JUnit.LinhaProducaoTest.garantirNomeAtributoIdentidadeExiste" />
       </list>
     </recent_temporary>
+=======
+>>>>>>> 1d2b92b950618d72c8fdcf620d9e15c3dbae07c8
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -188,6 +460,11 @@
       <workItem from="1588600358770" duration="9501000" />
       <workItem from="1588622937764" duration="11545000" />
       <workItem from="1588674929253" duration="8712000" />
+<<<<<<< HEAD
+      <workItem from="1588847232391" duration="3158000" />
+=======
+      <workItem from="1588851587591" duration="2586000" />
+>>>>>>> 1d2b92b950618d72c8fdcf620d9e15c3dbae07c8
     </task>
     <servers />
   </component>
@@ -223,14 +500,202 @@
       <configuration name="DepositoTest.garantirDepositoComCodigoDescricao" configurationId="JUnit" />
     </history-entry>
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3158000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Image Layers" />
+      <window_info id="Capture Tool" />
+      <window_info id="UI Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Persistence" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Spring" />
+      <window_info anchor="bottom" id="Terminal" weight="0.32936078" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Java Enterprise" />
+      <window_info anchor="bottom" id="Database Changes" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" weight="0.32936078" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Maven" weight="0.32995737" />
+      <window_info anchor="right" id="PlantUML" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="41" y="72" width="672" height="676" key="search.everywhere.popup" timestamp="1588804801052">
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1588851943054">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="41" y="72" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588804801052" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1588851943054" />
+    <state x="502" y="281" width="532" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1588852705751">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="502" y="281" width="532" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1588852705751" />
+    <state x="330" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588852702151">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="330" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1588852702151" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1588851494560">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1588851494560" />
+    <state x="41" y="72" width="672" height="676" key="search.everywhere.popup" timestamp="1588853152124">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="41" y="72" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588853152124" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryLinhaProducaoRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.persistence.impl/target/classes/eapli/base/persistence/impl/inmemory/InMemoryLinhaProducaoRepository.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#852#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryDepositRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <folding>
+            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#593#594#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.persistence.impl/target/classes/eapli/base/persistence/impl/inmemory/InMemoryDepositRepository.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#752#0" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#748#749#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.app.backoffice.console/src/test/java/eapli/base/app/other/console/BaseBackofficeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.app.common.console/src/main/java/eapli/base/app/common/console/BaseApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1046">
+          <caret line="81" column="28" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/BaseBackoffice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#3417#0" expanded="true" />
+            <element signature="e#2112#2143#0" expanded="true" />
+            <element signature="e#3072#3102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.persistence.impl/src/main/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/Produto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/domain/CategoriaDeProduto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaodepositos/domain/CodigoDeposito.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaodepositos/domain/Deposito.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="118" column="14" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/application/DefinirCategoriaMaterialController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="87" selection-start-line="9" selection-start-column="87" selection-end-line="9" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/authz/RegistoCategoriaMaterialUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/MainMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="208" column="97" selection-start-line="208" selection-start-column="97" selection-end-line="208" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>

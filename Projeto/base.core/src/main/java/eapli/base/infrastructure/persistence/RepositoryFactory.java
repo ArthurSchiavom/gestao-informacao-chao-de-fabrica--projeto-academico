@@ -86,7 +86,7 @@ public interface RepositoryFactory {
 	LinhaProducaoRepository linhasProducao();
 
 	/**
-	 * repository will be created in auto transaction mode
+	 * @param autoTx the transactional context to enroll
 	 *
 	 * @return
 	 */
@@ -100,13 +100,23 @@ public interface RepositoryFactory {
 	CategoriaRepository categoria();
 
 	/**
-	 * repository will be created in auto transaction mode
+	 * @param autoTx the transactional context to enroll
 	 *
 	 * @return
 	 */
 	CategoriaRepository categoria(TransactionalContext autoTx);
 
+	/**
+	 * repository will be created in auto transaction mode
+	 *
+	 * @return
+	 */
 	DepositoRepository depositos();
 
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return
+	 */
 	DepositoRepository depositos(TransactionalContext autoTx);
 }
