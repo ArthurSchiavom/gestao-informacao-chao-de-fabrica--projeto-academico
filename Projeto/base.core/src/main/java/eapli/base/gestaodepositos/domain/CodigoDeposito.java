@@ -12,7 +12,6 @@ import java.util.Objects;
 public class CodigoDeposito implements ValueObject, Comparable<CodigoDeposito> {
 	private static final long serialVersionUID = 1L;
 
-	@Id
 	private final String codigo;
 
 	public CodigoDeposito(String codigo) {

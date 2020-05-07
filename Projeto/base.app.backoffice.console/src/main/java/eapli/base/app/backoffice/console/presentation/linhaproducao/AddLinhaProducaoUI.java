@@ -16,7 +16,7 @@ public class AddLinhaProducaoUI extends AbstractUI {
 	private final AddLinhaProducaoController theController = new AddLinhaProducaoController();
 
 	@Override
-	protected boolean doShow() {
+	public boolean doShow() {
 		final String identifier = Console.readNonEmptyLine("Identificador",
 				"Identificador não pode ser vazio");
 		//TODO verificar o retorno aqui

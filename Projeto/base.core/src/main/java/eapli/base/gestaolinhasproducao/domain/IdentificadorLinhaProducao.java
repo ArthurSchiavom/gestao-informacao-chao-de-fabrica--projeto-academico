@@ -12,7 +12,6 @@ import java.util.Objects;
 public class IdentificadorLinhaProducao implements ValueObject, Comparable<IdentificadorLinhaProducao> {
 	private static final long serialVersionUID = 1L;
 
-	@Id
 	private final String identifier;
 
 	public IdentificadorLinhaProducao(String identifier) {

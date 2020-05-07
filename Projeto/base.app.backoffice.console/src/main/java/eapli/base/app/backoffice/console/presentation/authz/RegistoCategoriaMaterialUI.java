@@ -15,9 +15,9 @@ public class RegistoCategoriaMaterialUI extends AbstractUI {
          *
          * A semântica é dada pelo utilizador do sistema.
          */
-        final String identifier = Console.readNonEmptyLine("Descricao",
-                "Descricão não pode ser vazia");
-        final String descricao = Console.readNonEmptyLine("Descricao",
+        final String identifier = Console.readNonEmptyLine("Identificador ",
+                "Identificador não pode ser vazio");
+        final String descricao = Console.readNonEmptyLine("Descricao ",
                 "Descricão não pode ser vazia");
         //TODO verificar o retorno aqui
         try {
