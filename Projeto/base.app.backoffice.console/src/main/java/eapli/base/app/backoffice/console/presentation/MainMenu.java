@@ -27,7 +27,8 @@ import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
-import eapli.base.app.backoffice.console.presentation.authz.RegistoCategoriaMaterialUI;
+import eapli.base.app.backoffice.console.presentation.categoriaMaterial.RegistoCategoriaMaterialAction;
+import eapli.base.app.backoffice.console.presentation.categoriaMaterial.RegistoCategoriaMaterialUI;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
 import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.RegistarProdutoAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
@@ -201,7 +202,7 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Produção >");
 
         menu.addItem(REGISTAR_PRODUTO, "Registar produto", new RegistarProdutoAction());
-        menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new RegistoCategoriaMaterialUI()::show);
+        menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new RegistoCategoriaMaterialAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;

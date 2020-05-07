@@ -1,8 +1,10 @@
-package eapli.base.app.backoffice.console.presentation.authz;
+package eapli.base.app.backoffice.console.presentation.categoriaMaterial;
 
 import eapli.base.definircategoriamaterial.application.DefinirCategoriaMaterialController;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
+
+import javax.persistence.RollbackException;
 
 public class RegistoCategoriaMaterialUI extends AbstractUI {
 
@@ -23,8 +25,8 @@ public class RegistoCategoriaMaterialUI extends AbstractUI {
         try {
             this.theController.registarCategoriaMaterial(identifier,descricao);
             return true;
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Identificador inválido");
+        } catch (IllegalArgumentException| RollbackException ex) {
+            System.out.println("Identificador inválido ou já registado");
         }
         // continua no mesmo menu
         return false;
