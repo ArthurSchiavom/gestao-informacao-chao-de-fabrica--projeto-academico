@@ -3,15 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0cd505a8-bd17-4d2a-a5f5-cabd09040d35" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/authz/AddLinhaProducaoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/linhaproducao/AddLinhaProducaoUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/application/AddLinhaProducaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/application/AddLinhaProducaoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/domain/IdentificadorLinhaProducao.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/domain/IdentificadorLinhaProducao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/domain/LinhaProducao.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/domain/LinhaProducao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/usermanagement/domain/BaseRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/usermanagement/domain/BaseRoles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaolinhasproducao/domain/LinhaProducaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaolinhasproducao/domain/LinhaProducaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/application/RegistarProdutosDeCsvController.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/producao/materiaprima/produto/application/RegistarProdutosDeCsvController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/base.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_material/registarProduto/Produtos3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/test_material/registarProduto/Produtos3.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,14 +40,11 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
-  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="h2" />
@@ -232,6 +225,12 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="41" y="72" width="672" height="676" key="search.everywhere.popup" timestamp="1588804801052">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="41" y="72" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588804801052" />
   </component>
   <component name="masterDetails">
     <states>

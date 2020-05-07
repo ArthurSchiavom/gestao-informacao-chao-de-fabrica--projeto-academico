@@ -42,7 +42,7 @@ public class RegistarProdutosDeCsvController implements RegistarProdutosDeFichei
             next = scanner.next();
 
             if (next.length != N_CAMPOS) {
-                transformer.addFalha(nLinha, "A linha não tem o número de campos esperado.\n\n");
+                transformer.addFalha(nLinha, "A linha não tem o número de campos esperado0");
                 continue;
             }
 
