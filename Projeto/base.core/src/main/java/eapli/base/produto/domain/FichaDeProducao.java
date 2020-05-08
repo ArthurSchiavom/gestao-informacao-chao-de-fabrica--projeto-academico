@@ -12,6 +12,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Embeddable
@@ -24,7 +25,7 @@ public class FichaDeProducao implements ValueObject, Serializable, DTO<FichaDePr
     private final List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima;
 
     protected FichaDeProducao() {
-        quantidadesDeMateriaPrima = null;
+        quantidadesDeMateriaPrima = new ArrayList<>();
     }
 
     protected void addQuantidadeDeMateriaPrima(QuantidadeDeMateriaPrima quantidadeDeMateriaPrima) {
@@ -36,6 +37,10 @@ public class FichaDeProducao implements ValueObject, Serializable, DTO<FichaDePr
 
     public static FichaDeProducao valueOf() {
         return new FichaDeProducao();
+    }
+
+    public List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima() {
+        return Collections.unmodifiableList(new ArrayList<>(quantidadesDeMateriaPrima));
     }
 
     @Override

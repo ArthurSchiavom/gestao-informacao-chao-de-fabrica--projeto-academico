@@ -5,12 +5,12 @@ import eapli.base.app.backoffice.console.presentation.menu.OptionSelector;
 import eapli.base.app.backoffice.console.presentation.utilities.UserInteractionControl;
 import eapli.base.produto.application.RegistarProdutosDeCsvController;
 import eapli.base.produto.application.RegistarProdutosDeFicheiroController;
-import eapli.base.produto.application.ResultadoImportacaoFicheiro;
+import eapli.base.produto.application.ResultadoImportacaoRegistoProdutos;
 import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
-public class RegistarProdutoUI extends AbstractUI {
+public class RegistarProdutosUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
@@ -24,7 +24,7 @@ public class RegistarProdutoUI extends AbstractUI {
         optionSelector.show();
 
         RegistarProdutosDeFicheiroController controller = new RegistarProdutosDeCsvController();
-        ResultadoImportacaoFicheiro resultado = controller.iniciar(caminho, substituir.val);
+        ResultadoImportacaoRegistoProdutos resultado = controller.iniciar(caminho, substituir.val);
 
         System.out.println("\n\n" + ResultadoImportacaoFicheiroPresentationUtils.construirMensagemResultado(resultado) + "\n");
         UserInteractionControl.enterToContinue();
@@ -34,6 +34,6 @@ public class RegistarProdutoUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "Registar Produtos";
+        return "Carregar Catálogo de Produtos.";
     }
 }

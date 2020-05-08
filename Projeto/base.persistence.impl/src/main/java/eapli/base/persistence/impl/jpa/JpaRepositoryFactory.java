@@ -6,6 +6,7 @@ import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.persistence.impl.inmemory.InMemoryProdutoRepository;
 import eapli.base.produto.persistence.ProdutoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -52,8 +53,8 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
 	@Override
 	public ProdutoRepository produto() {
-//		return new InMemoryProdutoRepository();
-		return new JpaProdutoRepository(Application.settings().getPersistenceUnitName());
+		return new InMemoryProdutoRepository();
+//		return new JpaProdutoRepository(Application.settings().getPersistenceUnitName());
 	}
 
 	@Override

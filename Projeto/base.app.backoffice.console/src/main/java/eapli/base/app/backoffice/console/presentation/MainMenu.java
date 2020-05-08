@@ -28,12 +28,11 @@ import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.base.app.backoffice.console.presentation.categoriaMaterial.RegistoCategoriaMaterialAction;
-import eapli.base.app.backoffice.console.presentation.categoriaMaterial.RegistoCategoriaMaterialUI;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
 import eapli.base.app.backoffice.console.presentation.depositos.AddDepositoUI;
 import eapli.base.app.backoffice.console.presentation.linhaproducao.AddLinhaProducaoUI;
 import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.ConsultarProdutosSemFichaDeProducaoAction;
-import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.RegistarProdutoAction;
+import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.RegistarProdutosAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -208,7 +207,7 @@ public class MainMenu extends AbstractUI {
 	private Menu buildProducaoMenu() {
 		final Menu menu = new Menu("Produção >");
 
-		menu.addItem(REGISTAR_PRODUTO, "Registar Produto", new RegistarProdutoAction());
+		menu.addItem(REGISTAR_PRODUTO, "Carregar Catálogo de Produtos", new RegistarProdutosAction());
 		menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new RegistoCategoriaMaterialAction());
 		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new AddDepositoUI()::show);
 		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new AddLinhaProducaoUI()::show);

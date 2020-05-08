@@ -1,5 +1,6 @@
 package eapli.base.persistence.impl.inmemory;
 
+import com.google.common.collect.Lists;
 import eapli.base.produto.domain.CodigoUnico;
 import eapli.base.produto.domain.Produto;
 import eapli.base.produto.persistence.ProdutoRepository;
@@ -22,7 +23,6 @@ public class InMemoryProdutoRepository extends InMemoryDomainRepository<CodigoUn
 
     @Override
     public List<Produto> produtosSemFichaDeProducao() {
-        // TODO
-        throw new UnsupportedOperationException();
+        return Lists.newArrayList(this.match(e -> e.fichaDeProducao.quantidadesDeMateriaPrima().isEmpty()));
     }
 }

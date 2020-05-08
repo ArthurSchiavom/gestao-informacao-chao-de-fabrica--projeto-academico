@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.Map;
 
 @DTO
-public class ResultadoImportacaoFicheiro {
+public class ResultadoImportacaoRegistoProdutos {
     public final int nSucessos;
     public final int nFalhas;
     public final Map<Integer, String> erros;
 
-    public ResultadoImportacaoFicheiro(int nSucessos, int nFalhas, Map<Integer, String> erros) {
+    public ResultadoImportacaoRegistoProdutos(int nSucessos, int nFalhas, Map<Integer, String> erros) {
         this.nSucessos = nSucessos;
         this.nFalhas = nFalhas;
         this.erros = Collections.unmodifiableMap(erros);

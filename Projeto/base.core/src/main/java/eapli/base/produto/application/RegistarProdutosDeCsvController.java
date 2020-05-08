@@ -21,8 +21,8 @@ public class RegistarProdutosDeCsvController implements RegistarProdutosDeFichei
     private final String CHARSET_NAME = "UTF-8";
 
     @Override
-    public ResultadoImportacaoFicheiro iniciar(String filePath, boolean substituirSeExistir) {
-        ResultadoImportacaoFicheiroTransformer transformer = new ResultadoImportacaoFicheiroTransformer();
+    public ResultadoImportacaoRegistoProdutos iniciar(String filePath, boolean substituirSeExistir) {
+        ResultadoImportacaoRegistoProdutosTransformer transformer = new ResultadoImportacaoRegistoProdutosTransformer();
         FileScanner<String[]> scanner;
         try {
             scanner = new CsvFileScanner(SEPARADOR, filePath,
