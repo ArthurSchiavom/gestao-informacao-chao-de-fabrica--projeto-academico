@@ -1,8 +1,8 @@
-package eapli.base.materiaprima.produto.application;
+package eapli.base.produto.application;
 
 import eapli.base.infrastructure.domain.IllegalDomainValue;
 import eapli.base.materiaprima.domain.UnidadeDeMedida;
-import eapli.base.materiaprima.produto.domain.*;
+import eapli.base.produto.domain.*;
 
 /**
  * Facilita a leitura do código no controller e a atribuição gradual de valores, podendo então tratar os possíveis erros para cada atributo individualmente.

@@ -1,4 +1,4 @@
-package eapli.base.materiaprima.produto.application;
+package eapli.base.produto.application;
 
 import eapli.base.infrastructure.application.files.CsvFileScanner;
 import eapli.base.infrastructure.application.files.EmptyFileException;

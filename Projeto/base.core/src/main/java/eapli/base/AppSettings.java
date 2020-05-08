@@ -18,12 +18,13 @@ import java.util.Properties;
 public class AppSettings {
     private static final Logger LOGGER = LoggerFactory.getLogger(AppSettings.class);
 
-    private static final String PROPERTIES_RESOURCE = "application.properties";
-    private static final String REPOSITORY_FACTORY_KEY = "persistence.repositoryFactory";
-    private static final String UI_MENU_LAYOUT_KEY = "ui.menu.layout";
-    private static final String PERSISTENCE_UNIT_KEY = "persistence.persistenceUnit";
-    private static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
-    private static final String HIGH_CALORIES_DISH_LIMIT = "HighCaloriesDishLimit";
+    public static final String PROPERTIES_RESOURCE = "application.properties";
+    public static final String REPOSITORY_FACTORY_KEY = "persistence.repositoryFactory";
+    public static final String UI_MENU_LAYOUT_KEY = "ui.menu.layout";
+    public static final String PERSISTENCE_UNIT_KEY = "persistence.persistenceUnit";
+    public static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
+    public static final String HIGH_CALORIES_DISH_LIMIT = "HighCaloriesDishLimit";
+    public static final String BOOTSTRAP_PRODUTO = "bootstrap.produto";
 
     private final Properties applicationProperties = new Properties();
 

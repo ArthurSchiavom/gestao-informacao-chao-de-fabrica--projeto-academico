@@ -1,4 +1,4 @@
-package eapli.base.materiaprima.produto.application;
+package eapli.base.produto.application;
 
 import eapli.framework.representations.dto.DTO;
 

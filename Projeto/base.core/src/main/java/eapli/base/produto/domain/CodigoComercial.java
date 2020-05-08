@@ -1,10 +1,10 @@
-package eapli.base.materiaprima.produto.domain;
+package eapli.base.produto.domain;
 
 import eapli.base.infrastructure.domain.IllegalDomainValue;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
-import eapli.base.materiaprima.produto.persistence.ProdutoRepository;
+import eapli.base.produto.persistence.ProdutoRepository;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;

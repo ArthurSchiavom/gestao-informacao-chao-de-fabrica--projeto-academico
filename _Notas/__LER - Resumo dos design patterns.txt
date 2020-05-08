@@ -32,6 +32,8 @@ Pure fabrication - Criação de uma classe que não faz parte do modelo de domínio 
 
 IE - Uma classe tem uma função clara, específica e bem delimitada, que reflete a informação que guarda.
 
+HC/LC - Cada pedaço de código deve ser o mais independente possível e ter responsabilidades claramente definidas. Acoplamento (interdependência) dentro de packages é normal, devemos minimizar é o acoplamento entre packages.
+
 Adapter: Para quando a interface fornecida é diferente da esperada. Podemos traduzir a fornecida para ser compatível com a esperada. Por exemplo, um adapter que converta CSV em JSON, porque o programa espera um JSON, não um CSV. >>> T8 - More GoF Patterns
 
 Observer - Publicação e subscrição de eventos. O publicador tem uma lista de subscritores e notifica-os quando o evento ocorre. Os subscritores implementam uma interface, que é o que o publicador usa para os notificar. >>> https://refactoring.guru/design-patterns/observer
@@ -80,5 +82,3 @@ Repositories:
     >>> Teórica
     
 Vertical slicing - Dividimos os packages por funcionalidade (registar utilizador, bloquear utilizador,...) e dentro desses por tecnologia (UI, data access layer, business logic later,...)
-
-HC/LC - Cada pedaço de código deve ser o mais independente possível e ter responsabilidades claramente definidas. Acoplamento (interdependência) dentro de packages é normal, devemos minimizar é o acoplamento entre packages.

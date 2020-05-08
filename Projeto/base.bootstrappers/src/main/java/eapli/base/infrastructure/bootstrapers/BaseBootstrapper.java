@@ -61,7 +61,7 @@ public class BaseBootstrapper implements Action {
     public boolean execute() {
         // declare bootstrap actions
         // Using a List because arrays don't allow arrays of generic types
-        Action actions[] = {new MasterUsersBootstrapper(), };
+        Action actions[] = {new MasterUsersBootstrapper(), new ProdutoBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();
@@ -71,6 +71,7 @@ public class BaseBootstrapper implements Action {
         for (final Action boot : actions) {
             System.out.println("Bootstrapping " + nameOfEntity(boot) + "...");
             ret &= boot.execute();
+            System.out.println("\n=====================================");
         }
         return ret;
     }

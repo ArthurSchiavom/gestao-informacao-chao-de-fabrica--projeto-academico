@@ -1,9 +1,9 @@
-package eapli.base.materiaprima.produto.domain;
+package eapli.base.produto.domain;
 
 import eapli.base.infrastructure.application.DTO;
 import eapli.base.materiaprima.domain.QuantidadeDeMateriaPrima;
-import eapli.base.materiaprima.produto.application.FichaDeProducaoDTO;
-import eapli.base.materiaprima.produto.application.QuantidadeDeMateriaPrimaDTO;
+import eapli.base.produto.application.FichaDeProducaoDTO;
+import eapli.base.produto.application.QuantidadeDeMateriaPrimaDTO;
 import eapli.base.utilities.Lists;
 import eapli.framework.domain.model.ValueObject;
 

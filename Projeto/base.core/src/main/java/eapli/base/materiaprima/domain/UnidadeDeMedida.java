@@ -1,4 +1,4 @@
-package eapli.base.producao.materiaprima.domain;
+package eapli.base.materiaprima.domain;
 
 import eapli.framework.domain.model.ValueObject;
 

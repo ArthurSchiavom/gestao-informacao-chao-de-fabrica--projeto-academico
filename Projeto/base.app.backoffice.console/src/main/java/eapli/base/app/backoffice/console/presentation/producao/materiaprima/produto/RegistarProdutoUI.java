@@ -1,23 +1,20 @@
 package eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto;
 
+import eapli.base.app.common.console.presentation.files.ResultadoImportacaoFicheiroPresentationUtils;
 import eapli.base.app.backoffice.console.presentation.menu.OptionSelector;
 import eapli.base.app.backoffice.console.presentation.utilities.UserInteractionControl;
-import eapli.base.producao.materiaprima.produto.application.RegistarProdutosDeCsvController;
-import eapli.base.producao.materiaprima.produto.application.RegistarProdutosDeFicheiroController;
-import eapli.base.producao.materiaprima.produto.application.ResultadoImportacaoFicheiro;
+import eapli.base.produto.application.RegistarProdutosDeCsvController;
+import eapli.base.produto.application.RegistarProdutosDeFicheiroController;
+import eapli.base.produto.application.ResultadoImportacaoFicheiro;
 import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;
-
-import java.util.Map;
-import java.util.Scanner;
+import eapli.framework.util.Console;
 
 public class RegistarProdutoUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
-        System.out.println("Introduza o caminho do ficheiro a carregar: ");
-        Scanner scanner = new Scanner(System.in);
-        String caminho = scanner.nextLine();
+        String caminho = Console.readLine("Introduza o caminho do ficheiro a carregar: ");
 
         System.out.println("\nCaso seja encontrado algum produto com código único já registado, pretende que a aplicação substitua o produto atual com o indicado?\n");
         OptionSelector optionSelector = new OptionSelector();
@@ -29,25 +26,10 @@ public class RegistarProdutoUI extends AbstractUI {
         RegistarProdutosDeFicheiroController controller = new RegistarProdutosDeCsvController();
         ResultadoImportacaoFicheiro resultado = controller.iniciar(caminho, substituir.val);
 
-        System.out.println(construirMensagemResultado(resultado));
+        System.out.println("\n\n" + ResultadoImportacaoFicheiroPresentationUtils.construirMensagemResultado(resultado) + "\n");
         UserInteractionControl.enterToContinue();
 
         return false;
-    }
-
-    public String construirMensagemResultado(ResultadoImportacaoFicheiro resultado) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n\nNúmero de produtos importados com sucesso: ").append(resultado.nSucessos)
-                .append("\nNúmero de falhas: ").append(resultado.nFalhas);
-
-        if (resultado.erros.size() > 0) {
-            sb.append("\n\nAvisos:");
-            for (Map.Entry<Integer, String> erro : resultado.erros.entrySet()) {
-                sb.append("\nLinha nº").append(erro.getKey()).append(": ").append(erro.getValue());
-            }
-            sb.append("\n");
-        }
-        return sb.toString();
     }
 
     @Override

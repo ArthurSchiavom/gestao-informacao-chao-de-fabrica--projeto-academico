@@ -1,8 +1,8 @@
 Cada commit deve estar associado a um issue.
 
 exemplos:
-"UC-D-002: (...)" (use case)
-"IS-D-002: (...)" (issue não relacionado com use cases específicos)
+"UC-De-002: (...)" (use case)
+"IS-De-002: (...)" (issue não relacionado com use cases específicos)
 
 A - Análise
   Conversar com o cliente para perceber os seus requisitos e o seu

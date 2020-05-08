@@ -1,9 +1,9 @@
-package eapli.base.materiaprima.produto.application;
+package eapli.base.produto.application;
 
 import eapli.base.infrastructure.domain.IllegalDomainValue;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.materiaprima.produto.domain.Produto;
-import eapli.base.materiaprima.produto.persistence.ProdutoRepository;
+import eapli.base.produto.domain.Produto;
+import eapli.base.produto.persistence.ProdutoRepository;
 
 import java.util.Optional;
 

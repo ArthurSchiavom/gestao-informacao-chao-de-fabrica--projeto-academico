@@ -1,7 +1,7 @@
-package eapli.base.materiaprima.produto.persistence;
+package eapli.base.produto.persistence;
 
-import eapli.base.materiaprima.produto.domain.CodigoUnico;
-import eapli.base.materiaprima.produto.domain.Produto;
+import eapli.base.produto.domain.CodigoUnico;
+import eapli.base.produto.domain.Produto;
 import eapli.framework.domain.repositories.DomainRepository;
 
 import java.util.List;

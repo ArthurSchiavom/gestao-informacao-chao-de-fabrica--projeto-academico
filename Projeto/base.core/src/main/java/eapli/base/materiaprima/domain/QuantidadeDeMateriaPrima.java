@@ -1,12 +1,10 @@
-package eapli.base.producao.materiaprima.domain;
+package eapli.base.materiaprima.domain;
 
-import eapli.base.definircategoriamaterial.domain.Material;
 import eapli.base.infrastructure.application.DTO;
-import eapli.base.producao.produto.application.QuantidadeDeMateriaPrimaDTO;
+import eapli.base.produto.application.QuantidadeDeMateriaPrimaDTO;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 

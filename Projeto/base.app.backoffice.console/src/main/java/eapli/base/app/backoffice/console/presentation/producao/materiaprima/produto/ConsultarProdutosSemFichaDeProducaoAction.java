@@ -2,9 +2,10 @@ package eapli.base.app.backoffice.console.presentation.producao.materiaprima.pro
 
 import eapli.framework.actions.Action;
 
-public class RegistarProdutoAction implements Action {
+public class ConsultarProdutosSemFichaDeProducaoAction implements Action {
     @Override
     public boolean execute() {
-        return new RegistarProdutoUI().show();
+        new ConsultarProdutosSemFichaDeProducaoUI().show();
+        return false;
     }
 }

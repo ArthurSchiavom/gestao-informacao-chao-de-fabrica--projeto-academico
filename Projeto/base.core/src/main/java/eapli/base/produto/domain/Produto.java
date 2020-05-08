@@ -1,8 +1,8 @@
-package eapli.base.materiaprima.produto.domain;
+package eapli.base.produto.domain;
 
 import eapli.base.infrastructure.application.DTO;
 import eapli.base.materiaprima.domain.UnidadeDeMedida;
-import eapli.base.materiaprima.produto.application.ProdutoDTO;
+import eapli.base.produto.application.ProdutoDTO;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
