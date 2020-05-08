@@ -1,6 +1,8 @@
-package eapli.base.producao.materiaprima.produto.domain;
+package eapli.base.materiaprima.produto.domain;
 
-import eapli.base.producao.materiaprima.domain.UnidadeDeMedida;
+import eapli.base.infrastructure.application.DTO;
+import eapli.base.materiaprima.domain.UnidadeDeMedida;
+import eapli.base.materiaprima.produto.application.ProdutoDTO;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -10,7 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Version;
 
 @Entity
-public class Produto implements AggregateRoot<CodigoUnico> {
+public class Produto implements AggregateRoot<CodigoUnico>, DTO<ProdutoDTO> {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,7 +51,7 @@ public class Produto implements AggregateRoot<CodigoUnico> {
         this.codigoComercial = codigoComercial;
         this.descricaoBreve = descricaoBreve;
         this.descricaoCompleta = descricaoCompleta;
-        this.fichaDeProducao = null;
+        this.fichaDeProducao = FichaDeProducao.valueOf();
         this.unidadeDeMedida = unidadeDeMedida;
     }
 
@@ -79,5 +81,13 @@ public class Produto implements AggregateRoot<CodigoUnico> {
     @Override
     public CodigoUnico identity() {
         return this.codigoUnico;
+    }
+
+    @Override
+    public ProdutoDTO toDTO() {
+        return new ProdutoDTO(categoriaDeProduto.categoriaValor, codigoComercial.codigoComercialValor,
+                descricaoBreve.descricaoBreveValor, codigoUnico.codigoUnicoValor,
+                descricaoCompleta.descricaoCompletaValor, fichaDeProducao.toDTO(),
+                unidadeDeMedida.unidadeDeMedidaValor);
     }
 }

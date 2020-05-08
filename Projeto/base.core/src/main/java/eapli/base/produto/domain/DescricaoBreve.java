@@ -1,4 +1,4 @@
-package eapli.base.producao.materiaprima.produto.domain;
+package eapli.base.materiaprima.produto.domain;
 
 import eapli.base.infrastructure.domain.IllegalDomainValue;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;

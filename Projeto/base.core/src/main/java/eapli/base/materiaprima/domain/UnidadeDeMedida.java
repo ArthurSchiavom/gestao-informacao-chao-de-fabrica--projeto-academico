@@ -10,14 +10,14 @@ public class UnidadeDeMedida implements ValueObject, Serializable, Comparable<Un
 
     private static final long serialVersionUID = 1L;
 
-    private final String unidadeDeMedida;
+    public final String unidadeDeMedidaValor;
 
     public UnidadeDeMedida() {
-        unidadeDeMedida = null;
+        unidadeDeMedidaValor = null;
     }
 
     public UnidadeDeMedida(String unidadeDeMedida) {
-        this.unidadeDeMedida = unidadeDeMedida;
+        this.unidadeDeMedidaValor = unidadeDeMedida;
     }
 
     public static UnidadeDeMedida valueOf(String unidadeDeMedida) {
@@ -35,22 +35,22 @@ public class UnidadeDeMedida implements ValueObject, Serializable, Comparable<Un
 
         final UnidadeDeMedida that = (UnidadeDeMedida) o;
 
-        return this.unidadeDeMedida.equalsIgnoreCase(that.unidadeDeMedida);
+        return this.unidadeDeMedidaValor.equalsIgnoreCase(that.unidadeDeMedidaValor);
     }
 
     @Override
     public int hashCode() {
-        return unidadeDeMedida.hashCode();
+        return unidadeDeMedidaValor.hashCode();
     }
 
     @Override
     public String toString() {
-        return unidadeDeMedida;
+        return unidadeDeMedidaValor;
     }
 
     @Override
     public int compareTo(UnidadeDeMedida obj) {
-        return unidadeDeMedida.toLowerCase().compareTo(obj.unidadeDeMedida.toLowerCase());
+        return unidadeDeMedidaValor.toLowerCase().compareTo(obj.unidadeDeMedidaValor.toLowerCase());
     }
 }
 

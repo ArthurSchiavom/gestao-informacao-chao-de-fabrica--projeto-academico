@@ -1,10 +1,9 @@
-package eapli.base.producao.materiaprima.produto.application;
+package eapli.base.materiaprima.produto.application;
 
 import eapli.base.infrastructure.domain.IllegalDomainValue;
-import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.producao.materiaprima.produto.domain.Produto;
-import eapli.base.producao.materiaprima.produto.persistence.ProdutoRepository;
+import eapli.base.materiaprima.produto.domain.Produto;
+import eapli.base.materiaprima.produto.persistence.ProdutoRepository;
 
 import java.util.Optional;
 
@@ -27,7 +26,7 @@ public class RegistarProdutoController {
      */
     public void setCodigoUnico(String codigoUnico) throws IllegalDomainValue {
         if (subtituir) {
-            Optional<Produto> antigo = repo.produtoOfCodigoUnico(codigoUnico);
+            Optional<Produto> antigo = repo.produtoDeCodigoUnico(codigoUnico);
             if (antigo.isPresent()) {
                 repo.remove(antigo.get());
             }

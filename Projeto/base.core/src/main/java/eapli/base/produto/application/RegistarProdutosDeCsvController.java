@@ -1,6 +1,7 @@
-package eapli.base.producao.materiaprima.produto.application;
+package eapli.base.materiaprima.produto.application;
 
 import eapli.base.infrastructure.application.files.CsvFileScanner;
+import eapli.base.infrastructure.application.files.EmptyFileException;
 import eapli.base.infrastructure.application.files.FileScanner;
 import eapli.base.infrastructure.application.files.InvalidHeaderException;
 import eapli.base.infrastructure.domain.IllegalDomainValue;
@@ -26,7 +27,7 @@ public class RegistarProdutosDeCsvController implements RegistarProdutosDeFichei
         try {
             scanner = new CsvFileScanner(SEPARADOR, filePath,
                     CHARSET_NAME, "CódigoFabrico", "CódigoComercial", "Descrição Breve", "Descrição Completa", "Unidade", "Categoria");
-        } catch (FileNotFoundException|InvalidHeaderException e) {
+        } catch (FileNotFoundException|InvalidHeaderException|EmptyFileException e) {
             transformer.addFalha(0, e.getMessage());
             return transformer.gerarDTO();
         }

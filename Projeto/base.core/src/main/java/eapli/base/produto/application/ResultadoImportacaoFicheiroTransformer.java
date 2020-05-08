@@ -1,4 +1,4 @@
-package eapli.base.producao.materiaprima.produto.application;
+package eapli.base.materiaprima.produto.application;
 
 import java.util.HashMap;
 import java.util.Map;

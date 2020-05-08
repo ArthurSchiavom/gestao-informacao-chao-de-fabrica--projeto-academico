@@ -1,6 +1,9 @@
-package eapli.base.producao.materiaprima.produto.domain;
+package eapli.base.materiaprima.produto.domain;
 
-import eapli.base.producao.materiaprima.domain.QuantidadeDeMateriaPrima;
+import eapli.base.infrastructure.application.DTO;
+import eapli.base.materiaprima.domain.QuantidadeDeMateriaPrima;
+import eapli.base.materiaprima.produto.application.FichaDeProducaoDTO;
+import eapli.base.materiaprima.produto.application.QuantidadeDeMateriaPrimaDTO;
 import eapli.base.utilities.Lists;
 import eapli.framework.domain.model.ValueObject;
 
@@ -8,10 +11,11 @@ import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Embeddable
-public class FichaDeProducao implements ValueObject, Serializable, Comparable<FichaDeProducao> {
+public class FichaDeProducao implements ValueObject, Serializable, DTO<FichaDeProducaoDTO> {
 
     private static final long serialVersionUID = 1L;
 
@@ -62,8 +66,12 @@ public class FichaDeProducao implements ValueObject, Serializable, Comparable<Fi
     }
 
     @Override
-    public int compareTo(FichaDeProducao obj) {
-        throw new UnsupportedOperationException();
+    public FichaDeProducaoDTO toDTO() {
+        List<QuantidadeDeMateriaPrimaDTO> resultado = new ArrayList<>();
+        for (QuantidadeDeMateriaPrima quantidade : this.quantidadesDeMateriaPrima) {
+            resultado.add(quantidade.toDTO());
+        }
+        return new FichaDeProducaoDTO(resultado);
     }
 }
 
