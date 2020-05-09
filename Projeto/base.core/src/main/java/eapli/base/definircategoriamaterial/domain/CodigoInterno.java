@@ -15,7 +15,7 @@ public class CodigoInterno implements ValueObject, Comparable<CodigoInterno> {
     protected CodigoInterno() {
     }
 
-    protected CodigoInterno(String codigoInterno) {
+    public CodigoInterno(String codigoInterno) {
         this.CODIGO_INTERNO = codigoInterno;
     }
 

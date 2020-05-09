@@ -45,9 +45,7 @@ public class CodigoAlfanumerico implements ValueObject, Comparable<CodigoAlfanum
 
     @Override
     public String toString() {
-        return "CodigoAlfanumericoCategoria{" +
-                "codigoAlfaNumerico=" + codigoAlfaNumerico +
-                '}';
+        return "CodigoAlfaNumerico-->" + codigoAlfaNumerico ;
     }
 
     @Override

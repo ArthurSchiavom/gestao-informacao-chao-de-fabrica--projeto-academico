@@ -4,10 +4,12 @@ import eapli.base.Application;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
+import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.persistence.impl.inmemory.InMemoryProdutoRepository;
-import eapli.base.producao.materiaprima.produto.persistence.ProdutoRepository;
+import eapli.base.produto.persistence.ProdutoRepository;
+import eapli.base.registarmaquina.repository.MaquinaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.JpaAutoTxUserRepository;
@@ -88,6 +90,26 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	@Override
 	public DepositoRepository depositos(TransactionalContext autoTx) {
 		return new JpaDepositoRepository(autoTx);
+	}
+
+	@Override
+	public MaquinaRepository maquinas() {
+		return  new JpaMaquinaRepository(Application.settings().getPersistenceUnitName());
+	}
+
+	@Override
+	public MaquinaRepository maquinas(TransactionalContext autoTx) {
+		return new JpaMaquinaRepository(autoTx);
+	}
+
+	@Override
+	public MaterialRepository material() {
+		return new JpaMaterialRepository(Application.settings().getPersistenceUnitName());
+	}
+
+	@Override
+	public MaterialRepository material(TransactionalContext autoTx) {
+		return new JpaMaterialRepository(autoTx);
 	}
 
 	@Override

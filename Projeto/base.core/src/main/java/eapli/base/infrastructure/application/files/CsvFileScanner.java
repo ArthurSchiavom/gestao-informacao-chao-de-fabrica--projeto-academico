@@ -18,12 +18,16 @@ public class CsvFileScanner implements FileScanner<String[]> {
         }
     }
 
-    public CsvFileScanner(String separator, String filePath, String charsetName, String... expectedHeaderValues) throws FileNotFoundException, InvalidHeaderException {
+    public CsvFileScanner(String separator, String filePath, String charsetName, String... expectedHeaderValues) throws FileNotFoundException, InvalidHeaderException, EmptyFileException {
         this.SEPARATOR = separator;
         try {
             scanner = new Scanner(new FileInputStream(new File(filePath)), charsetName);
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("Ficheiro não encontrado");
+        }
+
+        if (!this.hasNext()) {
+            throw new EmptyFileException("O ficheiro está vazio.");
         }
 
         if (!headerEValido(expectedHeaderValues)) {

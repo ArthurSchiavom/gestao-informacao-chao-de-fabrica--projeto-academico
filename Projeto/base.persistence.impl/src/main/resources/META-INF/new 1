@@ -1,5 +1,5 @@
 
-    <class>eapli.base.producao.materiaprima.produto.domain.Produto</class>
+    <class>Produto</class>
     <class>eapli.base.producao.materiaprima.material.domain.Material</class>
 	
 	

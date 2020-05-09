@@ -4,10 +4,12 @@ import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
+import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
-import eapli.base.producao.materiaprima.produto.persistence.ProdutoRepository;
+import eapli.base.produto.persistence.ProdutoRepository;
+import eapli.base.registarmaquina.repository.MaquinaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.InMemoryUserRepository;
@@ -86,6 +88,26 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public DepositoRepository depositos(final TransactionalContext autoTx) {
 		return new InMemoryDepositRepository();
+	}
+
+	@Override
+	public MaquinaRepository maquinas() {
+		return maquinas(null);
+	}
+
+	@Override
+	public MaquinaRepository maquinas(TransactionalContext autoTx) {
+		return maquinas(autoTx);
+	}
+
+	@Override
+	public MaterialRepository material() {
+		return material(null);
+	}
+
+	@Override
+	public MaterialRepository material(final TransactionalContext autoTx) {
+		return new InMemoryMaterialRepository();
 	}
 
 	@Override

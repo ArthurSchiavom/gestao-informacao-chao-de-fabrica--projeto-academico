@@ -50,4 +50,13 @@ public class Categoria implements AggregateRoot<CodigoAlfanumerico> {
     public CodigoAlfanumerico identity(){
         return this.codigoAlfanumerico;
     }
+
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "version=" + version +
+                ", codigoAlfanumerico=" + codigoAlfanumerico +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
 }

@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
-  <persistence-unit name="eapli.base">
-      <!--
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    -->
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <persistence-unit name="eapli.base">
+        <!--
+      <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+      -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-  <class>eapli.base.gestaolinhasproducao.domain.LinhaProducao</class>
-  <class>eapli.base.gestaodepositos.domain.Deposito</class>
-  <class>eapli.base.definircategoriamaterial.domain.Categoria</class>
-  <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
-  <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
-  <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
-  <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
-  <class>eapli.base.clientusermanagement.domain.ClientUser</class>
-  <class>eapli.base.clientusermanagement.domain.SignupRequest</class>
-  <class>eapli.base.producao.materiaprima.produto.domain.Produto</class>
-  <class>eapli.base.producao.materiaprima.material.domain.Material</class>
+        <class>eapli.base.gestaolinhasproducao.domain.LinhaProducao</class>
+        <class>eapli.base.gestaodepositos.domain.Deposito</class>
+        <class>eapli.base.definircategoriamaterial.domain.Categoria</class>
+        <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
+        <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
+        <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
+        <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
+        <class>eapli.base.clientusermanagement.domain.ClientUser</class>
+        <class>eapli.base.clientusermanagement.domain.SignupRequest</class>
+        <class>eapli.base.produto.domain.Produto</class>
+        <class>eapli.base.definircategoriamaterial.domain.Material</class>
+        <class>eapli.base.registarmaquina.domain.Maquina</class>
 
-  <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:h2:.\db\base;MV_STORE=FALSE"/>
-    <!--
-          <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\base;MV_STORE=FALSE"/>
-          <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/base"/>
-          -->
-      <property name="javax.persistence.jdbc.user" value="sa"/>
-      <property name="javax.persistence.jdbc.password" value="eapli"/>
-      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
-      <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
-      <!-- <property name = "hibernate.show_sql" value = "true" /> -->
-      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
-    </properties>
-  </persistence-unit>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:.\db\base;MV_STORE=FALSE"/>
+            <!--
+                  <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\base;MV_STORE=FALSE"/>
+                  <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/base"/>
+                  -->
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value="eapli"/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
+            <!-- <property name = "hibernate.show_sql" value = "true" /> -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+
+        </properties>
+    </persistence-unit>
 </persistence>

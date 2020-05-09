@@ -26,6 +26,7 @@ public class AppSettings {
     private static final String HIGH_CALORIES_DISH_LIMIT = "HighCaloriesDishLimit";
     private static final String NUMERO_SERIE_MAQUINA_MAX_CHARS = "NumeroSerieMaquinaMaxChars";
     private static final String NUMERO_SERIE_MAQUINA_MIN_CHARS = "NumeroSerieMaquinaMinChars";
+    public static final String BOOTSTRAP_PRODUTO = "bootstrap.produto";
 
     private final Properties applicationProperties = new Properties();
 
