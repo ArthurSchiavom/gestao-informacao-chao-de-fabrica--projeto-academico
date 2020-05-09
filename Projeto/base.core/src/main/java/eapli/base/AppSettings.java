@@ -1,5 +1,6 @@
 package eapli.base;
 
+import eapli.base.registarmaquina.domain.NumeroSerie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +40,7 @@ public class AppSettings {
                 .getResourceAsStream(PROPERTIES_RESOURCE)) {
             if (propertiesStream != null) {
                 this.applicationProperties.load(propertiesStream);
+                NumeroSerie.definirRegrasNumeroSerie(applicationProperties.getProperty("NumeroSerieMaquinaMaxChars"),applicationProperties.getProperty("NumeroSerieMaquinaMinChars"));
             } else {
                 throw new FileNotFoundException(
                         "property file '" + PROPERTIES_RESOURCE + "' not found in the classpath");

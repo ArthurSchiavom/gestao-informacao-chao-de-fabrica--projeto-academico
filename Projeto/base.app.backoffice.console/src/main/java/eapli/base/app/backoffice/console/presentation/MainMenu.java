@@ -34,7 +34,7 @@ import eapli.base.app.backoffice.console.presentation.linhaproducao.AddLinhaProd
 import eapli.base.app.backoffice.console.presentation.materiaprima.AdicionarMaterialCatalogoAction;
 import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.ConsultarProdutosSemFichaDeProducaoAction;
 import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.RegistarProdutosAction;
-import eapli.base.app.backoffice.console.presentation.registarMaquina.RegistarMaquinaUI;
+import eapli.base.app.backoffice.console.presentation.registarMaquina.RegistarMaquinaAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -78,7 +78,7 @@ public class MainMenu extends AbstractUI {
 
 	//CHAO FABRICA
 
-	private static final int REGISTAR_MAQUINA = 7;
+	private static final int REGISTAR_MAQUINA = 1;
 	// SETTINGS
 	private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
 
@@ -118,7 +118,7 @@ public class MainMenu extends AbstractUI {
 	private static final int USERS_OPTION = 2;
 	private static final int PRODUCAO_OPTION = 3;
 	private static final int SETTINGS_OPTION = 4;
-	private static final int DISH_OPTION = 5;
+	private static final int GESTOR_CHAO_FABRICA = 5;
 	private static final int TRACEABILITY_OPTION = 6;
 	private static final int MEALS_OPTION = 7;
 	private static final int REPORTING_DISHES_OPTION = 8;
@@ -172,6 +172,8 @@ public class MainMenu extends AbstractUI {
 			mainMenu.addSubMenu(PRODUCAO_OPTION, producaoMenu);
 			final Menu settingsMenu = buildAdminSettingsMenu();
 			mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
+			final Menu gestorChaoFabricaMenu = buildGestorChaoFabricaMenu();
+			mainMenu.addSubMenu(GESTOR_CHAO_FABRICA,gestorChaoFabricaMenu);
 		}
 
 		if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -206,6 +208,15 @@ public class MainMenu extends AbstractUI {
 		return menu;
 	}
 
+	private Menu buildGestorChaoFabricaMenu() {
+		final Menu menu = new Menu("Gestor chão de fábrica >");
+
+		menu.addItem(REGISTAR_MAQUINA,"Registar máquina",new RegistarMaquinaAction());
+		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+		return menu;
+	}
+
 	/**
 	 * Menu do gestor de produção
 	 *
@@ -217,7 +228,6 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(REGISTAR_PRODUTO, "Carregar Catálogo de Produtos", new RegistarProdutosAction());
 		menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new RegistoCategoriaMaterialAction());
 		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new AddDepositoUI()::show);
-		menu.addItem(REGISTAR_MAQUINA,"Registar máquina",new RegistarMaquinaUI()::show);
 		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new AddLinhaProducaoUI()::show);
 		menu.addItem(REGISTAR_MATERIAL,"Registar material",new AdicionarMaterialCatalogoAction());
 		menu.addItem(CONSULTAR_PRODUTOS_SEM_FICHA, "Produtos Sem Ficha de Produção", new ConsultarProdutosSemFichaDeProducaoAction());

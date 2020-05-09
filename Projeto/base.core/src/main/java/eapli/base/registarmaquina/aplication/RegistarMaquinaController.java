@@ -38,9 +38,13 @@ public class RegistarMaquinaController {
         try {
             LinhaProducao linha = linhas.get(escolha-1);
             final OrdemLinhaProducao ordemLinhaProducao = new OrdemLinhaProducao(ordem);
+            System.out.println("ordem");
             final CodigoInterno codInterno = new CodigoInterno(codigoInterno);
+            System.out.println("codigo");
             final NumeroSerie numeroSerie = new NumeroSerie(numero);
+            System.out.println("numero");
             final IdentificadorProtocoloComunicacao identificadorProtocoloCom = new IdentificadorProtocoloComunicacao(identificadorProtocoloComunicacao);
+            System.out.println("protocolo");
             return repositoryMaquinas.save(new Maquina(numeroSerie,codInterno,ordemLinhaProducao,identificadorProtocoloCom,descricao,marca,modelo,linha));
 
         } catch (IllegalArgumentException| RollbackException ex) {
