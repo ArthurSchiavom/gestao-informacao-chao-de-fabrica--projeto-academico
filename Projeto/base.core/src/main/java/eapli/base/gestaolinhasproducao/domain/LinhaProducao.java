@@ -2,7 +2,6 @@ package eapli.base.gestaolinhasproducao.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Version;
@@ -14,8 +13,8 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 	private Long version;
 
 	@EmbeddedId
-	private final IdentificadorLinhaProducao identifier;
-	private final EstadoProcessamentoMensagens estado;
+	public final IdentificadorLinhaProducao identifier; // can be public bc its final
+	private EstadoProcessamentoMensagens estado;
 
 	public LinhaProducao(final String identifier) {
 		this.identifier = new IdentificadorLinhaProducao(identifier);
@@ -25,7 +24,6 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 	public LinhaProducao() {
 		//FOR ORM
 		this.identifier = null;
-		this.estado = null;
 	}
 
 	public static String identityAttributeName() {

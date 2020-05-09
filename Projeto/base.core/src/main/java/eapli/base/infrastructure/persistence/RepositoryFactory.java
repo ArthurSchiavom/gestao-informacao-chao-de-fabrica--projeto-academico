@@ -10,6 +10,7 @@ import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.producao.materiaprima.produto.persistence.ProdutoRepository;
+import eapli.base.registarmaquina.repository.MaquinaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
@@ -119,4 +120,18 @@ public interface RepositoryFactory {
 	 * @return
 	 */
 	DepositoRepository depositos(TransactionalContext autoTx);
+
+	/**
+	 * repository will be created in auto transaction mode
+	 *
+	 * @return
+	 */
+	MaquinaRepository maquinas();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return
+	 */
+	MaquinaRepository maquinas(TransactionalContext autoTx);
 }
