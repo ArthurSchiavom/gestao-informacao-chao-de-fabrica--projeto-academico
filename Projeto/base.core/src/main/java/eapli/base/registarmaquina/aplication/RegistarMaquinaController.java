@@ -19,8 +19,7 @@ public class RegistarMaquinaController {
      */
     public List<LinhaProducaoDTO> getLinhasDTO(){
         linhas = (List) repositoryLinhasProducao.findAll();
-        LinhasProducaoTransformer transformer = new LinhasProducaoTransformer();
-        return transformer.gerarLinhasDTO(linhas);
+        return LinhasProducaoTransformer.gerarLinhasDTO(linhas);
     }
 
     /**

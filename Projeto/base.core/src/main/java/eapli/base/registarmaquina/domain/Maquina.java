@@ -29,14 +29,17 @@ public class Maquina implements AggregateRoot<CodigoInterno> {
 
         @EmbeddedId
         private NumeroSerie numeroSerie;
+
         private CodigoInterno codigoInterno;
         private OrdemLinhaProducao ordemLinhaProducao;
         private FicheiroConfiguracao ficheiroConfiguracao;
         private IdentificadorProtocoloComunicacao identificadorProtocoloComunicacao;
         public final Date dataInstalacao;
+        @Column(insertable=false, updatable=false)
         private String descricao; // might change so it's not final
         private String marca; // might change so it's not final
         private String modelo; // might change so it's not final
+
         @ManyToOne
         private LinhaProducao linhaProducao;
 
