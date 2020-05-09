@@ -26,7 +26,7 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
      * @param path caminho do ficheiro
      * @param name nome do ficheiro
      */
-    protected FichaTecnicaPDF(String path, String name) {
+    public FichaTecnicaPDF(String path, String name) {
         this.path = path + '/' + name;
         FICHA_TECNICA = new File(this.path);
     }

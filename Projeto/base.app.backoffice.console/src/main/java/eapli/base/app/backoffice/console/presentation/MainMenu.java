@@ -31,6 +31,7 @@ import eapli.base.app.backoffice.console.presentation.categoriaMaterial.RegistoC
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
 import eapli.base.app.backoffice.console.presentation.depositos.AddDepositoUI;
 import eapli.base.app.backoffice.console.presentation.linhaproducao.AddLinhaProducaoUI;
+import eapli.base.app.backoffice.console.presentation.materiaprima.AdicionarMaterialCatalogoAction;
 import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.ConsultarProdutosSemFichaDeProducaoAction;
 import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.RegistarProdutosAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
@@ -70,7 +71,9 @@ public class MainMenu extends AbstractUI {
 	private static final int REGISTAR_CATEGORIA = 2;
 	private static final int REGISTAR_DEPOSITO = 3;
 	private static final int REGISTAR_LINHAPRODUCAO = 4;
-	private static final int CONSULTAR_PRODUTOS_SEM_FICHA = 5;
+	private static final int REGISTAR_MATERIAL=5;
+	private static final int CONSULTAR_PRODUTOS_SEM_FICHA = 6;
+
 
 	// SETTINGS
 	private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
@@ -211,6 +214,7 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new RegistoCategoriaMaterialAction());
 		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new AddDepositoUI()::show);
 		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new AddLinhaProducaoUI()::show);
+		menu.addItem(REGISTAR_MATERIAL,"Registar material",new AdicionarMaterialCatalogoAction());
 		menu.addItem(CONSULTAR_PRODUTOS_SEM_FICHA, "Produtos Sem Ficha de Produção", new ConsultarProdutosSemFichaDeProducaoAction());
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
