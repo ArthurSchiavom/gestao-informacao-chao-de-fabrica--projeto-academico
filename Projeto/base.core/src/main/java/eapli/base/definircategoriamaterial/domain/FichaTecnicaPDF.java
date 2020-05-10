@@ -29,11 +29,9 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
     @Transient
     private String path;
 
-    /**
     @Lob
-    @Column(columnDefinition = "BLOP")
+    @Basic (fetch = FetchType.LAZY)
     private byte[]file;
-    **/
 
     protected FichaTecnicaPDF() {
     }
@@ -49,8 +47,8 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
         this.path = path + '/' + name +".pdf";
         this.FICHA_TECNICA=new Document();
         criarFicheiro(this.FICHA_TECNICA,this.path,conteudoFichaTecnica);
-        FileInputStream fileInputStream= (FileInputStream) this.getClass().getClassLoader().getResourceAsStream(path); //Read the binary data from the file
-        //this.file=IOUtils.toByteArray(fileInputStream);
+        Path caminho=Paths.get(this.path);
+        this.file=Files.readAllBytes(caminho);
     }
 
     private void criarFicheiro(Document document,String nameFile,String conteudoParaFichaTecnica) {
@@ -60,7 +58,7 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
           document.add(new Paragraph(conteudoParaFichaTecnica));
           document.close();
       } catch (FileNotFoundException e) {
-          e.printStackTrace();
+          System.out.println("Ficheiro nao encontrado");
       } catch (DocumentException e) {
           e.printStackTrace();
       }
