@@ -93,6 +93,7 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public MaquinaRepository maquinas() {
 		return maquinas(null);
 	}
@@ -100,10 +101,20 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public MaquinaRepository maquinas(TransactionalContext autoTx) {
 		return maquinas(autoTx);
+=======
+	public FichaDeProducaoRepository fichaDeProducao() {
+		return null;
+	}
+
+	@Override
+	public FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx) {
+		return null;
+>>>>>>> Stashed changes
 	}
 
 	@Override
 	public MaterialRepository material() {
+<<<<<<< Updated upstream
 		return material(null);
 	}
 
@@ -121,6 +132,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	public FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx) {
 	}
 		return null;
+=======
+		return null;
+	}
+
+	@Override
+	public MaterialRepository material(TransactionalContext autoTx) {
+		return null;
+	}
+>>>>>>> Stashed changes
 
 	@Override
 	public SignupRequestRepository signupRequests(final TransactionalContext tx) {

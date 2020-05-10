@@ -2,7 +2,10 @@ package eapli.base.definircategoriamaterial.domain;
 
 import eapli.base.infrastructure.application.HasDTO;
 import eapli.base.utilities.Reflection;
+<<<<<<< Updated upstream
 import eapli.base.materiaprima.domain.UnidadeDeMedida;
+=======
+>>>>>>> Stashed changes
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 

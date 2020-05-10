@@ -105,10 +105,24 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
+<<<<<<< Updated upstream
+=======
+    public MaterialRepository material() {
+        return new JpaMaterialRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public MaterialRepository material(TransactionalContext autoTx) {
+        return new JpaMaterialRepository(autoTx);
+    }
+
+    @Override
+>>>>>>> Stashed changes
     public TransactionalContext newTransactionalContext() {
         return JpaAutoTxRepository.buildTransactionalContext(Application.settings().getPersistenceUnitName(),
                 Application.settings().getExtendedPersistenceProperties());
     }
+<<<<<<< Updated upstream
 	@Override
 	public MaquinaRepository maquinas() {
 		return  new JpaMaquinaRepository(Application.settings().getPersistenceUnitName());
@@ -128,4 +142,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	public MaterialRepository material(TransactionalContext autoTx) {
 		return new JpaMaterialRepository(autoTx);
 	}
+=======
+>>>>>>> Stashed changes
 }

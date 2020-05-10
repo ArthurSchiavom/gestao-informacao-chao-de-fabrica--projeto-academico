@@ -10,8 +10,11 @@ import eapli.base.definircategoriamaterial.repository.MaterialRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.produto.persistence.FichaDeProducaoRepository;
+<<<<<<< Updated upstream
 import eapli.base.registarmaquina.repository.MaquinaRepository;
 import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
+=======
+>>>>>>> Stashed changes
 import eapli.base.produto.persistence.ProdutoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -128,14 +131,19 @@ public interface RepositoryFactory {
 	 *
 	 * @return
 	 */
+<<<<<<< Updated upstream
 
 	MaquinaRepository maquinas();
+=======
+	FichaDeProducaoRepository fichaDeProducao();
+>>>>>>> Stashed changes
 
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
 	 * @return
 	 */
+<<<<<<< Updated upstream
 	MaquinaRepository maquinas(TransactionalContext autoTx);
 
 	MaterialRepository material();
@@ -146,18 +154,29 @@ public interface RepositoryFactory {
 	 * @return
 	 */
 	MaterialRepository material(TransactionalContext autoTx);
+=======
+	FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx);
+>>>>>>> Stashed changes
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
 	 * @return
 	 */
+<<<<<<< Updated upstream
 	FichaDeProducaoRepository fichaDeProducao();
+=======
+	MaterialRepository material();
+>>>>>>> Stashed changes
 
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
 	 * @return
 	 */
+<<<<<<< Updated upstream
 	FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx);
+=======
+	MaterialRepository material(TransactionalContext autoTx);
+>>>>>>> Stashed changes
 }
