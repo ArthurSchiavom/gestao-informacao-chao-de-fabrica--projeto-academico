@@ -30,6 +30,9 @@ public class CodigoAlfanumerico implements ValueObject, Comparable<CodigoAlfanum
         this.codigoAlfaNumerico = codigoAlfanumerico;
     }
 
+    public String obterCodigoAlfanumerico(){
+        return codigoAlfaNumerico;
+    }
 
     @Override
     public boolean equals(Object o) {

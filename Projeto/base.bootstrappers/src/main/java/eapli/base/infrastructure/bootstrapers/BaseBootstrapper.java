@@ -61,7 +61,7 @@ public class BaseBootstrapper implements Action {
     public boolean execute() {
         // declare bootstrap actions
         // Using a List because arrays don't allow arrays of generic types
-        Action actions[] = {new MasterUsersBootstrapper(), new ProdutoBootstrapper(), new MaquinaBootstrapper(), new CategoriaBootstrapper(), new DepositoBootstrapper(), new LinhaProducaoBootstrapper()};
+        Action actions[] = {new MasterUsersBootstrapper(), new ProdutoBootstrapper(), new MaquinaBootstrapper(), new CategoriaBootstrapper(),new MaterialBootstrapper(), new DepositoBootstrapper(), new LinhaProducaoBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();

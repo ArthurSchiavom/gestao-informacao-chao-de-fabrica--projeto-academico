@@ -54,8 +54,7 @@ public class Categoria implements AggregateRoot<CodigoAlfanumerico> {
     @Override
     public String toString() {
         return "Categoria{" +
-                "version=" + version +
-                ", codigoAlfanumerico=" + codigoAlfanumerico +
+                ", codigoAlfanumerico=" + codigoAlfanumerico.obterCodigoAlfanumerico() +
                 ", descricao='" + descricao + '\'' +
                 '}';
     }
