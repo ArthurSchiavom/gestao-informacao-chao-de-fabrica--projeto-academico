@@ -13,7 +13,9 @@ public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPr
 
     private static final long serialVersionUID = 1L;
 
-    /* O Hibernate falha se for final */
+    /* O hibernate falha se for final. Isto acontece a todos os valores de Embeddables que
+     * pertençam outro Embeddable, que por sua vez façam parte de uma @ElementCollection + @CollectionTable
+     * */
     public TipoDeMateriaPrima tipoDeMateriaPrima;
     /* O Hibernate falha se for final */
     public String idMateria;
@@ -22,7 +24,7 @@ public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPr
         return serialVersionUID;
     }
 
-    public MateriaPrima() {
+    protected MateriaPrima() {
         tipoDeMateriaPrima = null;
         idMateria = null;
     }
@@ -30,6 +32,10 @@ public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPr
     private MateriaPrima(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) {
         this.tipoDeMateriaPrima = tipoDeMateriaPrima;
         this.idMateria = idMateria;
+    }
+
+    public static MateriaPrima valueOf(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) {
+        return new MateriaPrima(tipoDeMateriaPrima, idMateria);
     }
 
     /** O Hibernate falha sem este método */
@@ -50,10 +56,6 @@ public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPr
     /** O Hibernate falha sem este método */
     public void setIdMateria(String idMateria) {
         this.idMateria = idMateria;
-    }
-
-    public MateriaPrima valueOf(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) {
-        return new MateriaPrima(tipoDeMateriaPrima, idMateria);
     }
 
     @Override

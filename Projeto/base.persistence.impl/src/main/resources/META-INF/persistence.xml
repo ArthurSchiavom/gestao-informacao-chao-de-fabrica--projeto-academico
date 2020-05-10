@@ -18,11 +18,8 @@
         <class>eapli.base.produto.domain.Produto</class>
         <class>eapli.base.definircategoriamaterial.domain.Material</class>
         <class>eapli.base.produto.domain.FichaDeProducao</class>
-<<<<<<< Updated upstream
         <class>eapli.base.registarmaquina.domain.Maquina</class>
-
-=======
->>>>>>> Stashed changes
+        <class>eapli.base.produto.domain.FichaDeProducao</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:.\db\base;MV_STORE=FALSE"/>

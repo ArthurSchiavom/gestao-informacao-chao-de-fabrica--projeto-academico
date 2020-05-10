@@ -1,7 +1,7 @@
 package eapli.base.produto.domain;
 
 import eapli.base.infrastructure.application.HasDTO;
-import eapli.base.infrastructure.domain.IllegalDomainValue;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.base.materiaprima.domain.QuantidadeDeMateriaPrima;
 import eapli.base.produto.application.FichaDeProducaoDTO;
@@ -22,7 +22,7 @@ public class FichaDeProducao implements AggregateRoot<Integer>, HasDTO<FichaDePr
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    public Integer uniqueVal;
+    public final Integer uniqueVal;
     public static String identityAttributeName() {
         return "uniqueVal";
     }
@@ -32,20 +32,22 @@ public class FichaDeProducao implements AggregateRoot<Integer>, HasDTO<FichaDePr
     public List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima;
 
     public FichaDeProducao() {
+        uniqueVal = 0;
     }
 
-    protected FichaDeProducao(List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima) throws IllegalDomainValue {
-        if (thisIsValid()) {
-            throw new IllegalDomainValue("A lista de quantidades de matéria prima não pode ser nula ou ter menos de 1 elemento.", IllegalDomainValueType.ALREADY_EXISTS);
+    protected FichaDeProducao(List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima) throws IllegalDomainValueException {
+        if (!thisIsValid(quantidadesDeMateriaPrima)) {
+            throw new IllegalDomainValueException("A lista de quantidades de matéria prima deve existir e ter pelo menos um elemento.", IllegalDomainValueType.ALREADY_EXISTS);
         }
-        this.quantidadesDeMateriaPrima = quantidadesDeMateriaPrima;
+        this.quantidadesDeMateriaPrima = new ArrayList<>(quantidadesDeMateriaPrima);
+        uniqueVal = 0;
     }
 
-    public boolean thisIsValid() {
-        return quantidadesDeMateriaPrima == null || quantidadesDeMateriaPrima.size() < 1;
+    private boolean thisIsValid(List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima) {
+        return quantidadesDeMateriaPrima != null && quantidadesDeMateriaPrima.size() > 0;
     }
 
-    public static FichaDeProducao valueOf(List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima) throws IllegalDomainValue {
+    public static FichaDeProducao valueOf(List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima) throws IllegalDomainValueException {
         return new FichaDeProducao(quantidadesDeMateriaPrima);
     }
 

@@ -1,6 +1,6 @@
 package eapli.base.produto.application.registarprodutos;
 
-import eapli.base.infrastructure.domain.IllegalDomainValue;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.produto.application.ProdutoBuilder;
 import eapli.base.produto.domain.Produto;
@@ -10,19 +10,16 @@ import eapli.framework.domain.repositories.TransactionalContext;
 import java.util.Optional;
 
 public class RegistarProdutoController {
-    private final TransactionalContext transactionalContext;
     private final ProdutoRepository repo;
     private final ProdutoBuilder produtoBuilder;
-    private final boolean subtituir;
-    private Produto aRemover;
+    private final boolean substituir;
     private String codigoUnicoComDelayRegisto;
+    private String codigoComercialComDelayRegisto;
 
-    public RegistarProdutoController(boolean subtituir) {
-        transactionalContext = PersistenceContext.repositories().newTransactionalContext();
-        repo = PersistenceContext.repositories().produto(transactionalContext);
+    public RegistarProdutoController(boolean substituir) {
+        repo = PersistenceContext.repositories().produto();
         produtoBuilder = new ProdutoBuilder();
-        this.subtituir = subtituir;
-        aRemover = null;
+        this.substituir = substituir;
         codigoUnicoComDelayRegisto = null;
     }
 
@@ -30,28 +27,21 @@ public class RegistarProdutoController {
      * Para que o sistema de substituição funcione corretamente, este deverá ser o primeiro método a ser invocado
      *
      * @param codigoUnico
-     * @throws IllegalDomainValue
+     * @throws IllegalDomainValueException
      */
-    public void setCodigoUnico(String codigoUnico) throws IllegalDomainValue {
-        if (subtituir) {
-            Optional<Produto> antigo = repo.produtoDeCodigoUnico(codigoUnico);
-            if (antigo.isPresent()) {
-                aRemover = antigo.get();
-                codigoUnicoComDelayRegisto = codigoUnico;
-            }
-        }
-        produtoBuilder.setCodigoUnico(codigoUnico);
+    public void setCodigoUnico(String codigoUnico) {
+        codigoUnicoComDelayRegisto = codigoUnico;
     }
 
     public void setCategoriaDeProduto(String categoriaDeProduto) {
         produtoBuilder.setCategoriaDeProduto(categoriaDeProduto);
     }
 
-    public void setCodigoComercial(String codigoComercial) throws IllegalDomainValue {
-        produtoBuilder.setCodigoComercial(codigoComercial);
+    public void setCodigoComercial(String codigoComercial) {
+        codigoComercialComDelayRegisto = codigoComercial;
     }
 
-    public void setDescricaoBreve(String descricaoBreve) throws IllegalDomainValue {
+    public void setDescricaoBreve(String descricaoBreve) throws IllegalDomainValueException {
         produtoBuilder.setDescricaoBreve(descricaoBreve);
     }
 
@@ -64,22 +54,26 @@ public class RegistarProdutoController {
     }
 
     /**
-     *
      * @return (1) true if the operation was successful or (2) false if the builder still doesn't have all obligatory information. (system error)
      */
-    public boolean register() {
-        if (!produtoBuilder.isReady()) {
-            return false;
+    public boolean register() throws IllegalDomainValueException {
+        if (substituir) {
+            Optional<Produto> antigo = repo.produtoDeCodigoUnico(codigoUnicoComDelayRegisto);
+            if (antigo.isPresent()) {
+                repo.remove(antigo.get());
+            }
         }
 
-        transactionalContext.beginTransaction();
-        if (aRemover != null) {
-            repo.remove(aRemover);
+        produtoBuilder.setCodigoUnico(codigoUnicoComDelayRegisto);
+        produtoBuilder.setCodigoComercial(codigoComercialComDelayRegisto);
+
+        if (!produtoBuilder.isReady()) {
+            // Should never happen
+            return false;
         }
 
         Produto produto = produtoBuilder.build();
         repo.save(produto);
-        transactionalContext.commit();
         return true;
     }
 }

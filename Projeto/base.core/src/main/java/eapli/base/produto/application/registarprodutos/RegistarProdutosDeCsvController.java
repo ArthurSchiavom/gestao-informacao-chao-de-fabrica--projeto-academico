@@ -4,7 +4,7 @@ import eapli.base.infrastructure.application.files.CsvFileScanner;
 import eapli.base.infrastructure.application.files.EmptyFileException;
 import eapli.base.infrastructure.application.files.FileScanner;
 import eapli.base.infrastructure.application.files.InvalidHeaderException;
-import eapli.base.infrastructure.domain.IllegalDomainValue;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 
 import java.io.FileNotFoundException;
 
@@ -61,8 +61,8 @@ public class RegistarProdutosDeCsvController implements RegistarProdutosDeFichei
                 else {
                     transformer.incrementarSucessos();
                 }
-            } catch (IllegalDomainValue illegalDomainValue) {
-                transformer.addFalha(nLinha, illegalDomainValue.getMessage());
+            } catch (IllegalDomainValueException illegalDomainValueException) {
+                transformer.addFalha(nLinha, illegalDomainValueException.getMessage());
                 transformer.incrementarFalhas();
             }
         }

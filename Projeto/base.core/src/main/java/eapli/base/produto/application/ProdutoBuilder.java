@@ -1,6 +1,6 @@
 package eapli.base.produto.application;
 
-import eapli.base.infrastructure.domain.IllegalDomainValue;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.materiaprima.domain.UnidadeDeMedida;
 import eapli.base.produto.domain.*;
 
@@ -18,7 +18,7 @@ public class ProdutoBuilder {
     public ProdutoBuilder() {
     }
 
-    public ProdutoBuilder setCodigoUnico(String codigoUnico) throws IllegalDomainValue {
+    public ProdutoBuilder setCodigoUnico(String codigoUnico) throws IllegalDomainValueException {
         this.codigoUnico = CodigoUnico.valueOf(codigoUnico);
         return this;
     }
@@ -28,12 +28,12 @@ public class ProdutoBuilder {
         return this;
     }
 
-    public ProdutoBuilder setCodigoComercial(String codigoComercial) throws IllegalDomainValue {
+    public ProdutoBuilder setCodigoComercial(String codigoComercial) throws IllegalDomainValueException {
         this.codigoComercial = CodigoComercial.valueOf(codigoComercial);
         return this;
     }
 
-    public ProdutoBuilder setDescricaoBreve(String descricaoBreve) throws IllegalDomainValue {
+    public ProdutoBuilder setDescricaoBreve(String descricaoBreve) throws IllegalDomainValueException {
         this.descricaoBreve = DescricaoBreve.valueOf(descricaoBreve);
         return this;
     }

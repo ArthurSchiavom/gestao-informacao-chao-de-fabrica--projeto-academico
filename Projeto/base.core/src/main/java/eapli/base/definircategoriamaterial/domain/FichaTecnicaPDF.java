@@ -1,15 +1,11 @@
 package eapli.base.definircategoriamaterial.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import eapli.framework.domain.model.ValueObject;
-import org.apache.commons.io.IOUtils;
 
 import javax.persistence.*;
 import java.io.*;
@@ -25,15 +21,17 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
     private static final long serialVersionUID = 1L;
 
     @Transient
-    private Document FICHA_TECNICA;
+    public final Document fichaTecnica;
     @Transient
-    private String path;
+    public final String path;
 
     @Lob
     @Basic (fetch = FetchType.LAZY)
     private byte[]file;
 
     protected FichaTecnicaPDF() {
+        fichaTecnica = null;
+        path = null;
     }
 
     /**
@@ -45,8 +43,8 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
      */
     public FichaTecnicaPDF(String path, String name,String conteudoFichaTecnica) throws IOException {
         this.path = path + '/' + name +".pdf";
-        this.FICHA_TECNICA=new Document();
-        criarFicheiro(this.FICHA_TECNICA,this.path,conteudoFichaTecnica);
+        this.fichaTecnica =new Document();
+        criarFicheiro(this.fichaTecnica,this.path,conteudoFichaTecnica);
         Path caminho=Paths.get(this.path);
         this.file=Files.readAllBytes(caminho);
     }
@@ -69,19 +67,19 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FichaTecnicaPDF that = (FichaTecnicaPDF) o;
-        return FICHA_TECNICA.equals(that.FICHA_TECNICA);
+        return fichaTecnica.equals(that.fichaTecnica);
     }
 
 
     @Override
     public int hashCode() {
-        return Objects.hash(FICHA_TECNICA);
+        return Objects.hash(fichaTecnica);
     }
 
     @Override
     public String toString() {
         return "FichaTecnicaPDF{" +
-                "FICHA_TECNICA=" + FICHA_TECNICA +
+                "FICHA_TECNICA=" + fichaTecnica +
                 '}';
     }
     public String path(){

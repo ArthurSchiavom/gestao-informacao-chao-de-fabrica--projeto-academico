@@ -1,11 +1,9 @@
+
 package eapli.base.definircategoriamaterial.domain;
 
 import eapli.base.infrastructure.application.HasDTO;
-import eapli.base.utilities.Reflection;
-<<<<<<< Updated upstream
 import eapli.base.materiaprima.domain.UnidadeDeMedida;
-=======
->>>>>>> Stashed changes
+import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
@@ -18,38 +16,60 @@ public class Material implements AggregateRoot<CodigoInterno>, HasDTO<MaterialDT
     private Long version;
 
     @EmbeddedId
-    public CodigoInterno codigoInterno;
-    public static String identityAttributeName(){
-        return Reflection.retrieveAttributeName(Material.class, CodigoInterno.class);
-    }
+    private CodigoInterno codigoInterno;
 
-    public Descricao descricao;
+
+    private UnidadeDeMedida unidadeDeMedida;
+    private String descricao;
+    private FichaTecnicaPDF fichaTecnicaPDF;
+
+
+
+    @ManyToOne
+    private Categoria categoria;
+
 
     protected Material() {
     }
 
-    protected Material(CodigoInterno codigoInterno, Descricao descricao) {
+    /**
+     * @param descricaoMaterial Descricao do material
+     * @param codigoInterno     Identificador com que queremos identificar o material
+     * @param categoria         Categoria onde se encaixa o material
+     * @param unidadeDeMedida   Unidade de medida usada para medir o material
+     */
+    public Material(String descricaoMaterial, CodigoInterno codigoInterno, Categoria categoria, UnidadeDeMedida unidadeDeMedida, FichaTecnicaPDF fichaTecnicaPDF) {
+        if (!podeGerarMaterial(codigoInterno, unidadeDeMedida, descricaoMaterial, categoria, fichaTecnicaPDF))
+            throw new IllegalArgumentException("Nenhum valor do produto pode ser nulo");
         this.codigoInterno = codigoInterno;
-        this.descricao = descricao;
+        this.unidadeDeMedida = unidadeDeMedida;
+        this.descricao = descricaoMaterial;
+        this.categoria = categoria;
+        this.fichaTecnicaPDF = fichaTecnicaPDF;
     }
 
-    public Material valueOf(CodigoInterno codigoInterno, Descricao descricao) {
-        return new Material(codigoInterno, descricao);
+    public static String identityAttributeName() {
+        return Reflection.retrieveAttributeName(Material.class, CodigoInterno.class);
+    }
+
+    private boolean podeGerarMaterial(CodigoInterno codigoInterno, UnidadeDeMedida unidadeDeMedida, String descricao, Categoria categoria, FichaTecnicaPDF fichaTecnicaPDF) {
+        return codigoInterno != null && categoria != null && unidadeDeMedida != null && descricao != null && fichaTecnicaPDF != null;
     }
 
     @Override
-    public boolean equals(final Object o){
-            return DomainEntities.areEqual(this,o);
+    public boolean equals(final Object o) {
+        return DomainEntities.areEqual(this, o);
     }
 
     @Override
-    public int hashCode(){
-            return DomainEntities.hashCode(this);
-            }
+    public int hashCode() {
+        return DomainEntities.hashCode(this);
+    }
+
     @Override
-    public boolean sameAs(final Object other){
-            return DomainEntities.areEqual(this,other);
-            }
+    public boolean sameAs(final Object other) {
+        return DomainEntities.areEqual(this, other);
+    }
 
     @Override
     public CodigoInterno identity() {
@@ -57,7 +77,18 @@ public class Material implements AggregateRoot<CodigoInterno>, HasDTO<MaterialDT
     }
 
     @Override
+    public String toString() {
+        return "Material{" +
+                "version=" + version +
+                ", codigoInterno=" + codigoInterno +
+                ", unidadeDeMedida=" + unidadeDeMedida +
+                ", descricao='" + descricao + '\'' +
+                ", categoria=" + categoria +
+                '}';
+    }
+
+    @Override
     public MaterialDTO toDTO() {
-        return new MaterialDTO(codigoInterno.codigoInterno, descricao.descricaoValor);
+        return new MaterialDTO(codigoInterno.codigoInternoValor, descricao, unidadeDeMedida.unidadeDeMedidaValor, fichaTecnicaPDF.fichaTecnica, fichaTecnicaPDF.path);
     }
 }

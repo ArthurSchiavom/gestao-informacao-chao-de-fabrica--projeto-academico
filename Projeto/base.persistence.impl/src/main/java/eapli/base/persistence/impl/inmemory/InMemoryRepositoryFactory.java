@@ -3,7 +3,6 @@ package eapli.base.persistence.impl.inmemory;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
-import eapli.base.definircategoriamaterial.repository.MaterialRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
@@ -93,7 +92,6 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	}
 
 	@Override
-<<<<<<< Updated upstream
 	public MaquinaRepository maquinas() {
 		return maquinas(null);
 	}
@@ -101,20 +99,19 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public MaquinaRepository maquinas(TransactionalContext autoTx) {
 		return maquinas(autoTx);
-=======
+	}
+
 	public FichaDeProducaoRepository fichaDeProducao() {
-		return null;
+		return new InMemoryFichaDeProducaoRepository();
 	}
 
 	@Override
 	public FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx) {
-		return null;
->>>>>>> Stashed changes
+		return new InMemoryFichaDeProducaoRepository();
 	}
 
 	@Override
 	public MaterialRepository material() {
-<<<<<<< Updated upstream
 		return material(null);
 	}
 
@@ -122,25 +119,6 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	public MaterialRepository material(final TransactionalContext autoTx) {
 		return new InMemoryMaterialRepository();
 	}
-
-	@Override
-	public FichaDeProducaoRepository fichaDeProducao() {
-	}
-		return null;
-
-	@Override
-	public FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx) {
-	}
-		return null;
-=======
-		return null;
-	}
-
-	@Override
-	public MaterialRepository material(TransactionalContext autoTx) {
-		return null;
-	}
->>>>>>> Stashed changes
 
 	@Override
 	public SignupRequestRepository signupRequests(final TransactionalContext tx) {

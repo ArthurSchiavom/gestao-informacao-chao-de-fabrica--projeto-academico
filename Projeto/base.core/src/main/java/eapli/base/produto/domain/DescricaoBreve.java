@@ -1,6 +1,6 @@
 package eapli.base.produto.domain;
 
-import eapli.base.infrastructure.domain.IllegalDomainValue;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
@@ -19,17 +19,17 @@ public class DescricaoBreve implements ValueObject, Serializable, Comparable<Des
         descricaoBreveValor = null;
     }
 
-    protected DescricaoBreve(String descricaoBreve) throws IllegalDomainValue {
+    protected DescricaoBreve(String descricaoBreve) throws IllegalDomainValueException {
         if (descricaoBreve == null) {
             throw new IllegalArgumentException("A descricao breve não pode ser null");
         }
         if (descricaoBreve.length() > MAX_CARACTERES_DESCRICAO_BREVE) {
-            throw new IllegalDomainValue("A descrição breve deve ter no máximo " + MAX_CARACTERES_DESCRICAO_BREVE + " caractéres", IllegalDomainValueType.TOO_MANY_CHARACTERS);
+            throw new IllegalDomainValueException("A descrição breve deve ter no máximo " + MAX_CARACTERES_DESCRICAO_BREVE + " caractéres", IllegalDomainValueType.TOO_MANY_CHARACTERS);
         }
         this.descricaoBreveValor = descricaoBreve;
     }
 
-    public static DescricaoBreve valueOf(String descricaoBreve) throws IllegalDomainValue {
+    public static DescricaoBreve valueOf(String descricaoBreve) throws IllegalDomainValueException {
         return new DescricaoBreve(descricaoBreve);
     }
 

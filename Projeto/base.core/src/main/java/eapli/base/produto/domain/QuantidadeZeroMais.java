@@ -1,5 +1,7 @@
 package eapli.base.produto.domain;
 
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
@@ -10,14 +12,34 @@ public class QuantidadeZeroMais implements ValueObject, Comparable<QuantidadeZer
 
     private static final long serialVersionUID = 1L;
 
-    public final double quantidadeValor;
+    /* O hibernate falha se for final. Isto acontece a todos os valores de Embeddables que
+    * pertençam outro Embeddable, que por sua vez façam parte de uma @ElementCollection + @CollectionTable
+    * */
+    public double quantidadeValor;
 
-    public QuantidadeZeroMais() {
+    protected QuantidadeZeroMais() {
         quantidadeValor = 0;
     }
 
-    public QuantidadeZeroMais(double quantidade) {
+    protected QuantidadeZeroMais(double quantidade) throws IllegalDomainValueException {
+        if (quantidade <= 0) {
+            throw new IllegalDomainValueException("A quantidade deve ser maior que 0", IllegalDomainValueType.ILLEGAL_VALUE);
+        }
         this.quantidadeValor = quantidade;
+    }
+
+    public static QuantidadeZeroMais valueOf(double quantidade) throws IllegalDomainValueException {
+        return new QuantidadeZeroMais(quantidade);
+    }
+
+    /* O hibernate falha se não tiver getters e setters */
+    public double getQuantidadeValor() {
+        return quantidadeValor;
+    }
+
+    /* O hibernate falha se não tiver getters e setters */
+    public void setQuantidadeValor(double quantidadeValor) {
+        this.quantidadeValor = quantidadeValor;
     }
 
     @Override

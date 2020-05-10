@@ -1,8 +1,8 @@
 package eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto;
 
 import eapli.base.app.backoffice.console.presentation.menu.OptionSelector;
-import eapli.base.infrastructure.domain.IllegalDomainValue;
-import eapli.base.produto.application.RegistarProdutoController;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.base.produto.application.registarprodutos.RegistarProdutoController;
 import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
@@ -34,7 +34,7 @@ public class AdicionarProdutoCatalogoUI extends AbstractUI {
             registarProdutoController.register();
             System.out.println("Inserido com sucesso");
             return true;
-        } catch (IllegalDomainValue illegalDomainValue) {
+        } catch (IllegalDomainValueException illegalDomainValue) {
         }
         return false;
     }

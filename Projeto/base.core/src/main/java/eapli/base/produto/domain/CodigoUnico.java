@@ -1,6 +1,6 @@
 package eapli.base.produto.domain;
 
-import eapli.base.infrastructure.domain.IllegalDomainValue;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
@@ -22,18 +22,18 @@ public class CodigoUnico implements ValueObject, Serializable, Comparable<Codigo
         codigoUnicoValor = null;
     }
 
-    protected CodigoUnico(String codigoUnico) throws IllegalDomainValue {
+    protected CodigoUnico(String codigoUnico) throws IllegalDomainValueException {
         if (codigoUnico == null || codigoUnico.isEmpty())
             throw new IllegalArgumentException("O código único deve existir e não ser vazio");
         RepositoryFactory repositoryFactory = PersistenceContext.repositories();
         ProdutoRepository produtoRepository = repositoryFactory.produto();
         if (produtoRepository.produtoDeCodigoUnico(codigoUnico).isPresent()) {
-            throw new IllegalDomainValue("O código único indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
+            throw new IllegalDomainValueException("O código único indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
         }
         this.codigoUnicoValor = codigoUnico;
     }
 
-    public static CodigoUnico valueOf(String codigoUnico) throws IllegalDomainValue {
+    public static CodigoUnico valueOf(String codigoUnico) throws IllegalDomainValueException {
         return new CodigoUnico(codigoUnico);
     }
 

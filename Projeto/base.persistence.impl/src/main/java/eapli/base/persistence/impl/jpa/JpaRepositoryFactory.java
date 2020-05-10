@@ -3,7 +3,6 @@ package eapli.base.persistence.impl.jpa;
 import eapli.base.Application;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
-import eapli.base.definircategoriamaterial.repository.MaterialRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
@@ -95,34 +94,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public FichaDeProducaoRepository fichaDeProducao() {
-        return new JpaFichaDeProducaoRepository(Application.settings().getPersistenceUnitName());
-    }
 
-    @Override
-    public FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx) {
-        return new JpaFichaDeProducaoRepository(autoTx);
-    }
-
-    @Override
-<<<<<<< Updated upstream
-=======
-    public MaterialRepository material() {
-        return new JpaMaterialRepository(Application.settings().getPersistenceUnitName());
-    }
-
-    @Override
-    public MaterialRepository material(TransactionalContext autoTx) {
-        return new JpaMaterialRepository(autoTx);
-    }
-
-    @Override
->>>>>>> Stashed changes
     public TransactionalContext newTransactionalContext() {
         return JpaAutoTxRepository.buildTransactionalContext(Application.settings().getPersistenceUnitName(),
                 Application.settings().getExtendedPersistenceProperties());
     }
-<<<<<<< Updated upstream
+
 	@Override
 	public MaquinaRepository maquinas() {
 		return  new JpaMaquinaRepository(Application.settings().getPersistenceUnitName());
@@ -142,6 +119,14 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	public MaterialRepository material(TransactionalContext autoTx) {
 		return new JpaMaterialRepository(autoTx);
 	}
-=======
->>>>>>> Stashed changes
+
+    @Override
+    public FichaDeProducaoRepository fichaDeProducao() {
+        return new JpaFichaDeProducaoRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx) {
+        return new JpaFichaDeProducaoRepository(autoTx);
+    }
 }

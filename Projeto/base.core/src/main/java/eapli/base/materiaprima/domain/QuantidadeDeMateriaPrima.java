@@ -6,6 +6,7 @@ import eapli.base.produto.domain.QuantidadeZeroMais;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,14 +18,18 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
     public final QuantidadeZeroMais quantidade;
     public final MateriaPrima materiaPrima;
 
-    public QuantidadeDeMateriaPrima() {
+    protected QuantidadeDeMateriaPrima() {
         quantidade = null;
         materiaPrima = null;
     }
 
-    public QuantidadeDeMateriaPrima(QuantidadeZeroMais quantidade, MateriaPrima materiaPrima) {
+    protected QuantidadeDeMateriaPrima(QuantidadeZeroMais quantidade, MateriaPrima materiaPrima) {
         this.quantidade = quantidade;
         this.materiaPrima = materiaPrima;
+    }
+
+    public static QuantidadeDeMateriaPrima valueOf(QuantidadeZeroMais quantidade, MateriaPrima materiaPrima) {
+        return new QuantidadeDeMateriaPrima(quantidade, materiaPrima);
     }
 
     @Override
@@ -58,7 +63,7 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
 
     @Override
     public QuantidadeDeMateriaPrimaDTO toDTO() {
-        return new QuantidadeDeMateriaPrimaDTO(null, quantidade.quantidadeValor);
+        return new QuantidadeDeMateriaPrimaDTO(materiaPrima.toDTO(), quantidade.quantidadeValor);
     }
 }
 
