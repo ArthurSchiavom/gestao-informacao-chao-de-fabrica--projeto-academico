@@ -15,7 +15,7 @@ public class LinhaProducaoBootstrapper implements Action {
 	@Override
 	public boolean execute() {
 		registar("Linha de Produção 1");
-		registar("LINEPROD_02");
+		registar("Linha de Produção 2");
 		return true;
 	}
 
