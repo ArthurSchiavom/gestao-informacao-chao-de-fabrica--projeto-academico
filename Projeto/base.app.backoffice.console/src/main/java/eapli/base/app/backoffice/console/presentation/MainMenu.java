@@ -76,9 +76,12 @@ public class MainMenu extends AbstractUI {
 	private static final int REGISTAR_LINHAPRODUCAO = 4;
 	private static final int REGISTAR_MATERIAL=5;
 	private static final int CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO = 6;
-	private static final int REGISTAR_MAQUINA = 7;
-	private static final int REGISTAR_FICHA_DE_PRODUCAO = 8;
-	private static final int REGISTAR_PRODUTO_CATALOGO=9;
+	private static final int REGISTAR_FICHA_DE_PRODUCAO = 7;
+	private static final int REGISTAR_PRODUTO_CATALOGO=8;
+
+	// GESTOR CHAO FABRICA
+	private static final int REGISTAR_MAQUINA = 1;
+
 
 
 	// SETTINGS
