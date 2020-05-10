@@ -55,8 +55,8 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
 	@Override
 	public ProdutoRepository produto() {
-		return new InMemoryProdutoRepository();
-//		return new JpaProdutoRepository(Application.settings().getPersistenceUnitName());
+//		return new InMemoryProdutoRepository();
+		return new JpaProdutoRepository(Application.settings().getPersistenceUnitName());
 	}
 
 	@Override
