@@ -1,6 +1,7 @@
 package eapli.base.definircategoriamaterial.domain;
 
 import eapli.base.materiaprima.domain.UnidadeDeMedida;
+import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
@@ -14,12 +15,17 @@ public class Material implements AggregateRoot<CodigoInterno> {
 
     @EmbeddedId
     private CodigoInterno codigoInterno;
+
+
     private UnidadeDeMedida unidadeDeMedida;
     private String descricao;
-    //private FichaTecnicaPDF fichaTecnicaPDF;
+    private FichaTecnicaPDF fichaTecnicaPDF;
+
 
     @ManyToOne
     private Categoria categoria;
+
+
 
     protected Material(){
     }
@@ -27,28 +33,26 @@ public class Material implements AggregateRoot<CodigoInterno> {
     /**
      *
      * @param descricaoMaterial Descricao do material
-     * @param nomeMaterial Nome do material
-     * @param conteudoFichaTecnica Conteudo da ficha tecnica
      * @param codigoInterno Identificador com que queremos identificar o material
      * @param categoria Categoria onde se encaixa o material
      * @param unidadeDeMedida  Unidade de medida usada para medir o material
      */
-    public Material(String descricaoMaterial, String nomeMaterial, String conteudoFichaTecnica, CodigoInterno codigoInterno, Categoria categoria, UnidadeDeMedida unidadeDeMedida)  {
-        this.codigoInterno=codigoInterno;
-        this.unidadeDeMedida=unidadeDeMedida;
-        this.descricao=descricaoMaterial;
-        this.categoria=categoria;
-         if (!podeGerarMaterial(this.codigoInterno,this.unidadeDeMedida, this.descricao,this.categoria))
+    public Material(String descricaoMaterial, CodigoInterno codigoInterno, Categoria categoria, UnidadeDeMedida unidadeDeMedida,FichaTecnicaPDF fichaTecnicaPDF) {
+        if (!podeGerarMaterial(codigoInterno,unidadeDeMedida,descricaoMaterial, categoria,fichaTecnicaPDF))
             throw new IllegalArgumentException("Nenhum valor do produto pode ser nulo");
-      }
-
-
-    public static String identityAttributeName(){
-            return "codigoInterno";
+        this.codigoInterno = codigoInterno;
+        this.unidadeDeMedida = unidadeDeMedida;
+        this.descricao = descricaoMaterial;
+        this.categoria = categoria;
+        this.fichaTecnicaPDF=fichaTecnicaPDF;
     }
 
-    private boolean podeGerarMaterial(CodigoInterno codigoInterno,UnidadeDeMedida unidadeDeMedida,String descricao,Categoria categoria){
-        return codigoInterno != null && categoria !=null && unidadeDeMedida != null && descricao != null;
+    public static String identityAttributeName(){
+        return Reflection.retrieveAttributeName(Material.class, CodigoInterno.class);
+    }
+
+    private boolean podeGerarMaterial(CodigoInterno codigoInterno,UnidadeDeMedida unidadeDeMedida,String descricao,Categoria categoria,FichaTecnicaPDF fichaTecnicaPDF){
+        return codigoInterno != null && categoria !=null && unidadeDeMedida != null && descricao != null && fichaTecnicaPDF != null;
     }
 
     @Override
@@ -81,8 +85,5 @@ public class Material implements AggregateRoot<CodigoInterno> {
                 '}';
     }
 
-    public String descricao(){
-        return this.descricao;
-    }
 
 }

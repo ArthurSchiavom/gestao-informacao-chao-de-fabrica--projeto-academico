@@ -1,10 +1,21 @@
 package eapli.base.definircategoriamaterial.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import eapli.framework.domain.model.ValueObject;
+import org.apache.commons.io.IOUtils;
 
-import javax.persistence.Embeddable;
-import java.io.File;
+import javax.persistence.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 
@@ -13,8 +24,16 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
 
     private static final long serialVersionUID = 1L;
 
-    private File FICHA_TECNICA;
+    @Transient
+    private Document FICHA_TECNICA;
+    @Transient
     private String path;
+
+    /**
+    @Lob
+    @Column(columnDefinition = "BLOP")
+    private byte[]file;
+    **/
 
     protected FichaTecnicaPDF() {
     }
@@ -26,9 +45,25 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
      * @param path caminho do ficheiro
      * @param name nome do ficheiro
      */
-    public FichaTecnicaPDF(String path, String name) {
-        this.path = path + '/' + name;
-        FICHA_TECNICA = new File(this.path);
+    public FichaTecnicaPDF(String path, String name,String conteudoFichaTecnica) throws IOException {
+        this.path = path + '/' + name +".pdf";
+        this.FICHA_TECNICA=new Document();
+        criarFicheiro(this.FICHA_TECNICA,this.path,conteudoFichaTecnica);
+        FileInputStream fileInputStream= (FileInputStream) this.getClass().getClassLoader().getResourceAsStream(path); //Read the binary data from the file
+        //this.file=IOUtils.toByteArray(fileInputStream);
+    }
+
+    private void criarFicheiro(Document document,String nameFile,String conteudoParaFichaTecnica) {
+      try {
+          PdfWriter.getInstance(document, new FileOutputStream(nameFile));
+          document.open();
+          document.add(new Paragraph(conteudoParaFichaTecnica));
+          document.close();
+      } catch (FileNotFoundException e) {
+          e.printStackTrace();
+      } catch (DocumentException e) {
+          e.printStackTrace();
+      }
     }
 
     @Override
@@ -51,9 +86,12 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
                 "FICHA_TECNICA=" + FICHA_TECNICA +
                 '}';
     }
+    public String path(){
+        return path;
+    }
 
     @Override
     public int compareTo(FichaTecnicaPDF obj) {
-        return this.FICHA_TECNICA.compareTo(obj.FICHA_TECNICA);
+        return 0;
     }
 }
