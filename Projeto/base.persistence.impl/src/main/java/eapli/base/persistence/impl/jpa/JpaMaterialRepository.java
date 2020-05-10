@@ -6,6 +6,8 @@ import eapli.base.definircategoriamaterial.domain.Material;
 import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
+import com.google.common.collect.Lists;
+import java.util.List;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,5 +29,10 @@ public class JpaMaterialRepository extends JpaAutoTxRepository<Material, CodigoI
         final Map<String, Object> params = new HashMap<>();
         params.put(Material.identityAttributeName(), codigoInterno);
         return matchOne("e."+ Material.identityAttributeName()+"=:identifier", params);
+    }
+    
+    @Override
+    public List<Material> findAllList() {
+        return Lists.newArrayList(this.findAll());
     }
 }

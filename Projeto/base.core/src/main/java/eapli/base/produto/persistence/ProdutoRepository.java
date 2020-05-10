@@ -11,4 +11,5 @@ public interface ProdutoRepository extends DomainRepository<CodigoUnico, Produto
     Optional<Produto> produtoDeCodigoUnico(String codigoUnico);
     Optional<Produto> produtoDeCodigoComercial(String codigoComercial);
     List<Produto> produtosSemFichaDeProducao();
+    List<Produto> findAllList();
 }

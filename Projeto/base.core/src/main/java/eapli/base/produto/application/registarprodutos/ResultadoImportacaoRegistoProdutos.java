@@ -1,4 +1,4 @@
-package eapli.base.produto.application;
+package eapli.base.produto.application.registarprodutos;
 
 import eapli.framework.representations.dto.DTO;
 

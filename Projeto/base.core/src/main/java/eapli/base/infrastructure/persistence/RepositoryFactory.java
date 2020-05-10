@@ -6,8 +6,10 @@ package eapli.base.infrastructure.persistence;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
+import eapli.base.definircategoriamaterial.repository.MaterialRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.produto.persistence.FichaDeProducaoRepository;
 import eapli.base.registarmaquina.repository.MaquinaRepository;
 import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
 import eapli.base.produto.persistence.ProdutoRepository;
@@ -144,4 +146,18 @@ public interface RepositoryFactory {
 	 * @return
 	 */
 	MaterialRepository material(TransactionalContext autoTx);
+
+	/**
+	 * repository will be created in auto transaction mode
+	 *
+	 * @return
+	 */
+	FichaDeProducaoRepository fichaDeProducao();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return
+	 */
+	FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx);
 }

@@ -17,6 +17,7 @@
         <class>eapli.base.clientusermanagement.domain.SignupRequest</class>
         <class>eapli.base.produto.domain.Produto</class>
         <class>eapli.base.definircategoriamaterial.domain.Material</class>
+        <class>eapli.base.produto.domain.FichaDeProducao</class>
         <class>eapli.base.registarmaquina.domain.Maquina</class>
 
 

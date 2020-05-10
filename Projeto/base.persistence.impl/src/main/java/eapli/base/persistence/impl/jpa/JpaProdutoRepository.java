@@ -1,5 +1,6 @@
 package eapli.base.persistence.impl.jpa;
 
+import com.google.common.collect.Lists;
 import eapli.base.Application;
 import eapli.base.produto.domain.CodigoUnico;
 import eapli.base.produto.domain.Produto;
@@ -41,7 +42,11 @@ class JpaProdutoRepository
 
     @Override
     public List<Produto> produtosSemFichaDeProducao() {
-        return this.createQuery("SELECT p FROM Produto p " +
-                "WHERE p.fichaDeProducao.quantidadesDeMateriaPrima IS EMPTY", Produto.class).getResultList();
+        return this.createQuery("SELECT p FROM Produto p WHERE p.fichaDeProducao is NULL", Produto.class).getResultList();
+    }
+
+    @Override
+    public List<Produto> findAllList() {
+        return Lists.newArrayList(this.findAll());
     }
 }

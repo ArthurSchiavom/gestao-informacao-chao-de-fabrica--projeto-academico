@@ -1,65 +1,72 @@
 package eapli.base.produto.domain;
 
-import eapli.base.infrastructure.application.DTO;
+import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.domain.IllegalDomainValue;
+import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.base.materiaprima.domain.QuantidadeDeMateriaPrima;
 import eapli.base.produto.application.FichaDeProducaoDTO;
 import eapli.base.produto.application.QuantidadeDeMateriaPrimaDTO;
 import eapli.base.utilities.Lists;
-import eapli.framework.domain.model.ValueObject;
+import eapli.framework.domain.model.AggregateRoot;
+import eapli.framework.domain.model.DomainEntities;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import java.io.Serializable;
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-@Embeddable
-public class FichaDeProducao implements ValueObject, Serializable, DTO<FichaDeProducaoDTO> {
+@Entity
+public class FichaDeProducao implements AggregateRoot<Integer>, HasDTO<FichaDeProducaoDTO> {
 
-    private static final long serialVersionUID = 1L;
+    @Version
+    private Long version;
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    public Integer uniqueVal;
+    public static String identityAttributeName() {
+        return "uniqueVal";
+    }
 
     @ElementCollection
     @CollectionTable
-    private final List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima;
+    public List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima;
 
-    protected FichaDeProducao() {
-        quantidadesDeMateriaPrima = new ArrayList<>();
+    public FichaDeProducao() {
     }
 
-    protected void addQuantidadeDeMateriaPrima(QuantidadeDeMateriaPrima quantidadeDeMateriaPrima) {
-        if (quantidadeDeMateriaPrima == null){
-            throw new IllegalArgumentException("A quantidade de matéria prima não pode ser null");
+    protected FichaDeProducao(List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima) throws IllegalDomainValue {
+        if (thisIsValid()) {
+            throw new IllegalDomainValue("A lista de quantidades de matéria prima não pode ser nula ou ter menos de 1 elemento.", IllegalDomainValueType.ALREADY_EXISTS);
         }
-        quantidadesDeMateriaPrima.add(quantidadeDeMateriaPrima);
+        this.quantidadesDeMateriaPrima = quantidadesDeMateriaPrima;
     }
 
-    public static FichaDeProducao valueOf() {
-        return new FichaDeProducao();
+    public boolean thisIsValid() {
+        return quantidadesDeMateriaPrima == null || quantidadesDeMateriaPrima.size() < 1;
     }
 
-    public List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima() {
-        return Collections.unmodifiableList(new ArrayList<>(quantidadesDeMateriaPrima));
+    public static FichaDeProducao valueOf(List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima) throws IllegalDomainValue {
+        return new FichaDeProducao(quantidadesDeMateriaPrima);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof FichaDeProducao)) {
-            return false;
-        }
-
-        final FichaDeProducao that = (FichaDeProducao) o;
-
-        return Lists.equals(this.quantidadesDeMateriaPrima, that.quantidadesDeMateriaPrima);
+    public boolean equals(final Object o) {
+        return DomainEntities.areEqual(this, o);
     }
 
     @Override
     public int hashCode() {
-        return quantidadesDeMateriaPrima.hashCode();
+        return DomainEntities.hashCode(this);
+    }
+
+    @Override
+    public boolean sameAs(final Object other) {
+        return DomainEntities.areEqual(this, other);
+    }
+
+    @Override
+    public Integer identity() {
+        return this.uniqueVal;
     }
 
     @Override
@@ -79,4 +86,3 @@ public class FichaDeProducao implements ValueObject, Serializable, DTO<FichaDePr
         return new FichaDeProducaoDTO(resultado);
     }
 }
-

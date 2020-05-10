@@ -1,6 +1,6 @@
 package eapli.base.materiaprima.domain;
 
-import eapli.base.infrastructure.application.DTO;
+import eapli.base.infrastructure.application.HasDTO;
 import eapli.base.materiaprima.application.MateriaPrimaDTO;
 import eapli.framework.domain.model.ValueObject;
 
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class MateriaPrima implements ValueObject, Serializable, DTO<MateriaPrimaDTO> {
+public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPrimaDTO> {
 
     private static final long serialVersionUID = 1L;
 

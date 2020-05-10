@@ -1,18 +1,17 @@
 package eapli.base.produto.domain;
 
-import eapli.base.infrastructure.application.DTO;
+import eapli.base.infrastructure.application.HasDTO;
 import eapli.base.materiaprima.domain.UnidadeDeMedida;
+import eapli.base.produto.application.FichaDeProducaoDTO;
 import eapli.base.produto.application.ProdutoDTO;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 @Entity
-public class Produto implements AggregateRoot<CodigoUnico>, DTO<ProdutoDTO> {
+public class Produto implements AggregateRoot<CodigoUnico>, HasDTO<ProdutoDTO> {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,27 +19,18 @@ public class Produto implements AggregateRoot<CodigoUnico>, DTO<ProdutoDTO> {
     private Long version;
 
     @EmbeddedId
-    public final CodigoUnico codigoUnico;
+    public CodigoUnico codigoUnico;
 
-    public static String identityAttributeName() {
-        return Reflection.retrieveAttributeName(Produto.class, CodigoUnico.class);
-    }
-
-    public final CategoriaDeProduto categoriaDeProduto;
-    public final CodigoComercial codigoComercial;
-    public final DescricaoBreve descricaoBreve;
-    public final DescricaoCompleta descricaoCompleta;
-    public final FichaDeProducao fichaDeProducao;
-    public final UnidadeDeMedida unidadeDeMedida;
+    @Column(unique=true)
+    public CodigoComercial codigoComercial;
+    @OneToOne
+    public FichaDeProducao fichaDeProducao;
+    public CategoriaDeProduto categoriaDeProduto;
+    public DescricaoBreve descricaoBreve;
+    public DescricaoCompleta descricaoCompleta;
+    public UnidadeDeMedida unidadeDeMedida;
 
     protected Produto() {
-        this.codigoUnico = null;
-        this.categoriaDeProduto = null;
-        this.codigoComercial = null;
-        this.descricaoBreve = null;
-        this.descricaoCompleta = null;
-        this.fichaDeProducao = null;
-        this.unidadeDeMedida = null;
     }
 
     protected Produto(CodigoUnico codigoUnico, CategoriaDeProduto categoriaDeProduto, CodigoComercial codigoComercial, DescricaoBreve descricaoBreve, DescricaoCompleta descricaoCompleta, UnidadeDeMedida unidadeDeMedida) {
@@ -51,8 +41,12 @@ public class Produto implements AggregateRoot<CodigoUnico>, DTO<ProdutoDTO> {
         this.codigoComercial = codigoComercial;
         this.descricaoBreve = descricaoBreve;
         this.descricaoCompleta = descricaoCompleta;
-        this.fichaDeProducao = FichaDeProducao.valueOf();
+        this.fichaDeProducao = null;
         this.unidadeDeMedida = unidadeDeMedida;
+    }
+
+    public static String identityAttributeName() {
+        return Reflection.retrieveAttributeName(Produto.class, CodigoUnico.class);
     }
 
     public static boolean podeGerarProduto(CodigoUnico codigoUnico, CategoriaDeProduto categoriaDeProduto, CodigoComercial codigoComercial, DescricaoBreve descricaoBreve, DescricaoCompleta descricaoCompleta, UnidadeDeMedida unidadeDeMedida) {
@@ -85,9 +79,10 @@ public class Produto implements AggregateRoot<CodigoUnico>, DTO<ProdutoDTO> {
 
     @Override
     public ProdutoDTO toDTO() {
+        FichaDeProducaoDTO fichaDeProducaoDTO = (fichaDeProducao == null) ? null : fichaDeProducao.toDTO();
         return new ProdutoDTO(categoriaDeProduto.categoriaValor, codigoComercial.codigoComercialValor,
                 descricaoBreve.descricaoBreveValor, codigoUnico.codigoUnicoValor,
-                descricaoCompleta.descricaoCompletaValor, fichaDeProducao.toDTO(),
+                descricaoCompleta.descricaoCompletaValor, fichaDeProducaoDTO,
                 unidadeDeMedida.unidadeDeMedidaValor);
     }
 }

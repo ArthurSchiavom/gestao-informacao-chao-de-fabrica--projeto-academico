@@ -1,6 +1,6 @@
 package eapli.base.app.common.console.presentation.files;
 
-import eapli.base.produto.application.ResultadoImportacaoRegistoProdutos;
+import eapli.base.produto.application.registarprodutos.ResultadoImportacaoRegistoProdutos;
 
 import java.util.Map;
 

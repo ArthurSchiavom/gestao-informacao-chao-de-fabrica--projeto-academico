@@ -1,4 +1,4 @@
-package eapli.base.produto.application;
+package eapli.base.produto.application.registarprodutos;
 
 import java.util.HashMap;
 import java.util.Map;

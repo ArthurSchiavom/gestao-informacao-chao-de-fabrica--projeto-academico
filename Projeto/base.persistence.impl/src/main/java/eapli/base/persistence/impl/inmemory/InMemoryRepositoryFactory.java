@@ -3,11 +3,13 @@ package eapli.base.persistence.impl.inmemory;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
+import eapli.base.definircategoriamaterial.repository.MaterialRepository;
 import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.produto.persistence.FichaDeProducaoRepository;
 import eapli.base.produto.persistence.ProdutoRepository;
 import eapli.base.registarmaquina.repository.MaquinaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -109,6 +111,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	public MaterialRepository material(final TransactionalContext autoTx) {
 		return new InMemoryMaterialRepository();
 	}
+
+	@Override
+	public FichaDeProducaoRepository fichaDeProducao() {
+	}
+		return null;
+
+	@Override
+	public FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx) {
+	}
+		return null;
 
 	@Override
 	public SignupRequestRepository signupRequests(final TransactionalContext tx) {

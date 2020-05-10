@@ -23,6 +23,11 @@ public class InMemoryProdutoRepository extends InMemoryDomainRepository<CodigoUn
 
     @Override
     public List<Produto> produtosSemFichaDeProducao() {
-        return Lists.newArrayList(this.match(e -> e.fichaDeProducao.quantidadesDeMateriaPrima().isEmpty()));
+        return Lists.newArrayList(this.match(e -> e.fichaDeProducao == null));
+    }
+
+    @Override
+    public List<Produto> findAllList() {
+        return Lists.newArrayList(this.findAll());
     }
 }

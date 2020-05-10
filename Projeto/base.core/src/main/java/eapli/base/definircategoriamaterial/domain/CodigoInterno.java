@@ -10,13 +10,14 @@ public class CodigoInterno implements ValueObject, Comparable<CodigoInterno> {
 
     private static final long serialVersionUID = 1L;
 
-    private String CODIGO_INTERNO;
+    public final String codigoInterno;
 
     protected CodigoInterno() {
+        codigoInterno = null;
     }
 
-    public CodigoInterno(String codigoInterno) {
-        this.CODIGO_INTERNO = codigoInterno;
+    protected CodigoInterno(String codigoInterno) {
+        this.codigoInterno = codigoInterno;
     }
 
 
@@ -25,23 +26,23 @@ public class CodigoInterno implements ValueObject, Comparable<CodigoInterno> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CodigoInterno that = (CodigoInterno) o;
-        return CODIGO_INTERNO.equals(that.CODIGO_INTERNO);
+        return codigoInterno.equals(that.codigoInterno);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(CODIGO_INTERNO);
+        return Objects.hash(codigoInterno);
     }
 
     @Override
     public String toString() {
         return "CodigoInterno{" +
-                "CODIGO_INTERNO='" + CODIGO_INTERNO + '\'' +
+                "CODIGO_INTERNO='" + codigoInterno + '\'' +
                 '}';
     }
 
     @Override
     public int compareTo(CodigoInterno obj) {
-        return this.CODIGO_INTERNO.compareTo(obj.CODIGO_INTERNO);
+        return this.codigoInterno.compareTo(obj.codigoInterno);
     }
 }

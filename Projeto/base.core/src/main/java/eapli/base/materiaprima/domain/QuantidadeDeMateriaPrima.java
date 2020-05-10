@@ -1,7 +1,8 @@
 package eapli.base.materiaprima.domain;
 
-import eapli.base.infrastructure.application.DTO;
+import eapli.base.infrastructure.application.HasDTO;
 import eapli.base.produto.application.QuantidadeDeMateriaPrimaDTO;
+import eapli.base.produto.domain.QuantidadeZeroMais;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
@@ -9,19 +10,19 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comparable<QuantidadeDeMateriaPrima>, DTO<QuantidadeDeMateriaPrimaDTO> {
+public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comparable<QuantidadeDeMateriaPrima>, HasDTO<QuantidadeDeMateriaPrimaDTO> {
 
     private static final long serialVersionUID = 1L;
 
-    private final double quantidade;
+    public final QuantidadeZeroMais quantidade;
     public final MateriaPrima materiaPrima;
 
     public QuantidadeDeMateriaPrima() {
-        this.quantidade = 0;
+        quantidade = null;
         materiaPrima = null;
     }
 
-    public QuantidadeDeMateriaPrima(double quantidade, MateriaPrima materiaPrima) {
+    public QuantidadeDeMateriaPrima(QuantidadeZeroMais quantidade, MateriaPrima materiaPrima) {
         this.quantidade = quantidade;
         this.materiaPrima = materiaPrima;
     }
@@ -37,7 +38,7 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
 
         final QuantidadeDeMateriaPrima that = (QuantidadeDeMateriaPrima) o;
 
-        return this.quantidade == that.quantidade && this.materiaPrima.equals(that.materiaPrima);
+        return this.quantidade.equals(that.quantidade) && this.materiaPrima.equals(that.materiaPrima);
     }
 
     @Override
@@ -47,17 +48,17 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
 
     @Override
     public String toString() {
-        return quantidade + " de " + materiaPrima.toString();
+        return quantidade.toString() + " de " + materiaPrima.toString();
     }
 
     @Override
     public int compareTo(QuantidadeDeMateriaPrima obj) {
-        return Double.compare(this.quantidade, obj.quantidade);
+        return quantidade.compareTo(obj.quantidade);
     }
 
     @Override
     public QuantidadeDeMateriaPrimaDTO toDTO() {
-        return new QuantidadeDeMateriaPrimaDTO(materiaPrima.toDTO(), quantidade);
+        return new QuantidadeDeMateriaPrimaDTO(null, quantidade.quantidadeValor);
     }
 }
 

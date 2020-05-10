@@ -3,9 +3,9 @@ package eapli.base.app.backoffice.console.presentation.producao.materiaprima.pro
 import eapli.base.app.common.console.presentation.files.ResultadoImportacaoFicheiroPresentationUtils;
 import eapli.base.app.backoffice.console.presentation.menu.OptionSelector;
 import eapli.base.app.backoffice.console.presentation.utilities.UserInteractionControl;
-import eapli.base.produto.application.RegistarProdutosDeCsvController;
-import eapli.base.produto.application.RegistarProdutosDeFicheiroController;
-import eapli.base.produto.application.ResultadoImportacaoRegistoProdutos;
+import eapli.base.produto.application.registarprodutos.RegistarProdutosDeCsvController;
+import eapli.base.produto.application.registarprodutos.RegistarProdutosDeFicheiroController;
+import eapli.base.produto.application.registarprodutos.ResultadoImportacaoRegistoProdutos;
 import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
