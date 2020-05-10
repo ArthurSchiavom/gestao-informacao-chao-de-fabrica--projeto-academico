@@ -18,7 +18,7 @@ public class OrdemLinhaProducao implements ValueObject, Comparable<OrdemLinhaPro
     }
 
     public OrdemLinhaProducao(int ordemLinhaProducao) throws IllegalArgumentException{
-        if(ordemLinhaProducao < 0){
+        if(ordemLinhaProducao <= 0){
             throw new IllegalArgumentException("Ordem na linha de produção tem que ser maior que 0");
         }
         this.ordemLinhaProducao = ordemLinhaProducao;

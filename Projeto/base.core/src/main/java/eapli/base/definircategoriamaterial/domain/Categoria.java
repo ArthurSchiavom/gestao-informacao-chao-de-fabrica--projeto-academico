@@ -15,7 +15,7 @@ public class Categoria implements AggregateRoot<CodigoAlfanumerico> {
 
     @EmbeddedId
     private CodigoAlfanumerico codigoAlfanumerico;
-    private String descricao;
+    private String descricao; // might change so it's not final
 
     protected Categoria() {
     }

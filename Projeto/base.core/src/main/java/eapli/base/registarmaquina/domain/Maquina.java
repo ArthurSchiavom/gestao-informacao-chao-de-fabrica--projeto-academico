@@ -34,9 +34,9 @@ public class Maquina implements AggregateRoot<CodigoInterno> {
         private FicheiroConfiguracao ficheiroConfiguracao;
         private IdentificadorProtocoloComunicacao identificadorProtocoloComunicacao;
         public final Date dataInstalacao;
-        private String descricao; // might change so it's not final
         private String marca; // might change so it's not final
         private String modelo; // might change so it's not final
+        private String descricaoMaquina; // might change so it's not final
         @ManyToOne
         private LinhaProducao linhaProducao;
 
@@ -53,7 +53,7 @@ public class Maquina implements AggregateRoot<CodigoInterno> {
                         this.codigoInterno = codigoInterno;
                         this.ordemLinhaProducao = ordemLinhaProducao;
                         this.identificadorProtocoloComunicacao = identificadorProtocoloComunicacao;
-                        this.descricao = descricao;
+                        this.descricaoMaquina = descricao;
                         this.marca = marca;
                         this.modelo = modelo;
                         this.linhaProducao = linha;

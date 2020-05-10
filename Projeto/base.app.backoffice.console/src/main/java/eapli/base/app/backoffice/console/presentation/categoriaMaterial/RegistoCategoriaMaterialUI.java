@@ -1,6 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.categoriaMaterial;
 
-import eapli.base.definircategoriamaterial.application.DefinirCategoriaMaterialController;
+import eapli.base.definircategoriamaterial.application.RegistarCategoriaMaterialController;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
@@ -8,7 +8,7 @@ import javax.persistence.RollbackException;
 
 public class RegistoCategoriaMaterialUI extends AbstractUI {
 
-    private final DefinirCategoriaMaterialController theController = new DefinirCategoriaMaterialController();
+    private final RegistarCategoriaMaterialController theController = new RegistarCategoriaMaterialController();
 
     @Override
     protected boolean doShow() {

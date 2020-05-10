@@ -19,7 +19,7 @@ public class NumeroSerie implements ValueObject, Comparable<NumeroSerie> {
     }
 
     public NumeroSerie(String numeroSerie) throws IllegalArgumentException{
-        if(numeroSerie.length()<=maxCharsNumeroSerie && numeroSerie.length()>=minCharsNumeroSerie) {
+        if(numeroSerie!= null && numeroSerie.length()<=maxCharsNumeroSerie && numeroSerie.length()>=minCharsNumeroSerie) {
             this.numeroSerie = numeroSerie;
         }else{
             throw new IllegalArgumentException("Número de série não está nos parametros das regras definidas");

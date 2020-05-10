@@ -10,9 +10,10 @@ public class CodigoAlfanumerico implements ValueObject, Comparable<CodigoAlfanum
 
     private static final long serialVersionUID = 1L;
 
-    private String codigoAlfaNumerico;
+    private final String codigoAlfaNumerico;
 
     protected CodigoAlfanumerico() {
+        codigoAlfaNumerico = null;
     }
 
     /**

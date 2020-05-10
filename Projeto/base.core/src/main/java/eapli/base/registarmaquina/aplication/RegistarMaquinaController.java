@@ -11,7 +11,7 @@ import java.util.List;
 public class RegistarMaquinaController {
     private final LinhaProducaoRepository repositoryLinhasProducao = PersistenceContext.repositories().linhasProducao();
     private final MaquinaRepository repositoryMaquinas = PersistenceContext.repositories().maquinas();
-    private List<LinhaProducao> linhas;
+    private List<LinhaProducao> linhas = null;
 
     /**
      *
@@ -19,8 +19,7 @@ public class RegistarMaquinaController {
      */
     public List<LinhaProducaoDTO> getLinhasDTO(){
         linhas = (List) repositoryLinhasProducao.findAll();
-        LinhasProducaoTransformer transformer = new LinhasProducaoTransformer();
-        return transformer.gerarLinhasDTO(linhas);
+        return LinhasProducaoTransformer.gerarLinhasDTO(linhas);
     }
 
     /**
@@ -36,12 +35,19 @@ public class RegistarMaquinaController {
      * @return máquina caso seja guardada no repositorio com sucesso
      */
     public Maquina registarMaquina(int escolha, int ordem, String codigoInterno, String numero, String descricao, String marca, String modelo,String identificadorProtocoloComunicacao) throws IllegalArgumentException,RollbackException{
+        if(linhas == null){
+            linhas = (List) repositoryLinhasProducao.findAll(); // for the bootstrap
+        }
         try {
             LinhaProducao linha = linhas.get(escolha-1);
             final OrdemLinhaProducao ordemLinhaProducao = new OrdemLinhaProducao(ordem);
+            System.out.println("ordem");
             final CodigoInterno codInterno = new CodigoInterno(codigoInterno);
+            System.out.println("codigo");
             final NumeroSerie numeroSerie = new NumeroSerie(numero);
+            System.out.println("numero");
             final IdentificadorProtocoloComunicacao identificadorProtocoloCom = new IdentificadorProtocoloComunicacao(identificadorProtocoloComunicacao);
+            System.out.println("protocolo");
             return repositoryMaquinas.save(new Maquina(numeroSerie,codInterno,ordemLinhaProducao,identificadorProtocoloCom,descricao,marca,modelo,linha));
 
         } catch (IllegalArgumentException| RollbackException ex) {
