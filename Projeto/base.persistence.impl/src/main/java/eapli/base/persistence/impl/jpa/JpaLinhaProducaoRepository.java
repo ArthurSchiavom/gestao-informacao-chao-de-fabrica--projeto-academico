@@ -1,9 +1,9 @@
 package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
-import eapli.base.gestaoproducao.gestaolinhaproducao.domain.IdentificadorLinhaProducao;
-import eapli.base.gestaoproducao.gestaolinhaproducao.domain.LinhaProducao;
-import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
+import eapli.base.gestaolinhasproducao.domain.LinhaProducao;
+import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 

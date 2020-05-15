@@ -1,8 +1,8 @@
 package eapli.base.persistence.impl.inmemory;
 
-import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInterno;
-import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
-import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
+import eapli.base.registarmaquina.domain.CodigoInterno;
+import eapli.base.registarmaquina.domain.Maquina;
+import eapli.base.registarmaquina.repository.MaquinaRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 import java.util.Optional;

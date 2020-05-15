@@ -1,8 +1,8 @@
 package eapli.base.persistence.impl.inmemory;
 
-import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
-import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
-import eapli.base.gestaoproducao.gestaodepositos.repository.DepositoRepository;
+import eapli.base.gestaodepositos.domain.CodigoDeposito;
+import eapli.base.gestaodepositos.domain.Deposito;
+import eapli.base.gestaodepositos.repository.DepositoRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 import java.util.Optional;

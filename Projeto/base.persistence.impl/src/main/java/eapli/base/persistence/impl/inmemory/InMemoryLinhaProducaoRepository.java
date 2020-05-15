@@ -1,8 +1,8 @@
 package eapli.base.persistence.impl.inmemory;
 
-import eapli.base.gestaoproducao.gestaolinhaproducao.domain.IdentificadorLinhaProducao;
-import eapli.base.gestaoproducao.gestaolinhaproducao.domain.LinhaProducao;
-import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
+import eapli.base.gestaolinhasproducao.domain.LinhaProducao;
+import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 import java.util.Optional;

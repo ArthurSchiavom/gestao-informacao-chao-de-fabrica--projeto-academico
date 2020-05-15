@@ -1,8 +1,9 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.gestaoproducao.gestaomateriais.application.RegistarCategoriaMaterialController;
-import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
-import eapli.base.gestaoproducao.gestaomateriasprimas.application.AdicionarMaterialCatalogoController;
+import eapli.base.definircategoriamaterial.application.RegistarCategoriaMaterialController;
+import eapli.base.definircategoriamaterial.domain.Categoria;
+import eapli.base.definircategoriamaterial.domain.CodigoAlfanumerico;
+import eapli.base.gestaomateriasprimas.application.AdicionarMaterialCatalogoController;
 import eapli.framework.actions.Action;
 
 import java.io.IOException;

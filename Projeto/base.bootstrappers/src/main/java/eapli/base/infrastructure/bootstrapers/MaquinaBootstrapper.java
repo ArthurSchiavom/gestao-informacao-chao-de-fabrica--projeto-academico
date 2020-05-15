@@ -1,7 +1,7 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.gestaoproducao.gestaolinhasproducao.application.AddLinhaProducaoController;
-import eapli.base.gestaoproducao.gestaomaquina.aplication.RegistarMaquinaController;
+import eapli.base.gestaolinhasproducao.application.AddLinhaProducaoController;
+import eapli.base.registarmaquina.aplication.RegistarMaquinaController;
 import eapli.framework.actions.Action;
 
 public class MaquinaBootstrapper implements Action{

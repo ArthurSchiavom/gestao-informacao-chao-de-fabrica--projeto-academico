@@ -1,12 +1,14 @@
 package eapli.base.persistence.impl.jpa;
 
-import com.google.common.collect.Lists;
 import eapli.base.Application;
-import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInterno;
-import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
-import eapli.base.gestaoproducao.gestaomateriasprimas.repository.MaterialRepository;
+import eapli.base.definircategoriamaterial.domain.CodigoInterno;
+import eapli.base.definircategoriamaterial.domain.Material;
+import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
+import eapli.base.produto.domain.Produto;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
+import com.google.common.collect.Lists;
+import java.util.List;
 
 import java.util.HashMap;
 import java.util.List;

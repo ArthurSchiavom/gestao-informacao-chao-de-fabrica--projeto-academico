@@ -23,6 +23,7 @@ package eapli.base.app.common.console.presentation.formatter;
  */
 
 import java.util.ArrayList;
+import java.lang.StringBuilder;
 
 public class ConsoleTable {
 
