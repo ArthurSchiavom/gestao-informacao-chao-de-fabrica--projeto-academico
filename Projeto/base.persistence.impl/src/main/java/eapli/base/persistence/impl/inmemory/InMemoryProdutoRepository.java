@@ -1,9 +1,9 @@
 package eapli.base.persistence.impl.inmemory;
 
 import com.google.common.collect.Lists;
-import eapli.base.produto.domain.CodigoUnico;
-import eapli.base.produto.domain.Produto;
-import eapli.base.produto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.gestaoprodutos.domain.CodigoUnico;
+import eapli.base.gestaoproducao.gestaoprodutos.domain.Produto;
+import eapli.base.gestaoproducao.gestaoprodutos.persistence.ProdutoRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 import java.util.List;

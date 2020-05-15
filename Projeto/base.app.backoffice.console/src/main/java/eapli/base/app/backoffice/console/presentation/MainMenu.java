@@ -27,16 +27,16 @@ import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
-import eapli.base.app.backoffice.console.presentation.categoriaMaterial.RegistoCategoriaMaterialAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
-import eapli.base.app.backoffice.console.presentation.depositos.AddDepositoUI;
-import eapli.base.app.backoffice.console.presentation.linhaproducao.AddLinhaProducaoUI;
-import eapli.base.app.backoffice.console.presentation.materiaprima.AdicionarMaterialCatalogoAction;
-import eapli.base.app.backoffice.console.presentation.producao.materiaprima.produto.AdicionarProdutoCatalogoAction;
-import eapli.base.app.backoffice.console.presentation.produto.ConsultarProdutosSemFichaDeProducaoAction;
-import eapli.base.app.backoffice.console.presentation.produto.EspecificarFichaDeProducaoAction;
-import eapli.base.app.backoffice.console.presentation.produto.RegistarProdutosAction;
-import eapli.base.app.backoffice.console.presentation.registarMaquina.RegistarMaquinaAction;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodeposito.especificacao.EspecificarDepositoUI;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaolinhaproducao.especificacao.EspecificarLinhaProducaoUI;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao.EspecificarMaquinaAction;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaterial.especificacao.categoriamaterial.EspecificarCategoriaMaterialAction;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaterial.especificacao.material.EspecificarMaterialAction;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.consulta.ConsultarProdutosSemFichaDeProducaoAction;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.fichadeproducao.EspecificarFichaDeProducaoAction;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.produto.EspecificarProdutoAction;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.produto.ImportarCatalogoProdutosAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -217,7 +217,7 @@ public class MainMenu extends AbstractUI {
 	private Menu buildGestorChaoFabricaMenu() {
 		final Menu menu = new Menu("Gestor chão de fábrica >");
 
-		menu.addItem(REGISTAR_MAQUINA,"Registar máquina",new RegistarMaquinaAction());
+		menu.addItem(REGISTAR_MAQUINA,"Registar máquina",new EspecificarMaquinaAction());
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
@@ -231,15 +231,15 @@ public class MainMenu extends AbstractUI {
 	private Menu buildProducaoMenu() {
 		final Menu menu = new Menu("Produção >");
 
-		menu.addItem(REGISTAR_PRODUTO, "Carregar Catálogo de Produtos", new RegistarProdutosAction());
-		menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new RegistoCategoriaMaterialAction());
-		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new AddDepositoUI()::show);
-		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new AddLinhaProducaoUI()::show);
-		menu.addItem(REGISTAR_MATERIAL,"Registar material",new AdicionarMaterialCatalogoAction());
+		menu.addItem(REGISTAR_PRODUTO, "Carregar Catálogo de Produtos", new ImportarCatalogoProdutosAction());
+		menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new EspecificarCategoriaMaterialAction());
+		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new EspecificarDepositoUI()::show);
+		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new EspecificarLinhaProducaoUI()::show);
+		menu.addItem(REGISTAR_MATERIAL,"Registar material",new EspecificarMaterialAction());
 		menu.addItem(CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO, "Produtos Sem Ficha de Produção", new ConsultarProdutosSemFichaDeProducaoAction());
 		menu.addItem(REGISTAR_FICHA_DE_PRODUCAO, "Registar Ficha de Produção",
 				new EspecificarFichaDeProducaoAction());
-		menu.addItem(REGISTAR_PRODUTO_CATALOGO,"Adicionar novo produto no catalogo", new AdicionarProdutoCatalogoAction());
+		menu.addItem(REGISTAR_PRODUTO_CATALOGO,"Adicionar novo produto no catalogo", new EspecificarProdutoAction());
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

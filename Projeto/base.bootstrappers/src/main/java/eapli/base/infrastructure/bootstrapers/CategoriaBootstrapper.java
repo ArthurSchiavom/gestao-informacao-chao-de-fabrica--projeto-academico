@@ -1,6 +1,6 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.definircategoriamaterial.application.RegistarCategoriaMaterialController;
+import eapli.base.gestaoproducao.gestaomateriais.application.RegistarCategoriaMaterialController;
 import eapli.framework.actions.Action;
 
 public class CategoriaBootstrapper implements Action{

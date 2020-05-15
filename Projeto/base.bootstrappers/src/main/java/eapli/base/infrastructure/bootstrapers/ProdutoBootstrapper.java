@@ -2,8 +2,8 @@ package eapli.base.infrastructure.bootstrapers;
 
 import eapli.base.AppSettings;
 import eapli.base.Application;
-import eapli.base.produto.application.registarprodutos.RegistarProdutosDeCsvController;
-import eapli.base.produto.application.registarprodutos.RegistarProdutosDeFicheiroController;
+import eapli.base.gestaoproducao.gestaoprodutos.application.registarprodutos.RegistarProdutosDeCsvController;
+import eapli.base.gestaoproducao.gestaoprodutos.application.registarprodutos.RegistarProdutosDeFicheiroController;
 import eapli.framework.actions.Action;
 
 public class ProdutoBootstrapper implements Action {

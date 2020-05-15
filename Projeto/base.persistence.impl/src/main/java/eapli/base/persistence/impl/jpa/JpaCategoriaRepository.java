@@ -1,10 +1,9 @@
 package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
-import eapli.base.definircategoriamaterial.domain.Categoria;
-import eapli.base.definircategoriamaterial.domain.CodigoAlfanumerico;
-import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
-import eapli.base.gestaolinhasproducao.domain.LinhaProducao;
+import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
+import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoAlfanumerico;
+import eapli.base.gestaoproducao.gestaomateriais.repository.CategoriaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 

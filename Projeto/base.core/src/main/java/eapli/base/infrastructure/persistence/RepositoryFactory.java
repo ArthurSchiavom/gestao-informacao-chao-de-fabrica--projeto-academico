@@ -5,13 +5,13 @@ package eapli.base.infrastructure.persistence;
 
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
-import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
-import eapli.base.gestaodepositos.repository.DepositoRepository;
-import eapli.base.gestaolinhasproducao.repository.LinhaProducaoRepository;
-import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
-import eapli.base.produto.persistence.FichaDeProducaoRepository;
-import eapli.base.registarmaquina.repository.MaquinaRepository;
-import eapli.base.produto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.gestaodepositos.repository.DepositoRepository;
+import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
+import eapli.base.gestaoproducao.gestaomateriais.repository.CategoriaRepository;
+import eapli.base.gestaoproducao.gestaomateriasprimas.repository.MaterialRepository;
+import eapli.base.gestaoproducao.gestaoprodutos.persistence.FichaDeProducaoRepository;
+import eapli.base.gestaoproducao.gestaoprodutos.persistence.ProdutoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
