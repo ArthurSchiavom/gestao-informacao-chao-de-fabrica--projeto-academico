@@ -25,16 +25,16 @@ public class JpaMaterialRepository extends JpaAutoTxRepository<Material, CodigoI
         super(persistenceUnitName, Application.settings().getExtendedPersistenceProperties(),
                 Material.identityAttributeName());
     }
-
-    @Override
-    public Optional<Material> findByCodigoInterno(CodigoInterno codigoInterno) {
-        final Map<String, Object> params = new HashMap<>();
-        params.put(Material.identityAttributeName(), codigoInterno);
-        return matchOne("e."+ Material.identityAttributeName()+"=:identifier", params);
-    }
     
     @Override
     public List<Material> findAllList() {
         return Lists.newArrayList(this.findAll());
+    }
+
+    @Override
+    public Optional<Material> obterMaterialPorCodigoInterno(String codigoInterno) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("codigo", codigoInterno);
+        return matchOne("e.codigoInterno.codigoInternoValor=:codigo", params);
     }
 }

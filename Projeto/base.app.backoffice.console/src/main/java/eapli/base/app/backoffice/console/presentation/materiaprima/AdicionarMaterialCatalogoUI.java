@@ -1,7 +1,10 @@
 package eapli.base.app.backoffice.console.presentation.materiaprima;
 
+import eapli.base.app.backoffice.console.presentation.menu.OptionSelector;
 import eapli.base.definircategoriamaterial.domain.Categoria;
+import eapli.base.definircategoriamaterial.domain.Material;
 import eapli.base.gestaomateriasprimas.application.AdicionarMaterialCatalogoController;
+import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
@@ -14,22 +17,38 @@ public class AdicionarMaterialCatalogoUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
+        boolean flag=false;
         final String nomeMaterial=Console.readNonEmptyLine("Insira o nome do Material: ","Nome do material nao pode ser vazio");
         final String codigoInterno = Console.readNonEmptyLine("Insira o codigo Interno: ", "Codigo interno não pode ser vazio");
-        final String unidadeMedida= Console.readNonEmptyLine("Insira a unidade Medida: ","Unidade de medida nao pode ser vazio");
-        final String path=Console.readNonEmptyLine("Insira o caminho onde prentende guardar o ficheiro: ", "Caminho nao pode ser vazio");
-        final String descricaoDoMaterial=Console.readNonEmptyLine("Insira a descricao do Material: ","Descricao do material nao pode ser vazio");
-        final String conteudoFichaTecnica=Console.readNonEmptyLine("Insira conteudo da Ficha tecnica: ","Conteudo da Ficha tecnica nao pode ser vazio");
-        final Categoria categoria=selecionarCategoria();
-        try {
-            this.adicionarMaterialCatalogoController.registarMaterial(unidadeMedida,descricaoDoMaterial,nomeMaterial,path,conteudoFichaTecnica,codigoInterno,categoria);
-            return true;
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Material Invalido!!"); //Melhorar a apresentacao!!!!!
-        } catch (NullPointerException ex){
-            System.out.println(ex.getCause());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (verificaoCodigoInterno(codigoInterno)){
+            System.out.println("Codigo Interno ja existente! Prendente substituir?\n");
+            OptionSelector optionSelector = new OptionSelector();
+            final Updateable<Boolean> substituir = new Updateable<>();
+            optionSelector.registerOption("Sim", () -> substituir.val = true);
+            optionSelector.registerOption("Não", () -> substituir.val = false);
+            optionSelector.show();
+            if (substituir.val){
+                adicionarMaterialCatalogoController.removerMaterialPorCodigoInterno(codigoInterno);
+            }else{
+                flag=true;
+            }
+        }
+        if (flag==false) {
+            final String unidadeMedida = Console.readNonEmptyLine("Insira a unidade Medida: ", "Unidade de medida nao pode ser vazio");
+            final String path = Console.readNonEmptyLine("Insira o caminho onde prentende guardar o ficheiro: ", "Caminho nao pode ser vazio");
+            final String descricaoDoMaterial = Console.readNonEmptyLine("Insira a descricao do Material: ", "Descricao do material nao pode ser vazio");
+            final String conteudoFichaTecnica = Console.readNonEmptyLine("Insira conteudo da Ficha tecnica: ", "Conteudo da Ficha tecnica nao pode ser vazio");
+            final Categoria categoria = selecionarCategoria();
+            try {
+                this.adicionarMaterialCatalogoController.registarMaterial(unidadeMedida, descricaoDoMaterial, nomeMaterial, path, conteudoFichaTecnica, codigoInterno, categoria);
+                return true;
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Material Invalido!!"); //Melhorar a apresentacao!!!!!
+            } catch (NullPointerException ex) {
+                System.out.println(ex.getCause());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }
@@ -41,6 +60,16 @@ public class AdicionarMaterialCatalogoUI extends AbstractUI {
         selectorCategoria.show();
         final Categoria categoriaSelecionada=selectorCategoria.selectedElement();
         return categoriaSelecionada;
+    }
+
+    private boolean verificaoCodigoInterno(String codigoInterno){
+        Material teste=adicionarMaterialCatalogoController.obterMaterialPorCodigoInterno(codigoInterno);
+        if (teste==null){
+            return false;
+        }else{
+            System.out.println("O codigo interno ja inserido ja existe!\n");
+            return true;
+        }
     }
 
     @Override

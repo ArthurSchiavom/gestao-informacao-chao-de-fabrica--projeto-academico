@@ -5,10 +5,14 @@ import eapli.base.definircategoriamaterial.domain.CodigoInterno;
 import eapli.base.definircategoriamaterial.domain.FichaTecnicaPDF;
 import eapli.base.definircategoriamaterial.domain.Material;
 import eapli.base.gestaomateriasprimas.repository.MaterialRepository;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.materiaprima.domain.UnidadeDeMedida;
+import eapli.base.produto.domain.Produto;
 
+import javax.activation.DataHandler;
 import java.io.IOException;
+import java.util.Optional;
 
 public class AdicionarMaterialCatalogoController {
     MaterialRepository materialRepository=PersistenceContext.repositories().material();
@@ -32,4 +36,15 @@ public class AdicionarMaterialCatalogoController {
         final Material material=new Material(descricaoMaterial, codigoInt, categoria,uDeMedida,fichaTecnicaPDF);
         return  this.materialRepository.save(material);
     }
+
+    public boolean removerMaterialPorCodigoInterno(String codigoInterno){
+            Material antigo = obterMaterialPorCodigoInterno(codigoInterno);
+            materialRepository.remove(antigo);
+            return true;
+    }
+
+    public Material obterMaterialPorCodigoInterno(String codigoInterno){
+        return materialRepository.obterMaterialPorCodigoInterno(codigoInterno).get();
+    }
+
 }

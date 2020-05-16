@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MaterialRepository extends DomainRepository<CodigoInterno, Material> {
-    Optional<Material> findByCodigoInterno(CodigoInterno codigoInterno);
     List<Material> findAllList();
+    Optional<Material> obterMaterialPorCodigoInterno(String codigoInterno);
 }

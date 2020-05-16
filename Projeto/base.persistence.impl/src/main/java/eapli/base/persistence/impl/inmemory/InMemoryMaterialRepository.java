@@ -13,14 +13,15 @@ import java.util.Optional;
 
 public class InMemoryMaterialRepository extends InMemoryDomainRepository<CodigoInterno, Material> implements MaterialRepository {
 
-    @Override
-    public Optional<Material> findByCodigoInterno(CodigoInterno codigoInterno) {
-        return Optional.of(data().get(codigoInterno));
-    }
    
     @Override
     public List<Material> findAllList() {
         return Lists.newArrayList(this.findAll());
+    }
+
+    @Override
+    public Optional<Material> obterMaterialPorCodigoInterno(String codigoInterno) {
+        return Optional.of(data().get(codigoInterno));
     }
 }
 
