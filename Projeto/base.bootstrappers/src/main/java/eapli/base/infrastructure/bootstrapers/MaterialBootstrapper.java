@@ -3,7 +3,7 @@ package eapli.base.infrastructure.bootstrapers;
 import eapli.base.gestaoproducao.gestaomaterial.application.EspecificarCategoriaMaterialController;
 import eapli.base.gestaoproducao.gestaomaterial.application.EspecificarMaterialController;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
-import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.framework.actions.Action;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class MaterialBootstrapper implements Action {
             Categoria categoria2= especificarCategoriaMaterialController.registarCategoriaMaterial("1234567","metais");
             Categoria categoria3= especificarCategoriaMaterialController.registarCategoriaMaterial("1212344", "metais");
         try {
-            especificarMaterialController.registarMaterial(UnidadeDeMedida.KILOGRAMA,
+            especificarMaterialController.registarMaterial("kg",
                     " É um elemento químico, símbolo Fe, de número atômico 26",
                     "Ferro",
                     "test_material/outputPDF",
@@ -29,7 +29,7 @@ public class MaterialBootstrapper implements Action {
                             "Para obter-se ferro no estado elementar, os óxidos são reduzidos com carbono e imediatamente submetidos a um processo de refinação para retirar as impurezas presentes.",
                     "100",
                     categoria1);
-            especificarMaterialController.registarMaterial(UnidadeDeMedida.KILOGRAMA,
+            especificarMaterialController.registarMaterial("kg",
                     " O aço é uma liga metálica formada essencialmente por ferro e carbono, com percentagens deste último variando entre 0,008 e 2,11%",
                     "Aco",
                     "test_material/outputPDF",
@@ -40,7 +40,7 @@ public class MaterialBootstrapper implements Action {
                     "101", categoria2);
             ;
 
-            especificarMaterialController.registarMaterial(UnidadeDeMedida.KILOGRAMA,
+            especificarMaterialController.registarMaterial("kg",
                     " O cobre é um elemento químico de símbolo Cu (do latim cuprum), número atômico 29 (29 prótons e 29 elétrons) e de massa atómica 63,54 u.",
                     "Cobre",
                     "test_material/outputPDF",
@@ -50,8 +50,8 @@ public class MaterialBootstrapper implements Action {
                             "Além disso, o cobre foi representado com o mesmo signo que Vênus (a afrodite grega), pois Chipre estava consagrada a deusa da beleza e os espelhos eram fabricados com este metal. O símbolo, espelho de Vênus da mitologia e da alquimia, modificação do egípcio Ankh, foi posteriormente adotado por Carl Linné para simbolizar o gênero feminino(♀).",
                     "102",
                     categoria3);
-        }catch (IOException e) {
-            e.printStackTrace();
+        }catch (IOException|IllegalDomainValueException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
         return true;
     }
