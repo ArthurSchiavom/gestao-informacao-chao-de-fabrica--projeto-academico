@@ -43,8 +43,8 @@ public class ProdutoBuilder {
         return this;
     }
 
-    public ProdutoBuilder setUnidadeDeMedida(String unidadeDeMedida) {
-        this.unidadeDeMedida = UnidadeDeMedida.valueOf(unidadeDeMedida);
+    public ProdutoBuilder setUnidadeDeMedida(String unidadeDeMedida) throws IllegalDomainValueException {
+        this.unidadeDeMedida = UnidadeDeMedida.actualValueOf(unidadeDeMedida);
         return this;
     }
 

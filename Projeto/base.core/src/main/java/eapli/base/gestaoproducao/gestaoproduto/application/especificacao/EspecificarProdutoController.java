@@ -48,7 +48,7 @@ public class EspecificarProdutoController {
         produtoBuilder.setDescricaoCompleta(descricaoCompleta);
     }
 
-    public void setUnidadeDeMedida(String unidadeDeMedida) {
+    public void setUnidadeDeMedida(String unidadeDeMedida) throws IllegalDomainValueException {
         produtoBuilder.setUnidadeDeMedida(unidadeDeMedida);
     }
 

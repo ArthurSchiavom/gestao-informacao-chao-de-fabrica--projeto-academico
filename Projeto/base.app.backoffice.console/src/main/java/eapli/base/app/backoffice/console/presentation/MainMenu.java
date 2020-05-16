@@ -78,9 +78,7 @@ public class MainMenu extends AbstractUI {
 	private static final int CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO = 6;
 	private static final int REGISTAR_FICHA_DE_PRODUCAO = 7;
 	private static final int REGISTAR_PRODUTO_CATALOGO=8;
-
-	// GESTOR CHAO FABRICA
-	private static final int REGISTAR_MAQUINA = 1;
+	private static final int REGISTAR_MAQUINA = 9;
 
 
 
@@ -177,8 +175,6 @@ public class MainMenu extends AbstractUI {
 			mainMenu.addSubMenu(PRODUCAO_OPTION, producaoMenu);
 			final Menu settingsMenu = buildAdminSettingsMenu();
 			mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
-			final Menu gestorChaoFabricaMenu = buildGestorChaoFabricaMenu();
-			mainMenu.addSubMenu(GESTOR_CHAO_FABRICA,gestorChaoFabricaMenu);
 		}
 
 		if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -214,15 +210,6 @@ public class MainMenu extends AbstractUI {
 		return menu;
 	}
 
-	private Menu buildGestorChaoFabricaMenu() {
-		final Menu menu = new Menu("Gestor chão de fábrica >");
-
-		menu.addItem(REGISTAR_MAQUINA,"Registar máquina",new EspecificarMaquinaAction());
-		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-
-		return menu;
-	}
-
 	/**
 	 * Menu do gestor de produção
 	 *
@@ -240,6 +227,7 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(REGISTAR_FICHA_DE_PRODUCAO, "Registar Ficha de Produção",
 				new EspecificarFichaDeProducaoAction());
 		menu.addItem(REGISTAR_PRODUTO_CATALOGO,"Adicionar novo produto no catalogo", new EspecificarProdutoAction());
+		menu.addItem(REGISTAR_MAQUINA,"Registar máquina", new EspecificarMaquinaAction());
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

@@ -33,8 +33,9 @@ public class EspecificarProdutoUI extends AbstractUI {
             especificarProdutoController.setUnidadeDeMedida(unidadeDeMedida);
             especificarProdutoController.register();
             System.out.println("Inserido com sucesso");
-            return true;
-        } catch (IllegalDomainValueException illegalDomainValue) {
+            return false;
+        } catch (IllegalDomainValueException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
         return false;
     }
