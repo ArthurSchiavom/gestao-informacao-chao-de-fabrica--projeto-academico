@@ -1,6 +1,7 @@
-package eapli.base.gestaoproducao.gestaomaquina.aplication;
+package eapli.base.gestaoproducao.gestaomaquina.aplication.dto;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
+import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhaProducaoDTO;
 
 import java.util.ArrayList;
 import java.util.List;

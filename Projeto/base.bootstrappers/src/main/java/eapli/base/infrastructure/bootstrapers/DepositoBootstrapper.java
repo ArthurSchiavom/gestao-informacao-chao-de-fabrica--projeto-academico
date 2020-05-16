@@ -1,6 +1,6 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.gestaoproducao.gestaodeposito.application.AddDepositoController;
+import eapli.base.gestaoproducao.gestaodeposito.application.especificacao.EspecificarDepositoController;
 import eapli.framework.actions.Action;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class DepositoBootstrapper implements Action {
 	private static final Logger LOGGER = LogManager.getLogger(LinhaProducaoBootstrapper.class);
 
-	private final AddDepositoController controller = new AddDepositoController();
+	private final EspecificarDepositoController controller = new EspecificarDepositoController();
 	@Override
 	public boolean execute() {
 		registar("DEP001", "Deposito de Madeira");

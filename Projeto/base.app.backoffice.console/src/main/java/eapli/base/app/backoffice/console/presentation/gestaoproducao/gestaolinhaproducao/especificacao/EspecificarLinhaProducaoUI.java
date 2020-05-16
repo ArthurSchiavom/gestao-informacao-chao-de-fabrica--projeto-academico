@@ -1,6 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaolinhaproducao.especificacao;
 
-import eapli.base.gestaoproducao.gestaolinhasproducao.application.AddLinhaProducaoController;
+import eapli.base.gestaoproducao.gestaolinhasproducao.application.especificacao.EspecificarLinhaProducaoController;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
@@ -11,9 +11,9 @@ import org.apache.logging.log4j.Logger;
 /**
  * Menu para adicionar uma nova linha de produção
  */
-public class EspecificacaoLinhaProducaoUI extends AbstractUI {
-	private static final Logger LOGGER = LogManager.getLogger(EspecificacaoLinhaProducaoUI.class);
-	private final AddLinhaProducaoController theController = new AddLinhaProducaoController();
+public class EspecificarLinhaProducaoUI extends AbstractUI {
+	private static final Logger LOGGER = LogManager.getLogger(EspecificarLinhaProducaoUI.class);
+	private final EspecificarLinhaProducaoController theController = new EspecificarLinhaProducaoController();
 
 	@Override
 	public boolean doShow() {

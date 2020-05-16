@@ -1,10 +1,10 @@
-package eapli.base.gestaoproducao.gestaolinhasproducao.application;
+package eapli.base.gestaoproducao.gestaolinhasproducao.application.especificacao;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
-public class AddLinhaProducaoController {
+public class EspecificarLinhaProducaoController {
 	//TODO add authz maybe
 	private final LinhaProducaoRepository repository = PersistenceContext.repositories().linhasProducao();
 

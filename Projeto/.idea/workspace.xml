@@ -2,176 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c03c76a-9147-48bb-aee5-314ed70addd2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaterial/especificacao/EspecificarCategoriaMaterialAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaterial/especificacao/EspecificarMaterialAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaoproduto/especificacao/EspecificarProdutoAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaodeposito/application/AddDepositoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaodeposito/domain/CodigoDeposito.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaodeposito/domain/Deposito.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaodeposito/repository/DepositoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaolinhasproducao/application/AddLinhaProducaoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaolinhasproducao/domain/EstadoProcessamentoMensagens.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaolinhasproducao/domain/IdentificadorLinhaProducao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaolinhasproducao/domain/LinhaProducao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaolinhasproducao/repository/LinhaProducaoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/LinhaProducaoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/LinhasProducaoTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/RegistarMaquinaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/domain/CodigoInterno.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/domain/FicheiroConfiguracao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/domain/IdentificadorProtocoloComunicacao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/domain/Maquina.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/domain/NumeroSerie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/domain/OrdemLinhaProducao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/repository/MaquinaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/application/EspecificarCategoriaMaterialController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/application/EspecificarMaterialController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/application/dto/MaterialDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/domain/Categoria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/domain/CodigoInterno.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/domain/Descricao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/domain/FichaTecnicaPDF.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/domain/Material.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/repository/CategoriaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaterial/repository/MaterialRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomateriaprima/application/dto/MateriaPrimaDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomateriaprima/domain/MateriaPrima.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomateriaprima/domain/QuantidadeDeMateriaPrima.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomateriaprima/domain/TipoDeMateriaPrima.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomateriaprima/domain/UnidadeDeMedida.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/consulta/ConsultarProdutosSemFichaDeProducaoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/dto/FichaDeProducaoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/dto/ProdutoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/dto/QuantidadeDeMateriaPrimaDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/especificacao/EspecificarFichaDeProducaoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/especificacao/EspecificarProdutoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/especificacao/ImportarCatalogoCsvProdutosController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/especificacao/ImportarCatalogoProdutosController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/especificacao/ResultadoImportacaoCatalogoProdutos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/especificacao/ResultadoImportacaoCatalogoProdutosTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaoproducao/gestaodeposito/domain/DepositoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaoproducao/gestaolinhasproducao/domain/LinhaProducaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaoproducao/gestaomaquina/domain/MaquinaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaoproducao/gestaomaquina/domain/NumeroSerieTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaoproducao/gestaomaquina/domain/OrdemLinhaProducaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaoproducao/gestaomaterial/domain/CodigoAlfanumericoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/categoriaMaterial/RegistoCategoriaMaterialAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/categoriaMaterial/RegistoCategoriaMaterialUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaterial/especificacao/EspecificarCategoriaMaterialUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/depositos/AddDepositoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/depositos/AddDepositoUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/linhaproducao/AddLinhaProducaoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaolinhaproducao/especificacao/EspecificacaoLinhaProducaoUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/materiaprima/AdicionarMaterialCatalogoAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/materiaprima/AdicionarMaterialCatalogoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaterial/especificacao/EspecificarMaterialUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/materiaprima/ListCategoriaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaterial/ListCategoriaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/producao/materiaprima/produto/AdicionarProdutoCatalogoAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/producao/materiaprima/produto/AdicionarProdutoCatalogoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaoproduto/especificacao/EspecificarProdutoUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/producao/materiaprima/produto/RegistarProdutosUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/produto/ConsultarProdutosSemFichaDeProducaoAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaoproduto/consulta/ConsultarProdutosSemFichaDeProducaoAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/produto/ConsultarProdutosSemFichaDeProducaoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaoproduto/consulta/ConsultarProdutosSemFichaDeProducaoUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/produto/EspecificarFichaDeProducaoAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaoproduto/especificacao/EspecificarFichaDeProducaoAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/produto/EspecificarFichaDeProducaoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaoproduto/especificacao/EspecificarFichaDeProducaoUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/produto/RegistarProdutosAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaoproduto/especificacao/ImportarCatalogoProdutosAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/produto/RegistarProdutosUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaoproduto/especificacao/ImportarCatalogoProdutosUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/registarMaquina/RegistarMaquinaAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaquina/especificacao/RegistarMaquinaAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/registarMaquina/RegistarMaquinaUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaquina/especificacao/RegistarMaquinaUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.common.console/src/main/java/eapli/base/app/common/console/presentation/files/ResultadoImportacaoFicheiroPresentationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.common.console/src/main/java/eapli/base/app/common/console/presentation/files/ResultadoImportacaoFicheiroPresentationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.common.console/src/main/java/eapli/base/app/common/console/presentation/formatter/ConsoleTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.common.console/src/main/java/eapli/base/app/common/console/presentation/formatter/ConsoleTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.app.common.console/src/main/java/eapli/base/app/common/console/presentation/formatter/ConsoleTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.common.console/src/main/java/eapli/base/app/common/console/presentation/formatter/ConsoleTables.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/CategoriaBootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/CategoriaBootstrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/depositos/AddDepositoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaodepositos/especificacao/EspecificarDepositoUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaolinhaproducao/especificacao/EspecificacaoLinhaProducaoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaolinhaproducao/especificacao/EspecificarLinhaProducaoUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaquina/especificacao/RegistarMaquinaAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaquina/especificacao/EspecificarMaquinaAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaquina/especificacao/RegistarMaquinaUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/gestaoproducao/gestaomaquina/especificacao/EspecificarMaquinaUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.app.backoffice.console/src/main/java/eapli/base/app/backoffice/console/presentation/utilities/UserInteractionControl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/DepositoBootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/DepositoBootstrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/LinhaProducaoBootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/LinhaProducaoBootstrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/MaquinaBootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/MaquinaBootstrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/MaterialBootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/MaterialBootstrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/ProdutoBootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.bootstrappers/src/main/java/eapli/base/infrastructure/bootstrapers/ProdutoBootstrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/AppSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/AppSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/application/RegistarCategoriaMaterialController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/domain/Categoria.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/domain/CodigoAlfanumerico.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/domain/CodigoInterno.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/domain/Descricao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/domain/FichaTecnicaPDF.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/domain/Material.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/domain/MaterialDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/definircategoriamaterial/repository/CategoriaRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaodepositos/application/AddDepositoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaodepositos/domain/CodigoDeposito.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaodepositos/domain/Deposito.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaodepositos/repository/DepositoRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/application/AddLinhaProducaoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/domain/EstadoProcessamentoMensagens.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/domain/IdentificadorLinhaProducao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/domain/LinhaProducao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaolinhasproducao/repository/LinhaProducaoRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaomateriasprimas/application/AdicionarMaterialCatalogoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaomateriasprimas/repository/MaterialRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/application/HasDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/application/HasDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/materiaprima/application/MateriaPrimaDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/materiaprima/domain/MateriaPrima.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/materiaprima/domain/QuantidadeDeMateriaPrima.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/materiaprima/domain/TipoDeMateriaPrima.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/materiaprima/domain/UnidadeDeMedida.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/ConsultarProdutosSemFichaDeProducaoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/EspecificarFichaDeProducaoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/FichaDeProducaoDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/ProdutoBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/application/ProdutoBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/ProdutoDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/QuantidadeDeMateriaPrimaDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/registarprodutos/RegistarProdutoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/registarprodutos/RegistarProdutosDeCsvController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/registarprodutos/RegistarProdutosDeFicheiroController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/registarprodutos/ResultadoImportacaoRegistoProdutos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/application/registarprodutos/ResultadoImportacaoRegistoProdutosTransformer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/CategoriaDeProduto.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/domain/CategoriaDeProduto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/CodigoComercial.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/domain/CodigoComercial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/CodigoUnico.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/domain/CodigoUnico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/DescricaoBreve.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/domain/DescricaoBreve.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/DescricaoCompleta.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/domain/DescricaoCompleta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/FichaDeProducao.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/domain/FichaDeProducao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/domain/Produto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/QuantidadeZeroMais.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/domain/QuantidadeZeroMais.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/domain/Somefuckingshit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/persistence/FichaDeProducaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/persistence/FichaDeProducaoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/produto/persistence/ProdutoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaoproduto/persistence/ProdutoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/aplication/LinhaProducaoDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/aplication/LinhasProducaoTransformer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/aplication/RegistarMaquinaController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/domain/CodigoInterno.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/domain/FicheiroConfiguracao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/domain/IdentificadorProtocoloComunicacao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/domain/Maquina.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/domain/NumeroSerie.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/domain/OrdemLinhaProducao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/registarmaquina/repository/MaquinaRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/definircategoriamaterial/domain/CodigoAlfanumericoTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaodepositos/domain/DepositoTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/gestaolinhasproducao/domain/LinhaProducaoTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/registarmaquina/domain/MaquinaTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/registarmaquina/domain/NumeroSerieTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.core/src/test/java/eapli/base/registarmaquina/domain/OrdemLinhaProducaoTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryCategoriaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryCategoriaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryDepositRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryDepositRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryFichaDeProducaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryFichaDeProducaoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryLinhaProducaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryLinhaProducaoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryMaquinaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryMaquinaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryMaterialRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryMaterialRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryProdutoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryProdutoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaCategoriaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaCategoriaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaDepositoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaDepositoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaFichaDeProducaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaFichaDeProducaoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaLinhaProducaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaLinhaProducaoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaMaquinaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaMaquinaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaMaterialRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaMaterialRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaProdutoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaProdutoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/java/eapli/base/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base.persistence.impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/base.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaodeposito/application/AddDepositoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaodeposito/application/especificacao/EspecificarDepositoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaolinhasproducao/application/AddLinhaProducaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaolinhasproducao/application/especificacao/EspecificarLinhaProducaoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/LinhaProducaoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/dto/LinhaProducaoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/LinhasProducaoTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/dto/LinhasProducaoTransformer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/RegistarMaquinaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/base.core/src/main/java/eapli/base/gestaoproducao/gestaomaquina/aplication/especificacao/EspecificarMaquinaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/base.h2.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/base.h2.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,6 +30,7 @@
   <component name="ProjectId" id="1bxytXGyK7e9I7Pe6oy8Nv5WlOr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -203,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589588253080</updated>
-      <workItem from="1589588260053" duration="1498000" />
+      <workItem from="1589588260053" duration="2971000" />
     </task>
     <servers />
   </component>
@@ -211,13 +58,17 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="590" y="337" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1589589344621">
+    <state x="225" y="337" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1589590417484">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="590" y="337" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1589589344621" />
+    <state x="225" y="337" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1589590417484" />
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589589625314">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1589589625314" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589590902818">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1589590902818" />
   </component>
 </project>

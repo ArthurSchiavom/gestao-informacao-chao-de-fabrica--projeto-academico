@@ -1,6 +1,6 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.gestaoproducao.gestaolinhasproducao.application.AddLinhaProducaoController;
+import eapli.base.gestaoproducao.gestaolinhasproducao.application.especificacao.EspecificarLinhaProducaoController;
 import eapli.framework.actions.Action;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class LinhaProducaoBootstrapper implements Action {
 	private static final Logger LOGGER = LogManager.getLogger(LinhaProducaoBootstrapper.class);
 
-	private final AddLinhaProducaoController controller = new AddLinhaProducaoController();
+	private final EspecificarLinhaProducaoController controller = new EspecificarLinhaProducaoController();
 
 	@Override
 	public boolean execute() {

@@ -1,7 +1,9 @@
-package eapli.base.gestaoproducao.gestaomaquina.aplication;
+package eapli.base.gestaoproducao.gestaomaquina.aplication.especificacao;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhaProducaoDTO;
+import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhasProducaoTransformer;
 import eapli.base.gestaoproducao.gestaomaquina.domain.*;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -9,7 +11,7 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 import javax.persistence.RollbackException;
 import java.util.List;
 
-public class RegistarMaquinaController {
+public class EspecificarMaquinaController {
     private final LinhaProducaoRepository repositoryLinhasProducao = PersistenceContext.repositories().linhasProducao();
     private final MaquinaRepository repositoryMaquinas = PersistenceContext.repositories().maquinas();
     private List<LinhaProducao> linhas = null;

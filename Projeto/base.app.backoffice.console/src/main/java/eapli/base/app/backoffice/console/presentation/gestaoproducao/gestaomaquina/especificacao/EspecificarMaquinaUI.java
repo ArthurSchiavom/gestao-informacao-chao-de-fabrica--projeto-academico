@@ -1,7 +1,7 @@
 package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao;
 
-import eapli.base.gestaoproducao.gestaomaquina.aplication.LinhaProducaoDTO;
-import eapli.base.gestaoproducao.gestaomaquina.aplication.RegistarMaquinaController;
+import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhaProducaoDTO;
+import eapli.base.gestaoproducao.gestaomaquina.aplication.especificacao.EspecificarMaquinaController;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * UI para registar a máquina
  */
-public class RegistarMaquinaUI extends AbstractUI {
+public class EspecificarMaquinaUI extends AbstractUI {
 
-    private final RegistarMaquinaController theController = new RegistarMaquinaController();
+    private final EspecificarMaquinaController theController = new EspecificarMaquinaController();
 
     @Override
     protected boolean doShow() {

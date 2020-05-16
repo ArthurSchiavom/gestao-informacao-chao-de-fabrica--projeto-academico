@@ -1,13 +1,13 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.gestaoproducao.gestaolinhasproducao.application.AddLinhaProducaoController;
-import eapli.base.gestaoproducao.gestaomaquina.aplication.RegistarMaquinaController;
+import eapli.base.gestaoproducao.gestaolinhasproducao.application.especificacao.EspecificarLinhaProducaoController;
+import eapli.base.gestaoproducao.gestaomaquina.aplication.especificacao.EspecificarMaquinaController;
 import eapli.framework.actions.Action;
 
 public class MaquinaBootstrapper implements Action{
 
-    RegistarMaquinaController controller = new RegistarMaquinaController();
-    private final AddLinhaProducaoController controllerLinha = new AddLinhaProducaoController();
+    EspecificarMaquinaController controller = new EspecificarMaquinaController();
+    private final EspecificarLinhaProducaoController controllerLinha = new EspecificarLinhaProducaoController();
 
     @Override
     public boolean execute() {

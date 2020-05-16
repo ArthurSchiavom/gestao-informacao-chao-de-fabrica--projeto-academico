@@ -1,4 +1,4 @@
-package eapli.base.gestaoproducao.gestaomaquina.aplication;
+package eapli.base.gestaoproducao.gestaomaquina.aplication.dto;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 

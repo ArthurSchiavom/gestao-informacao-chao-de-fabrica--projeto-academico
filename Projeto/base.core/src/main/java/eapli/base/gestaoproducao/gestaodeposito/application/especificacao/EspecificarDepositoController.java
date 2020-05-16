@@ -1,10 +1,10 @@
-package eapli.base.gestaoproducao.gestaodeposito.application;
+package eapli.base.gestaoproducao.gestaodeposito.application.especificacao;
 
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
-public class AddDepositoController {
+public class EspecificarDepositoController {
 	//Todo add authz maybe
 	private final DepositoRepository repository = PersistenceContext.repositories().depositos();
 

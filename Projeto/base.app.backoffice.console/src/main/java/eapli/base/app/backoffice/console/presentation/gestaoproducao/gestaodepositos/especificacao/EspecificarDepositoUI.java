@@ -1,6 +1,6 @@
-package eapli.base.app.backoffice.console.presentation.depositos;
+package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao;
 
-import eapli.base.gestaoproducao.gestaodeposito.application.AddDepositoController;
+import eapli.base.gestaoproducao.gestaodeposito.application.especificacao.EspecificarDepositoController;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
@@ -8,9 +8,9 @@ import eapli.framework.util.Console;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class AddDepositoUI extends AbstractUI {
-	private static final Logger LOGGER = LogManager.getLogger(AddDepositoController.class);
-	private final AddDepositoController theController = new AddDepositoController();
+public class EspecificarDepositoUI extends AbstractUI {
+	private static final Logger LOGGER = LogManager.getLogger(EspecificarDepositoController.class);
+	private final EspecificarDepositoController theController = new EspecificarDepositoController();
 
 	@Override
 	protected boolean doShow() {
