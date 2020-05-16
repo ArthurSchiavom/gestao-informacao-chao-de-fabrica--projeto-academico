@@ -38,7 +38,7 @@ public class EspecificarFichaDeProducaoUI extends AbstractUI {
             idProduto = Console.readNonEmptyLine("Indique o código único do produto cuja ficha de produção deseja alterar.", "Indique um código válido.");
             continuar = !controller.selecionarProdutoAlvo(idProduto);
             if (continuar) {
-                System.out.println("O código indicado não se encontra registado.\n");
+                System.out.println("O código indicado não se encontra registado a um produto sem ficha de produção.\n");
             }
         }
 

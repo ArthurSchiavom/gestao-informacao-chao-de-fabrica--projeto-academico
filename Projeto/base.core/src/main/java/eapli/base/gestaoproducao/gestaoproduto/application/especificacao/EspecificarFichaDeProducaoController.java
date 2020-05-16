@@ -29,6 +29,7 @@ public class EspecificarFichaDeProducaoController {
     private final FichaDeProducaoRepository fichaDeProducaoRepository;
     private final ProdutoRepository produtoRepository;
     private final Map<String, Produto> codigoUnicoToProduto;
+    private final Map<String, Produto> codigoUnicoToProdutoSemFichaDeProducao;
     private final Map<String, Material> codigoInternoToMaterial;
     private final List<MaterialDTO> materiaisDTO;
     private final List<ProdutoDTO> produtosDTO;
@@ -48,6 +49,7 @@ public class EspecificarFichaDeProducaoController {
 
         codigoUnicoToProduto = Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(produtos));
         codigoInternoToMaterial = Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(materiais));
+        codigoUnicoToProdutoSemFichaDeProducao = Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(produtosSemFichaDeProducao));
 
         materiaisDTO = Collections.unmodifiableList(DTOUtils.toDTOList(materiais));
         produtosDTO = Collections.unmodifiableList(DTOUtils.toDTOList(produtos));
@@ -72,11 +74,11 @@ public class EspecificarFichaDeProducaoController {
     /**
      *
      * @param codigoUnico
-     * @return (1) true em caso de sucesso ou (2) caso o ID não esteja registado
+     * @return (1) true em caso de sucesso ou (2) caso o código único não esteja associado a um produto sem ficha de produção
      * @throws IllegalDomainValueException
      */
     public boolean selecionarProdutoAlvo(String codigoUnico) {
-        produtoAlvo = codigoUnicoToProduto.get(codigoUnico);
+        produtoAlvo = codigoUnicoToProdutoSemFichaDeProducao.get(codigoUnico);
         return produtoAlvo != null;
     }
 
@@ -87,9 +89,14 @@ public class EspecificarFichaDeProducaoController {
 
     public void adicionarProduto(String codigoUnico, double quantidade) throws IllegalDomainValueException {
         Produto produto = codigoUnicoToProduto.get(codigoUnico);
+
         if (produto == null) {
             throw new IllegalDomainValueException("O código único especificado não está associado a nenhum produto", IllegalDomainValueType.DOESNT_EXIST);
         }
+        if (produto.equals(produtoAlvo)) {
+            throw new IllegalDomainValueException("O produto alvo não pode constar na sua própria ficha de produção", IllegalDomainValueType.ILLEGAL_VALUE);
+        }
+
         MateriaPrima materiaPrima = MateriaPrima.valueOf(TipoDeMateriaPrima.PRODUTO, codigoUnico);
         adicionarMateriaPrima(materiaPrima, quantidade);
     }
