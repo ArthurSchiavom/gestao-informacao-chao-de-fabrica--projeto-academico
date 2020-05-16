@@ -38,14 +38,7 @@ public class EspecificarMaterialUI extends AbstractUI {
             }
         }
         if (flag==false) {
-            UnidadeDeMedida unidadeMedida;
-            try {
-                unidadeMedida = UnidadeDeMedida.actualValueOf(Console.readNonEmptyLine("Insira a unidade Medida: ", "Unidade de medida nao pode ser vazio"));
-            } catch (IllegalDomainValueException e) {
-                System.out.println("Erro: " + e.getMessage());
-                UserInteractionFlow.enterToContinue();
-                return false;
-            }
+            String unidadeMedida = Console.readNonEmptyLine("Insira a unidade Medida: ", "Unidade de medida nao pode ser vazio");
             final String path = Console.readNonEmptyLine("Insira o caminho onde prentende guardar o ficheiro: ", "Caminho nao pode ser vazio");
             final String descricaoDoMaterial = Console.readNonEmptyLine("Insira a descricao do Material: ", "Descricao do material nao pode ser vazio");
             final String conteudoFichaTecnica = Console.readNonEmptyLine("Insira conteudo da Ficha tecnica: ", "Conteudo da Ficha tecnica nao pode ser vazio");
@@ -53,12 +46,12 @@ public class EspecificarMaterialUI extends AbstractUI {
             try {
                 this.especificarMaterialController.registarMaterial(unidadeMedida, descricaoDoMaterial, nomeMaterial, path, conteudoFichaTecnica, codigoInterno, categoria);
                 return false;
+            }  catch (IllegalDomainValueException e) {
+                System.out.println("Erro: " + e.getMessage());
             } catch (IllegalArgumentException ex) {
                 System.out.println("Material Invalido!!"); //Melhorar a apresentacao!!!!!
-            } catch (NullPointerException ex) {
-                System.out.println(ex.getCause());
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (NullPointerException|IOException ex) {
+                System.out.println("Erro interno");
             }
         }
         return false;

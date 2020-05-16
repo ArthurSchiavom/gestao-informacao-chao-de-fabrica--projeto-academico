@@ -25,10 +25,10 @@ public class EspecificarMaterialController {
      *
      * @Return Vai retornar um objecto do tipo Material
      */
-    public Material registarMaterial(UnidadeDeMedida unidadeDeMedida, String descricaoMaterial, String nomeMaterial,String path ,String conteudoFichaTecnica, String codigoInterno, Categoria categoria) throws IOException {
+    public Material registarMaterial(String unidadeDeMedida, String descricaoMaterial, String nomeMaterial,String path ,String conteudoFichaTecnica, String codigoInterno, Categoria categoria) throws IOException, IllegalDomainValueException {
         final CodigoInterno codigoInt= new CodigoInterno(codigoInterno);
         final Categoria catg = categoria;
-        final UnidadeDeMedida uDeMedida = unidadeDeMedida;
+        final UnidadeDeMedida uDeMedida = UnidadeDeMedida.actualValueOf(unidadeDeMedida);
         final FichaTecnicaPDF fichaTecnicaPDF=new FichaTecnicaPDF(path,nomeMaterial,conteudoFichaTecnica);
         final Material material=new Material(descricaoMaterial, codigoInt, categoria,uDeMedida,fichaTecnicaPDF);
         return  this.materialRepository.save(material);
