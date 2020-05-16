@@ -2,9 +2,9 @@ package eapli.base.persistence.impl.jpa;
 
 import com.google.common.collect.Lists;
 import eapli.base.Application;
-import eapli.base.produto.domain.CodigoUnico;
-import eapli.base.produto.domain.Produto;
-import eapli.base.produto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
+import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
+import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 

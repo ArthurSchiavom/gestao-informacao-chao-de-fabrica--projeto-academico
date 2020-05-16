@@ -1,9 +1,9 @@
 package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
-import eapli.base.registarmaquina.domain.CodigoInterno;
-import eapli.base.registarmaquina.domain.Maquina;
-import eapli.base.registarmaquina.repository.MaquinaRepository;
+import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInterno;
+import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
+import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 

@@ -1,6 +1,6 @@
 package eapli.base;
 
-import eapli.base.registarmaquina.domain.NumeroSerie;
+import eapli.base.gestaoproducao.gestaomaquina.domain.NumeroSerie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

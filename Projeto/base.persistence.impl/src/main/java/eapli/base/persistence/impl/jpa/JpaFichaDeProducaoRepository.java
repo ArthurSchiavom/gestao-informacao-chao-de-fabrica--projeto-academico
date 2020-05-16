@@ -1,16 +1,11 @@
 package eapli.base.persistence.impl.jpa;
 
 
-import com.google.common.collect.Lists;
 import eapli.base.Application;
-import eapli.base.definircategoriamaterial.domain.Material;
-import eapli.base.produto.domain.FichaDeProducao;
-import eapli.base.produto.persistence.FichaDeProducaoRepository;
+import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
+import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 class JpaFichaDeProducaoRepository
         extends JpaAutoTxRepository<FichaDeProducao, Integer, Integer>

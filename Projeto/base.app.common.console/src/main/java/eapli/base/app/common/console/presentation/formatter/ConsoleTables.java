@@ -1,11 +1,10 @@
 package eapli.base.app.common.console.presentation.formatter;
 
-import eapli.base.definircategoriamaterial.domain.MaterialDTO;
-import eapli.base.produto.application.ProdutoDTO;
+import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
+import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class ConsoleTables {
     public static String tabelaDeProdutos(Collection<ProdutoDTO> produtos) {

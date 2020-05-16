@@ -1,6 +1,6 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.gestaolinhasproducao.application.AddLinhaProducaoController;
+import eapli.base.gestaoproducao.gestaolinhasproducao.application.AddLinhaProducaoController;
 import eapli.framework.actions.Action;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;

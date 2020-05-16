@@ -1,25 +1,24 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.definircategoriamaterial.application.RegistarCategoriaMaterialController;
-import eapli.base.definircategoriamaterial.domain.Categoria;
-import eapli.base.definircategoriamaterial.domain.CodigoAlfanumerico;
-import eapli.base.gestaomateriasprimas.application.AdicionarMaterialCatalogoController;
+import eapli.base.gestaoproducao.gestaomaterial.application.EspecificarCategoriaMaterialController;
+import eapli.base.gestaoproducao.gestaomaterial.application.EspecificarMaterialController;
+import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
 import eapli.framework.actions.Action;
 
 import java.io.IOException;
 
 public class MaterialBootstrapper implements Action {
 
-    AdicionarMaterialCatalogoController adicionarMaterialCatalogoController=new AdicionarMaterialCatalogoController();
-    RegistarCategoriaMaterialController registarCategoriaMaterialController=new RegistarCategoriaMaterialController();
+    EspecificarMaterialController especificarMaterialController =new EspecificarMaterialController();
+    EspecificarCategoriaMaterialController especificarCategoriaMaterialController =new EspecificarCategoriaMaterialController();
 
     @Override
     public boolean execute() {
-            Categoria categoria1=registarCategoriaMaterialController.registarCategoriaMaterial("123456","metais");
-            Categoria categoria2=registarCategoriaMaterialController.registarCategoriaMaterial("1234567","metais");
-            Categoria categoria3=registarCategoriaMaterialController.registarCategoriaMaterial("1212344", "metais");
+            Categoria categoria1= especificarCategoriaMaterialController.registarCategoriaMaterial("123456","metais");
+            Categoria categoria2= especificarCategoriaMaterialController.registarCategoriaMaterial("1234567","metais");
+            Categoria categoria3= especificarCategoriaMaterialController.registarCategoriaMaterial("1212344", "metais");
         try {
-            adicionarMaterialCatalogoController.registarMaterial("kg",
+            especificarMaterialController.registarMaterial("kg",
                     " É um elemento químico, símbolo Fe, de número atômico 26",
                     "Ferro",
                     "test_material/outputPDF",
@@ -29,7 +28,7 @@ public class MaterialBootstrapper implements Action {
                             "Para obter-se ferro no estado elementar, os óxidos são reduzidos com carbono e imediatamente submetidos a um processo de refinação para retirar as impurezas presentes.",
                     "100",
                     categoria1);
-            adicionarMaterialCatalogoController.registarMaterial("kg",
+            especificarMaterialController.registarMaterial("kg",
                     " O aço é uma liga metálica formada essencialmente por ferro e carbono, com percentagens deste último variando entre 0,008 e 2,11%",
                     "Aco",
                     "test_material/outputPDF",
@@ -40,7 +39,7 @@ public class MaterialBootstrapper implements Action {
                     "101", categoria2);
             ;
 
-            adicionarMaterialCatalogoController.registarMaterial("kg",
+            especificarMaterialController.registarMaterial("kg",
                     " O cobre é um elemento químico de símbolo Cu (do latim cuprum), número atômico 29 (29 prótons e 29 elétrons) e de massa atómica 63,54 u.",
                     "Cobre",
                     "test_material/outputPDF",

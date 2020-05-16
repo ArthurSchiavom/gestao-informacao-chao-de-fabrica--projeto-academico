@@ -1,8 +1,8 @@
 package eapli.base.persistence.impl.inmemory;
 
-import eapli.base.definircategoriamaterial.domain.Categoria;
-import eapli.base.definircategoriamaterial.domain.CodigoAlfanumerico;
-import eapli.base.definircategoriamaterial.repository.CategoriaRepository;
+import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
+import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoAlfanumerico;
+import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 import java.util.Optional;

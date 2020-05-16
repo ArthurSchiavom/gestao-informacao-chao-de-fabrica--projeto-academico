@@ -6,20 +6,20 @@
       -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>eapli.base.gestaolinhasproducao.domain.LinhaProducao</class>
-        <class>eapli.base.gestaodepositos.domain.Deposito</class>
-        <class>eapli.base.definircategoriamaterial.domain.Categoria</class>
+        <class>eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao</class>
+        <class>eapli.base.gestaoproducao.gestaodeposito.domain.Deposito</class>
+        <class>eapli.base.gestaoproducao.gestaomaterial.domain.Categoria</class>
         <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
         <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
         <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
         <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
         <class>eapli.base.clientusermanagement.domain.ClientUser</class>
         <class>eapli.base.clientusermanagement.domain.SignupRequest</class>
-        <class>eapli.base.produto.domain.Produto</class>
-        <class>eapli.base.definircategoriamaterial.domain.Material</class>
-        <class>eapli.base.produto.domain.FichaDeProducao</class>
-        <class>eapli.base.registarmaquina.domain.Maquina</class>
-        <class>eapli.base.produto.domain.FichaDeProducao</class>
+        <class>eapli.base.gestaoproducao.gestaoproduto.domain.Produto</class>
+        <class>eapli.base.gestaoproducao.gestaomaterial.domain.Material</class>
+        <class>eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao</class>
+        <class>eapli.base.gestaoproducao.gestaomaquina.domain.Maquina</class>
+        <class>eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:.\db\base;MV_STORE=FALSE"/>

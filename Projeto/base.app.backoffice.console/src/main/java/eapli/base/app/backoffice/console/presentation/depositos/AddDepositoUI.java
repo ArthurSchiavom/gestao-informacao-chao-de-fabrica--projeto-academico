@@ -1,6 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.depositos;
 
-import eapli.base.gestaodepositos.application.AddDepositoController;
+import eapli.base.gestaoproducao.gestaodeposito.application.AddDepositoController;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;

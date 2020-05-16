@@ -1,9 +1,9 @@
 package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
-import eapli.base.gestaodepositos.domain.CodigoDeposito;
-import eapli.base.gestaodepositos.domain.Deposito;
-import eapli.base.gestaodepositos.repository.DepositoRepository;
+import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
+import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
+import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 

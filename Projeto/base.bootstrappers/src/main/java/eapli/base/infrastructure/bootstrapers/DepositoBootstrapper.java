@@ -1,6 +1,6 @@
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.gestaodepositos.application.AddDepositoController;
+import eapli.base.gestaoproducao.gestaodeposito.application.AddDepositoController;
 import eapli.framework.actions.Action;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
