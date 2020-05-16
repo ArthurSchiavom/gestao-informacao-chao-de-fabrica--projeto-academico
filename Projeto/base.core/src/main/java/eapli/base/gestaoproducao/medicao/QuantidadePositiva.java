@@ -1,4 +1,4 @@
-package eapli.base.gestaoproducao.gestaoproduto.domain;
+package eapli.base.gestaoproducao.medicao;
 
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
-public class QuantidadeZeroMais implements ValueObject, Comparable<QuantidadeZeroMais> {
+public class QuantidadePositiva implements ValueObject, Comparable<QuantidadePositiva> {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,19 +17,19 @@ public class QuantidadeZeroMais implements ValueObject, Comparable<QuantidadeZer
     * */
     public double quantidadeValor;
 
-    protected QuantidadeZeroMais() {
+    protected QuantidadePositiva() {
         quantidadeValor = 0;
     }
 
-    protected QuantidadeZeroMais(double quantidade) throws IllegalDomainValueException {
+    protected QuantidadePositiva(double quantidade) throws IllegalDomainValueException {
         if (quantidade <= 0) {
             throw new IllegalDomainValueException("A quantidade deve ser maior que 0", IllegalDomainValueType.ILLEGAL_VALUE);
         }
         this.quantidadeValor = quantidade;
     }
 
-    public static QuantidadeZeroMais valueOf(double quantidade) throws IllegalDomainValueException {
-        return new QuantidadeZeroMais(quantidade);
+    public static QuantidadePositiva valueOf(double quantidade) throws IllegalDomainValueException {
+        return new QuantidadePositiva(quantidade);
     }
 
     /* O hibernate falha se não tiver getters e setters */
@@ -47,11 +47,11 @@ public class QuantidadeZeroMais implements ValueObject, Comparable<QuantidadeZer
         if (this == o) {
             return true;
         }
-        if (!(o instanceof QuantidadeZeroMais)) {
+        if (!(o instanceof QuantidadePositiva)) {
             return false;
         }
 
-        final QuantidadeZeroMais that = (QuantidadeZeroMais) o;
+        final QuantidadePositiva that = (QuantidadePositiva) o;
 
         return quantidadeValor == that.quantidadeValor;
     }
@@ -67,7 +67,7 @@ public class QuantidadeZeroMais implements ValueObject, Comparable<QuantidadeZer
     }
 
     @Override
-    public int compareTo(QuantidadeZeroMais obj) {
+    public int compareTo(QuantidadePositiva obj) {
         return Double.compare(quantidadeValor, obj.quantidadeValor);
     }
 }

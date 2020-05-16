@@ -1,6 +1,6 @@
 package eapli.base.gestaoproducao.gestaoproduto.domain;
 
-import eapli.base.gestaoproducao.gestaomateriaprima.domain.UnidadeDeMedida;
+import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.FichaDeProducaoDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 import eapli.base.infrastructure.application.HasDTO;
@@ -83,6 +83,6 @@ public class Produto implements AggregateRoot<CodigoUnico>, HasDTO<ProdutoDTO> {
         return new ProdutoDTO(categoriaDeProduto.categoriaValor, codigoComercial.codigoComercialValor,
                 descricaoBreve.descricaoBreveValor, codigoUnico.codigoUnicoValor,
                 descricaoCompleta.descricaoCompletaValor, fichaDeProducaoDTO,
-                unidadeDeMedida.unidadeDeMedidaValor);
+                unidadeDeMedida.abreviatura);
     }
 }

@@ -2,7 +2,7 @@
 package eapli.base.gestaoproducao.gestaomaterial.domain;
 
 import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
-import eapli.base.gestaoproducao.gestaomateriaprima.domain.UnidadeDeMedida;
+import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.infrastructure.application.HasDTO;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
@@ -26,7 +26,6 @@ public class Material implements AggregateRoot<CodigoInterno>, HasDTO<MaterialDT
     private UnidadeDeMedida unidadeDeMedida;
     private String descricao;
     private FichaTecnicaPDF fichaTecnicaPDF;
-
 
 
     @ManyToOne
@@ -93,6 +92,6 @@ public class Material implements AggregateRoot<CodigoInterno>, HasDTO<MaterialDT
 
     @Override
     public MaterialDTO toDTO() {
-        return new MaterialDTO(codigoInterno.codigoInternoValor, descricao, unidadeDeMedida.unidadeDeMedidaValor, fichaTecnicaPDF.fichaTecnica, fichaTecnicaPDF.path);
+        return new MaterialDTO(codigoInterno.codigoInternoValor, descricao, unidadeDeMedida.abreviatura, fichaTecnicaPDF.fichaTecnica, fichaTecnicaPDF.path);
     }
 }

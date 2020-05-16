@@ -9,7 +9,7 @@ import eapli.base.gestaoproducao.gestaomateriaprima.domain.TipoDeMateriaPrima;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
-import eapli.base.gestaoproducao.gestaoproduto.domain.QuantidadeZeroMais;
+import eapli.base.gestaoproducao.medicao.QuantidadePositiva;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.infrastructure.application.DTOUtils;
@@ -74,7 +74,7 @@ public class EspecificarFichaDeProducaoController {
     }
 
     private void adicionarMateriaPrima(MateriaPrima materiaPrima, double quantidade) throws IllegalDomainValueException {
-        QuantidadeDeMateriaPrima quantidadeDeMateriaPrima = QuantidadeDeMateriaPrima.valueOf(QuantidadeZeroMais.valueOf(quantidade), materiaPrima);
+        QuantidadeDeMateriaPrima quantidadeDeMateriaPrima = QuantidadeDeMateriaPrima.valueOf(QuantidadePositiva.valueOf(quantidade), materiaPrima);
         quantidadesDeMateriaPrimaAAdicionar.add(quantidadeDeMateriaPrima);
     }
 

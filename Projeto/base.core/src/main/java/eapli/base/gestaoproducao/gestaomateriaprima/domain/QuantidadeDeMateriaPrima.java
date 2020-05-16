@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.gestaomateriaprima.domain;
 
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMateriaPrimaDTO;
-import eapli.base.gestaoproducao.gestaoproduto.domain.QuantidadeZeroMais;
+import eapli.base.gestaoproducao.medicao.QuantidadePositiva;
 import eapli.base.infrastructure.application.HasDTO;
 import eapli.framework.domain.model.ValueObject;
 
@@ -14,7 +14,7 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
 
     private static final long serialVersionUID = 1L;
 
-    public final QuantidadeZeroMais quantidade;
+    public final QuantidadePositiva quantidade;
     public final MateriaPrima materiaPrima;
 
     protected QuantidadeDeMateriaPrima() {
@@ -22,12 +22,12 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
         materiaPrima = null;
     }
 
-    protected QuantidadeDeMateriaPrima(QuantidadeZeroMais quantidade, MateriaPrima materiaPrima) {
+    protected QuantidadeDeMateriaPrima(QuantidadePositiva quantidade, MateriaPrima materiaPrima) {
         this.quantidade = quantidade;
         this.materiaPrima = materiaPrima;
     }
 
-    public static QuantidadeDeMateriaPrima valueOf(QuantidadeZeroMais quantidade, MateriaPrima materiaPrima) {
+    public static QuantidadeDeMateriaPrima valueOf(QuantidadePositiva quantidade, MateriaPrima materiaPrima) {
         return new QuantidadeDeMateriaPrima(quantidade, materiaPrima);
     }
 

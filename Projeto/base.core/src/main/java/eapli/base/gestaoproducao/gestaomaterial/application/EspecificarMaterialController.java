@@ -5,7 +5,8 @@ import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInterno;
 import eapli.base.gestaoproducao.gestaomaterial.domain.FichaTecnicaPDF;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
-import eapli.base.gestaoproducao.gestaomateriaprima.domain.UnidadeDeMedida;
+import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
 import java.io.IOException;
@@ -24,10 +25,10 @@ public class EspecificarMaterialController {
      *
      * @Return Vai retornar um objecto do tipo Material
      */
-    public Material registarMaterial(String unidadeDeMedida, String descricaoMaterial, String nomeMaterial,String path ,String conteudoFichaTecnica, String codigoInterno, Categoria categoria) throws IOException {
+    public Material registarMaterial(UnidadeDeMedida unidadeDeMedida, String descricaoMaterial, String nomeMaterial,String path ,String conteudoFichaTecnica, String codigoInterno, Categoria categoria) throws IOException {
         final CodigoInterno codigoInt= new CodigoInterno(codigoInterno);
         final Categoria catg = categoria;
-        final UnidadeDeMedida uDeMedida = new UnidadeDeMedida(unidadeDeMedida);
+        final UnidadeDeMedida uDeMedida = unidadeDeMedida;
         final FichaTecnicaPDF fichaTecnicaPDF=new FichaTecnicaPDF(path,nomeMaterial,conteudoFichaTecnica);
         final Material material=new Material(descricaoMaterial, codigoInt, categoria,uDeMedida,fichaTecnicaPDF);
         return  this.materialRepository.save(material);

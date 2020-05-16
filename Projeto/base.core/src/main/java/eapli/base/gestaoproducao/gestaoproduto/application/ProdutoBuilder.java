@@ -1,6 +1,6 @@
 package eapli.base.gestaoproducao.gestaoproduto.application;
 
-import eapli.base.gestaoproducao.gestaomateriaprima.domain.UnidadeDeMedida;
+import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.gestaoproduto.domain.*;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 

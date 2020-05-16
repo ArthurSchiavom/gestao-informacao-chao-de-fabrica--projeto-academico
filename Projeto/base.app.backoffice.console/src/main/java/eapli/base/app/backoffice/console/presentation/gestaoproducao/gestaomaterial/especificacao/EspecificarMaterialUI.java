@@ -2,9 +2,12 @@ package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomate
 
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaterial.ListCategoriaService;
 import eapli.base.app.backoffice.console.presentation.menu.OptionSelector;
+import eapli.base.app.common.console.presentation.interaction.UserInteractionFlow;
 import eapli.base.gestaoproducao.gestaomaterial.application.EspecificarMaterialController;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
+import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
@@ -35,14 +38,21 @@ public class EspecificarMaterialUI extends AbstractUI {
             }
         }
         if (flag==false) {
-            final String unidadeMedida = Console.readNonEmptyLine("Insira a unidade Medida: ", "Unidade de medida nao pode ser vazio");
+            UnidadeDeMedida unidadeMedida;
+            try {
+                unidadeMedida = UnidadeDeMedida.actualValueOf(Console.readNonEmptyLine("Insira a unidade Medida: ", "Unidade de medida nao pode ser vazio"));
+            } catch (IllegalDomainValueException e) {
+                System.out.println("Erro: " + e.getMessage());
+                UserInteractionFlow.enterToContinue();
+                return false;
+            }
             final String path = Console.readNonEmptyLine("Insira o caminho onde prentende guardar o ficheiro: ", "Caminho nao pode ser vazio");
             final String descricaoDoMaterial = Console.readNonEmptyLine("Insira a descricao do Material: ", "Descricao do material nao pode ser vazio");
             final String conteudoFichaTecnica = Console.readNonEmptyLine("Insira conteudo da Ficha tecnica: ", "Conteudo da Ficha tecnica nao pode ser vazio");
             final Categoria categoria = selecionarCategoria();
             try {
                 this.especificarMaterialController.registarMaterial(unidadeMedida, descricaoDoMaterial, nomeMaterial, path, conteudoFichaTecnica, codigoInterno, categoria);
-                return true;
+                return false;
             } catch (IllegalArgumentException ex) {
                 System.out.println("Material Invalido!!"); //Melhorar a apresentacao!!!!!
             } catch (NullPointerException ex) {
