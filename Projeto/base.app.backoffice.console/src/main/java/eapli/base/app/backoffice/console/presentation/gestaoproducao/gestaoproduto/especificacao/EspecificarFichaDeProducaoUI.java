@@ -21,10 +21,16 @@ public class EspecificarFichaDeProducaoUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         EspecificarFichaDeProducaoController controller = new EspecificarFichaDeProducaoController();
-        List<ProdutoDTO> produtos = controller.produtos();
+        List<ProdutoDTO> produtosSemFichaDeProducao = controller.produtosSemFichaDeProducao();
 
-        String produtosDisplay = ConsoleTables.tabelaDeProdutos(produtos);
-        System.out.println(produtosDisplay + "\n\n");
+        if (produtosSemFichaDeProducao.isEmpty()) {
+            System.out.println("Não há nenhum produto sem ficha de produção.\n");
+            UserInteractionFlow.enterToContinue();
+            return false;
+        }
+
+        String produtosSemFichaDeProducaoDisplay = ConsoleTables.tabelaDeProdutos(produtosSemFichaDeProducao);
+        System.out.println(produtosSemFichaDeProducaoDisplay + "\n\n");
 
         String idProduto = null;
         boolean continuar = true;
@@ -36,8 +42,12 @@ public class EspecificarFichaDeProducaoUI extends AbstractUI {
             }
         }
 
+        List<ProdutoDTO> produtos = controller.produtos();
+        String produtosDisplay = ConsoleTables.tabelaDeProdutos(produtos);
+        System.out.println(produtosDisplay + "\n\n");
+
         System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + produtosDisplay + "\n\nO Produto " + idProduto + " foi selecionado.\n");
-        String promptMateria = "Indique o código único de um produto a adicionar à ficha de produção " +
+        String promptMateria = "\nIndique o código único de um produto a adicionar à ficha de produção " +
                 "(pressione enter sem escrever nada para terminar a adição de produtos): ";
         String promptQuantidade = "Indique agora a quantidade deste produto: ";
         lerMateriais(promptMateria, promptQuantidade, controller::adicionarProduto);
@@ -45,7 +55,7 @@ public class EspecificarFichaDeProducaoUI extends AbstractUI {
         List<MaterialDTO> materiais = controller.materiais();
         String materiaisDisplay = ConsoleTables.tabelaDeMaterial(materiais);
         System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + materiaisDisplay + "\n\nSelecione agora os materiais que constituem a ficha de produção.\n");
-        promptMateria = "Indique o código interno de um material a adicionar à ficha de produção " +
+        promptMateria = "\nIndique o código interno de um material a adicionar à ficha de produção " +
                 "(pressione enter sem escrever nada para terminar a adição de materiais): ";
         promptQuantidade = "Indique agora a quantidade deste material: ";
         lerMateriais(promptMateria, promptQuantidade, controller::adicionarMaterial);

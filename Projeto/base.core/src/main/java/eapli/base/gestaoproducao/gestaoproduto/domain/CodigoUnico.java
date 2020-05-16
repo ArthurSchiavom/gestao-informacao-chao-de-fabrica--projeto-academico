@@ -6,7 +6,9 @@ import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.framework.domain.model.ValueObject;
+import eapli.framework.domain.repositories.TransactionalContext;
 
+import javax.annotation.Nullable;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -22,19 +24,24 @@ public class CodigoUnico implements ValueObject, Serializable, Comparable<Codigo
         codigoUnicoValor = null;
     }
 
-    protected CodigoUnico(String codigoUnico) throws IllegalDomainValueException {
+    protected CodigoUnico(String codigoUnico, @Nullable ProdutoRepository repo) throws IllegalDomainValueException {
         if (codigoUnico == null || codigoUnico.isEmpty())
             throw new IllegalArgumentException("O código único deve existir e não ser vazio");
-        RepositoryFactory repositoryFactory = PersistenceContext.repositories();
-        ProdutoRepository produtoRepository = repositoryFactory.produto();
-        if (produtoRepository.produtoDeCodigoUnico(codigoUnico).isPresent()) {
+
+        if (repo == null) {
+            RepositoryFactory repositoryFactory = PersistenceContext.repositories();
+            repo = repositoryFactory.produto();
+        }
+
+        if (repo.produtoDeCodigoUnico(codigoUnico).isPresent()) {
             throw new IllegalDomainValueException("O código único indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
         }
+
         this.codigoUnicoValor = codigoUnico;
     }
 
-    public static CodigoUnico valueOf(String codigoUnico) throws IllegalDomainValueException {
-        return new CodigoUnico(codigoUnico);
+    public static CodigoUnico valueOf(String codigoUnico, @Nullable ProdutoRepository repo) throws IllegalDomainValueException {
+        return new CodigoUnico(codigoUnico, repo);
     }
 
     @Override

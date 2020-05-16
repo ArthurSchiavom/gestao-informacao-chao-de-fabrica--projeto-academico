@@ -1,8 +1,12 @@
 package eapli.base.gestaoproducao.gestaoproduto.application;
 
+import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.gestaoproduto.domain.*;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.framework.domain.repositories.TransactionalContext;
+
+import javax.annotation.Nullable;
 
 /**
  * Facilita a leitura do código no controller e a atribuição gradual de valores, podendo então tratar os possíveis erros para cada atributo individualmente.
@@ -18,8 +22,8 @@ public class ProdutoBuilder {
     public ProdutoBuilder() {
     }
 
-    public ProdutoBuilder setCodigoUnico(String codigoUnico) throws IllegalDomainValueException {
-        this.codigoUnico = CodigoUnico.valueOf(codigoUnico);
+    public ProdutoBuilder setCodigoUnico(String codigoUnico, @Nullable ProdutoRepository repo) throws IllegalDomainValueException {
+        this.codigoUnico = CodigoUnico.valueOf(codigoUnico, repo);
         return this;
     }
 
@@ -28,8 +32,8 @@ public class ProdutoBuilder {
         return this;
     }
 
-    public ProdutoBuilder setCodigoComercial(String codigoComercial) throws IllegalDomainValueException {
-        this.codigoComercial = CodigoComercial.valueOf(codigoComercial);
+    public ProdutoBuilder setCodigoComercial(String codigoComercial, @Nullable ProdutoRepository repo) throws IllegalDomainValueException {
+        this.codigoComercial = CodigoComercial.valueOf(codigoComercial, repo);
         return this;
     }
 

@@ -9,14 +9,14 @@ import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import java.io.FileNotFoundException;
 
 public class ImportarCatalogoCsvProdutosController implements ImportarCatalogoProdutosController {
-    private final String SEPARADOR = ";";
-    private final int INDEX_CODIGO_FABRICO = 0;
-    private final int INDEX_CODIGO_COMERCIAL = 1;
-    private final int INDEX_DESCRICAO_BREVE = 2;
-    private final int INDEX_DESCRICAO_COMPLETA = 3;
-    private final int INDEX_UNIDADE = 4;
-    private final int INDEX_CATEGORIA = 5;
-    private final int N_CAMPOS = 6;
+    private static final String SEPARADOR = ";";
+    private static final int INDEX_CODIGO_FABRICO = 0;
+    private static final int INDEX_CODIGO_COMERCIAL = 1;
+    private static final int INDEX_DESCRICAO_BREVE = 2;
+    private static final int INDEX_DESCRICAO_COMPLETA = 3;
+    private static final int INDEX_UNIDADE = 4;
+    private static final int INDEX_CATEGORIA = 5;
+    private static final int N_CAMPOS = 6;
 
     private final String CHARSET_NAME = "UTF-8";
 

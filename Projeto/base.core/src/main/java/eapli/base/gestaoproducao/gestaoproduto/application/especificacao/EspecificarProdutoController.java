@@ -1,22 +1,24 @@
 package eapli.base.gestaoproducao.gestaoproduto.application.especificacao;
 
 import eapli.base.gestaoproducao.gestaoproduto.application.ProdutoBuilder;
+import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
+import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.infrastructure.persistence.RepositoryFactory;
+import eapli.framework.domain.repositories.TransactionalContext;
 
 import java.util.Optional;
 
 public class EspecificarProdutoController {
-    private final ProdutoRepository repo;
     private final ProdutoBuilder produtoBuilder;
     private final boolean substituir;
     private String codigoUnicoComDelayRegisto;
     private String codigoComercialComDelayRegisto;
 
     public EspecificarProdutoController(boolean substituir) {
-        repo = PersistenceContext.repositories().produto();
         produtoBuilder = new ProdutoBuilder();
         this.substituir = substituir;
         codigoUnicoComDelayRegisto = null;
@@ -56,23 +58,46 @@ public class EspecificarProdutoController {
      * @return (1) true if the operation was successful or (2) false if the builder still doesn't have all obligatory information. (system error)
      */
     public boolean register() throws IllegalDomainValueException {
+        RepositoryFactory repositoryFactory = PersistenceContext.repositories();
+        TransactionalContext transactionalContext = repositoryFactory.newTransactionalContext();
+        ProdutoRepository repoProduto = repositoryFactory.produto();
+        FichaDeProducaoRepository repoFichaDeProducao = repositoryFactory.fichaDeProducao();
+
+        transactionalContext.beginTransaction();
         if (substituir) {
-            Optional<Produto> antigo = repo.produtoDeCodigoUnico(codigoUnicoComDelayRegisto);
+            Optional<Produto> antigo = repoProduto.produtoDeCodigoUnico(codigoUnicoComDelayRegisto);
             if (antigo.isPresent()) {
-                repo.remove(antigo.get());
+                Produto produto = antigo.get();
+                FichaDeProducao fichaDeProducao = produto.fichaDeProducao;
+
+                repoProduto.remove(produto);
+                if (fichaDeProducao != null) {
+                    repoFichaDeProducao.remove(fichaDeProducao);
+                }
             }
         }
 
-        produtoBuilder.setCodigoUnico(codigoUnicoComDelayRegisto);
-        produtoBuilder.setCodigoComercial(codigoComercialComDelayRegisto);
+        try {
+            produtoBuilder.setCodigoUnico(codigoUnicoComDelayRegisto, repoProduto);
+            produtoBuilder.setCodigoComercial(codigoComercialComDelayRegisto, repoProduto);
+        } catch (IllegalDomainValueException e) {
+            transactionalContext.rollback();
+            transactionalContext.close();
+            throw e;
+        }
 
         if (!produtoBuilder.isReady()) {
             // Should never happen
+            transactionalContext.rollback();
+            transactionalContext.close();
             return false;
         }
 
         Produto produto = produtoBuilder.build();
-        repo.save(produto);
+        repoProduto.save(produto);
+
+        transactionalContext.commit();
+        transactionalContext.close();
         return true;
     }
 }

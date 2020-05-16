@@ -32,6 +32,7 @@ public class EspecificarFichaDeProducaoController {
     private final Map<String, Material> codigoInternoToMaterial;
     private final List<MaterialDTO> materiaisDTO;
     private final List<ProdutoDTO> produtosDTO;
+    private final List<ProdutoDTO> produtosSemFichaDeProducaoDTO;
     private List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrimaAAdicionar;
     private Produto produtoAlvo;
 
@@ -43,12 +44,14 @@ public class EspecificarFichaDeProducaoController {
 
         List<Material> materiais = materialRepository.findAllList();
         List<Produto> produtos = produtoRepository.findAllList();
+        List<Produto> produtosSemFichaDeProducao = produtoRepository.produtosSemFichaDeProducao();
 
         codigoUnicoToProduto = Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(produtos));
         codigoInternoToMaterial = Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(materiais));
 
         materiaisDTO = Collections.unmodifiableList(DTOUtils.toDTOList(materiais));
         produtosDTO = Collections.unmodifiableList(DTOUtils.toDTOList(produtos));
+        produtosSemFichaDeProducaoDTO = Collections.unmodifiableList(DTOUtils.toDTOList(produtosSemFichaDeProducao));
 
         quantidadesDeMateriaPrimaAAdicionar = new ArrayList<>();
         produtoAlvo = null;
@@ -60,6 +63,10 @@ public class EspecificarFichaDeProducaoController {
 
     public List<MaterialDTO> materiais() {
         return materiaisDTO;
+    }
+
+    public List<ProdutoDTO> produtosSemFichaDeProducao() {
+        return produtosSemFichaDeProducaoDTO;
     }
 
     /**
