@@ -1,5 +1,7 @@
 package eapli.base.gestaoproducao.gestaoproduto.domain;
 
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
@@ -16,11 +18,17 @@ public class CategoriaDeProduto implements ValueObject, Serializable, Comparable
         categoriaValor = null;
     }
 
-    protected CategoriaDeProduto(String categoria) {
+    protected CategoriaDeProduto(String categoria) throws IllegalDomainValueException {
+        if (categoria == null) {
+            throw new IllegalArgumentException("A categoria não pode ser null ou vazia");
+        }
+        if (categoria.isEmpty()) {
+            throw new IllegalDomainValueException("A categoria não pode ser null ou vazia", IllegalDomainValueType.ILLEGAL_VALUE);
+        }
         this.categoriaValor = categoria;
     }
 
-    public static CategoriaDeProduto valueOf(String categoria) {
+    public static CategoriaDeProduto valueOf(String categoria) throws IllegalDomainValueException {
         return new CategoriaDeProduto(categoria);
     }
 

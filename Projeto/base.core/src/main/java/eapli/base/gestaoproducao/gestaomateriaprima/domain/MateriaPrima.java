@@ -1,9 +1,17 @@
 package eapli.base.gestaoproducao.gestaomateriaprima.domain;
 
+import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
 import eapli.base.gestaoproducao.gestaomateriaprima.application.dto.MateriaPrimaDTO;
+import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
+import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.base.infrastructure.domain.IllegalDomainValueType;
+import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.framework.domain.model.ValueObject;
+import eapli.framework.domain.repositories.DomainRepository;
 
+import javax.annotation.Nullable;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -29,12 +37,19 @@ public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPr
         idMateria = null;
     }
 
-    private MateriaPrima(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) {
+    private MateriaPrima(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) throws IllegalDomainValueException {
+        if (tipoDeMateriaPrima == null || idMateria == null) {
+            throw new IllegalArgumentException("Nenhum valor pode ser nulo");
+        }
+        if (idMateria.isEmpty()) {
+            throw new IllegalDomainValueException("O ID da matéria deve ser especificado", IllegalDomainValueType.ILLEGAL_VALUE);
+        }
+
         this.tipoDeMateriaPrima = tipoDeMateriaPrima;
         this.idMateria = idMateria;
     }
 
-    public static MateriaPrima valueOf(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) {
+    public static MateriaPrima valueOf(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) throws IllegalDomainValueException {
         return new MateriaPrima(tipoDeMateriaPrima, idMateria);
     }
 
@@ -84,7 +99,7 @@ public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPr
 
     @Override
     public String toString() {
-        return String.format("%s - %s", tipoDeMateriaPrima, idMateria);
+        return String.format("%s (%s)", idMateria, tipoDeMateriaPrima.toString());
     }
 }
 

@@ -20,6 +20,8 @@ public class FichaDeProducao implements AggregateRoot<Integer>, HasDTO<FichaDePr
     @Version
     private Long version;
 
+    private final String fichaVaziaMensagem = "Ficha de produção vazia";
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     public final Integer uniqueVal;
@@ -73,9 +75,6 @@ public class FichaDeProducao implements AggregateRoot<Integer>, HasDTO<FichaDePr
 
     @Override
     public String toString() {
-        if (quantidadesDeMateriaPrima.isEmpty())
-            return "Ficha de produção vazia";
-
         return Lists.generateColonSeparatedDisplayList(quantidadesDeMateriaPrima);
     }
 

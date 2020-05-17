@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.medicao;
 
+import com.google.common.math.DoubleMath;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class QuantidadePositiva implements ValueObject, Comparable<QuantidadePositiva> {
 
     private static final long serialVersionUID = 1L;
+    private static final double TOLERANCIA_DOUBLE = 0.000000001d;
 
     /* O hibernate falha se for final. Isto acontece a todos os valores de Embeddables que
     * pertençam outro Embeddable, que por sua vez façam parte de uma @ElementCollection + @CollectionTable
@@ -53,7 +55,7 @@ public class QuantidadePositiva implements ValueObject, Comparable<QuantidadePos
 
         final QuantidadePositiva that = (QuantidadePositiva) o;
 
-        return quantidadeValor == that.quantidadeValor;
+        return DoubleMath.fuzzyEquals(quantidadeValor, that.quantidadeValor, TOLERANCIA_DOUBLE);
     }
 
     @Override
@@ -63,12 +65,12 @@ public class QuantidadePositiva implements ValueObject, Comparable<QuantidadePos
 
     @Override
     public String toString() {
-        return "" + quantidadeValor;
+        return String.format("%.4f", quantidadeValor);
     }
 
     @Override
     public int compareTo(QuantidadePositiva obj) {
-        return Double.compare(quantidadeValor, obj.quantidadeValor);
+        return DoubleMath.fuzzyCompare(quantidadeValor, obj.quantidadeValor, TOLERANCIA_DOUBLE);
     }
 }
 

@@ -20,9 +20,9 @@ public class Lists {
             return "vazio";
 
         StringBuilder sb = new StringBuilder();
-        sb.append(l1.get(0).toString());
+        sb.append(l1.get(0));
         for (int i = 1; i < l1.size(); i++) {
-            sb.append("; ").append(l1.get(i).toString());
+            sb.append("; ").append(l1.get(i));
         }
 
         return sb.toString();

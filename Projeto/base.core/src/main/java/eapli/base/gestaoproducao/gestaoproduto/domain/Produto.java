@@ -46,7 +46,7 @@ public class Produto implements AggregateRoot<CodigoUnico>, HasDTO<ProdutoDTO> {
     }
 
     public static String identityAttributeName() {
-        return Reflection.retrieveAttributeName(Produto.class, CodigoUnico.class);
+        return "codigoUnico";
     }
 
     public static boolean podeGerarProduto(CodigoUnico codigoUnico, CategoriaDeProduto categoriaDeProduto, CodigoComercial codigoComercial, DescricaoBreve descricaoBreve, DescricaoCompleta descricaoCompleta, UnidadeDeMedida unidadeDeMedida) {

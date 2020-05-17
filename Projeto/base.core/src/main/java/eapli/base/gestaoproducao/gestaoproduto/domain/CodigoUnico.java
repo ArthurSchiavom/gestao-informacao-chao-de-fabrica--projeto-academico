@@ -25,8 +25,12 @@ public class CodigoUnico implements ValueObject, Serializable, Comparable<Codigo
     }
 
     protected CodigoUnico(String codigoUnico, @Nullable ProdutoRepository repo) throws IllegalDomainValueException {
-        if (codigoUnico == null || codigoUnico.isEmpty())
+        if (codigoUnico == null) {
             throw new IllegalArgumentException("O código único deve existir e não ser vazio");
+        }
+        if (codigoUnico.isEmpty()) {
+            throw new IllegalDomainValueException("O código único deve existir e não ser vazio", IllegalDomainValueType.ILLEGAL_VALUE);
+        }
 
         if (repo == null) {
             RepositoryFactory repositoryFactory = PersistenceContext.repositories();

@@ -34,7 +34,7 @@ public class EspecificarProdutoController {
         codigoUnicoComDelayRegisto = codigoUnico;
     }
 
-    public void setCategoriaDeProduto(String categoriaDeProduto) {
+    public void setCategoriaDeProduto(String categoriaDeProduto) throws IllegalDomainValueException {
         produtoBuilder.setCategoriaDeProduto(categoriaDeProduto);
     }
 
@@ -46,7 +46,7 @@ public class EspecificarProdutoController {
         produtoBuilder.setDescricaoBreve(descricaoBreve);
     }
 
-    public void setDescricaoCompleta(String descricaoCompleta) {
+    public void setDescricaoCompleta(String descricaoCompleta) throws IllegalDomainValueException {
         produtoBuilder.setDescricaoCompleta(descricaoCompleta);
     }
 

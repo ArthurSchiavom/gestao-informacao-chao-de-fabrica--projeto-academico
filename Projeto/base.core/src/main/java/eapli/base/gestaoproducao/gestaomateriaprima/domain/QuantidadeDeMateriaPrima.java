@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.gestaomateriaprima.domain;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMateriaPrimaDTO;
 import eapli.base.gestaoproducao.medicao.QuantidadePositiva;
 import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
@@ -23,6 +24,10 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
     }
 
     protected QuantidadeDeMateriaPrima(QuantidadePositiva quantidade, MateriaPrima materiaPrima) {
+        if (quantidade == null || materiaPrima == null) {
+            throw new IllegalArgumentException("Não são permitidos valores nulos");
+        }
+
         this.quantidade = quantidade;
         this.materiaPrima = materiaPrima;
     }
@@ -52,12 +57,12 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
 
     @Override
     public String toString() {
-        return quantidade.toString() + " de " + materiaPrima.toString();
+        return String.format("%s de %s", quantidade.toString(), materiaPrima.toString());
     }
 
     @Override
     public int compareTo(QuantidadeDeMateriaPrima obj) {
-        return quantidade.compareTo(obj.quantidade);
+        throw new UnsupportedOperationException();
     }
 
     @Override

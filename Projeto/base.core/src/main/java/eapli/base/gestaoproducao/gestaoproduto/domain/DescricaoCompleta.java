@@ -1,5 +1,7 @@
 package eapli.base.gestaoproducao.gestaoproduto.domain;
 
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
@@ -16,14 +18,17 @@ public class DescricaoCompleta implements ValueObject, Serializable, Comparable<
         descricaoCompletaValor = null;
     }
 
-    protected DescricaoCompleta(String descricaoCompleta) {
-        if (descricaoCompleta == null || descricaoCompleta.isEmpty()) {
+    protected DescricaoCompleta(String descricaoCompleta) throws IllegalDomainValueException {
+        if (descricaoCompleta == null) {
             throw new IllegalArgumentException("A descrição completa não pode ser vazia.");
+        }
+        if (descricaoCompleta.isEmpty()) {
+            throw new IllegalDomainValueException("A descrição breve deve ser especificada", IllegalDomainValueType.ILLEGAL_VALUE);
         }
         this.descricaoCompletaValor = descricaoCompleta;
     }
 
-    public static DescricaoCompleta valueOf(String descricaoCompleta) {
+    public static DescricaoCompleta valueOf(String descricaoCompleta) throws IllegalDomainValueException {
         return new DescricaoCompleta(descricaoCompleta);
     }
 

@@ -26,6 +26,9 @@ public class DescricaoBreve implements ValueObject, Serializable, Comparable<Des
         if (descricaoBreve.length() > MAX_CARACTERES_DESCRICAO_BREVE) {
             throw new IllegalDomainValueException("A descrição breve deve ter no máximo " + MAX_CARACTERES_DESCRICAO_BREVE + " caractéres", IllegalDomainValueType.TOO_MANY_CHARACTERS);
         }
+        if (descricaoBreve.isEmpty()) {
+            throw new IllegalDomainValueException("Deve fornecer uma descrição breve", IllegalDomainValueType.TOO_MANY_CHARACTERS);
+        }
         this.descricaoBreveValor = descricaoBreve;
     }
 

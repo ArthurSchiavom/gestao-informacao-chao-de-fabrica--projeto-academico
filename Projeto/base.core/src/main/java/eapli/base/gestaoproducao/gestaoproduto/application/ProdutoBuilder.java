@@ -27,7 +27,7 @@ public class ProdutoBuilder {
         return this;
     }
 
-    public ProdutoBuilder setCategoriaDeProduto(String categoriaDeProduto) {
+    public ProdutoBuilder setCategoriaDeProduto(String categoriaDeProduto) throws IllegalDomainValueException {
         this.categoriaDeProduto = CategoriaDeProduto.valueOf(categoriaDeProduto);
         return this;
     }
@@ -42,7 +42,7 @@ public class ProdutoBuilder {
         return this;
     }
 
-    public ProdutoBuilder setDescricaoCompleta(String descricaoCompleta) {
+    public ProdutoBuilder setDescricaoCompleta(String descricaoCompleta) throws IllegalDomainValueException {
         this.descricaoCompleta = DescricaoCompleta.valueOf(descricaoCompleta);
         return this;
     }

@@ -24,8 +24,12 @@ public class CodigoComercial implements ValueObject, Serializable, Comparable<Co
     }
 
     public CodigoComercial(String codigoComercial, @Nullable ProdutoRepository repo) throws IllegalDomainValueException {
-        if (codigoComercial == null || codigoComercial.isEmpty())
-            throw new IllegalArgumentException("O código único deve existir e não ser vazio");
+        if (codigoComercial == null) {
+            throw new IllegalArgumentException("O código único deve existir");
+        }
+        if (codigoComercial.isEmpty()) {
+             throw new IllegalDomainValueException("O código comercial deve existir e não ser vazio", IllegalDomainValueType.ILLEGAL_VALUE);
+        }
 
         if (repo == null) {
             RepositoryFactory repositoryFactory = PersistenceContext.repositories();
