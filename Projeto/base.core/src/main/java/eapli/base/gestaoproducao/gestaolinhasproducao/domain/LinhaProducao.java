@@ -50,4 +50,9 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 	public IdentificadorLinhaProducao identity() {
 		return this.identifier;
 	}
+
+	@Override
+	public String toString() {
+		return "LinhaProducao{ Identificador: "+ identifier.identifier+", estado: "+ estado.toString()+"}";
+	}
 }

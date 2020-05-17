@@ -13,9 +13,9 @@ public class MaquinaBootstrapper implements Action{
     public boolean execute() {
         controllerLinha.registarLinhaProducao("Linha 5"); // para ter linhas para registar máquinas
         controllerLinha.registarLinhaProducao("Linha 6"); // para ter linhas para registar máquinas
-        controller.registarMaquina(1,1,"123","Num 1234","DP-420","sony","HC-A","UDP");
-        controller.registarMaquina(1,2,"123","Num 1235","BJ-420","apple","HC-B","TCP");
-        controller.registarMaquina(2,2,"123","Num 1000","K-9","samsung","HC-S","TCP");
+        controller.registarMaquina(1,1,"123","Num 1234","DP-420","sony","HC-A","UDP",false);
+        controller.registarMaquina(1,2,"1234","Num 1235","BJ-420","apple","HC-B","TCP",false);
+        controller.registarMaquina(2,2,"1235","Num 1000","K-9","samsung","HC-S","TCP",false);
 
         return true;
     }

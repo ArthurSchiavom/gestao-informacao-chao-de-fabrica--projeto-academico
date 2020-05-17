@@ -10,7 +10,7 @@ import java.util.Objects;
 public class IdentificadorLinhaProducao implements ValueObject, Comparable<IdentificadorLinhaProducao> {
 	private static final long serialVersionUID = 1L;
 
-	private final String identifier;
+	public final String identifier;
 
 	public IdentificadorLinhaProducao(String identifier) {
 		if(identifier == null || identifier.trim().isEmpty()) {

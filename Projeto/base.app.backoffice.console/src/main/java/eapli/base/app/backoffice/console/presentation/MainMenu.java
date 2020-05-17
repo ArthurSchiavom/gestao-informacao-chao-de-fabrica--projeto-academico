@@ -69,59 +69,31 @@ public class MainMenu extends AbstractUI {
 	private static final int DEACTIVATE_USER_OPTION = 3;
 	private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
 
-	// PRODUCAO
+	// GESTOR PRODUCAO
 	private static final int REGISTAR_PRODUTO = 1;
 	private static final int REGISTAR_CATEGORIA = 2;
-	private static final int REGISTAR_DEPOSITO = 3;
-	private static final int REGISTAR_LINHAPRODUCAO = 4;
-	private static final int REGISTAR_MATERIAL=5;
-	private static final int CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO = 6;
-	private static final int REGISTAR_FICHA_DE_PRODUCAO = 7;
-	private static final int REGISTAR_PRODUTO_CATALOGO=8;
-	private static final int REGISTAR_MAQUINA = 9;
+	private static final int REGISTAR_MATERIAL=3;
+	private static final int CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO = 4;
+	private static final int REGISTAR_FICHA_DE_PRODUCAO = 5;
+	private static final int REGISTAR_PRODUTO_CATALOGO=6;
+
+
+	// GESTOR CHAO DE FÁBRICA
+	private static final int REGISTAR_MAQUINA = 1;
+	private static final int REGISTAR_DEPOSITO = 2;
+	private static final int REGISTAR_LINHAPRODUCAO = 3;
 
 
 
 	// SETTINGS
 	private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
 
-	// DISH TYPES
-	private static final int DISH_TYPE_REGISTER_OPTION = 1;
-	private static final int DISH_TYPE_LIST_OPTION = 2;
-	private static final int DISH_TYPE_CHANGE_OPTION = 3;
-	private static final int DISH_TYPE_ACTIVATE_DEACTIVATE_OPTION = 4;
-
-	// DISHES
-	private static final int DISH_REGISTER_OPTION = 5;
-	private static final int DISH_LIST_OPTION = 6;
-	private static final int DISH_REGISTER_DTO_OPTION = 7;
-	private static final int DISH_LIST_DTO_OPTION = 8;
-	private static final int DISH_ACTIVATE_DEACTIVATE_OPTION = 9;
-	private static final int DISH_CHANGE_OPTION = 10;
-
-	// DISH PROPERTIES
-	private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
-	private static final int CHANGE_DISH_PRICE_OPTION = 2;
-
-	// MATERIALS
-	private static final int MATERIAL_REGISTER_OPTION = 1;
-	private static final int MATERIAL_LIST_OPTION = 2;
-
-	// REPORTING
-	private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
-	private static final int REPORTING_HIGH_CALORIES_DISHES_OPTION = 2;
-	private static final int REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION = 3;
-
-	// MEALS
-	private static final int LIST_MEALS_OPTION = 1;
-	private static final int MEAL_REGISTER_OPTION = 2;
-
 	// MAIN MENU
 	private static final int MY_USER_OPTION = 1;
 	private static final int USERS_OPTION = 2;
 	private static final int PRODUCAO_OPTION = 3;
-	private static final int SETTINGS_OPTION = 4;
-	private static final int GESTOR_CHAO_FABRICA = 5;
+	private static final int FABRICA_OPTION = 4;
+	private static final int SETTINGS_OPTION = 5;
 	private static final int TRACEABILITY_OPTION = 6;
 	private static final int MEALS_OPTION = 7;
 	private static final int REPORTING_DISHES_OPTION = 8;
@@ -171,10 +143,13 @@ public class MainMenu extends AbstractUI {
 		if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.ADMIN)) {
 			final Menu usersMenu = buildUsersMenu();
 			mainMenu.addSubMenu(USERS_OPTION, usersMenu);
-			final Menu producaoMenu = buildProducaoMenu();
+			final Menu producaoMenu = buildGestorProducaoMenu();
 			mainMenu.addSubMenu(PRODUCAO_OPTION, producaoMenu);
+			final Menu fabricaMenu = buildGestorChaoFabricaMenu();
+			mainMenu.addSubMenu(FABRICA_OPTION,fabricaMenu);
 			final Menu settingsMenu = buildAdminSettingsMenu();
 			mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
+
 		}
 
 		if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -215,19 +190,32 @@ public class MainMenu extends AbstractUI {
 	 *
 	 * @return
 	 */
-	private Menu buildProducaoMenu() {
+	private Menu buildGestorProducaoMenu() {
 		final Menu menu = new Menu("Produção >");
 
 		menu.addItem(REGISTAR_PRODUTO, "Carregar Catálogo de Produtos", new ImportarCatalogoProdutosAction());
 		menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new EspecificarCategoriaMaterialAction());
-		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new EspecificarDepositoUI()::show);
-		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new EspecificarLinhaProducaoUI()::show);
 		menu.addItem(REGISTAR_MATERIAL,"Registar material",new EspecificarMaterialAction());
 		menu.addItem(CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO, "Produtos Sem Ficha de Produção", new ConsultarProdutosSemFichaDeProducaoAction());
 		menu.addItem(REGISTAR_FICHA_DE_PRODUCAO, "Registar Ficha de Produção",
 				new EspecificarFichaDeProducaoAction());
 		menu.addItem(REGISTAR_PRODUTO_CATALOGO,"Adicionar novo produto no catalogo", new EspecificarProdutoAction());
+		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+		return menu;
+	}
+
+	/**
+	 * Menu do gestor de chao de fabrica
+	 *
+	 * @return
+	 */
+	private Menu buildGestorChaoFabricaMenu() {
+		final Menu menu = new Menu("Chao Fabrica >"); // nao tem acentos, por causa do UTF-8 no terminal
+
 		menu.addItem(REGISTAR_MAQUINA,"Registar máquina", new EspecificarMaquinaAction());
+		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new EspecificarDepositoUI()::show);
+		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new EspecificarLinhaProducaoUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

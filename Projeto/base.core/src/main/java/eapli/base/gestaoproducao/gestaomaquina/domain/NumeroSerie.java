@@ -11,11 +11,12 @@ public class NumeroSerie implements ValueObject, Comparable<NumeroSerie> {
 
     private static final long serialVersionUID = 1L;
 
-    private String numeroSerie;
+    public final String numeroSerie;
     private static int maxCharsNumeroSerie;
     private static int minCharsNumeroSerie;
 
     protected NumeroSerie() {
+        numeroSerie = "";
     }
 
     public NumeroSerie(String numeroSerie) throws IllegalArgumentException{
@@ -39,12 +40,6 @@ public class NumeroSerie implements ValueObject, Comparable<NumeroSerie> {
         return Objects.hash(numeroSerie);
     }
 
-    @Override
-    public String toString() {
-        return "NumeroSerie{" +
-                "numeroSerie='" + numeroSerie + '\'' +
-                '}';
-    }
 
     @Override
     public int compareTo(NumeroSerie obj) {

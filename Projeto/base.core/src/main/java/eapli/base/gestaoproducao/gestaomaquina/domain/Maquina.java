@@ -31,8 +31,8 @@ public class Maquina implements AggregateRoot<CodigoInterno> {
         @Version
         private Long version;
 
-        @EmbeddedId
         private NumeroSerie numeroSerie;
+        @EmbeddedId
         private CodigoInterno codigoInterno;
         private OrdemLinhaProducao ordemLinhaProducao;
         private FicheiroConfiguracao ficheiroConfiguracao;
@@ -68,7 +68,7 @@ public class Maquina implements AggregateRoot<CodigoInterno> {
         }
 
         public static String identityAttributeName(){
-                return"numeroSerie";
+                return"codigoInterno";
         }
 
         @Override
@@ -86,7 +86,28 @@ public class Maquina implements AggregateRoot<CodigoInterno> {
         }
 
         @Override
+        public String toString() {
+                return "Maquina{" +
+                        "numeroSerie=" + numeroSerie.numeroSerie +
+                        ", ordemLinhaProducao=" + ordemLinhaProducao.ordemLinhaProducao +
+                        ", dataInstalacao=" + dataInstalacao +
+                        ", marca='" + marca + '\'' +
+                        ", modelo='" + modelo + '\'' +
+                        ", descricaoMaquina='" + descricaoMaquina + '\'' +
+                        ", linhaProducao=" + linhaProducao.identifier +
+                        '}';
+        }
+
+        @Override
         public CodigoInterno identity() {
                 return this.codigoInterno;
+        }
+
+        public OrdemLinhaProducao getOrdemLinhaProducao() {
+                return ordemLinhaProducao;
+        }
+
+        public void setOrdemLinhaProducao(OrdemLinhaProducao ordemLinhaProducao) {
+                this.ordemLinhaProducao = ordemLinhaProducao;
         }
 }

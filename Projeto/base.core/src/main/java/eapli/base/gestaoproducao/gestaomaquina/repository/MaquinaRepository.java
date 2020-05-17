@@ -1,5 +1,7 @@
 package eapli.base.gestaoproducao.gestaomaquina.repository;
 
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInterno;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.framework.domain.repositories.DomainRepository;
@@ -14,4 +16,6 @@ public interface MaquinaRepository extends DomainRepository<CodigoInterno, Maqui
      * @return máquina ou null
      */
     Optional<Maquina> findByIdentifier(CodigoInterno identifier);
+
+    Iterable<Maquina> findByLinhaProducao(IdentificadorLinhaProducao o);
 }
