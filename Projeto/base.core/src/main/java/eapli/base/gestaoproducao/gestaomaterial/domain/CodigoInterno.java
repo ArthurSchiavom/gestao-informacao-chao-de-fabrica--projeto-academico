@@ -18,6 +18,9 @@ public class CodigoInterno implements ValueObject, Comparable<CodigoInterno> {
 
     // TODO - mudar para protected e utilizar valueOf()
     public CodigoInterno(String codigoInterno) {
+        if(codigoInterno == null ||  codigoInterno.trim().length() == 0 || codigoInterno==null|| codigoInterno.trim().length()==0 ) {
+            throw new IllegalArgumentException("Ficha tecnica pdf não válida");
+        }
         this.codigoInternoValor = codigoInterno;
     }
 

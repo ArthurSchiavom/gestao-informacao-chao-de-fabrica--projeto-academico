@@ -23,7 +23,7 @@ public class JpaMaterialRepository extends JpaAutoTxRepository<Material, CodigoI
         super(persistenceUnitName, Application.settings().getExtendedPersistenceProperties(),
                 Material.identityAttributeName());
     }
-    
+
     @Override
     public List<Material> findAllList() {
         return Lists.newArrayList(this.findAll());

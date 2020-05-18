@@ -23,25 +23,35 @@ public class EspecificarMaterialController {
      * @param categoria Categoria onde se encaixa o material
      * @param unidadeDeMedida  Unidade de medida usada para medir o material
      *
-     * @Return Vai retornar um objecto do tipo Material
+     * @Return Vai retornar um objecto do tipo Material e vai registar na base de dados
      */
     public Material registarMaterial(String unidadeDeMedida, String descricaoMaterial, String nomeMaterial,String path ,String conteudoFichaTecnica, String codigoInterno, Categoria categoria) throws IOException, IllegalDomainValueException {
         final CodigoInterno codigoInt= new CodigoInterno(codigoInterno);
         final Categoria catg = categoria;
         final UnidadeDeMedida uDeMedida = UnidadeDeMedida.actualValueOf(unidadeDeMedida);
-        final FichaTecnicaPDF fichaTecnicaPDF=new FichaTecnicaPDF(path,nomeMaterial,conteudoFichaTecnica);
+        final FichaTecnicaPDF fichaTecnicaPDF=new FichaTecnicaPDF(path.trim(),nomeMaterial,conteudoFichaTecnica);
         final Material material=new Material(descricaoMaterial, codigoInt, categoria,uDeMedida,fichaTecnicaPDF);
         return  this.materialRepository.save(material);
     }
 
+    /**
+     * Remove um Material da base de dados
+     * @param codigoInterno Codigo interno em String
+     * @return
+     */
     public boolean removerMaterialPorCodigoInterno(String codigoInterno){
-            Material antigo = obterMaterialPorCodigoInterno(codigoInterno);
-            materialRepository.remove(antigo);
-            return true;
+        Material antigo = obterMaterialPorCodigoInterno(codigoInterno);
+        materialRepository.remove(antigo);
+        return true;
     }
 
-    public Material obterMaterialPorCodigoInterno(String codigoInterno){
+    /**
+     * Atraves do codigo interno (identificador) consegue obter o Material associado
+     * @param codigoInterno Codigo interno em String
+     * @return Retorna um Material
+     */
+    public Material obterMaterialPorCodigoInterno(String codigoInterno) {
         return materialRepository.obterMaterialPorCodigoInterno(codigoInterno).get();
     }
-
 }
+
