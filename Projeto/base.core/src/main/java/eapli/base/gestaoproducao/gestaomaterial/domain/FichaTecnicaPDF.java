@@ -59,7 +59,6 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
 
     public static boolean validarCaminho(String path){
         File teste=new File(path);
-        String another=teste.getAbsolutePath();
         if (teste.exists()){
             return true;
         }else{
@@ -69,7 +68,7 @@ public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF>
 
     private void criarFicheiro(Document document,String nameFile,String conteudoParaFichaTecnica) {
         try {
-            PdfWriter.getInstance(document, new FileOutputStream(nameFile));
+            PdfWriter.getInstance(document, new FileOutputStream(nameFile.trim()));
             document.open();
             document.add(new Paragraph(conteudoParaFichaTecnica));
             document.close();
