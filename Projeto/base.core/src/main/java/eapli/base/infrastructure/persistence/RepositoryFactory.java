@@ -12,6 +12,7 @@ import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
@@ -107,6 +108,20 @@ public interface RepositoryFactory {
 	 * @return
 	 */
 	CategoriaRepository categoria(TransactionalContext autoTx);
+
+	/**
+	 * repository will be created in auto transaction mode
+	 *
+	 * @return
+	 */
+	OrdemProducaoRepository ordemProducao();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return
+	 */
+	OrdemProducaoRepository ordemProducao(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode

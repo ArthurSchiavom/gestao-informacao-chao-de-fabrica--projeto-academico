@@ -4,7 +4,7 @@ import eapli.base.gestaoproducao.gestaomateriaprima.application.dto.MateriaPrima
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import org.junit.Test;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 
 /**
@@ -34,9 +34,9 @@ public class MateriaPrimaTest {
         assertEquals(materiaPrima.idMateria, "sunny");
         assertEquals(materiaPrima.tipoDeMateriaPrima, TipoDeMateriaPrima.MATERIAL);
 
-        assertThrows(IllegalArgumentException.class, () -> MateriaPrima.valueOf(null, "sunny"));
-        assertThrows(IllegalArgumentException.class, () -> MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, null));
-        assertThrows(IllegalDomainValueException.class, () -> MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, ""));
+        assertUtils(IllegalArgumentException.class, () -> MateriaPrima.valueOf(null, "sunny"));
+        assertUtils(IllegalArgumentException.class, () -> MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, null));
+        assertUtils(IllegalDomainValueException.class, () -> MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, ""));
     }
 
     /**

@@ -1,30 +1,32 @@
-package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao;
+package eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao;
 
 import eapli.base.app.common.console.presentation.files.ResultadoImportacaoFicheiroPresentationUtils;
 import eapli.base.app.common.console.presentation.interaction.OptionSelector;
 import eapli.base.app.common.console.presentation.interaction.UserInteractionFlow;
-import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ImportarCatalogoCsvProdutosController;
-import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ImportarCatalogoProdutosController;
-import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoCatalogoProdutos;
+import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinha;
+import eapli.base.gestaoproducao.ordemProducao.application.ImportarOrdensProducaoController;
 import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
-public class ImportarCatalogoProdutosUI extends AbstractUI {
+public class ImportarOrdensProducaoUI extends AbstractUI {
+
+    ImportarOrdensProducaoController controller = new ImportarOrdensProducaoController();
 
     @Override
     protected boolean doShow() {
+
         String caminho = Console.readLine("Introduza o caminho do ficheiro a carregar: ");
 
-        System.out.println("\nCaso seja encontrado algum produto com código único já registado, pretende que a aplicação substitua o produto atual com o indicado?\n");
+        System.out.println("\nCaso seja encontrado alguma ordem de produção com identificador já registado, pretende " +
+                "que a aplicação substitua a ordem de produção atual com o indicado?\n");
         OptionSelector optionSelector = new OptionSelector();
         final Updateable<Boolean> substituir = new Updateable<>();
         optionSelector.registerOption("Sim", () -> substituir.val = true);
         optionSelector.registerOption("Não", () -> substituir.val = false);
         optionSelector.show();
 
-        ImportarCatalogoProdutosController controller = new ImportarCatalogoCsvProdutosController();
-        ResultadoImportacaoCatalogoProdutos resultado = controller.iniciar(caminho, substituir.val);
+        ResultadoImportacaoLinhaALinha resultado = controller.importarOrdensProducao(caminho, substituir.val);
 
         System.out.println("\n\n" + ResultadoImportacaoFicheiroPresentationUtils.construirMensagemResultado(resultado) + "\n");
         UserInteractionFlow.enterToContinue();
@@ -34,6 +36,6 @@ public class ImportarCatalogoProdutosUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "Carregar Catálogo de Produtos.";
+        return "Especificar ordem produção";
     }
 }

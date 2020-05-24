@@ -4,7 +4,7 @@ import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMater
 import eapli.base.gestaoproducao.medicao.QuantidadePositiva;
 import org.junit.Test;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 
 /**
@@ -28,9 +28,9 @@ public class QuantidadeDeMateriaPrimaTest {
         assertEquals("a", quantidadeDeMateriaPrima.materiaPrima.idMateria);
         assertEquals(TipoDeMateriaPrima.MATERIAL, quantidadeDeMateriaPrima.materiaPrima.tipoDeMateriaPrima);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertUtils(IllegalArgumentException.class, () ->
                 QuantidadeDeMateriaPrima.valueOf(null, MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, "a")));
-        assertThrows(IllegalArgumentException.class, () ->
+        assertUtils(IllegalArgumentException.class, () ->
                 QuantidadeDeMateriaPrima.valueOf(QuantidadePositiva.valueOf(1), null));
     }
 
@@ -81,7 +81,7 @@ public class QuantidadeDeMateriaPrimaTest {
     @Test
     public void testCompareTo() throws Exception {
         QuantidadeDeMateriaPrima q1 = QuantidadeDeMateriaPrima.valueOf(QuantidadePositiva.valueOf(3), MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, "a"));
-        assertThrows(UnsupportedOperationException.class, () -> q1.compareTo(q1));
+        assertUtils(UnsupportedOperationException.class, () -> q1.compareTo(q1));
     }
 
     /**

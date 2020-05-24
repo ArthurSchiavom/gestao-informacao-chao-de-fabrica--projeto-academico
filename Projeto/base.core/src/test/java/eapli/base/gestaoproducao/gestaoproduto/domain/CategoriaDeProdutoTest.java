@@ -3,7 +3,7 @@ package eapli.base.gestaoproducao.gestaoproduto.domain;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import org.junit.Test;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 
 /**
@@ -23,8 +23,8 @@ public class CategoriaDeProdutoTest {
         CategoriaDeProduto categoriaDeProduto = CategoriaDeProduto.valueOf("hello");
         assertEquals(categoriaDeProduto.categoriaValor, "hello");
 
-        assertThrows(IllegalArgumentException.class, () -> CategoriaDeProduto.valueOf(null));
-        assertThrows(IllegalDomainValueException.class, () -> CategoriaDeProduto.valueOf(""));
+        assertUtils(IllegalArgumentException.class, () -> CategoriaDeProduto.valueOf(null));
+        assertUtils(IllegalDomainValueException.class, () -> CategoriaDeProduto.valueOf(""));
     }
 
     /**
