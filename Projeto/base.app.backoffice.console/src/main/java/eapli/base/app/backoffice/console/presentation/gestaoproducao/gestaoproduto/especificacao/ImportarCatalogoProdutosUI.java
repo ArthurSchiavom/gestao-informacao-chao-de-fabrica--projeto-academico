@@ -17,8 +17,8 @@ public class ImportarCatalogoProdutosUI extends AbstractUI {
         String caminho = Console.readLine("Introduza o caminho do ficheiro a carregar: ");
 
         System.out.println("\nCaso seja encontrado algum produto com código único já registado, pretende que a aplicação substitua o produto atual com o indicado?\n");
-        OptionSelector optionSelector = new OptionSelector();
         final Updateable<Boolean> substituir = new Updateable<>();
+        OptionSelector optionSelector = new OptionSelector();
         optionSelector.registerOption("Sim", () -> substituir.val = true);
         optionSelector.registerOption("Não", () -> substituir.val = false);
         optionSelector.show();

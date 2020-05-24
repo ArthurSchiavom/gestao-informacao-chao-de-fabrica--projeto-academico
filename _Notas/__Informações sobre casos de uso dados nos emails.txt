@@ -23,3 +23,7 @@ Uma linha de produção é um sequência contínua de máquinas e, portanto, o normal 
 
 MÁQUINAS - É possível que estas duas máquinas (máquina na posição 1 e máquina na posição 10, caso não exista máquinas entre elas) comuniquem entre elas, ou apenas quando se encontram em posições consecutivas (1 para 2, 4 para 5, por exemplo)?
 No exemplo dado, existiria uma linha com 2 máquinas. A máquina 10 aparece imediatamente após a máquina 1. Neste caso, as matérias-primas fluem da máquina 1 para a máquina 10.
+
+Simulador de Máquinas
+* Se se passar, por parâmetro, ao simulador um identificador que o servidor não conhece, o servidor não deverá aceitar a comunicação com essa máquina/simulador. 
+* Deve ser possivel colocar em execução vários simuladores em simultâneo. Cada um com parâmetros diferentes
