@@ -3,12 +3,12 @@ package eapli.base.gestaoproducao.gestaoproduto.application.especificacao;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResultadoImportacaoCatalogoProdutosTransformer {
+public class ResultadoImportacaoLinhaALinhaTransformer {
     private int nSucessos;
     private int nFalhas;
     private Map<Integer, String> erros;
 
-    public ResultadoImportacaoCatalogoProdutosTransformer() {
+    public ResultadoImportacaoLinhaALinhaTransformer() {
         this.nSucessos = 0;
         this.nFalhas = 0;
         erros = new HashMap<>();
@@ -26,7 +26,7 @@ public class ResultadoImportacaoCatalogoProdutosTransformer {
         erros.put(linha, erro);
     }
 
-    public ResultadoImportacaoCatalogoProdutos gerarDTO() {
-        return new ResultadoImportacaoCatalogoProdutos(nSucessos, nFalhas, erros);
+    public ResultadoImportacaoLinhaALinha gerarDTO() {
+        return new ResultadoImportacaoLinhaALinha(nSucessos, nFalhas, erros);
     }
 }

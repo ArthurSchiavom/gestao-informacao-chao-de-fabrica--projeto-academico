@@ -9,6 +9,7 @@ import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -109,7 +110,18 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 		return new JpaMaquinaRepository(autoTx);
 	}
 
-	@Override
+    @Override
+    public OrdemProducaoRepository ordemProducao() {
+        return  new JpaOrdemProducaoRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public OrdemProducaoRepository ordemProducao(TransactionalContext autoTx) {
+        return new JpaOrdemProducaoRepository(autoTx);
+    }
+
+
+    @Override
 	public MaterialRepository material() {
 		return new JpaMaterialRepository(Application.settings().getPersistenceUnitName());
 	}

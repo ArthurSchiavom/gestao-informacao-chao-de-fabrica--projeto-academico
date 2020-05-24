@@ -12,7 +12,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 
 /**
@@ -66,9 +66,9 @@ public class FichaDeProducaoTest {
     @Test
     public void testValueOf() throws IllegalDomainValueException {
         final List<QuantidadeDeMateriaPrima> lista = null;
-        assertThrows(IllegalDomainValueException.class, () -> FichaDeProducao.valueOf(lista));
+        assertUtils(IllegalDomainValueException.class, () -> FichaDeProducao.valueOf(lista));
         final List<QuantidadeDeMateriaPrima> lista2 = new ArrayList<>();
-        assertThrows(IllegalDomainValueException.class, () -> FichaDeProducao.valueOf(lista2));
+        assertUtils(IllegalDomainValueException.class, () -> FichaDeProducao.valueOf(lista2));
 
         QuantidadeDeMateriaPrima q = Mockito.mock(QuantidadeDeMateriaPrima.class);
         lista2.add(q);

@@ -1,12 +1,9 @@
 package eapli.base.gestaoproducao.medicao;
 
-import eapli.base.gestaoproducao.gestaoproduto.domain.DescricaoCompleta;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 
 /**
@@ -26,8 +23,8 @@ public class QuantidadePositivaTest {
         QuantidadePositiva q1 = QuantidadePositiva.valueOf(3.5d);
         assertEquals(3.5d, q1.quantidadeValor, 0.0001d);
 
-        assertThrows(IllegalDomainValueException.class, () -> QuantidadePositiva.valueOf(0d));
-        assertThrows(IllegalDomainValueException.class, () -> QuantidadePositiva.valueOf(-10d));
+        assertUtils(IllegalDomainValueException.class, () -> QuantidadePositiva.valueOf(0d));
+        assertUtils(IllegalDomainValueException.class, () -> QuantidadePositiva.valueOf(-10d));
     }
 
     /**

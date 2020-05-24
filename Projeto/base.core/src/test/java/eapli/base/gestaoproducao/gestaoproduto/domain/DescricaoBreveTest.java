@@ -3,7 +3,7 @@ package eapli.base.gestaoproducao.gestaoproduto.domain;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import org.junit.Test;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 
 /**
@@ -20,8 +20,8 @@ public class DescricaoBreveTest {
      */
     @Test
     public void testValueOf() throws IllegalDomainValueException {
-        assertThrows(IllegalDomainValueException.class, () -> DescricaoBreve.valueOf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); //31 caracteres
-        assertThrows(IllegalDomainValueException.class, () -> DescricaoBreve.valueOf(""));
+        assertUtils(IllegalDomainValueException.class, () -> DescricaoBreve.valueOf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); //31 caracteres
+        assertUtils(IllegalDomainValueException.class, () -> DescricaoBreve.valueOf(""));
 
         String valor = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
         DescricaoBreve desc = DescricaoBreve.valueOf(valor); // 30 caracteres
