@@ -80,7 +80,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina> {
     }
 
     public static String identityAttributeName() {
-        return "codigoInterno";
+        return "codigoInternoMaquina";
     }
 
     @Override

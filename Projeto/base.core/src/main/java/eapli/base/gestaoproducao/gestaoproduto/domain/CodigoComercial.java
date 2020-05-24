@@ -33,15 +33,15 @@ public class CodigoComercial implements ValueObject, Serializable, Comparable<Co
              throw new IllegalDomainValueException("O código comercial deve existir e não ser vazio", IllegalDomainValueType.ILLEGAL_VALUE);
         }
 
-//        if (repo == null) {
-//            RepositoryFactory repositoryFactory = PersistenceContext.repositories();
-//            repo = repositoryFactory.produto();
-//        }
-//
-//
-//        if (repo.produtoDeCodigoComercial(codigoComercial).isPresent()) {
-//            throw new IllegalDomainValueException("O código comercial indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
-//        }
+        if (repo == null) {
+            RepositoryFactory repositoryFactory = PersistenceContext.repositories();
+            repo = repositoryFactory.produto();
+        }
+
+
+        if (repo.produtoDeCodigoComercial(codigoComercial).isPresent()) {
+            throw new IllegalDomainValueException("O código comercial indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
+        }
         this.codigoComercialValor = codigoComercial;
     }
 

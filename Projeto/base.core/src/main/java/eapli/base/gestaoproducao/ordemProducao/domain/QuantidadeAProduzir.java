@@ -2,12 +2,15 @@ package eapli.base.gestaoproducao.ordemProducao.domain;
 
 import eapli.framework.domain.model.ValueObject;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
 public class QuantidadeAProduzir implements ValueObject, Comparable<QuantidadeAProduzir>{
 
     private static final long serialVersionUID = 1L;
 
+    @XmlValue
     public final int quantidade;
 
     public QuantidadeAProduzir() {

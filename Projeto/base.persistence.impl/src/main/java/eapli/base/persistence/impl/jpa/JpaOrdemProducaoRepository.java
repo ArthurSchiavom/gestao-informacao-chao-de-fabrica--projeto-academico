@@ -1,7 +1,9 @@
 package eapli.base.persistence.impl.jpa;
 
+import com.google.common.collect.Lists;
 import eapli.base.Application;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
+import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.ordemProducao.domain.Estado;
 import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
 import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorEncomenda;
@@ -15,6 +17,7 @@ import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -91,5 +94,10 @@ public class JpaOrdemProducaoRepository extends JpaAutoTxRepository<OrdemProduca
             transactionalContext.close();
             throw ex;
         }
+    }
+
+    @Override
+    public List<OrdemProducao> findAllList() {
+        return Lists.newArrayList(this.findAll());
     }
 }

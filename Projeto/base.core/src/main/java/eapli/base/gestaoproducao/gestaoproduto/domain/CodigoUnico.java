@@ -34,14 +34,14 @@ public class CodigoUnico implements ValueObject, Serializable, Comparable<Codigo
             throw new IllegalDomainValueException("O código único deve existir e não ser vazio", IllegalDomainValueType.ILLEGAL_VALUE);
         }
 
-//        if (repo == null) {
-//            RepositoryFactory repositoryFactory = PersistenceContext.repositories();
-//            repo = repositoryFactory.produto();
-//        }
-//
-//        if (repo.produtoDeCodigoUnico(codigoUnico).isPresent()) {
-//            throw new IllegalDomainValueException("O código único indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
-//        }
+        if (repo == null) {
+            RepositoryFactory repositoryFactory = PersistenceContext.repositories();
+            repo = repositoryFactory.produto();
+        }
+
+        if (repo.produtoDeCodigoUnico(codigoUnico).isPresent()) {
+            throw new IllegalDomainValueException("O código único indicado já está registado", IllegalDomainValueType.ALREADY_EXISTS);
+        }
 
         this.codigoUnicoValor = codigoUnico;
     }

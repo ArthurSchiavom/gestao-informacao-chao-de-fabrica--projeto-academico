@@ -14,6 +14,8 @@ import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
+import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -23,6 +25,7 @@ import java.util.List;
 
 @XmlRootElement(name = "chaoDeFabrica")
 public class ChaoDeFabrica {
+	private final int NUMBER_OF_LISTS = 8;
 	private int emptyLists;
 
 	@XmlElementWrapper(name = "linhasDeProducao")
@@ -53,8 +56,12 @@ public class ChaoDeFabrica {
 	@XmlElement(name = "maquina")
 	private List<Maquina> listaMaquinas;
 
+	@XmlElementWrapper(name = "ordensDeProducao")
+	@XmlElement(name = "ordemProducao")
+	private List<OrdemProducao> listaOrdensProducao;
+
 	ChaoDeFabrica() {
-		emptyLists = 7;
+		emptyLists = NUMBER_OF_LISTS;
 	}
 
 	/**
@@ -70,63 +77,88 @@ public class ChaoDeFabrica {
 		loadMateriais();
 		loadFichasProducao();
 		loadMaquinas();
-		return verifyAllIsLoaded();
+		loadOrdensProducao();
+		return verifyThisIsNotEmpty();
 	}
 
 	/**
-	 * Verifica que todas as listas foram carregadas
-	 * @return
+	 * Verifica que pelo menos alguma coisa foi carregada
+	 * @return true se pelo menos uma coisa foi carregada
 	 */
-	public boolean verifyAllIsLoaded() {
-		return emptyLists == 0;
+	public boolean verifyThisIsEmpty() {
+		return emptyLists == NUMBER_OF_LISTS;
+	}
+
+	/**
+	 * Verifica se o chao de fabrica carregou alguma coisa
+	 * @return verdadeiro se carregou <br> falso se nada foi carregado
+	 */
+	public boolean verifyThisIsNotEmpty() {
+		return !verifyThisIsEmpty();
 	}
 
     private boolean loadLinhasProducao() {
 		LinhaProducaoRepository lProdRepo = PersistenceContext.repositories().linhasProducao();
 		this.listaLinhaProd = lProdRepo.findAllList();
-		emptyLists--;
-		return !listaLinhaProd.isEmpty();
+		return verifyListIsNotEmpty(listaLinhaProd);
 	}
 
 	private boolean loadDepositos() {
 		DepositoRepository depoRepo = PersistenceContext.repositories().depositos();
 		this.listaDepositos = depoRepo.findAllList();
-		emptyLists--;
-		return !listaDepositos.isEmpty();
+		return verifyListIsNotEmpty(listaDepositos);
 	}
 
 	private boolean loadCategorias() {
 		CategoriaRepository catRepo = PersistenceContext.repositories().categoria();
 		this.listaCategoria = catRepo.findAllList();
-		emptyLists--;
-		return !listaCategoria.isEmpty();
+		return verifyListIsNotEmpty(listaCategoria);
 	}
 
 	private boolean loadProdutos() {
 		ProdutoRepository prodRepo = PersistenceContext.repositories().produto();
 		this.listaProdutos = prodRepo.findAllList();
-		emptyLists--;
-		return !listaProdutos.isEmpty();
+		return verifyListIsNotEmpty(listaProdutos);
 	}
 
 	private boolean loadMateriais() {
 		MaterialRepository matRepo = PersistenceContext.repositories().material();
 		this.listaMateriais = matRepo.findAllList();
-		emptyLists--;
-		return !listaMateriais.isEmpty();
+		return verifyListIsNotEmpty(listaMateriais);
 	}
 
 	private boolean loadFichasProducao() {
 		FichaDeProducaoRepository fichaProdRepo = PersistenceContext.repositories().fichaDeProducao();
 		this.listaFichasProducao = fichaProdRepo.findAllList();
-		emptyLists--;
-		return !listaFichasProducao.isEmpty();
+		return verifyListIsNotEmpty(listaFichasProducao);
 	}
 
 	private boolean loadMaquinas() {
 		MaquinaRepository maqRepo = PersistenceContext.repositories().maquinas();
 		this.listaMaquinas = maqRepo.findAllList();
-		emptyLists--;
-		return !listaMaquinas.isEmpty();
+		return verifyListIsNotEmpty(listaMaquinas);
+	}
+
+	private boolean loadOrdensProducao() {
+		OrdemProducaoRepository ordProdRepo = PersistenceContext.repositories().ordemProducao();
+		this.listaOrdensProducao = ordProdRepo.findAllList();
+		return verifyListIsNotEmpty(listaOrdensProducao);
+	}
+
+	/**
+	 * Verifica se uma lista está vazia, e se estiver
+	 * faz prepara tudo
+	 * @param lista a lista que pretendemos verificar
+	 * @param <E> o objeto de dominio da lista
+	 * @return verdadeiro se a lista não estiver fazia <br>
+	 *     falso se a lista estiver vazia
+	 */
+	private <E> boolean verifyListIsNotEmpty(List<E> lista) {
+		if(lista.isEmpty()) {
+			return false;
+		} else {
+			emptyLists--;
+			return true;
+		}
 	}
 }

@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.ordemProducao.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
 /**
@@ -13,6 +14,7 @@ public class Identificador implements ValueObject, Comparable<Identificador> {
 
     private static final long serialVersionUID = 1L;
 
+    @XmlValue
     public final String identificador;
 
     public Identificador() {

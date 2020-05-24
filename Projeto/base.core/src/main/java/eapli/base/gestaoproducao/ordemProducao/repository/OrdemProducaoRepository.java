@@ -6,6 +6,7 @@ import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorEncomenda;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.framework.domain.repositories.DomainRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface OrdemProducaoRepository  extends DomainRepository<Identificador, OrdemProducao> {
@@ -23,4 +24,5 @@ public interface OrdemProducaoRepository  extends DomainRepository<Identificador
 
     public boolean saveRewrite(OrdemProducao op);
 
+	List<OrdemProducao> findAllList();
 }

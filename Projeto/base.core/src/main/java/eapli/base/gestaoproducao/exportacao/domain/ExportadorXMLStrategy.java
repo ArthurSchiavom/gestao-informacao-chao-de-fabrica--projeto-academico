@@ -23,7 +23,7 @@ public class ExportadorXMLStrategy implements ExportadorStrategy {
 
 	@Override
 	public boolean export(String filename, ChaoDeFabrica chaoDeFabrica) {
-		if(chaoDeFabrica == null || !chaoDeFabrica.verifyAllIsLoaded()) {
+		if(chaoDeFabrica == null || chaoDeFabrica.verifyThisIsEmpty()) {
 			LOGGER.error("Chão de Fábrica introduzido está vazio, não há nada para exportar");
 			return false;
 		}

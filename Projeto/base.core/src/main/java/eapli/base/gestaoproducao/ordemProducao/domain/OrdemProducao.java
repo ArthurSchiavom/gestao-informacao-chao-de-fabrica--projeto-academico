@@ -6,6 +6,9 @@ import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,17 +22,30 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
     @Version
     private Long version;
 
+    @XmlAttribute
     @EmbeddedId
     public final Identificador identificador;
+    @XmlElement
     private QuantidadeAProduzir quantidadeAProduzir;
+    @XmlElementWrapper(name = "encomendas")
+    @XmlElement(name = "identificadorEncomenda")
     @ElementCollection // to store a List which is a Collection
     private List<IdentificadorEncomenda> identificadorEncomendaList;
+    //TODO Diogo muda isto para LocalDate
+    @XmlElement
     public final Date dataEmissao;
+    @XmlElement
     public final Date dataPrevistaExecucao;
+    @XmlElement
     public Date fimExecucao;
+    @XmlElement
     public Date inicioExecucao;
+    @XmlElement
     private Estado estado;
     @OneToMany
+    @XmlElementWrapper(name = "produtos")
+    @XmlElement(name = "codigoProduto")
+    //TODO Diogo muda isto para CodigoUnico
     private List<Produto> produtos;
 
     /**
