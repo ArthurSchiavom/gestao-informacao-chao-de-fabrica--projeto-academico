@@ -58,7 +58,7 @@ public class EspecificarMaquinaController {
                 incrementarMaquinasComOrdemIgualOuSuperior(escolha, ordem);
             }
             return repositoryMaquinas.save(new Maquina(numeroSerie, codInterno, ordemLinhaProducao,
-                    identificadorProtocoloCom, descricao, marca, modelo, linha.identifier));
+                    identificadorProtocoloCom, descricao, marca, modelo, linha));
 
 
         } catch (IllegalArgumentException | RollbackException ex) {

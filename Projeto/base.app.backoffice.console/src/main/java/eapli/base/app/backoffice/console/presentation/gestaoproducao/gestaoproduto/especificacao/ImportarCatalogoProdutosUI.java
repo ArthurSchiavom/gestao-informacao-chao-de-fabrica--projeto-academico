@@ -5,7 +5,7 @@ import eapli.base.app.common.console.presentation.interaction.OptionSelector;
 import eapli.base.app.common.console.presentation.interaction.UserInteractionFlow;
 import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ImportarCatalogoCsvProdutosController;
 import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ImportarCatalogoProdutosController;
-import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoCatalogoProdutos;
+import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinha;
 import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
@@ -24,7 +24,7 @@ public class ImportarCatalogoProdutosUI extends AbstractUI {
         optionSelector.show();
 
         ImportarCatalogoProdutosController controller = new ImportarCatalogoCsvProdutosController();
-        ResultadoImportacaoCatalogoProdutos resultado = controller.iniciar(caminho, substituir.val);
+        ResultadoImportacaoLinhaALinha resultado = controller.iniciar(caminho, substituir.val);
 
         System.out.println("\n\n" + ResultadoImportacaoFicheiroPresentationUtils.construirMensagemResultado(resultado) + "\n");
         UserInteractionFlow.enterToContinue();
