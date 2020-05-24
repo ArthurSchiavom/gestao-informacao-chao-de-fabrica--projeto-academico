@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 
 public class ProdutoTest {
@@ -63,12 +63,12 @@ public class ProdutoTest {
      */
     @Test
     public void testValueOf() throws Exception {
-        assertThrows(IllegalArgumentException.class, ()-> Produto.valueOf(null, categoriaDeProduto, codigoComercial, descricaoBreve, descricaoCompleta, UnidadeDeMedida.KILOGRAMA));
-        assertThrows(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, null, codigoComercial, descricaoBreve, descricaoCompleta, UnidadeDeMedida.KILOGRAMA));
-        assertThrows(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, categoriaDeProduto, null, descricaoBreve, descricaoCompleta, UnidadeDeMedida.KILOGRAMA));
-        assertThrows(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, categoriaDeProduto, codigoComercial, null, descricaoCompleta, UnidadeDeMedida.KILOGRAMA));
-        assertThrows(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, categoriaDeProduto, codigoComercial, descricaoBreve, null, UnidadeDeMedida.KILOGRAMA));
-        assertThrows(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, categoriaDeProduto, codigoComercial, descricaoBreve, descricaoCompleta, null));
+        assertUtils(IllegalArgumentException.class, ()-> Produto.valueOf(null, categoriaDeProduto, codigoComercial, descricaoBreve, descricaoCompleta, UnidadeDeMedida.KILOGRAMA));
+        assertUtils(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, null, codigoComercial, descricaoBreve, descricaoCompleta, UnidadeDeMedida.KILOGRAMA));
+        assertUtils(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, categoriaDeProduto, null, descricaoBreve, descricaoCompleta, UnidadeDeMedida.KILOGRAMA));
+        assertUtils(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, categoriaDeProduto, codigoComercial, null, descricaoCompleta, UnidadeDeMedida.KILOGRAMA));
+        assertUtils(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, categoriaDeProduto, codigoComercial, descricaoBreve, null, UnidadeDeMedida.KILOGRAMA));
+        assertUtils(IllegalArgumentException.class, ()-> Produto.valueOf(codigoUnico, categoriaDeProduto, codigoComercial, descricaoBreve, descricaoCompleta, null));
 
         Produto p = Produto.valueOf(codigoUnico, categoriaDeProduto, codigoComercial, descricaoBreve, descricaoCompleta, UnidadeDeMedida.GRAMA);
         assertNull(p.fichaDeProducao);

@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -36,9 +36,9 @@ public class CodigoUnicoTest {
      */
     @Test
     public void testValueOf() throws IllegalDomainValueException {
-        assertThrows(IllegalDomainValueException.class, () -> CodigoUnico.valueOf("test", produtoRepositoryIsPresent));
-        assertThrows(IllegalArgumentException.class, () -> CodigoUnico.valueOf(null, produtoRepositoryIsNotPresent));
-        assertThrows(IllegalDomainValueException.class, () -> CodigoUnico.valueOf("", produtoRepositoryIsNotPresent));
+        assertUtils(IllegalDomainValueException.class, () -> CodigoUnico.valueOf("test", produtoRepositoryIsPresent));
+        assertUtils(IllegalArgumentException.class, () -> CodigoUnico.valueOf(null, produtoRepositoryIsNotPresent));
+        assertUtils(IllegalDomainValueException.class, () -> CodigoUnico.valueOf("", produtoRepositoryIsNotPresent));
 
         CodigoUnico c = CodigoUnico.valueOf("test", produtoRepositoryIsNotPresent);
         assertEquals(c.codigoUnicoValor, "test");

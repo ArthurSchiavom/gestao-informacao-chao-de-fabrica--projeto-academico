@@ -3,7 +3,7 @@ package eapli.base.gestaoproducao.gestaoproduto.domain;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import org.junit.Test;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.*;
 
 /** 
@@ -23,7 +23,7 @@ public class DescricaoCompletaTest {
         DescricaoCompleta desc = DescricaoCompleta.valueOf("hello");
         assertEquals(desc.descricaoCompletaValor, "hello");
 
-        assertThrows(IllegalDomainValueException.class, () -> DescricaoCompleta.valueOf(""));
+        assertUtils(IllegalDomainValueException.class, () -> DescricaoCompleta.valueOf(""));
     }
 
     @Test(expected = IllegalArgumentException.class)

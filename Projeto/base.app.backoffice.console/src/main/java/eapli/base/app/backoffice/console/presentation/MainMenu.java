@@ -28,6 +28,9 @@ import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
+import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ConsultarOrdemProducaoByEncomendaUI;
+import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ConsultarOrdemProducaoByEstadoUI;
+import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ImportarOrdensProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao.EspecificarDepositoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaolinhaproducao.especificacao.EspecificarLinhaProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao.EspecificarMaquinaAction;
@@ -77,7 +80,10 @@ public class MainMenu extends AbstractUI {
 	private static final int REGISTAR_MATERIAL = 3;
 	private static final int CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO = 4;
 	private static final int REGISTAR_FICHA_DE_PRODUCAO = 5;
-	private static final int REGISTAR_PRODUTO_CATALOGO = 6;
+	private static final int REGISTAR_PRODUTO_CATALOGO=6;
+	private static final int IMPORTAR_ORDENS_PRODUCAO = 7;
+	private static final int CONSULTAR_ORDEM_PRODUCAO_ENCOMENDA = 8;
+	private static final int CONSULTAR_ORDEM_PRODUCAO_ESTADO = 9;
 
 
 	// GESTOR CHAO DE FÁBRICA
@@ -201,7 +207,10 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO, "Produtos Sem Ficha de Produção", new ConsultarProdutosSemFichaDeProducaoAction());
 		menu.addItem(REGISTAR_FICHA_DE_PRODUCAO, "Registar Ficha de Produção",
 				new EspecificarFichaDeProducaoAction());
-		menu.addItem(REGISTAR_PRODUTO_CATALOGO, "Adicionar novo produto no catalogo", new EspecificarProdutoAction());
+		menu.addItem(REGISTAR_PRODUTO_CATALOGO,"Adicionar novo produto no catalogo", new EspecificarProdutoAction());
+		menu.addItem(IMPORTAR_ORDENS_PRODUCAO,"Importar ordens de produção", new ImportarOrdensProducaoUI()::show);
+		menu.addItem(CONSULTAR_ORDEM_PRODUCAO_ENCOMENDA,"Consultar ordens de produção pelo identificador da encomenda", new ConsultarOrdemProducaoByEncomendaUI()::show);
+		menu.addItem(CONSULTAR_ORDEM_PRODUCAO_ESTADO,"Consultar ordens de produção pelo estado", new ConsultarOrdemProducaoByEstadoUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

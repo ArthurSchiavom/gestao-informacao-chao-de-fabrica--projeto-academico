@@ -1,2 +1,6 @@
-CódigoFabrico;CódigoComercial;Descrição Breve;Descrição Completa;Unidade;Categoria
-1000001;3200a30000001asd;Aglomerado Negro;Aglomerado Negro;UN;ME-AN
+Identificador;Quantidade a produzir;Data emissão;Data prevista execução;Data fim execução,Data início execução;Estado;EncomendasID 
+1111111;15;15-10-2013;15-12-2015;18-12-2015;17-12-2015;CONCLUIDA;2,3,4,5,6
+1111112;15;15-10-2013;15-12-2015;18-12-2015;17-12-2015;CONCLUIDA;113,420
+1111113;15;15-10-2013;15-12-2016;18-12-2016;17-12-2016;CONCLUIDA;1
+1111114;15;15-10-2013;13-12-2015;18-12-2015;17-12-2015;CONCLUIDA;
+1111115;15;15-10-2013;16-12-2015;18-12-2015;17-12-2015;CONCLUIDA;123

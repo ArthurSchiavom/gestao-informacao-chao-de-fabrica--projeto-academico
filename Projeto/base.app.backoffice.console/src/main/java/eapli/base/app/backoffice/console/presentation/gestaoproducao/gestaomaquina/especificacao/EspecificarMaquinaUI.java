@@ -32,30 +32,36 @@ public class EspecificarMaquinaUI extends AbstractUI {
         if (escolha != 0) {
 
             final int ordemLinhaProducao = Console.readInteger("Insira a posição na linha de produção");
-            boolean existeMaquinaNaLinhaNaOrdem = theController.existeMaquinaEmLinhaProducaoNaOrdem(escolha,ordemLinhaProducao);
+            boolean existeMaquinaNaLinhaNaOrdem = theController.existeMaquinaEmLinhaProducaoNaOrdem(escolha,
+                    ordemLinhaProducao);
 
-            if(existeMaquinaNaLinhaNaOrdem){
+            if (existeMaquinaNaLinhaNaOrdem) {
                 System.out.println("Já existe uma máquina nessa linha de produção nessa posição\n" +
                         "0. Pretende cancelar a operação\n" +
-                        "1. Meter esta máquina na posição "+ ordemLinhaProducao +" e mover as outras máquinas para as posições seguintes");
-                        final int reescrever = Console.readOption(1, 1, 0);
-                        if(reescrever == 0){
-                            System.out.println("Máquina não registada");
-                            // continua no mesmo menu
-                            return false;
-                        }
+                        "1. Meter esta máquina na posição " + ordemLinhaProducao + " e mover as outras máquinas para " +
+                        "as posições seguintes");
+                final int reescrever = Console.readOption(1, 1, 0);
+                if (reescrever == 0) {
+                    System.out.println("Máquina não registada");
+                    // continua no mesmo menu
+                    return false;
+                }
 
             }
 
-            final String codigoInterno = Console.readNonEmptyLine("Insira o código interno", "O código interno não pode ser vazio");
-            final String numeroSerie = Console.readNonEmptyLine("Insira o número de serie da máquina", "O número de série da máquina não pode ser vazio");
+            final String codigoInterno = Console.readNonEmptyLine("Insira o código interno", "O código interno não " +
+                    "pode ser vazio");
+            final String numeroSerie = Console.readNonEmptyLine("Insira o número de serie da máquina", "O número de " +
+                    "série da máquina não pode ser vazio");
             final String descricao = Console.readLine("Descrição da máquina");
             final String marca = Console.readLine("Marca da máquina");
             final String modelo = Console.readLine("Modelo da máquina");
-            final String identificadorProtocoloComunicacao = Console.readNonEmptyLine("Identificador protocolo de comunicação da máquina", "Não pode ser vazio");
+            final int identificadorProtocoloComunicacao = Console.readInteger("Identificador protocolo de " +
+                    "comunicação da máquina");
 
             try {
-                theController.registarMaquina(escolha, ordemLinhaProducao, codigoInterno, numeroSerie, descricao, marca, modelo, identificadorProtocoloComunicacao, existeMaquinaNaLinhaNaOrdem);
+                theController.registarMaquina(escolha, ordemLinhaProducao, codigoInterno, numeroSerie, descricao,
+                        marca, modelo, identificadorProtocoloComunicacao, existeMaquinaNaLinhaNaOrdem);
                 System.out.println("Máquina registada com sucesso");
                 return false;
             } catch (Exception ex) {

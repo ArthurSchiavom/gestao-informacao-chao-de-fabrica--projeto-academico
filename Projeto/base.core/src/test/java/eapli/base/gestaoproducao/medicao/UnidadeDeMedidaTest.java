@@ -2,10 +2,8 @@ package eapli.base.gestaoproducao.medicao;
 
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
 
-import static eapli.base.Utils.assertThrows;
+import static eapli.base.Utils.assertUtils;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -33,6 +31,6 @@ public class UnidadeDeMedidaTest {
         assertEquals(UnidadeDeMedida.actualValueOf("cm"), UnidadeDeMedida.CENTIMETRO);
         assertEquals(UnidadeDeMedida.actualValueOf("centímetros"), UnidadeDeMedida.CENTIMETRO);
         assertEquals(UnidadeDeMedida.actualValueOf("unidades"), UnidadeDeMedida.UNIDADES);
-        assertThrows(IllegalDomainValueException.class, () -> UnidadeDeMedida.actualValueOf("inexistente"));
+        assertUtils(IllegalDomainValueException.class, () -> UnidadeDeMedida.actualValueOf("inexistente"));
     }
 } 

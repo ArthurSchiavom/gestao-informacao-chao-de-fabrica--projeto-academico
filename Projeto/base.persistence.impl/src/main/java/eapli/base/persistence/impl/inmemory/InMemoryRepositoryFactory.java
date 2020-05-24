@@ -9,6 +9,7 @@ import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -100,6 +101,17 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	public MaquinaRepository maquinas(TransactionalContext autoTx) {
 		return maquinas(autoTx);
 	}
+
+	@Override
+	public OrdemProducaoRepository ordemProducao() {
+		return ordemProducao(null);
+	}
+
+	@Override
+	public OrdemProducaoRepository ordemProducao(TransactionalContext autoTx) {
+		return ordemProducao(autoTx);
+	}
+
 
 	public FichaDeProducaoRepository fichaDeProducao() {
 		return new InMemoryFichaDeProducaoRepository();

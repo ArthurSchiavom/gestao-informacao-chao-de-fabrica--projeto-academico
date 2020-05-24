@@ -55,7 +55,7 @@ public class CsvFileScanner implements FileScanner<String[]> {
             return false;
         }
         for (int i = 0; i < actualValues.length; i++) {
-            if (!actualValues[i].equals(expectedValues[i])) {
+            if (!actualValues[i].trim().equals(expectedValues[i].trim())) {
                 return false;
             }
         }

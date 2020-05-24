@@ -5,6 +5,7 @@ import eapli.framework.actions.Action;
 public class ImportarCatalogoProdutosAction implements Action {
     @Override
     public boolean execute() {
-        return new ImportarCatalogoProdutosUI().show();
+        throw new UnsupportedOperationException("isto nao tava feito");
+//        return new ImportarCatalogoProdutosUI().show();
     }
 }

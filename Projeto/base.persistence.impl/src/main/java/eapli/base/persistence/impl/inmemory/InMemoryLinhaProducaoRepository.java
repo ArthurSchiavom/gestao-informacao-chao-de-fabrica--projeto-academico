@@ -1,6 +1,7 @@
 package eapli.base.persistence.impl.inmemory;
 
 import com.google.common.collect.Lists;
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.EstadoProcessamentoMensagens;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;

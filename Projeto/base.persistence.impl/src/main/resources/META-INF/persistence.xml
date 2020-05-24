@@ -4,6 +4,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao</class>
+        <class>eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao</class>
         <class>eapli.base.gestaoproducao.gestaodeposito.domain.Deposito</class>
         <class>eapli.base.gestaoproducao.gestaomaterial.domain.Categoria</class>
         <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
@@ -16,7 +17,6 @@
         <class>eapli.base.gestaoproducao.gestaomaterial.domain.Material</class>
         <class>eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao</class>
         <class>eapli.base.gestaoproducao.gestaomaquina.domain.Maquina</class>
-        <class>eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/BaseDados_LAPR4_2020_G3"/>

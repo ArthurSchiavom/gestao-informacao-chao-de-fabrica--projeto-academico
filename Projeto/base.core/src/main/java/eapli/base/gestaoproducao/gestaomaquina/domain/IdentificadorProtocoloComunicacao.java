@@ -3,24 +3,29 @@ package eapli.base.gestaoproducao.gestaomaquina.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
 @Embeddable
 public class IdentificadorProtocoloComunicacao implements ValueObject, Comparable<IdentificadorProtocoloComunicacao> {
 
+    @Transient
+    private final int MAX_RANGE = 65535;
+    @Transient
+    private final int MIN_RANGE = 1;
     private static final long serialVersionUID = 1L;
 
     @XmlValue
-    public final String identificadorProtocoloComunicao;
+    public final int identificadorProtocoloComunicao;
 
     protected IdentificadorProtocoloComunicacao() {
-        identificadorProtocoloComunicao = null;
+        identificadorProtocoloComunicao = 0;
     }
 
-    public IdentificadorProtocoloComunicacao(String identificadorProtocoloComunicao) throws IllegalArgumentException{
-        if(identificadorProtocoloComunicao == null || identificadorProtocoloComunicao.trim().isEmpty()){
-            throw new IllegalArgumentException("Identificador protocolo de comunocação inválido");
+    public IdentificadorProtocoloComunicacao(int identificadorProtocoloComunicao) throws IllegalArgumentException{
+        if( identificadorProtocoloComunicao > MAX_RANGE || identificadorProtocoloComunicao < MIN_RANGE){
+            throw new IllegalArgumentException("Identificador protocolo de comunicação inválido");
         }
         this.identificadorProtocoloComunicao = identificadorProtocoloComunicao;
     }
@@ -30,7 +35,7 @@ public class IdentificadorProtocoloComunicacao implements ValueObject, Comparabl
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IdentificadorProtocoloComunicacao that = (IdentificadorProtocoloComunicacao) o;
-        return identificadorProtocoloComunicao.equals(that.identificadorProtocoloComunicao);
+        return identificadorProtocoloComunicao == that.identificadorProtocoloComunicao;
     }
 
     @Override
@@ -40,13 +45,12 @@ public class IdentificadorProtocoloComunicacao implements ValueObject, Comparabl
 
     @Override
     public String toString() {
-        return "IdentificadorProtocoloComunicacao{" +
-                "identificadorProtocoloComunicao='" + identificadorProtocoloComunicao + '\'' +
+        return "Identificador Protocolo Comunicao='" + identificadorProtocoloComunicao + '\'' +
                 '}';
     }
 
     @Override
     public int compareTo(IdentificadorProtocoloComunicacao obj) {
-        return this.identificadorProtocoloComunicao.compareTo(obj.identificadorProtocoloComunicao);
+        return this.identificadorProtocoloComunicao-obj.identificadorProtocoloComunicao;
     }
 }

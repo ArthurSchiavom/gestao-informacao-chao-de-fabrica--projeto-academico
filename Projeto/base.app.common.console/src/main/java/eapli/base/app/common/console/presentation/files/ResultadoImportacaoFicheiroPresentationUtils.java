@@ -1,12 +1,12 @@
 package eapli.base.app.common.console.presentation.files;
 
-import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoCatalogoProdutos;
-
+import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinha;
 import java.util.Map;
 
 public class ResultadoImportacaoFicheiroPresentationUtils {
 
-    public static String construirMensagemResultado(ResultadoImportacaoCatalogoProdutos resultado) {
+    //TODO: fazer isto de maneira generica para os 2
+    public static String construirMensagemResultado(ResultadoImportacaoLinhaALinha resultado) {
         StringBuilder sb = new StringBuilder();
         sb.append("Número de produtos importados com sucesso: ").append(resultado.nSucessos)
                 .append("\nNúmero de falhas: ").append(resultado.nFalhas);
