@@ -5,6 +5,7 @@ import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlValue;
 import java.io.Serializable;
 
 @Embeddable
@@ -13,6 +14,7 @@ public class DescricaoBreve implements ValueObject, Serializable, Comparable<Des
     private static final long serialVersionUID = 1L;
     private static final int MAX_CARACTERES_DESCRICAO_BREVE = 30;
 
+    @XmlValue
     public final String descricaoBreveValor;
 
     protected DescricaoBreve() {

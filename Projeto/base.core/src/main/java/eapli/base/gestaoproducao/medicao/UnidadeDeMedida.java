@@ -3,6 +3,9 @@ package eapli.base.gestaoproducao.medicao;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlValue;
+
 public enum UnidadeDeMedida {
     UNIDADES("UN", "unidades"),
     KILOGRAMA("Kg", "kilogramas"),
@@ -14,7 +17,9 @@ public enum UnidadeDeMedida {
     DECILITRO("dl", "decilitros"),
     CENTILITRO("cl", "centilitros");
 
+    @XmlElement
     public final String abreviatura;
+    @XmlElement
     public final String nome;
 
     UnidadeDeMedida(String abreviatura, String nome) {

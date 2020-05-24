@@ -7,6 +7,7 @@ import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,7 +16,9 @@ public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comp
 
     private static final long serialVersionUID = 1L;
 
+    @XmlElement
     public final QuantidadePositiva quantidade;
+    @XmlElement
     public final MateriaPrima materiaPrima;
 
     protected QuantidadeDeMateriaPrima() {

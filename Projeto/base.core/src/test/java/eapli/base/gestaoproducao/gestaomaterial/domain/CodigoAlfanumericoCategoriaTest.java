@@ -7,20 +7,20 @@ import java.lang.reflect.Field;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class CodigoAlfanumericoTest {
+public class CodigoAlfanumericoCategoriaTest {
     @Test(expected = IllegalArgumentException.class)
     public void garantirIdentificadorNaoPodeSerNull() {
-        new CodigoAlfanumerico(null);
+        new CodigoAlfanumericoCategoria(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void garantirIdentificadorNaoPodeSerStringVazia() {
-        new CodigoAlfanumerico("");
+        new CodigoAlfanumericoCategoria("");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void garantirIdentificadorNaoSerVazioComEspacos() {
-        new CodigoAlfanumerico(" ");
+        new CodigoAlfanumericoCategoria(" ");
     }
 
     @Test

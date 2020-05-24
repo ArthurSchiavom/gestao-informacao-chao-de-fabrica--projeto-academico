@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.gestaomaquina.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
 @Embeddable
@@ -10,6 +11,7 @@ public class OrdemLinhaProducao implements ValueObject, Comparable<OrdemLinhaPro
 
     private static final long serialVersionUID = 1L;
 
+    @XmlValue
     public final int ordemLinhaProducao;
 
     protected OrdemLinhaProducao() {

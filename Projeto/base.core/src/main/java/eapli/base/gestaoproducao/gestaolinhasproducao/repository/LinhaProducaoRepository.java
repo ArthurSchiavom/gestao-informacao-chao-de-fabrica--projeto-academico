@@ -4,6 +4,7 @@ import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaP
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.framework.domain.repositories.DomainRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface LinhaProducaoRepository extends DomainRepository<IdentificadorLinhaProducao, LinhaProducao> {
@@ -13,4 +14,9 @@ public interface LinhaProducaoRepository extends DomainRepository<IdentificadorL
 	 * @return a production line or null
 	 */
 	Optional<LinhaProducao> findByIdentifier(IdentificadorLinhaProducao identifier);
+
+	/**
+	 * @return a list with all fichas de produção
+	 */
+	List<LinhaProducao> findAllList();
 }

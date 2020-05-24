@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.gestaomaquina.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlValue;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ public class NumeroSerie implements ValueObject, Comparable<NumeroSerie> {
 
     private static final long serialVersionUID = 1L;
 
+    @XmlValue
     public final String numeroSerie;
     private static int maxCharsNumeroSerie;
     private static int minCharsNumeroSerie;

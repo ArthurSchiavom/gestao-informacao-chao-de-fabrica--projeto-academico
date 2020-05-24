@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.gestaomaquina.domain;
 
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -8,6 +9,10 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,35 +31,44 @@ import java.util.Date;
  *
  */
 @Entity
-public class Maquina implements AggregateRoot<CodigoInterno> {
+public class Maquina implements AggregateRoot<CodigoInternoMaquina> {
 
         @Version
         private Long version;
 
+        @XmlElement
         private NumeroSerie numeroSerie;
         @EmbeddedId
-        private CodigoInterno codigoInterno;
+        @XmlAttribute
+        private CodigoInternoMaquina codigoInternoMaquina;
+        @XmlElement
         private OrdemLinhaProducao ordemLinhaProducao;
+        @XmlElement
         private FicheiroConfiguracao ficheiroConfiguracao;
+        @XmlElement
         private IdentificadorProtocoloComunicacao identificadorProtocoloComunicacao;
+        @XmlElement
         public final Date dataInstalacao;
+        @XmlElement
         private String marca; // might change so it's not final
+        @XmlElement
         private String modelo; // might change so it's not final
+        @XmlElement
         private String descricaoMaquina; // might change so it's not final
-        @ManyToOne
-        private LinhaProducao linhaProducao;
+        @XmlElement
+        private IdentificadorLinhaProducao linhaProducao;
 
 
-        protected Maquina(){
+        public Maquina(){
                 dataInstalacao = null;
         }
 
-        public Maquina(NumeroSerie numeroSerie, CodigoInterno codigoInterno, OrdemLinhaProducao ordemLinhaProducao,
+        public Maquina(NumeroSerie numeroSerie, CodigoInternoMaquina codigoInternoMaquina, OrdemLinhaProducao ordemLinhaProducao,
                        IdentificadorProtocoloComunicacao identificadorProtocoloComunicacao, String descricao, String marca,
-                       String modelo, LinhaProducao linha) throws IllegalArgumentException{
+                       String modelo, IdentificadorLinhaProducao linha) throws IllegalArgumentException{
                 try {
                         this.numeroSerie = numeroSerie;
-                        this.codigoInterno = codigoInterno;
+                        this.codigoInternoMaquina = codigoInternoMaquina;
                         this.ordemLinhaProducao = ordemLinhaProducao;
                         this.identificadorProtocoloComunicacao = identificadorProtocoloComunicacao;
                         this.descricaoMaquina = descricao;
@@ -68,7 +82,7 @@ public class Maquina implements AggregateRoot<CodigoInterno> {
         }
 
         public static String identityAttributeName(){
-                return"codigoInterno";
+                return"codigoInternoMaquina";
         }
 
         @Override
@@ -99,10 +113,11 @@ public class Maquina implements AggregateRoot<CodigoInterno> {
         }
 
         @Override
-        public CodigoInterno identity() {
-                return this.codigoInterno;
+        public CodigoInternoMaquina identity() {
+                return this.codigoInternoMaquina;
         }
 
+        @XmlTransient
         public OrdemLinhaProducao getOrdemLinhaProducao() {
                 return ordemLinhaProducao;
         }

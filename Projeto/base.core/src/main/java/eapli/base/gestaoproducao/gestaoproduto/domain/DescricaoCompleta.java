@@ -5,6 +5,7 @@ import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlValue;
 import java.io.Serializable;
 
 @Embeddable
@@ -12,6 +13,7 @@ public class DescricaoCompleta implements ValueObject, Serializable, Comparable<
 
     private static final long serialVersionUID = 1L;
 
+    @XmlValue
     public final String descricaoCompletaValor;
 
     protected DescricaoCompleta() {

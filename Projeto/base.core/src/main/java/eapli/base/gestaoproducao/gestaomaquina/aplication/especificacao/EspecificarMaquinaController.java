@@ -1,6 +1,5 @@
 package eapli.base.gestaoproducao.gestaomaquina.aplication.especificacao;
 
-import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhaProducaoDTO;
@@ -8,11 +7,9 @@ import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhasProducaoTran
 import eapli.base.gestaoproducao.gestaomaquina.domain.*;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.framework.util.Console;
 
 import javax.persistence.RollbackException;
 import java.util.List;
-import java.util.Optional;
 
 public class EspecificarMaquinaController {
     private final LinhaProducaoRepository repositoryLinhasProducao = PersistenceContext.repositories().linhasProducao();
@@ -50,14 +47,14 @@ public class EspecificarMaquinaController {
 
             LinhaProducao linha = linhas.get(escolha-1);
             final OrdemLinhaProducao ordemLinhaProducao = new OrdemLinhaProducao(ordem);
-            final CodigoInterno codInterno = new CodigoInterno(codigoInterno);
+            final CodigoInternoMaquina codInterno = new CodigoInternoMaquina(codigoInterno);
             final NumeroSerie numeroSerie = new NumeroSerie(numero);
             final IdentificadorProtocoloComunicacao identificadorProtocoloCom = new IdentificadorProtocoloComunicacao(identificadorProtocoloComunicacao);
 
             if(existeMaquinaNaPosicao && repositoryMaquinas.findByIdentifier(codInterno) != null){
                 incrementarMaquinasComOrdemIgualOuSuperior(escolha,ordem);
             }
-            return repositoryMaquinas.save(new Maquina(numeroSerie, codInterno, ordemLinhaProducao, identificadorProtocoloCom, descricao, marca, modelo, linha));
+            return repositoryMaquinas.save(new Maquina(numeroSerie, codInterno, ordemLinhaProducao, identificadorProtocoloCom, descricao, marca, modelo, linha.identifier));
 
 
         } catch (IllegalArgumentException| RollbackException ex) {

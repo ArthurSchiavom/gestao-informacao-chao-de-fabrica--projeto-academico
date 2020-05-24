@@ -6,6 +6,9 @@ import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
 @Embeddable
@@ -17,10 +20,22 @@ public class QuantidadePositiva implements ValueObject, Comparable<QuantidadePos
     /* O hibernate falha se for final. Isto acontece a todos os valores de Embeddables que
     * pertençam outro Embeddable, que por sua vez façam parte de uma @ElementCollection + @CollectionTable
     * */
+    @XmlValue
     public double quantidadeValor;
 
     protected QuantidadePositiva() {
         quantidadeValor = 0;
+    }
+
+    /* O hibernate falha se não tiver getters e setters públicos */
+    @XmlTransient
+    public double getQuantidadeValor() {
+        return quantidadeValor;
+    }
+
+    /* O hibernate falha se não tiver getters e setters públicos */
+    public void setQuantidadeValor(double quantidadeValor) {
+        this.quantidadeValor = quantidadeValor;
     }
 
     protected QuantidadePositiva(double quantidade) throws IllegalDomainValueException {
@@ -32,16 +47,6 @@ public class QuantidadePositiva implements ValueObject, Comparable<QuantidadePos
 
     public static QuantidadePositiva valueOf(double quantidade) throws IllegalDomainValueException {
         return new QuantidadePositiva(quantidade);
-    }
-
-    /* O hibernate falha se não tiver getters e setters */
-    public double getQuantidadeValor() {
-        return quantidadeValor;
-    }
-
-    /* O hibernate falha se não tiver getters e setters */
-    public void setQuantidadeValor(double quantidadeValor) {
-        this.quantidadeValor = quantidadeValor;
     }
 
     @Override

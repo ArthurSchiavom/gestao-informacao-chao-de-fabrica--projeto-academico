@@ -6,6 +6,7 @@ import eapli.framework.domain.model.DomainEntities;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.*;
 
 @Entity
 public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> {
@@ -13,8 +14,11 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 	@Version
 	private Long version;
 
+	@XmlAttribute(name = "identificador")
 	@EmbeddedId
 	public final IdentificadorLinhaProducao identifier; // can be public bc its final
+
+	@XmlElement
 	private EstadoProcessamentoMensagens estado;
 
 	public LinhaProducao(final String identifier) {

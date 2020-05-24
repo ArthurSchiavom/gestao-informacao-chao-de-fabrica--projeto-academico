@@ -20,140 +20,140 @@ public interface RepositoryFactory {
 	/**
 	 * factory method to create a transactional context to use in the repositories
 	 *
-	 * @return
+	 * @return transactional context for use in repos
 	 */
 	TransactionalContext newTransactionalContext();
 
 	/**
 	 *
 	 * @param autoTx the transactional context to enrol
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	UserRepository users(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	UserRepository users();
 
 	/**
 	 *
 	 * @param autoTx the transactional context to enroll
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	ClientUserRepository clientUsers(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	ClientUserRepository clientUsers();
 
 	/**
 	 *
 	 * @param autoTx the transactional context to enroll
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	SignupRequestRepository signupRequests(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	SignupRequestRepository signupRequests();
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	ProdutoRepository produto();
 
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	ProdutoRepository produto(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	LinhaProducaoRepository linhasProducao();
 
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	LinhaProducaoRepository linhasProducao(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	CategoriaRepository categoria();
 
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	CategoriaRepository categoria(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	DepositoRepository depositos();
 
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	DepositoRepository depositos(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	FichaDeProducaoRepository fichaDeProducao();
 
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 	MaterialRepository material();
 
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	MaterialRepository material(TransactionalContext autoTx);
 
 	/**
 	 * repository will be created in auto transaction mode
 	 *
-	 * @return
+	 * @return repository automatic transaction mode
 	 */
 
 	MaquinaRepository maquinas();
@@ -161,7 +161,7 @@ public interface RepositoryFactory {
 	/**
 	 * @param autoTx the transactional context to enroll
 	 *
-	 * @return
+	 * @return the repository with a certain transactional context
 	 */
 	MaquinaRepository maquinas(TransactionalContext autoTx);
 }

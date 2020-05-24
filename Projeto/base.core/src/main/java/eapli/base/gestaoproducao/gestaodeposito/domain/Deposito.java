@@ -6,6 +6,8 @@ import eapli.framework.domain.model.DomainEntities;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
 public class Deposito implements AggregateRoot<CodigoDeposito> {
@@ -24,7 +26,9 @@ public class Deposito implements AggregateRoot<CodigoDeposito> {
 	}
 
 	@EmbeddedId
+	@XmlAttribute
 	private final CodigoDeposito codigo;
+	@XmlElement
 	private final String descricao;
 
 	public Deposito(String codigo, String descricao) {

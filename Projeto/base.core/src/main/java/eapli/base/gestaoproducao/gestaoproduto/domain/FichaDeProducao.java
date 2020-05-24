@@ -11,6 +11,8 @@ import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class FichaDeProducao implements AggregateRoot<Integer>, HasDTO<FichaDePr
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @XmlAttribute
     public final Integer uniqueVal;
     public static String identityAttributeName() {
         return "uniqueVal";
@@ -31,6 +34,7 @@ public class FichaDeProducao implements AggregateRoot<Integer>, HasDTO<FichaDePr
 
     @ElementCollection
     @CollectionTable
+    @XmlElement
     public List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima;
 
     public FichaDeProducao() {

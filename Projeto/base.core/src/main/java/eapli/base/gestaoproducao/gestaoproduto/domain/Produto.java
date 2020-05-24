@@ -9,6 +9,8 @@ import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
 public class Produto implements AggregateRoot<CodigoUnico>, HasDTO<ProdutoDTO> {
@@ -19,15 +21,22 @@ public class Produto implements AggregateRoot<CodigoUnico>, HasDTO<ProdutoDTO> {
     private Long version;
 
     @EmbeddedId
+    @XmlAttribute
     public CodigoUnico codigoUnico;
 
     @Column(unique=true)
+    @XmlElement
     public CodigoComercial codigoComercial;
     @OneToOne
+    @XmlElement
     public FichaDeProducao fichaDeProducao;
+    @XmlElement
     public CategoriaDeProduto categoriaDeProduto;
+    @XmlElement
     public DescricaoBreve descricaoBreve;
+    @XmlElement
     public DescricaoCompleta descricaoCompleta;
+    @XmlElement
     public UnidadeDeMedida unidadeDeMedida;
 
     protected Produto() {

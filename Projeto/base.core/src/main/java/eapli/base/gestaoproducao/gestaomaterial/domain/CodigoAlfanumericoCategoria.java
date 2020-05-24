@@ -3,16 +3,18 @@ package eapli.base.gestaoproducao.gestaomaterial.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
 @Embeddable
-public class CodigoAlfanumerico implements ValueObject, Comparable<CodigoAlfanumerico> {
+public class CodigoAlfanumericoCategoria implements ValueObject, Comparable<CodigoAlfanumericoCategoria> {
 
     private static final long serialVersionUID = 1L;
 
+    @XmlValue
     private final String codigoAlfaNumerico;
 
-    protected CodigoAlfanumerico() {
+    protected CodigoAlfanumericoCategoria() {
         codigoAlfaNumerico = null;
     }
 
@@ -23,7 +25,7 @@ public class CodigoAlfanumerico implements ValueObject, Comparable<CodigoAlfanum
      *
      * @throws IllegalArgumentException caso o codigo alfanumerico seja invalido
      */
-    public CodigoAlfanumerico(String codigoAlfanumerico) throws IllegalArgumentException{
+    public CodigoAlfanumericoCategoria(String codigoAlfanumerico) throws IllegalArgumentException{
         if(codigoAlfanumerico == null || codigoAlfanumerico.length()>10 || codigoAlfanumerico.trim().length() == 0) {
             throw new IllegalArgumentException("Código alfanumero não válido");
         }
@@ -38,7 +40,7 @@ public class CodigoAlfanumerico implements ValueObject, Comparable<CodigoAlfanum
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CodigoAlfanumerico that = (CodigoAlfanumerico) o;
+        CodigoAlfanumericoCategoria that = (CodigoAlfanumericoCategoria) o;
         return codigoAlfaNumerico.equals(that.codigoAlfaNumerico);
     }
 
@@ -53,7 +55,7 @@ public class CodigoAlfanumerico implements ValueObject, Comparable<CodigoAlfanum
     }
 
     @Override
-    public int compareTo(CodigoAlfanumerico obj) {
+    public int compareTo(CodigoAlfanumericoCategoria obj) {
         return this.codigoAlfaNumerico.compareTo(obj.codigoAlfaNumerico);
     }
 }

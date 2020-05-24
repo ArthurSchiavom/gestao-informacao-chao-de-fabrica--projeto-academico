@@ -4,12 +4,15 @@ package eapli.base.gestaoproducao.gestaolinhasproducao.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
 @Embeddable
 public class IdentificadorLinhaProducao implements ValueObject, Comparable<IdentificadorLinhaProducao> {
 	private static final long serialVersionUID = 1L;
 
+	@XmlValue
 	public final String identifier;
 
 	public IdentificadorLinhaProducao(String identifier) {
@@ -39,9 +42,7 @@ public class IdentificadorLinhaProducao implements ValueObject, Comparable<Ident
 
 	@Override
 	public String toString() {
-		return "IdentificadorLinhaProducao{" +
-				"identifier='" + identifier + '\'' +
-				'}';
+		return identifier;
 	}
 
 	@Override

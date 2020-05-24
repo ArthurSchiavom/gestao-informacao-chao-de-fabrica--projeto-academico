@@ -4,6 +4,7 @@ import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
 import eapli.framework.domain.repositories.DomainRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface DepositoRepository extends DomainRepository<CodigoDeposito, Deposito> {
@@ -13,4 +14,9 @@ public interface DepositoRepository extends DomainRepository<CodigoDeposito, Dep
 	 * @return um deposito ou null
 	 */
 	Optional<Deposito> findByCodigo(CodigoDeposito codigo);
+
+	/**
+	 * @return a list with all depositos
+	 */
+	List<Deposito> findAllList();
 }

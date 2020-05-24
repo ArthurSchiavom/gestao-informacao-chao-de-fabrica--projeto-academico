@@ -8,6 +8,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,10 +24,13 @@ import java.util.Objects;
 public class FichaTecnicaPDF implements ValueObject, Comparable<FichaTecnicaPDF> {
     private static final long serialVersionUID = 1L;
 
+    @XmlTransient
     @Transient
     public final Document fichaTecnica;
+    @XmlElement
     @Transient
     public final String path;
+    @XmlElement
     public final String nome;
 
     @Lob

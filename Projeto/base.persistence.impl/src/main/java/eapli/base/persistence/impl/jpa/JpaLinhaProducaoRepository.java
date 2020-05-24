@@ -1,5 +1,6 @@
 package eapli.base.persistence.impl.jpa;
 
+import com.google.common.collect.Lists;
 import eapli.base.Application;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
@@ -8,6 +9,7 @@ import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,5 +32,10 @@ public class JpaLinhaProducaoRepository
 		params.put(LinhaProducao.identityAttributeName(), identifier);
 		return matchOne("e."+ LinhaProducao.identityAttributeName()+"=:identifier", params);
 		//visto pelo dos profs
+	}
+
+	@Override
+	public List<LinhaProducao> findAllList() {
+		return Lists.newArrayList(this.findAll());
 	}
 }

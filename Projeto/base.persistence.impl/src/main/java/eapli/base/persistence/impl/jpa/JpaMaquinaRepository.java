@@ -1,20 +1,20 @@
 package eapli.base.persistence.impl.jpa;
 
+import com.google.common.collect.Lists;
 import eapli.base.Application;
-import eapli.base.clientusermanagement.domain.ClientUser;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
-import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
-import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInterno;
+import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInterno, CodigoInterno>
+public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInternoMaquina, CodigoInternoMaquina>
         implements MaquinaRepository {
 
     public JpaMaquinaRepository(TransactionalContext autoTx) {
@@ -27,7 +27,7 @@ public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInt
     }
 
     @Override
-    public Optional<Maquina> findByIdentifier(CodigoInterno identifier) {
+    public Optional<Maquina> findByIdentifier(CodigoInternoMaquina identifier) {
         final Map<String, Object> params = new HashMap<>();
         params.put(Maquina.identityAttributeName(), identifier);
         return matchOne("e."+ Maquina.identityAttributeName()+"=:"+Maquina.identityAttributeName(), params);
@@ -42,6 +42,11 @@ public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInt
         final Map<String, Object> params = new HashMap<>();
         params.put("linhaProducao", linhaProducao);
         return match("e.linhaProducao.identifier=:linhaProducao",params);
+    }
+
+    @Override
+    public List<Maquina> findAllList() {
+        return Lists.newArrayList(this.findAll());
     }
 
 }

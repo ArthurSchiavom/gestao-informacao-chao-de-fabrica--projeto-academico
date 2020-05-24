@@ -38,6 +38,8 @@ import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoprodu
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.EspecificarProdutoAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.ImportarCatalogoProdutosAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
+import eapli.base.gestaoproducao.exportacao.application.ExportacaoFicheiroXMLChaoDeFabricaUI;
+import eapli.base.gestaoproducao.exportacao.domain.ExportadorXMLStrategy;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -72,17 +74,17 @@ public class MainMenu extends AbstractUI {
 	// GESTOR PRODUCAO
 	private static final int REGISTAR_PRODUTO = 1;
 	private static final int REGISTAR_CATEGORIA = 2;
-	private static final int REGISTAR_MATERIAL=3;
+	private static final int REGISTAR_MATERIAL = 3;
 	private static final int CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO = 4;
 	private static final int REGISTAR_FICHA_DE_PRODUCAO = 5;
-	private static final int REGISTAR_PRODUTO_CATALOGO=6;
+	private static final int REGISTAR_PRODUTO_CATALOGO = 6;
 
 
 	// GESTOR CHAO DE FÁBRICA
 	private static final int REGISTAR_MAQUINA = 1;
 	private static final int REGISTAR_DEPOSITO = 2;
 	private static final int REGISTAR_LINHAPRODUCAO = 3;
-
+	private static final int EXPORTAR_XML = 4;
 
 
 	// SETTINGS
@@ -146,7 +148,7 @@ public class MainMenu extends AbstractUI {
 			final Menu producaoMenu = buildGestorProducaoMenu();
 			mainMenu.addSubMenu(PRODUCAO_OPTION, producaoMenu);
 			final Menu fabricaMenu = buildGestorChaoFabricaMenu();
-			mainMenu.addSubMenu(FABRICA_OPTION,fabricaMenu);
+			mainMenu.addSubMenu(FABRICA_OPTION, fabricaMenu);
 			final Menu settingsMenu = buildAdminSettingsMenu();
 			mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
 
@@ -195,11 +197,11 @@ public class MainMenu extends AbstractUI {
 
 		menu.addItem(REGISTAR_PRODUTO, "Carregar Catálogo de Produtos", new ImportarCatalogoProdutosAction());
 		menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new EspecificarCategoriaMaterialAction());
-		menu.addItem(REGISTAR_MATERIAL,"Registar material",new EspecificarMaterialAction());
+		menu.addItem(REGISTAR_MATERIAL, "Registar material", new EspecificarMaterialAction());
 		menu.addItem(CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO, "Produtos Sem Ficha de Produção", new ConsultarProdutosSemFichaDeProducaoAction());
 		menu.addItem(REGISTAR_FICHA_DE_PRODUCAO, "Registar Ficha de Produção",
 				new EspecificarFichaDeProducaoAction());
-		menu.addItem(REGISTAR_PRODUTO_CATALOGO,"Adicionar novo produto no catalogo", new EspecificarProdutoAction());
+		menu.addItem(REGISTAR_PRODUTO_CATALOGO, "Adicionar novo produto no catalogo", new EspecificarProdutoAction());
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
@@ -213,13 +215,12 @@ public class MainMenu extends AbstractUI {
 	private Menu buildGestorChaoFabricaMenu() {
 		final Menu menu = new Menu("Chao Fabrica >"); // nao tem acentos, por causa do UTF-8 no terminal
 
-		menu.addItem(REGISTAR_MAQUINA,"Registar máquina", new EspecificarMaquinaAction());
+		menu.addItem(REGISTAR_MAQUINA, "Registar Máquina", new EspecificarMaquinaAction());
 		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new EspecificarDepositoUI()::show);
 		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new EspecificarLinhaProducaoUI()::show);
+		menu.addItem(EXPORTAR_XML, "Exportar XML do Chão de Fábrica", new ExportacaoFicheiroXMLChaoDeFabricaUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
 	}
-
-
 }

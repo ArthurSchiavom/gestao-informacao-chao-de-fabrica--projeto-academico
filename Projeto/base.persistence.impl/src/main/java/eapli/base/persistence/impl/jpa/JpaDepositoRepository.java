@@ -1,5 +1,6 @@
 package eapli.base.persistence.impl.jpa;
 
+import com.google.common.collect.Lists;
 import eapli.base.Application;
 import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
@@ -8,6 +9,7 @@ import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,5 +31,10 @@ public class JpaDepositoRepository
 		params.put(Deposito.identityAttributeName(), codigo);
 		return matchOne("e."+ Deposito.identityAttributeName()+"=:codigo", params);
 
+	}
+
+	@Override
+	public List<Deposito> findAllList() {
+		return Lists.newArrayList(this.findAll());
 	}
 }

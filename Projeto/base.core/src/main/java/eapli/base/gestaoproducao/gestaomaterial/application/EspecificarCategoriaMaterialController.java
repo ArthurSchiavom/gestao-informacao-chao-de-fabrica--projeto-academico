@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.gestaomaterial.application;
 
 import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
-import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoAlfanumerico;
+import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoAlfanumericoCategoria;
 import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
@@ -16,7 +16,7 @@ public class EspecificarCategoriaMaterialController {
      */
     public Categoria registarCategoriaMaterial(final String identifier, final String descricao) throws IllegalArgumentException{
         try {
-            final CodigoAlfanumerico codigo = new CodigoAlfanumerico(identifier);
+            final CodigoAlfanumericoCategoria codigo = new CodigoAlfanumericoCategoria(identifier);
             final Categoria cat = new Categoria(codigo, descricao);
             return this.repository.save(cat);
         }catch(IllegalArgumentException ex){

@@ -10,88 +10,90 @@ import eapli.framework.domain.model.DomainEntities;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
-public class Material implements AggregateRoot<CodigoInterno>, HasDTO<MaterialDTO> {
+public class Material implements AggregateRoot<CodigoInternoMaterial>, HasDTO<MaterialDTO> {
 
-    @Version
-    private Long version;
+	@Version
+	private Long version;
 
-    @EmbeddedId
-    private CodigoInterno codigoInterno;
+	@EmbeddedId
+	@XmlAttribute
+	private CodigoInternoMaterial codigoInternoMaterial;
+
+	@XmlElement
+	private UnidadeDeMedida unidadeDeMedida;
+	@XmlElement
+	private String descricao;
+	@XmlElement
+	private FichaTecnicaPDF fichaTecnicaPDF;
+	@XmlElement
+	private CodigoAlfanumericoCategoria categoria;
 
 
-    private UnidadeDeMedida unidadeDeMedida;
-    private String descricao;
-    private FichaTecnicaPDF fichaTecnicaPDF;
+	public Material() {
+	}
 
+	/**
+	 * @param descricaoMaterial     Descricao do material
+	 * @param codigoInternoMaterial Identificador com que queremos identificar o material
+	 * @param categoria             Categoria onde se encaixa o material
+	 * @param unidadeDeMedida       Unidade de medida usada para medir o material
+	 */
+	public Material(String descricaoMaterial, CodigoInternoMaterial codigoInternoMaterial, CodigoAlfanumericoCategoria categoria, UnidadeDeMedida unidadeDeMedida, FichaTecnicaPDF fichaTecnicaPDF) {
+		if (!podeGerarMaterial(codigoInternoMaterial, unidadeDeMedida, descricaoMaterial, categoria, fichaTecnicaPDF))
+			throw new IllegalArgumentException("Nenhum valor do produto pode ser nulo");
+		this.codigoInternoMaterial = codigoInternoMaterial;
+		this.unidadeDeMedida = unidadeDeMedida;
+		this.descricao = descricaoMaterial;
+		this.categoria = categoria;
+		this.fichaTecnicaPDF = fichaTecnicaPDF;
+	}
 
-    @ManyToOne
-    private Categoria categoria;
+	public static String identityAttributeName() {
+		return Reflection.retrieveAttributeName(Material.class, CodigoInternoMaterial.class);
+	}
 
+	private boolean podeGerarMaterial(CodigoInternoMaterial codigoInternoMaterial, UnidadeDeMedida unidadeDeMedida, String descricao, CodigoAlfanumericoCategoria categoria, FichaTecnicaPDF fichaTecnicaPDF) {
+		return codigoInternoMaterial != null && categoria != null && unidadeDeMedida != null && descricao != null && fichaTecnicaPDF != null;
+	}
 
-    protected Material() {
-    }
+	@Override
+	public boolean equals(final Object o) {
+		return DomainEntities.areEqual(this, o);
+	}
 
-    /**
-     * @param descricaoMaterial Descricao do material
-     * @param codigoInterno     Identificador com que queremos identificar o material
-     * @param categoria         Categoria onde se encaixa o material
-     * @param unidadeDeMedida   Unidade de medida usada para medir o material
-     */
-    public Material(String descricaoMaterial, CodigoInterno codigoInterno, Categoria categoria, UnidadeDeMedida unidadeDeMedida, FichaTecnicaPDF fichaTecnicaPDF) {
-        if (!podeGerarMaterial(codigoInterno, unidadeDeMedida, descricaoMaterial, categoria, fichaTecnicaPDF))
-            throw new IllegalArgumentException("Nenhum valor do produto pode ser nulo");
-        this.codigoInterno = codigoInterno;
-        this.unidadeDeMedida = unidadeDeMedida;
-        this.descricao = descricaoMaterial;
-        this.categoria = categoria;
-        this.fichaTecnicaPDF = fichaTecnicaPDF;
-    }
+	@Override
+	public int hashCode() {
+		return DomainEntities.hashCode(this);
+	}
 
-    public static String identityAttributeName() {
-        return Reflection.retrieveAttributeName(Material.class, CodigoInterno.class);
-    }
+	@Override
+	public boolean sameAs(final Object other) {
+		return DomainEntities.areEqual(this, other);
+	}
 
-    private boolean podeGerarMaterial(CodigoInterno codigoInterno, UnidadeDeMedida unidadeDeMedida, String descricao, Categoria categoria, FichaTecnicaPDF fichaTecnicaPDF) {
-        return codigoInterno != null && categoria != null && unidadeDeMedida != null && descricao != null && fichaTecnicaPDF != null;
-    }
+	@Override
+	public CodigoInternoMaterial identity() {
+		return this.codigoInternoMaterial;
+	}
 
-    @Override
-    public boolean equals(final Object o) {
-        return DomainEntities.areEqual(this, o);
-    }
+	@Override
+	public String toString() {
+		return "Material{" +
+				"version=" + version +
+				", codigoInternoMaterial=" + codigoInternoMaterial +
+				", unidadeDeMedida=" + unidadeDeMedida +
+				", descricao='" + descricao + '\'' +
+				", categoria=" + categoria +
+				'}';
+	}
 
-    @Override
-    public int hashCode() {
-        return DomainEntities.hashCode(this);
-    }
-
-    @Override
-    public boolean sameAs(final Object other) {
-        return DomainEntities.areEqual(this, other);
-    }
-
-    @Override
-    public CodigoInterno identity() {
-        return this.codigoInterno;
-    }
-
-    @Override
-    public String toString() {
-        return "Material{" +
-                "version=" + version +
-                ", codigoInterno=" + codigoInterno +
-                ", unidadeDeMedida=" + unidadeDeMedida +
-                ", descricao='" + descricao + '\'' +
-                ", categoria=" + categoria +
-                '}';
-    }
-
-    @Override
-    public MaterialDTO toDTO() {
-        return new MaterialDTO(codigoInterno.codigoInternoValor, descricao, unidadeDeMedida.abreviatura, fichaTecnicaPDF.fichaTecnica, fichaTecnicaPDF.path);
-    }
+	@Override
+	public MaterialDTO toDTO() {
+		return new MaterialDTO(codigoInternoMaterial.codigoInternoValor, descricao, unidadeDeMedida.abreviatura, fichaTecnicaPDF.fichaTecnica, fichaTecnicaPDF.path);
+	}
 }

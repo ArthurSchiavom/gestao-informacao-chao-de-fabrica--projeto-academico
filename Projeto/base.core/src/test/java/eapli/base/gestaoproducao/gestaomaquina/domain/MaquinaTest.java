@@ -14,7 +14,7 @@ public class MaquinaTest {
         String identificador = Maquina.identityAttributeName();
         for (Field field : Maquina.class.getDeclaredFields()) {
             if (identificador.equals(field.getName()) &&
-                    field.getType().isAssignableFrom(CodigoInterno.class)) {
+                    field.getType().isAssignableFrom(CodigoInternoMaquina.class)) {
                 found = true;
                 break;
             }

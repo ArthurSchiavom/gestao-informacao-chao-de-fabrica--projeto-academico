@@ -5,12 +5,14 @@ import eapli.framework.domain.model.ValueObject;
 import eapli.framework.validations.StringPredicates;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
 @Embeddable
 public class CodigoDeposito implements ValueObject, Comparable<CodigoDeposito> {
 	private static final long serialVersionUID = 1L;
 
+	@XmlValue
 	private final String codigo;
 
 	public CodigoDeposito(String codigo) {

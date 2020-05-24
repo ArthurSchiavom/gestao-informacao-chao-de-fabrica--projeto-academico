@@ -13,6 +13,8 @@ import eapli.framework.domain.repositories.DomainRepository;
 
 import javax.annotation.Nullable;
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -24,8 +26,10 @@ public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPr
     /* O hibernate falha se for final. Isto acontece a todos os valores de Embeddables que
      * pertençam outro Embeddable, que por sua vez façam parte de uma @ElementCollection + @CollectionTable
      * */
+    @XmlElement
     public TipoDeMateriaPrima tipoDeMateriaPrima;
     /* O Hibernate falha se for final */
+    @XmlElement
     public String idMateria;
 
     public static long getSerialVersionUID() {
@@ -49,28 +53,19 @@ public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPr
         this.idMateria = idMateria;
     }
 
-    public static MateriaPrima valueOf(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) throws IllegalDomainValueException {
-        return new MateriaPrima(tipoDeMateriaPrima, idMateria);
-    }
-
-    /** O Hibernate falha sem este método */
-    public TipoDeMateriaPrima getTipoDeMateriaPrima() {
-        return tipoDeMateriaPrima;
-    }
-
-    /** O Hibernate falha sem este método */
-    public void setTipoDeMateriaPrima(TipoDeMateriaPrima tipoDeMateriaPrima) {
-        this.tipoDeMateriaPrima = tipoDeMateriaPrima;
-    }
-
-    /** O Hibernate falha sem este método */
+    /* O hibernate falha se não tiver getters e setters públicos */
+    @XmlTransient
     public String getIdMateria() {
         return idMateria;
     }
 
-    /** O Hibernate falha sem este método */
+    /* O hibernate falha se não tiver getters e setters públicos */
     public void setIdMateria(String idMateria) {
         this.idMateria = idMateria;
+    }
+
+    public static MateriaPrima valueOf(TipoDeMateriaPrima tipoDeMateriaPrima, String idMateria) throws IllegalDomainValueException {
+        return new MateriaPrima(tipoDeMateriaPrima, idMateria);
     }
 
     @Override

@@ -2,7 +2,7 @@ package eapli.base.persistence.impl.jpa;
 
 import com.google.common.collect.Lists;
 import eapli.base.Application;
-import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInterno;
+import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInternoMaterial;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class JpaMaterialRepository extends JpaAutoTxRepository<Material, CodigoInterno, CodigoInterno> implements MaterialRepository {
+public class JpaMaterialRepository extends JpaAutoTxRepository<Material, CodigoInternoMaterial, CodigoInternoMaterial> implements MaterialRepository {
 
     public JpaMaterialRepository(TransactionalContext autoTx) {
         super(autoTx, Material.identityAttributeName());

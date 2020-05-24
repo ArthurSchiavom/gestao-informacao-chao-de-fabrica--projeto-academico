@@ -6,28 +6,33 @@ import eapli.framework.domain.model.DomainEntities;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
-public class Categoria implements AggregateRoot<CodigoAlfanumerico> {
+public class Categoria implements AggregateRoot<CodigoAlfanumericoCategoria> {
 
     @Version
     private Long version;
 
     @EmbeddedId
-    private CodigoAlfanumerico codigoAlfanumerico;
+    @XmlAttribute(name = "codigoAlfanumerico")
+    public final CodigoAlfanumericoCategoria codigoAlfanumericoCategoria;
+    @XmlElement
     private String descricao; // might change so it's not final
 
     protected Categoria() {
+        this.codigoAlfanumericoCategoria = null;
     }
 
-    public Categoria(CodigoAlfanumerico codigoAlfanumerico, String descricao) {
-        this.codigoAlfanumerico = codigoAlfanumerico;
+    public Categoria(CodigoAlfanumericoCategoria codigoAlfanumericoCategoria, String descricao) {
+        this.codigoAlfanumericoCategoria = codigoAlfanumericoCategoria;
         this.descricao = descricao;
     }
 
 
     public static String identityAttributeName(){
-            return"codigoAlfanumerico";
+            return"codigoAlfanumericoCategoria";
     }
 
 
@@ -47,14 +52,14 @@ public class Categoria implements AggregateRoot<CodigoAlfanumerico> {
     }
 
     @Override
-    public CodigoAlfanumerico identity(){
-        return this.codigoAlfanumerico;
+    public CodigoAlfanumericoCategoria identity(){
+        return this.codigoAlfanumericoCategoria;
     }
 
     @Override
     public String toString() {
         return "Categoria{" +
-                ", codigoAlfanumerico=" + codigoAlfanumerico.obterCodigoAlfanumerico() +
+                ", codigoAlfanumericoCategoria=" + codigoAlfanumericoCategoria.obterCodigoAlfanumerico() +
                 ", descricao='" + descricao + '\'' +
                 '}';
     }

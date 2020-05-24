@@ -1,25 +1,21 @@
 package eapli.base.definircategoriamaterial.domain;
 
-import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInterno;
+import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInternoMaterial;
 import org.junit.Test;
 
-import java.io.IOException;
-
-import static org.junit.Assert.*;
-
-public class CodigoInternoTest {
+public class CodigoInternoMaterialMaquinaTest {
     @Test(expected = IllegalArgumentException.class) public void garantirCodigoInternoNaoPodeSerNull() {
-            new CodigoInterno(null);
+            new CodigoInternoMaterial(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void garantirCodigoInternoNaoPodeSerStringVazia() {
-            new CodigoInterno("");
+            new CodigoInternoMaterial("");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void garantirCodigoInternoNaoSerVazioComEspacos() {
-            new CodigoInterno(" ");
+            new CodigoInternoMaterial(" ");
     }
 
 }

@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.gestaomaterial.application;
 
 import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
-import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInterno;
+import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInternoMaterial;
 import eapli.base.gestaoproducao.gestaomaterial.domain.FichaTecnicaPDF;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
@@ -26,11 +26,11 @@ public class EspecificarMaterialController {
      * @Return Vai retornar um objecto do tipo Material e vai registar na base de dados
      */
     public Material registarMaterial(String unidadeDeMedida, String descricaoMaterial, String nomeMaterial,String path ,String conteudoFichaTecnica, String codigoInterno, Categoria categoria) throws IOException, IllegalDomainValueException {
-        final CodigoInterno codigoInt= new CodigoInterno(codigoInterno);
+        final CodigoInternoMaterial codigoInt= new CodigoInternoMaterial(codigoInterno);
         final Categoria catg = categoria;
         final UnidadeDeMedida uDeMedida = UnidadeDeMedida.actualValueOf(unidadeDeMedida);
         final FichaTecnicaPDF fichaTecnicaPDF=new FichaTecnicaPDF(path.trim(),nomeMaterial,conteudoFichaTecnica);
-        final Material material=new Material(descricaoMaterial, codigoInt, categoria,uDeMedida,fichaTecnicaPDF);
+        final Material material=new Material(descricaoMaterial, codigoInt, categoria.codigoAlfanumericoCategoria,uDeMedida,fichaTecnicaPDF);
         return  this.materialRepository.save(material);
     }
 
