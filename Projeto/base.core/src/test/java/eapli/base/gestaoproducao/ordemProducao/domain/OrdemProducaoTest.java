@@ -1,22 +1,80 @@
 package eapli.base.gestaoproducao.ordemProducao.domain;
 
+import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinha;
+import eapli.base.gestaoproducao.ordemProducao.application.ImportarOrdensProducaoController;
 import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
 public class OrdemProducaoTest {
 
-    OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), new ArrayList<>(), new Date(),
+    OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), new ArrayList<>(),
+            new Date(),
             new Date(), Estado.EM_EXECUCAO);
-    OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234), new ArrayList<>(), new Date(),
+    OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234), new ArrayList<>(),
+            new Date(),
             new Date(), Estado.EM_EXECUCAO);
-    OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123), new ArrayList<>(), new Date(),
+    OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123), new ArrayList<>(),
+            new Date(),
             new Date(), Estado.EM_EXECUCAO);
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorDataNoFuturo() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String s = "12-12-2030";
+        Date data;
+
+        try {
+            data = sdf.parse(s);
+            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123), new ArrayList<>(),
+                    data,
+                    new Date(), Estado.EM_EXECUCAO);
+
+        } catch (ParseException e) {
+        }
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorQuantidadeNegativa() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String s = "12-12-2030";
+        Date data;
+
+        try {
+            data = sdf.parse(s);
+            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(-1), new ArrayList<>(),
+                    new Date(),
+                    new Date(), Estado.EM_EXECUCAO);
+
+        } catch (ParseException e) {
+        }
+    }
+
+    @Test
+    public void testConstructorDataCorreta() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String s = "12-12-2030";
+        Date data;
+
+        try {
+            data = sdf.parse(s);
+            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123), new ArrayList<>(),
+                    new Date(),
+                    data, Estado.EM_EXECUCAO);
+
+        } catch (ParseException e) {
+        }
+    }
 
     @Test
     public void identityAttributeName() {
@@ -25,7 +83,7 @@ public class OrdemProducaoTest {
 
     @Test
     public void identity() {
-        assertEquals(op1.identity(),new Identificador("dak"));
+        assertEquals(op1.identity(), new Identificador("dak"));
     }
 
     @Test
@@ -47,8 +105,8 @@ public class OrdemProducaoTest {
         ordensDTO.add(OrdemProducao.gerarOrdensProducaoDTO(op2));
 
         int i = 0;
-        for(OrdemProducaoDTO o : ordensDTO){
-            assertEquals(ordensDTO.get(i).information,opDTO.get(i).information);
+        for (OrdemProducaoDTO o : ordensDTO) {
+            assertEquals(ordensDTO.get(i).information, opDTO.get(i).information);
             i++;
         }
     }
