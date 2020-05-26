@@ -76,7 +76,7 @@ Nota importante: Devemos usar e abusar de queries. Para uma situação como pesqui
     >>> Teórica
 
 Repositories:
-    * Fazem parte da cama de persistência.
+    * Fazem parte da camada de persistência.
     * Devem implementar uma interface, que permite a mudança de tecnologia sem impacto no funcionamento da aplicação.
     * Devem ter os métodos de pesquisa lá dentro, como findByMonth e getAverageRetailPrice. O repositório é capaz de efetuar estas pesquisas de maneira eficiente. No entanto, não devemos ter lógica de negócio na camada de persistência. Por exemplo, se tivermos o cálculo de idade, é discutível se deve estar na camada de persistência ou na de domínio. 
     >>> Teórica

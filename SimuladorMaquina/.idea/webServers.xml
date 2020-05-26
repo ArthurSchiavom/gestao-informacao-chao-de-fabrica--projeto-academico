@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b9e5fec6-c0ab-4789-b88d-98ced2f5863e" name="DEI5">
+        <fileTransfer rootFolder="/users/home/1180842" accessType="SFTP" host="ssh5.dei.isep.ipp.pt" port="22" sshConfigId="988a9d68-0110-47f3-9548-4da1537f7003" sshConfig="1180842@ssh5.dei.isep.ipp.pt:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

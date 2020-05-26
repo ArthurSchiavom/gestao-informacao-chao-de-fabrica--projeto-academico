@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="DEI5">
+    <serverData>
+      <paths name="DEI5">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/LAPR4" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-3.17.2" />
+            <excludedPath local="true" path="$PROJECT_DIR$/.idea" />
+            <excludedPath path="/LAPR4/cmake-3.17.2" />
+            <excludedPath path="/LAPR4/CMakeFiles" />
+            <excludedPath path="/LAPR4/Makefile" />
+            <excludedPath path="/LAPR4/SimuladorMaquina" />
+            <excludedPath path="/LAPR4/cmake_install.cmake" />
+            <excludedPath path="/LAPR4/cmake-3.17.2.tar.gz" />
+            <excludedPath path="/LAPR4/CMakeCache.txt" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-3.17.2" />
+            <excludedPath local="true" path="$PROJECT_DIR$/out" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

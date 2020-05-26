@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="ssh5.dei.isep.ipp.pt" id="988a9d68-0110-47f3-9548-4da1537f7003" port="22" nameFormat="DESCRIPTIVE" username="1180842" />
+      <sshConfig authType="PASSWORD" host="ssh3.dei.isep.ipp.pt" id="96eded39-9412-4bc7-a70e-ee0d7640a3b3" port="22" nameFormat="DESCRIPTIVE" username="1180842" />
+      <sshConfig authType="PASSWORD" host="ssh4.dei.isep.ipp.pt" id="cc48c880-bba3-4ba1-88e5-61f8642e528c" port="22" nameFormat="DESCRIPTIVE" username="1180842" />
+    </configs>
+  </component>
+</project>

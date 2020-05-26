@@ -1,0 +1,127 @@
+## Exemplo 1: ##
+
+### Tipos de Mensagens ###
+
+C0 -> Consumo
+C9 -> Entrega de Produção
+P1 -> Produção
+P2 -> Estorno
+S0 -> Inicio de Atividade
+S1 -> Retoma de Atividade
+S8 -> Paragem
+S9 -> Fim de Atividade
+
+
+### Estrutura das Mensagens (Formato normalizado): ###
+
+C0 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
+C9 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
+P1 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
+P2 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
+
+S0 -> Máquina;TipoMsg;DataHora;OrdemProducao
+S1 -> Máquina;TipoMsg;DataHora;Erro
+S8 -> Máquina;TipoMsg;DataHora
+S9 -> Máquina;TipoMsg;DataHora;OrdemProducao
+
+
+### Linha de Produção + Máquinas Usadas ###
+
+T3  -> Transformadora/Cortadora
+DD4 -> Transportadora
+
+Linha = T3 -> DD4
+
+### Ordem de Produção ###
+
+ID_ORDEM = 100003363
+PRODUTO A PRODUZIR = 50000106
+QUANTIDADE = 65 000 unidades
+
+### FICHA DE PRODUÇÃO ###
+
+ID_PRODUTO = 50000106
+
+Precisa de "24,4 unidades" de "32000142" por cada "1000 unidades" de "50000106".
+
+
+### Resultados ###
+
+Produção: 65 010 unidades de 50000106 divididos nos seguintes lotes:
+
+Quantidade:	Lote:
+7517		DE06191071
+11213		DE06191072
+3949		DE06191073
+3308		DE06191081
+4569		DE06191082
+4604		DE06191083
+3757		DE06191092
+2316		DE06191093
+5239		DE06191105
+2444		DE06191131
+5586		DE06191132 
+2470		DE06191133
+3093		DE06191141
+3037		DE06191142
+1908		DE06191143
+
+
+Consumos: foram consumidas 1 691 unidades de 32000142 do depósito L030.
+Estornos: foram estornadas 99 unidades de 41000651 para o depósito L030.
+
+A produção foi entregue em 2 dois depósitos L040 e L042 com a seguinte distribuição:
+
+Quantidade:	Lote:		Depósito
+7517		DE06191071	L040
+11213		DE06191072	L040
+3949		DE06191073	L040
+3308		DE06191081	L040
+4569		DE06191082	L040
+4604		DE06191083	L040
+3757		DE06191092	L040
+2316		DE06191093	L040
+5239		DE06191105	L042
+2444		DE06191131	L042
+5586		DE06191132	L042
+2470		DE06191133	L042
+3093		DE06191141	L042
+3037		DE06191142	L042
+1908		DE06191143	L042
+
+Totais entregues por depósito:
+L040 recebeu 41 233 unidades de 50000106.
+L042 recebeu 23 777 unidades de 50000106.
+
+
+DESVIOS:
+- foram produzidas mais 10 unidades de 50000106 do que o previsto na ordem de produção 100003363.
+- foram consumidas mais 104,76 unidades de 32000142 do que o estimado pela Ficha de Produção.
+
+
+TEMPOS:
+- Início/Fim da Ordem de Produção: 2019/03/26 15:14:46 até 2019/03/26 15:20:28
+- Início/Fim Operacao T3: 		   2019/03/26 15:14:46 até 2019/03/26 15:20:09
+- Início/Fim Operacao DD4: 		   2019/03/26 15:17:10 até 2019/03/26 15:20:28
+
+- Tempo Bruto Ordem Produção: 5 minutos e 42 segundos
+- Tempo Bruto T3: 5 minutos e 23 segundos
+- Tempo Bruto DD4: 3 minutos e 18 segundos
+
+(sem paragens)
+
+- Tempo Efetivo Ordem Produção: 5 minutos e 42 segundos
+- Tempo Efetivo T3: 5 minutos e 23 segundos
+- Tempo Efetivo DD4: 3 minutos e 18 segundos
+
+
+
+
+
+
+
+
+
+
+
+
