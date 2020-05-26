@@ -33,6 +33,7 @@ import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordempro
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ImportarOrdensProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao.EspecificarDepositoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaolinhaproducao.especificacao.EspecificarLinhaProducaoUI;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao.EspecificarFicheiroConfiguracaoAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao.EspecificarMaquinaAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaterial.especificacao.EspecificarCategoriaMaterialAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaterial.especificacao.EspecificarMaterialAction;
@@ -87,9 +88,10 @@ public class MainMenu extends AbstractUI {
 
 	// GESTOR CHAO DE FÁBRICA
 	private static final int REGISTAR_MAQUINA = 1;
-	private static final int REGISTAR_DEPOSITO = 2;
-	private static final int REGISTAR_LINHAPRODUCAO = 3;
-	private static final int EXPORTAR_XML = 4;
+	private static final int ASSOCIAR_FICHEIRO_CONFIGURACAO=2;
+	private static final int REGISTAR_DEPOSITO = 3;
+	private static final int REGISTAR_LINHAPRODUCAO = 4;
+	private static final int EXPORTAR_XML = 5;
 
 
 	// SETTINGS
@@ -224,6 +226,7 @@ public class MainMenu extends AbstractUI {
 		final Menu menu = new Menu("Chao Fabrica >"); // nao tem acentos, por causa do UTF-8 no terminal
 
 		menu.addItem(REGISTAR_MAQUINA, "Registar Máquina", new EspecificarMaquinaAction());
+		menu.addItem(ASSOCIAR_FICHEIRO_CONFIGURACAO,"Associar Ficheiro de Configuração",new EspecificarFicheiroConfiguracaoAction());
 		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new EspecificarDepositoUI()::show);
 		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new EspecificarLinhaProducaoUI()::show);
 		menu.addItem(EXPORTAR_XML, "Exportar XML do Chão de Fábrica", new ExportacaoFicheiroXMLChaoDeFabricaUI()::show);

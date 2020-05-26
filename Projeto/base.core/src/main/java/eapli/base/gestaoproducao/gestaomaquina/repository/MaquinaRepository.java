@@ -2,6 +2,7 @@ package eapli.base.gestaoproducao.gestaomaquina.repository;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.base.gestaoproducao.gestaomaquina.domain.FicheiroConfiguracao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.framework.domain.repositories.DomainRepository;
 
@@ -23,4 +24,7 @@ public interface MaquinaRepository extends DomainRepository<CodigoInternoMaquina
 	 * @return a list with all maquinas
 	 */
 	List<Maquina> findAllList();
+
+	List<Maquina> maquinasSemFicheiroDeConfiguracao();
+
 }

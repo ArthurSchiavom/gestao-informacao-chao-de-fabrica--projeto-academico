@@ -50,4 +50,8 @@ public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInt
         return Lists.newArrayList(this.findAll());
     }
 
+    @Override
+    public List<Maquina> maquinasSemFicheiroDeConfiguracao() {
+        return this.createQuery("SELECT p FROM Maquina p WHERE p.ficheiroConfiguracao is NULL", Maquina.class).getResultList();
+    }
 }

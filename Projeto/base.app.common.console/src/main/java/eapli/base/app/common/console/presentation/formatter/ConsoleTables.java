@@ -1,5 +1,7 @@
 package eapli.base.app.common.console.presentation.formatter;
 
+import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.MaquinaDTO;
+import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 
@@ -7,6 +9,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class ConsoleTables {
+    public static String tabelaDeMaquinas(Collection<MaquinaDTO> maquinas){
+        ArrayList<String> headers = new ArrayList<>();
+        headers.add("Numero de Serie");
+        headers.add("Código interno");
+        headers.add("Identificador Protocolo  Comunicacao");
+        headers.add("Marca");
+        headers.add("Modelo");
+        headers.add("Ordem Linha Producao");
+        headers.add("Linha de producao");
+        ArrayList<ArrayList<String>> tabelaRaw = new ArrayList<>();
+        for (MaquinaDTO maquinaDTO : maquinas) {
+            ArrayList<String> linha = new ArrayList<>();
+            linha.add(maquinaDTO.numeroSerie);
+            linha.add(maquinaDTO.codigoInterno);
+            linha.add(maquinaDTO.identificadorProtocoloComunicacao);
+            linha.add(maquinaDTO.marca);
+            linha.add(maquinaDTO.modelo);
+            linha.add(maquinaDTO.ordemLinhaProducao);
+            linha.add(maquinaDTO.identificadorLinhaProducao);
+            tabelaRaw.add(linha);
+        }
+        ConsoleTable tabela = new ConsoleTable(headers, tabelaRaw);
+        return tabela.generateTable();
+    }
     public static String tabelaDeProdutos(Collection<ProdutoDTO> produtos) {
         ArrayList<String> headers = new ArrayList<>();
         headers.add("Código de fabrico");
