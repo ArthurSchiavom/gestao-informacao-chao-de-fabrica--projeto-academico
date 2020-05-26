@@ -16,18 +16,23 @@ import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoReposi
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
-import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.infrastructure.persistence.RepositoryFactory;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+/**
+ * O chão de fábrica contem todos os elementos do dominio
+ * pertencentes ao chão de fábrica
+ * <p>
+ * Para utilizar, utilizar o Builder
+ */
 @XmlRootElement(name = "chaoDeFabrica")
 public class ChaoDeFabrica {
-	private final int NUMBER_OF_LISTS = 8;
-	private int emptyLists;
-
 	@XmlElementWrapper(name = "linhasDeProducao")
 	@XmlElement(name = "linhaDeProducao")
 	private List<LinhaProducao> listaLinhaProd;
@@ -60,105 +65,148 @@ public class ChaoDeFabrica {
 	@XmlElement(name = "ordemProducao")
 	private List<OrdemProducao> listaOrdensProducao;
 
-	ChaoDeFabrica() {
-		emptyLists = NUMBER_OF_LISTS;
+	private boolean nothingWasLoaded;
+
+	public ChaoDeFabrica(boolean nothingWasLoaded, List<LinhaProducao> listaLinhaProd, List<Deposito> listaDepositos,
+	                     List<Categoria> listaCategoria, List<Produto> listaProdutos,
+	                     List<Material> listaMateriais, List<FichaDeProducao> listaFichasProducao,
+	                     List<Maquina> listaMaquinas, List<OrdemProducao> listaOrdensProducao) {
+		this.nothingWasLoaded = nothingWasLoaded;
+		this.listaLinhaProd = listaLinhaProd;
+		this.listaDepositos = listaDepositos;
+		this.listaCategoria = listaCategoria;
+		this.listaProdutos = listaProdutos;
+		this.listaMateriais = listaMateriais;
+		this.listaFichasProducao = listaFichasProducao;
+		this.listaMaquinas = listaMaquinas;
+		this.listaOrdensProducao = listaOrdensProducao;
 	}
 
-	/**
-	 * Carrega todos os dados do chão de fábrica
-	 * @return verdadeiro se tudo o que carregou foi carregado com sucesso <br>
-	 *     falso se carregou alguma lista vazia
-	 */
-	public boolean loadAllData() {
-		loadLinhasProducao();
-		loadDepositos();
-		loadCategorias();
-		loadProdutos();
-		loadMateriais();
-		loadFichasProducao();
-		loadMaquinas();
-		loadOrdensProducao();
-		return verifyThisIsNotEmpty();
+	public ChaoDeFabrica() {
+		//For JAXB reasons
 	}
 
 	/**
 	 * Verifica que pelo menos alguma coisa foi carregada
+	 *
 	 * @return true se pelo menos uma coisa foi carregada
 	 */
-	public boolean verifyThisIsEmpty() {
-		return emptyLists == NUMBER_OF_LISTS;
+	public boolean nothingWasLoaded() {
+		return this.nothingWasLoaded;
 	}
 
-	/**
-	 * Verifica se o chao de fabrica carregou alguma coisa
-	 * @return verdadeiro se carregou <br> falso se nada foi carregado
-	 */
-	public boolean verifyThisIsNotEmpty() {
-		return !verifyThisIsEmpty();
-	}
+	public static class Builder {
+		private boolean hasLoadedNothing;
+		private final RepositoryFactory repoFact;
+		private List<LinhaProducao> listaLinhaProd;
+		private List<Deposito> listaDepositos;
+		private List<Categoria> listaCategoria;
+		private List<Produto> listaProdutos;
+		private List<Material> listaMateriais;
+		private List<FichaDeProducao> listaFichasProducao;
+		private List<Maquina> listaMaquinas;
+		private List<OrdemProducao> listaOrdensProducao;
 
-    private boolean loadLinhasProducao() {
-		LinhaProducaoRepository lProdRepo = PersistenceContext.repositories().linhasProducao();
-		this.listaLinhaProd = lProdRepo.findAllList();
-		return verifyListIsNotEmpty(listaLinhaProd);
-	}
-
-	private boolean loadDepositos() {
-		DepositoRepository depoRepo = PersistenceContext.repositories().depositos();
-		this.listaDepositos = depoRepo.findAllList();
-		return verifyListIsNotEmpty(listaDepositos);
-	}
-
-	private boolean loadCategorias() {
-		CategoriaRepository catRepo = PersistenceContext.repositories().categoria();
-		this.listaCategoria = catRepo.findAllList();
-		return verifyListIsNotEmpty(listaCategoria);
-	}
-
-	private boolean loadProdutos() {
-		ProdutoRepository prodRepo = PersistenceContext.repositories().produto();
-		this.listaProdutos = prodRepo.findAllList();
-		return verifyListIsNotEmpty(listaProdutos);
-	}
-
-	private boolean loadMateriais() {
-		MaterialRepository matRepo = PersistenceContext.repositories().material();
-		this.listaMateriais = matRepo.findAllList();
-		return verifyListIsNotEmpty(listaMateriais);
-	}
-
-	private boolean loadFichasProducao() {
-		FichaDeProducaoRepository fichaProdRepo = PersistenceContext.repositories().fichaDeProducao();
-		this.listaFichasProducao = fichaProdRepo.findAllList();
-		return verifyListIsNotEmpty(listaFichasProducao);
-	}
-
-	private boolean loadMaquinas() {
-		MaquinaRepository maqRepo = PersistenceContext.repositories().maquinas();
-		this.listaMaquinas = maqRepo.findAllList();
-		return verifyListIsNotEmpty(listaMaquinas);
-	}
-
-	private boolean loadOrdensProducao() {
-		OrdemProducaoRepository ordProdRepo = PersistenceContext.repositories().ordemProducao();
-		this.listaOrdensProducao = ordProdRepo.findAllList();
-		return verifyListIsNotEmpty(listaOrdensProducao);
-	}
-
-	/**
-	 * Verifica se uma lista está vazia, e se estiver
-	 * faz prepara tudo
-	 * @param lista a lista que pretendemos verificar
-	 * @param <E> o objeto de dominio da lista
-	 * @return verdadeiro se a lista não estiver fazia <br>
-	 *     falso se a lista estiver vazia
-	 */
-	private <E> boolean verifyListIsNotEmpty(List<E> lista) {
-		if(lista.isEmpty()) {
-			return false;
-		} else {
-			emptyLists--;
-			return true;
+		public Builder(RepositoryFactory repoFact) {
+			this.hasLoadedNothing = true;
+			this.repoFact = repoFact;
+			this.listaLinhaProd = new ArrayList<>();
+			this.listaDepositos = new ArrayList<>();
+			this.listaCategoria = new ArrayList<>();
+			this.listaProdutos = new ArrayList<>();
+			this.listaMateriais = new ArrayList<>();
+			this.listaFichasProducao = new ArrayList<>();
+			this.listaMaquinas = new ArrayList<>();
+			this.listaOrdensProducao = new ArrayList<>();
 		}
+
+		public Builder loadLinhasProducao() {
+			LinhaProducaoRepository lProdRepo = repoFact.linhasProducao();
+			this.listaLinhaProd = lProdRepo.findAllList();
+			verifyListIsNotEmpty(listaLinhaProd);
+			return this;
+		}
+
+		public Builder loadDepositos() {
+			DepositoRepository depoRepo = repoFact.depositos();
+			this.listaDepositos = depoRepo.findAllList();
+			verifyListIsNotEmpty(listaDepositos);
+			return this;
+		}
+
+		public Builder loadCategorias() {
+			CategoriaRepository catRepo = repoFact.categoria();
+			this.listaCategoria = catRepo.findAllList();
+			verifyListIsNotEmpty(listaCategoria);
+			return this;
+		}
+
+		public Builder loadProdutos() {
+			ProdutoRepository prodRepo = repoFact.produto();
+			this.listaProdutos = prodRepo.findAllList();
+			verifyListIsNotEmpty(listaProdutos);
+			return this;
+		}
+
+		public Builder loadMateriais() {
+			MaterialRepository matRepo = repoFact.material();
+			this.listaMateriais = matRepo.findAllList();
+			verifyListIsNotEmpty(listaMateriais);
+			return this;
+		}
+
+		public Builder loadFichasProducao() {
+			FichaDeProducaoRepository fichaProdRepo = repoFact.fichaDeProducao();
+			this.listaFichasProducao = fichaProdRepo.findAllList();
+			verifyListIsNotEmpty(listaFichasProducao);
+			return this;
+		}
+
+		public Builder loadMaquinas() {
+			MaquinaRepository maqRepo = repoFact.maquinas();
+			this.listaMaquinas = maqRepo.findAllList();
+			verifyListIsNotEmpty(listaMaquinas);
+			return this;
+		}
+
+		public Builder loadOrdensProducao(Date dataAFiltrar) {
+			OrdemProducaoRepository ordProdRepo = repoFact.ordemProducao();
+			this.listaOrdensProducao = ordProdRepo.findAllwithDateAfter(dataAFiltrar);
+			verifyListIsNotEmpty(listaOrdensProducao);
+			return this;
+		}
+
+		public void loadTemposDeProducao(Date dataAFiltrar) {
+			throw new UnsupportedOperationException("Tempos de Produção ainda não foram implementados");
+		}
+
+		public void loadDesvios(Date dataAFiltrar) {
+			throw new UnsupportedOperationException("Desvios não foram implementados");
+		}
+
+		/**
+		 * Verifica se uma lista está vazia, e se estiver
+		 * faz prepara tudo
+		 *
+		 * @param list a lista que pretendemos verificar
+		 * @param <E>  o objeto de dominio da lista
+		 * @return verdadeiro se a lista não estiver fazia <br>
+		 * falso se a lista estiver vazia
+		 */
+		private <E> boolean verifyListIsNotEmpty(List<E> list) {
+			if (list.isEmpty()) {
+				return false;
+			} else {
+				hasLoadedNothing = false;
+				return true;
+			}
+		}
+
+		public ChaoDeFabrica build() {
+			return new ChaoDeFabrica(hasLoadedNothing, listaLinhaProd, listaDepositos,
+					listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas,
+					listaOrdensProducao);
+		}
+
 	}
 }

@@ -22,7 +22,6 @@ public class LinhaProducaoBootstrapper implements Action {
 	private void registar(final String identifier) {
 		try {
 			controller.registarLinhaProducao(identifier);
-			LOGGER.info(identifier);
 		} catch (final IntegrityViolationException | ConcurrencyException e) {
 			LOGGER.warn("Assuming {} already exists (activate trace log for details)", identifier);
 			LOGGER.trace("Assuming existing record", e);

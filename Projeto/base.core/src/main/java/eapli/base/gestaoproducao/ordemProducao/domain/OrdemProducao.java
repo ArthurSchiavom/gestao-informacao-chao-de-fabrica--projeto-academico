@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.ordemProducao.domain;
 
+import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
-import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,26 +24,38 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
     @XmlAttribute
     @EmbeddedId
     public final Identificador identificador;
+
     @XmlElement
     private QuantidadeAProduzir quantidadeAProduzir;
+
     @XmlElementWrapper(name = "encomendas")
-    @XmlElement(name = "identificadorEncomenda")
+    @XmlElement(name = "idEncomenda")
     @ElementCollection // to store a List which is a Collection
     private List<IdentificadorEncomenda> identificadorEncomendaList;
+
     @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     @Temporal(TemporalType.DATE)
     public final Date dataEmissao;
+
     @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     @Temporal(TemporalType.DATE)
     public final Date dataPrevistaExecucao;
+
     @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     @Temporal(TemporalType.DATE)
     public Date fimExecucao;
+
     @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     @Temporal(TemporalType.DATE)
     public Date inicioExecucao;
+
     @XmlElement
     private Estado estado;
+
     @ElementCollection
     @XmlElementWrapper(name = "produtos")
     @XmlElement(name = "codigoProduto")

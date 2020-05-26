@@ -22,7 +22,6 @@ public class DepositoBootstrapper implements Action {
 	private void registar(String codigo, String descricao) {
 		try {
 			controller.registarDeposito(codigo, descricao);
-			LOGGER.info(codigo);
 		} catch (final IntegrityViolationException | ConcurrencyException e) {
 			LOGGER.warn("Assuming {} already exists (activate trace log for details)", codigo);
 			LOGGER.trace("Assuming existing record", e);

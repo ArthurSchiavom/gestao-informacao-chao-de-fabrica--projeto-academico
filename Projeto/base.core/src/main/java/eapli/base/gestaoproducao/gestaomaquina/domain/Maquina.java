@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.gestaomaquina.domain;
 
+import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.framework.domain.model.AggregateRoot;
@@ -10,6 +11,7 @@ import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -44,6 +46,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina> {
     @XmlElement
     private IdentificadorProtocoloComunicacao identificadorProtocoloComunicacao;
     @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public final Date dataInstalacao;
     @XmlElement
     private String marca; // might change so it's not final

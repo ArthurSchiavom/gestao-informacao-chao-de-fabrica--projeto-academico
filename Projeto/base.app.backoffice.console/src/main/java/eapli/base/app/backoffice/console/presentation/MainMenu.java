@@ -41,8 +41,7 @@ import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoprodu
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.EspecificarProdutoAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.ImportarCatalogoProdutosAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
-import eapli.base.gestaoproducao.exportacao.application.ExportacaoFicheiroXMLChaoDeFabricaUI;
-import eapli.base.gestaoproducao.exportacao.domain.ExportadorXMLStrategy;
+import eapli.base.gestaoproducao.exportacao.application.xml.ExportacaoFicheiroXMLChaoDeFabricaUI;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;

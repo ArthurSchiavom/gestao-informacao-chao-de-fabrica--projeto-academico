@@ -2,10 +2,10 @@ package eapli.base.gestaoproducao.ordemProducao.repository;
 
 import eapli.base.gestaoproducao.ordemProducao.domain.Estado;
 import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
-import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorEncomenda;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.framework.domain.repositories.DomainRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +22,7 @@ public interface OrdemProducaoRepository  extends DomainRepository<Identificador
 
     public Iterable<OrdemProducao> findOrdemProducaoByEstado(Estado estado);
 
-    public boolean saveRewrite(OrdemProducao op);
+    boolean saveRewrite(OrdemProducao op);
 
-	List<OrdemProducao> findAllList();
+    List<OrdemProducao> findAllwithDateAfter(Date dataFiltrar);
 }

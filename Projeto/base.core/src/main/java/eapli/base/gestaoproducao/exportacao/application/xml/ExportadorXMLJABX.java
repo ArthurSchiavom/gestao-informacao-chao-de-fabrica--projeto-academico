@@ -1,5 +1,7 @@
-package eapli.base.gestaoproducao.exportacao.domain;
+package eapli.base.gestaoproducao.exportacao.application.xml;
 
+import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
+import eapli.base.gestaoproducao.exportacao.domain.Exportador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,23 +11,13 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 import java.io.File;
 
-public class ExportadorXMLStrategy implements ExportadorStrategy {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ExportadorXMLStrategy.class);
+public class ExportadorXMLJABX implements Exportador {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExportadorXMLJABX.class);
 
 	@Override
-	public ChaoDeFabrica loadAllData() {
-		final ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica();
-		if(!chaoDeFabrica.loadAllData()) {
-			return null;
-		}
-		return chaoDeFabrica;
-	}
-
-	@Override
-	public boolean export(String filename, ChaoDeFabrica chaoDeFabrica) {
-		if(chaoDeFabrica == null || chaoDeFabrica.verifyThisIsEmpty()) {
-			LOGGER.error("Chão de Fábrica introduzido está vazio, não há nada para exportar");
-			return false;
+	public boolean export(File file, ChaoDeFabrica chaoDeFabrica) {
+		if(chaoDeFabrica == null || chaoDeFabrica.nothingWasLoaded()) {
+			throw new IllegalArgumentException("Chão de Fábrica introduzido está vazio, não há nada para exportar");
 		}
 
 		JAXBContext context = null;
@@ -33,6 +25,7 @@ public class ExportadorXMLStrategy implements ExportadorStrategy {
 			context = JAXBContext.newInstance(ChaoDeFabrica.class);
 		} catch (JAXBException e) {
 			LOGGER.error("Erro a criar uma nova instancia de contexto JAXB");
+			return false;
 		}
 
 		Marshaller marshaller = null;
@@ -41,6 +34,7 @@ public class ExportadorXMLStrategy implements ExportadorStrategy {
 			marshaller = context.createMarshaller();
 		} catch (JAXBException e) {
 			LOGGER.error("Erro a criar um marshaller dado o contexto");
+			return false;
 		}
 
 		try {
@@ -48,16 +42,22 @@ public class ExportadorXMLStrategy implements ExportadorStrategy {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		} catch (PropertyException e) {
 			LOGGER.error("Erro a definir o formato de output");
+			return false;
 		}
-
-		File file = new File(filename + ".xml");
 
 		try {
 			marshaller.marshal(chaoDeFabrica, file);
 		} catch (JAXBException e) {
-			LOGGER.error("Erro a exportar para XML");
+			e.printStackTrace();
+			LOGGER.error("Erro a exportar para XML. Verificar nome de ficheiro");
+			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String fileExtension() {
+		return ".xml";
 	}
 
 }
