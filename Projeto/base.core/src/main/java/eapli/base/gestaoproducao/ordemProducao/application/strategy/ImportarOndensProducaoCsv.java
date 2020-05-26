@@ -18,7 +18,8 @@ import java.util.List;
 
 public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy {
 
-    private static final String SEPARADOR = ";";
+    private static final String SEPARADOR = ",";
+    private static final String SEPARADOR_ENCOMENDAS = ";";
     private static final int INDEX_IDENTIFICADOR = 0;
     private static final int INDEX_QUANTIDADE_A_PRODUZIR = 1;
     private static final int INDEX_DATA_EMISSAO = 2;
@@ -71,8 +72,8 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
                 id = new Identificador(next[INDEX_IDENTIFICADOR]);
                 estado = Estado.valueOf(next[INDEX_ESTADO]);
                 encomendas = getEncomendas(next[INDEX_ENCOMENDAS_ID]);
-                dataEmissao = getData(next[INDEX_DATA_EMISSAO], false);
-                dataPrevistaExecucao = getData(next[INDEX_DATA_PREVISTA_EXECUCAO], false);
+                dataEmissao = getData(next[INDEX_DATA_EMISSAO]);
+                dataPrevistaExecucao = getData(next[INDEX_DATA_PREVISTA_EXECUCAO]);
 
                 try {
                     quantidadeAProduzir = new QuantidadeAProduzir(Integer.parseInt(next[INDEX_QUANTIDADE_A_PRODUZIR]));
@@ -115,19 +116,12 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
      * <p>
      * day-month-year
      */
-    private Date getData(String s, boolean validoNoFuturo) {
+    private Date getData(String s) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
         try {
             Date data = sdf.parse(s);
-            if (!validoNoFuturo) { // a data nao pode ser no futuro
-                Date dataAgora = new Date(System.currentTimeMillis());
-
-                if (data.compareTo(dataAgora) > 0) { // é no futuro e nao é valida
-                    return null;
-                }
-            }
             return data;
         } catch (ParseException e) {
             return null;
@@ -139,7 +133,7 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
      * cria instancias de todos as encomendas ID
      */
     private List<IdentificadorEncomenda> getEncomendas(String s) {
-        String[] encomendas = s.split(",");
+        String[] encomendas = s.split(SEPARADOR_ENCOMENDAS);
 
         List<IdentificadorEncomenda> lista = new ArrayList<>();
 

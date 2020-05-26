@@ -1,16 +1,14 @@
 package eapli.base.gestaoproducao.ordemProducao.domain;
 
+import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,22 +29,24 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
     @XmlElement(name = "identificadorEncomenda")
     @ElementCollection // to store a List which is a Collection
     private List<IdentificadorEncomenda> identificadorEncomendaList;
-    //TODO Diogo muda isto para LocalDate
     @XmlElement
+    @Temporal(TemporalType.DATE)
     public final Date dataEmissao;
     @XmlElement
+    @Temporal(TemporalType.DATE)
     public final Date dataPrevistaExecucao;
     @XmlElement
+    @Temporal(TemporalType.DATE)
     public Date fimExecucao;
     @XmlElement
+    @Temporal(TemporalType.DATE)
     public Date inicioExecucao;
     @XmlElement
     private Estado estado;
-    @OneToMany
+    @ElementCollection
     @XmlElementWrapper(name = "produtos")
     @XmlElement(name = "codigoProduto")
-    //TODO Diogo muda isto para CodigoUnico
-    private List<Produto> produtos;
+    private List<CodigoUnico> produtos;
 
     /**
      * Do moodle:
@@ -58,7 +58,9 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
                          List<IdentificadorEncomenda> identificadorEncomendaList, Date dataEmissao,
                          Date dataPrevistaExecucao, Estado estado) throws IllegalArgumentException {
 
-        if (dataPrevistaExecucao.compareTo(dataEmissao) >= 0) {
+        Date dataAtual = new Date(System.currentTimeMillis());
+
+        if (dataPrevistaExecucao.compareTo(dataEmissao) >= 0 && dataAtual.compareTo(dataEmissao) >= 0) {
 
             this.identificador = identificador;
             this.quantidadeAProduzir = quantidadeAProduzir;

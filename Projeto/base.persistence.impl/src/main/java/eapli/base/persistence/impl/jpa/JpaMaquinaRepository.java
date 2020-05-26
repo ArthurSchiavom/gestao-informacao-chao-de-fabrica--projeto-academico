@@ -35,13 +35,14 @@ public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInt
 
     /**
      * encontra as máquinas todas numa linha de produção
-     * @param linhaProducao a procurar
+     * @param idLinhaProd a procurar
      * @return Iterable de máquinas numa linha de produção
      */
-    public Iterable<Maquina> findByLinhaProducao(IdentificadorLinhaProducao linhaProducao){
+    public Iterable<Maquina> findByLinhaProducao(IdentificadorLinhaProducao idLinhaProd){
+        System.out.println("Linha identifier: " + idLinhaProd);
         final Map<String, Object> params = new HashMap<>();
-        params.put("linhaProducao", linhaProducao);
-        return match("e.linhaProducao.identifier=:linhaProducao",params);
+        params.put("linhaProducao", idLinhaProd);
+        return match("e.linhaProducao=:linhaProducao",params);
     }
 
     @Override
