@@ -31,6 +31,7 @@ import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSig
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ConsultarOrdemProducaoByEncomendaUI;
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ConsultarOrdemProducaoByEstadoUI;
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ImportarOrdensProducaoUI;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.exportacao.exportacaoXML.ExportacaoFicheiroXMLChaoDeFabricaUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao.EspecificarDepositoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaolinhaproducao.especificacao.EspecificarLinhaProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao.EspecificarFicheiroConfiguracaoAction;
@@ -42,7 +43,6 @@ import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoprodu
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.EspecificarProdutoAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.ImportarCatalogoProdutosAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
-import eapli.base.gestaoproducao.exportacao.application.xml.ExportacaoFicheiroXMLChaoDeFabricaUI;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;

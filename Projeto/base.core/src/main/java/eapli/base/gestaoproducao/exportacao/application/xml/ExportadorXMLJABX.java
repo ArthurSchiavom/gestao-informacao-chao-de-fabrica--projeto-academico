@@ -24,6 +24,7 @@ public class ExportadorXMLJABX implements Exportador {
 		try {
 			context = JAXBContext.newInstance(ChaoDeFabrica.class);
 		} catch (JAXBException e) {
+			e.printStackTrace();
 			LOGGER.error("Erro a criar uma nova instancia de contexto JAXB");
 			return false;
 		}
@@ -40,6 +41,7 @@ public class ExportadorXMLJABX implements Exportador {
 		try {
 			assert marshaller != null;
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "chaoDeFabrica.xsd");
 		} catch (PropertyException e) {
 			LOGGER.error("Erro a definir o formato de output");
 			return false;

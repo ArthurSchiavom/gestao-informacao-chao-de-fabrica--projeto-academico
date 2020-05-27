@@ -132,6 +132,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, HasDTO<Maqu
         this.ficheiroConfiguracao = ficheiroConfiguracao;
     }
 
+    @XmlTransient
     public FicheiroConfiguracao getFicheiroConfiguracao() {
         return ficheiroConfiguracao;
     }

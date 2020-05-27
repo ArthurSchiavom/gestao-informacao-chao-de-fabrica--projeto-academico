@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.exportacao.application.xml;
 
 import eapli.base.gestaoproducao.exportacao.application.FormatoExportacao;
-import eapli.base.gestaoproducao.exportacao.application.ServicoExportacao;
+import eapli.base.gestaoproducao.exportacao.domain.ServicoExportacao;
 
 import java.util.Date;
 

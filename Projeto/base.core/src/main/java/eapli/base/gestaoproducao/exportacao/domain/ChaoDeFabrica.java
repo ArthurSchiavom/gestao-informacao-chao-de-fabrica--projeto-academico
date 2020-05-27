@@ -21,6 +21,7 @@ import eapli.base.infrastructure.persistence.RepositoryFactory;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

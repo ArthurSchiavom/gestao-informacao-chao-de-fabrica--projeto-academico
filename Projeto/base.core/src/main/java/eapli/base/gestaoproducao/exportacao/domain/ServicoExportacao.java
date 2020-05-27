@@ -1,5 +1,8 @@
-package eapli.base.gestaoproducao.exportacao.application;
+package eapli.base.gestaoproducao.exportacao.domain;
 
+import eapli.base.gestaoproducao.exportacao.application.ExportadorFactory;
+import eapli.base.gestaoproducao.exportacao.application.FormatoExportacao;
+import eapli.base.gestaoproducao.exportacao.application.PathAdapter;
 import eapli.base.gestaoproducao.exportacao.application.xml.ExportadorXMLJABX;
 import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
 import eapli.base.gestaoproducao.exportacao.domain.Exportador;
@@ -28,6 +31,15 @@ public class ServicoExportacao {
 	 */
 	public boolean exportar(String pathStr, boolean exportarTempoProd, boolean exportarDesvios, Date dataAFiltrar,
 	                        FormatoExportacao formato) {
+		Exportador exportador = new ExportadorFactory().getEstrategiaExportacao(formato);
+		String extensao = exportador.fileExtension();
+		File path = null;
+
+		try {
+			path = PathAdapter.makeFileFromPathString(pathStr+extensao);
+		} catch (IOException e) {
+			LOGGER.error(e.getMessage());
+		}
 		RepositoryFactory repoFact = PersistenceContext.repositories();
 		ChaoDeFabrica.Builder builder = new ChaoDeFabrica.Builder(repoFact);
 		builder.loadCategorias()
@@ -44,16 +56,8 @@ public class ServicoExportacao {
 		if (exportarDesvios) {
 			builder.loadDesvios(dataAFiltrar);
 		}
-
 		ChaoDeFabrica chaoDeFabrica = builder.build();
-		Exportador exportador = new ExportadorFactory().getEstrategiaExportacao(formato);
-		String extensao = exportador.fileExtension();
-		File path = null;
-		try {
-			path = PathAdapter.makeFileFromPathString(pathStr+extensao);
-		} catch (IOException e) {
-			LOGGER.error(e.getMessage());
-		}
+
 		return exportador.export(path, chaoDeFabrica);
 	}
 }

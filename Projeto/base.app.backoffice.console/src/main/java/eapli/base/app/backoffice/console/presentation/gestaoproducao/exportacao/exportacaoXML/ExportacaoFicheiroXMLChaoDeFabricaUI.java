@@ -1,5 +1,6 @@
-package eapli.base.gestaoproducao.exportacao.application.xml;
+package eapli.base.app.backoffice.console.presentation.gestaoproducao.exportacao.exportacaoXML;
 
+import eapli.base.gestaoproducao.exportacao.application.xml.ExportacaoFicheiroXMLChaoFabricaController;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
@@ -15,7 +16,8 @@ public class ExportacaoFicheiroXMLChaoDeFabricaUI extends AbstractUI {
 		final boolean exportarTempoProd = Console.readBoolean("Pretende exportar tempos de produção? (S/N)");
 		final boolean exportarDesvios = Console.readBoolean("Pretende exportar desvios? (S/N)");
 		final Date dataAFiltrar = Console.readDate(
-				"Que data pretende filtrar? (dd-MM-yyyy)", "dd-MM-yyyy");
+				"Escolher data a partir da qual todos os registos que conteem uma data de emissão vão ser " +
+						"exportados (dd-MM-yyyy)", "dd-MM-yyyy");
 		final boolean exportacaoTeveSucesso = controller.exportar(path, exportarTempoProd, exportarDesvios, dataAFiltrar);
 		if (exportacaoTeveSucesso) {
 			System.out.println("A Exportação correu com sucesso");

@@ -33,7 +33,6 @@ public class Material implements AggregateRoot<CodigoInternoMaterial>, HasDTO<Ma
 	@XmlElement
 	private CodigoAlfanumericoCategoria categoria;
 
-
 	public Material() {
 	}
 
