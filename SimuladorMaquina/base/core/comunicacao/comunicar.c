@@ -72,7 +72,7 @@ int start_tcp_connection(char *target, char *porta) {
     }
     sock = socket(list->ai_family, list->ai_socktype, list->ai_protocol);
     if (sock == -1) {
-        perror("Falha ao tentar abrir socket.");
+        perror("Falha ao tentar abrir socket");
         freeaddrinfo(list);
         return -1;
     }
@@ -131,9 +131,7 @@ Packet_tcp receive_packet_tcp(int socket) {
 
     result.payload = received_payload;
     result.socket = socket;
-
-    printf("READ FROM SOCKET: id: %d; length: %d; %s\n", result.payload.id, result.payload.data_length, result.payload.data);
-
+    
     return result;
 }
 
