@@ -22,7 +22,7 @@ typedef struct Payload {
     unsigned char version;
     unsigned char code;
     unsigned short id;
-    unsigned int data_length;
+    unsigned short data_length;
     char *data;
 } Payload;
 

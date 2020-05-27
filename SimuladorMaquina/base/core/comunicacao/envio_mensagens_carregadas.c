@@ -54,8 +54,7 @@ _Noreturn void modulo_envio_mensagens() {
 
                     sleep(3);
 
-                    ligar_ao_servidor_central();
-                    packet.socket = socket_sistema_central;
+                    packet.socket = ligar_ao_servidor_central();
                 } else {
                     if (desconectado) {
                         desconectado = FALSE;

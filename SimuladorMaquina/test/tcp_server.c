@@ -18,40 +18,32 @@
 #define REQUEST_CODE_ACK 150
 #define REQUEST_CODE_NACK 151
 
-typedef struct Payload {
+typedef struct Payloadd {
     unsigned char version;
     unsigned char code;
     unsigned short id;
-    unsigned int data_length;
+    unsigned short data_length;
     char *data;
-} Payload;
+} Payloadd;
 
-typedef struct Packet {
-    Payload payload;
+typedef struct Packett {
+    Payloadd payload;
     int socket;
-} Packet;
+} Packett;
 
-typedef struct Built_Payload {
+typedef struct Built_Payloadd {
     int size;
     char *content;
-} Built_Payload;
-
-int reverse_bytes_int(int num) {
-    int swapped = ((num >> 24) & 0xff) | // move byte 3 to byte 0
-                  ((num << 8) & 0xff0000) | // move byte 1 to byte 2
-                  ((num >> 8) & 0xff00) | // move byte 2 to byte 1
-                  ((num << 24) & 0xff000000); // byte 0 to byte 3
-    return swapped;
-}
+} Built_Payloadd;
 
 short reverse_bytes_short(short num) {
     short swapped = (num >> 8) | (num << 8);
     return swapped;
 }
 
-Built_Payload build_payload(Payload payload) {
-    Built_Payload resultado;
-    int built_payload_size = sizeof(payload) - 4 + payload.data_length;
+Built_Payloadd build_payload(Payloadd payload) {
+    Built_Payloadd resultado;
+    int built_payload_size = 6 + payload.data_length;
     resultado.size = built_payload_size;
 
     resultado.content = malloc(built_payload_size);
@@ -62,10 +54,10 @@ Built_Payload build_payload(Payload payload) {
     unsigned short *helper_short = &(resultado.content[2]);
     *helper_short = id;
 
-    unsigned int data_length = reverse_bytes_int(payload.data_length);
-    unsigned int *helper_int = &(resultado.content[4]);
-    *helper_int = data_length;
-    strcpy(resultado.content + 8, payload.data);
+    unsigned short data_length = reverse_bytes_short(payload.data_length);
+    helper_short = &(resultado.content[4]);
+    *helper_short = data_length;
+    strcpy(resultado.content + 6, payload.data);
 
 
     return resultado;
@@ -99,8 +91,8 @@ int start_tcp_connection(char *target, char *porta) {
     return sock;
 }
 
-int send_packet_tcp(Packet packet) {
-    Built_Payload payload = build_payload(packet.payload);
+int send_packet_tcp(Packett packet) {
+    Built_Payloadd payload = build_payload(packet.payload);
     write(packet.socket, payload.content, payload.size);
 
     free(payload.content);
@@ -112,25 +104,42 @@ void close_tcp_connectionn(int socket) {
     close(socket);
 }
 
-Packet receive_packet_tcpp(int socket) {
-    Packet result;
+Packett receive_packet_tcpp(int socket) {
+    Packett result;
 
     result.socket = socket;
     read(socket, &(result.payload.version), 1);
     read(socket, &(result.payload.code), 1);
     read(socket, &(result.payload.id), 2);
-    read(socket, &(result.payload.data_length), 4);
-    result.payload.id = reverse_bytes_short(result.payload.id);
-    result.payload.data_length = reverse_bytes_int(result.payload.data_length);
+    read(socket, &(result.payload.data_length), 2);
 
-    result.payload.data = malloc(result.payload.data_length);
-    read(socket, result.payload.data, result.payload.data_length);
+    result.payload.id = reverse_bytes_short(result.payload.id);
+    result.payload.data_length = reverse_bytes_short(result.payload.id);
+
+    int success;
+    if (result.payload.data_length == 0) {
+        result.payload.data_length = 1;
+        char *dummy = malloc(1);
+        dummy[0] = 0;
+        result.payload.data = dummy;
+        success = 1;
+    }
+    else {
+        result.payload.data = malloc(result.payload.data_length);
+        success = read(socket, result.payload.data, result.payload.data_length);
+    }
+
+    if (success == -1) {
+        result.socket = -1;
+    }
+
+    printf("READ FROM SOCKET: id: %d; length: %d\n", result.payload.id, result.payload.data_length);
 
     return result;
 }
 
 int handshake(int socket) {
-    Packet packet;
+    Packett packet;
     packet.socket = socket;
     packet.payload.version = 0;
     packet.payload.code = REQUEST_CODE_HELLO;
@@ -142,7 +151,7 @@ int handshake(int socket) {
     printf("enviando packet hello\n");
     send_packet_tcp(packet);
     printf("enviado, à espera de resposta\n");
-    Packet reply = receive_packet_tcpp(socket);
+    Packett reply = receive_packet_tcpp(socket);
 
     return reply.payload.code;
 }
@@ -193,15 +202,17 @@ int main(void) {
 
 
             while (1) {
-                Payload data;
+                Payloadd data;
+//                Payloadd data = receive_packet_tcpp(newSock).payload;
+
                 data.version = 0;
                 data.code = 0;
                 read(newSock, &(data.version), 1);
                 read(newSock, &(data.code), 1);
                 read(newSock, &(data.id), 2);
-                read(newSock, &(data.data_length), 4);
+                read(newSock, &(data.data_length), 2);
                 data.id = reverse_bytes_short(data.id);
-                data.data_length = reverse_bytes_int(data.data_length);
+                data.data_length = reverse_bytes_short(data.data_length);
                 data.data = malloc(data.data_length);
                 read(newSock, data.data, data.data_length);
 
@@ -213,14 +224,16 @@ int main(void) {
 
                 free(data.data);
 
-                Packet packet;
+                Packett packet;
                 packet.socket = newSock;
                 packet.payload.version = 0;
                 packet.payload.code = 150;
                 packet.payload.id = 123;
-                packet.payload.data_length = 1;
-                packet.payload.data = malloc(1);
-                packet.payload.data[0] = 0;
+                packet.payload.data_length = 3;
+                packet.payload.data = malloc(3);
+                packet.payload.data[0] = 'Y';
+                packet.payload.data[1] = 'O';
+                packet.payload.data[2] = 0;
 
                 // test NACK
 //                if (count == 4) {

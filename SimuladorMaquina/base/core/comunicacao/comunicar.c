@@ -37,7 +37,7 @@ short reverse_bytes_short(short num) {
 
 Built_Payload build_payload(Payload payload) {
     Built_Payload resultado;
-    int built_payload_size = 8 + payload.data_length;
+    int built_payload_size = 6 + payload.data_length;
     resultado.size = built_payload_size;
 
     resultado.content = malloc(built_payload_size);
@@ -48,10 +48,10 @@ Built_Payload build_payload(Payload payload) {
     unsigned short *helper_short = &(resultado.content[2]);
     *helper_short = id;
 
-    unsigned int data_length = reverse_bytes_int(payload.data_length);
-    unsigned int *helper_int = &(resultado.content[4]);
-    *helper_int = data_length;
-    strcpy(resultado.content + 8, payload.data);
+    unsigned short data_length = reverse_bytes_short(payload.data_length);
+    helper_short = &(resultado.content[4]);
+    *helper_short = data_length;
+    strcpy(resultado.content + 6, payload.data);
 
 
     return resultado;
@@ -102,28 +102,37 @@ void close_tcp_connection(int socket) {
 Packet_tcp receive_packet_tcp(int socket) {
     Packet_tcp result;
 
-    result.socket = socket;
-    read(socket, &(result.payload.version), 1);
-    read(socket, &(result.payload.code), 1);
-    read(socket, &(result.payload.id), 2);
-    read(socket, &(result.payload.data_length), 4);
+    Payload received_payload;
+
+    received_payload.version = 0;
+    received_payload.code = 0;
+    read(socket, &(received_payload.version), 1);
+    read(socket, &(received_payload.code), 1);
+    read(socket, &(received_payload.id), 2);
+    read(socket, &(received_payload.data_length), 2);
+    received_payload.id = reverse_bytes_short(received_payload.id);
+    received_payload.data_length = reverse_bytes_short(received_payload.data_length);
 
     int success;
-    if (result.payload.data_length == 0) {
-        result.payload.data_length = 1;
+    if (received_payload.data_length == 0) {
+        received_payload.data_length = 1;
         char *dummy = malloc(1);
         dummy[0] = 0;
-        result.payload.data = dummy;
+        received_payload.data = dummy;
         success = 1;
-    }
-    else {
-        result.payload.data = malloc(result.payload.data_length);
-        success = read(socket, result.payload.data, result.payload.data_length);
+    } else {
+        received_payload.data = malloc(received_payload.data_length);
+        read(socket, received_payload.data, received_payload.data_length);
     }
 
     if (success == -1) {
         result.socket = -1;
     }
+
+    result.payload = received_payload;
+    result.socket = socket;
+
+    printf("READ FROM SOCKET: id: %d; length: %d; %s\n", result.payload.id, result.payload.data_length, result.payload.data);
 
     return result;
 }
@@ -167,88 +176,5 @@ int ligar_ao_servidor_central() {
 
     return -1;
 }
-
-//Packet_udp send_packet_udp_and_receive_reply(Packet_udp packet) { NÃO TESTADO
-//    Packet_udp resposta;
-//    resposta.payload.code = REQUEST_CODE_FAILED_TO_SEND;
-//
-//    Built_Payload built_payload = build_payload(packet.payload);
-//
-//    struct sockaddr_storage serverAddr;
-//    int sock, res, err;
-//    unsigned int serverAddrLen;
-//    struct addrinfo req, *list;
-//
-//    bzero((char *) &req, sizeof(req));
-//
-//// let getaddrinfo set the family depending on the supplied server address
-//    req.ai_family = AF_UNSPEC;
-//    req.ai_socktype = SOCK_DGRAM;
-//    err = getaddrinfo(packet.endereco, packet.porta, &req, &list);
-//    if (err) {
-//        printf("Failed to get server address, error: %s\n", gai_strerror(err));
-//        return resposta;
-//    }
-//    serverAddrLen = list->ai_addrlen;
-//
-//// store the server address for later use when sending requests
-//    memcpy(&serverAddr, list->ai_addr, serverAddrLen);
-//    freeaddrinfo(list);
-//    bzero((char *) &req, sizeof(req));
-//
-//// for the local address, request the same family as determined for the server address
-//    req.ai_family = serverAddr.ss_family;
-//    req.ai_socktype = SOCK_DGRAM;
-//    req.ai_flags = AI_PASSIVE; // local address
-//    err = getaddrinfo(NULL, "0", &req, &list); // port 0 = auto assign
-//    if (err) {
-//        printf("Failed to get local address, error: %s\n", gai_strerror(err));
-//        return resposta;
-//    }
-//    sock = socket(list->ai_family, list->ai_socktype, list->ai_protocol);
-//    if (sock == -1) {
-//        perror("Failed to open socket");
-//        freeaddrinfo(list);
-//        return resposta;
-//    }
-//    if (bind(sock, (struct sockaddr *) list->ai_addr, list->ai_addrlen) == -1) {
-//        perror("Failed to bind socket");
-//        close(sock);
-//        freeaddrinfo(list);
-//        return resposta;
-//    }
-//
-//    freeaddrinfo(list);
-//
-//    sendto(sock, built_payload.content, built_payload.size, 0, (struct sockaddr *) &serverAddr, serverAddrLen);
-//
-//    char *buffer = malloc(UDP_BUFFER_SIZE);
-//
-//    recvfrom(sock, buffer, UDP_BUFFER_SIZE, 0, (struct sockaddr *) &serverAddr, &serverAddrLen);
-//    resposta.payload.version = buffer[0];
-//    resposta.payload.code = buffer[1];
-//    unsigned short *helper_short = &(buffer[2]);
-//    resposta.payload.id = reverse_bytes_short(*helper_short);
-//    unsigned int *helper_int = &(buffer[4]);
-//    resposta.payload.data_length = reverse_bytes_int(*helper_int);
-//
-//    resposta.payload.data = malloc(resposta.payload.data_length);
-//    strcpy(resposta.payload.data, buffer + 8);
-//    free(buffer);
-//
-//    int len = strlen(packet.endereco) + 1;
-//    packet.endereco[len-1] = 0;
-//    resposta.endereco = malloc(len);
-//    strcpy(resposta.endereco, packet.endereco);
-//
-//    len = strlen(packet.porta) + 1;
-//    packet.porta[len-1] = 0;
-//    resposta.porta = malloc(len);
-//    strcpy(resposta.porta, packet.porta);
-//
-//    close(sock);
-//
-//    return resposta;
-//}
 
 

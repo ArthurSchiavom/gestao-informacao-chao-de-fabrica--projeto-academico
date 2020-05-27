@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<chaoDeFabrica>
+    <linhasDeProducao>
+        <linhaDeProducao identificador="Linha 5">
+            <estado>INATIVO</estado>
+        </linhaDeProducao>
+        <linhaDeProducao identificador="Linha 6">
+            <estado>INATIVO</estado>
+        </linhaDeProducao>
+        <linhaDeProducao identificador="Linha de Produção 1">
+            <estado>INATIVO</estado>
+        </linhaDeProducao>
+        <linhaDeProducao identificador="Linha de Produção 2">
+            <estado>INATIVO</estado>
+        </linhaDeProducao>
+    </linhasDeProducao>
+    <depositos>
+        <deposito codigo="DEP001">
+            <descricao>Deposito de Madeira</descricao>
+        </deposito>
+        <deposito codigo="DEP002">
+            <descricao>Deposito de Ferro</descricao>
+        </deposito>
+        <deposito codigo="DEP003">
+            <descricao>Deposito de Aço</descricao>
+        </deposito>
+    </depositos>
+    <categorias>
+        <categoria codigoAlfanumerico="ID-123">
+            <descricao>Metal</descricao>
+        </categoria>
+        <categoria codigoAlfanumerico="ID-122">
+            <descricao>Madeira</descricao>
+        </categoria>
+        <categoria codigoAlfanumerico="ID-121">
+            <descricao>Plástico</descricao>
+        </categoria>
+        <categoria codigoAlfanumerico="123456">
+            <descricao>metais</descricao>
+        </categoria>
+        <categoria codigoAlfanumerico="1234567">
+            <descricao>metais</descricao>
+        </categoria>
+        <categoria codigoAlfanumerico="1212344">
+            <descricao>metais</descricao>
+        </categoria>
+    </categorias>
+    <produtos>
+        <produto codigoUnico="1100001a">
+            <codigoComercial>320030000002a</codigoComercial>
+            <categoriaDeProduto>ME-AP</categoriaDeProduto>
+            <descricaoBreve>Aparas</descricaoBreve>
+            <descricaoCompleta>Aparas</descricaoCompleta>
+            <unidadeDeMedida>UNIDADES</unidadeDeMedida>
+        </produto>
+        <produto codigoUnico="1200001b">
+            <codigoComercial>320030000003b</codigoComercial>
+            <categoriaDeProduto>ME-BR</categoriaDeProduto>
+            <descricaoBreve>Amostras</descricaoBreve>
+            <descricaoCompleta>Amostras</descricaoCompleta>
+            <unidadeDeMedida>UNIDADES</unidadeDeMedida>
+        </produto>
+        <produto codigoUnico="1200002c">
+            <codigoComercial>320030000004c</codigoComercial>
+            <categoriaDeProduto>ME-BR</categoriaDeProduto>
+            <descricaoBreve>Blocos</descricaoBreve>
+            <descricaoCompleta>Blocos</descricaoCompleta>
+            <unidadeDeMedida>UNIDADES</unidadeDeMedida>
+        </produto>
+        <produto codigoUnico="1200003d">
+            <codigoComercial>320030000005d</codigoComercial>
+            <categoriaDeProduto>ME-BR</categoriaDeProduto>
+            <descricaoBreve>Blocos Borracha</descricaoBreve>
+            <descricaoCompleta>Blocos Borracha</descricaoCompleta>
+            <unidadeDeMedida>UNIDADES</unidadeDeMedida>
+        </produto>
+    </produtos>
+    <materiais>
+        <material codigoInternoMaterial="100">
+            <unidadeDeMedida>KILOGRAMA</unidadeDeMedida>
+            <descricao> É um elemento químico, símbolo Fe, de número atômico 26</descricao>
+            <fichaTecnicaPDF>
+                <nome>Ferro</nome>
+            </fichaTecnicaPDF>
+            <categoria>123456</categoria>
+        </material>
+        <material codigoInternoMaterial="101">
+            <unidadeDeMedida>KILOGRAMA</unidadeDeMedida>
+            <descricao> O aço é uma liga metálica formada essencialmente por ferro e carbono, com percentagens deste último variando entre 0,008 e 2,11%</descricao>
+            <fichaTecnicaPDF>
+                <nome>Aco</nome>
+            </fichaTecnicaPDF>
+            <categoria>1234567</categoria>
+        </material>
+        <material codigoInternoMaterial="102">
+            <unidadeDeMedida>KILOGRAMA</unidadeDeMedida>
+            <descricao> O cobre é um elemento químico de símbolo Cu (do latim cuprum), número atômico 29 (29 prótons e 29 elétrons) e de massa atómica 63,54 u.</descricao>
+            <fichaTecnicaPDF>
+                <nome>Cobre</nome>
+            </fichaTecnicaPDF>
+            <categoria>1212344</categoria>
+        </material>
+    </materiais>
+    <fichasDeProducao/>
+    <maquinas>
+        <maquina codigoInterno="123">
+            <numeroSerie>Num 1234</numeroSerie>
+            <ordemLinhaProducao>1</ordemLinhaProducao>
+            <identificadorProtocoloComunicacao>1</identificadorProtocoloComunicacao>
+            <dataInstalacao>26-05-2020</dataInstalacao>
+            <marca>sony</marca>
+            <modelo>HC-A</modelo>
+            <descricaoMaquina>DP-420</descricaoMaquina>
+            <linhaProducao>Linha 5</linhaProducao>
+        </maquina>
+        <maquina codigoInterno="1234">
+            <numeroSerie>Num 1235</numeroSerie>
+            <ordemLinhaProducao>2</ordemLinhaProducao>
+            <identificadorProtocoloComunicacao>64931</identificadorProtocoloComunicacao>
+            <dataInstalacao>26-05-2020</dataInstalacao>
+            <marca>apple</marca>
+            <modelo>HC-B</modelo>
+            <descricaoMaquina>BJ-420</descricaoMaquina>
+            <linhaProducao>Linha 5</linhaProducao>
+        </maquina>
+        <maquina codigoInterno="1235">
+            <numeroSerie>Num 1000</numeroSerie>
+            <ordemLinhaProducao>2</ordemLinhaProducao>
+            <identificadorProtocoloComunicacao>234</identificadorProtocoloComunicacao>
+            <dataInstalacao>26-05-2020</dataInstalacao>
+            <marca>samsung</marca>
+            <modelo>HC-S</modelo>
+            <descricaoMaquina>K-9</descricaoMaquina>
+            <linhaProducao>Linha 6</linhaProducao>
+        </maquina>
+    </maquinas>
+    <ordensDeProducao/>
+</chaoDeFabrica>
