@@ -13,6 +13,8 @@
 #define REQUEST_CODE_ACK 150
 #define REQUEST_CODE_NACK 151
 
+#define PAYLOAD_STATIC_DATA_SIZE 6
+
 int intervalo_entre_mensagens_segundos;
 char *endereco_sistema_central;
 int socket_sistema_central;

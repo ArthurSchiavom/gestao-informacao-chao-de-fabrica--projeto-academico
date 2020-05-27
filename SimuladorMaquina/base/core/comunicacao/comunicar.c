@@ -37,7 +37,7 @@ short reverse_bytes_short(short num) {
 
 Built_Payload build_payload(Payload payload) {
     Built_Payload resultado;
-    int built_payload_size = 6 + payload.data_length;
+    int built_payload_size = PAYLOAD_STATIC_DATA_SIZE + payload.data_length;
     resultado.size = built_payload_size;
 
     resultado.content = malloc(built_payload_size);
@@ -51,7 +51,7 @@ Built_Payload build_payload(Payload payload) {
     unsigned short data_length = reverse_bytes_short(payload.data_length);
     helper_short = &(resultado.content[4]);
     *helper_short = data_length;
-    strcpy(resultado.content + 6, payload.data);
+    strcpy(resultado.content + PAYLOAD_STATIC_DATA_SIZE, payload.data);
 
 
     return resultado;
