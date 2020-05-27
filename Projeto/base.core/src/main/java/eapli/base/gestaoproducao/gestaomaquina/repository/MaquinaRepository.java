@@ -2,6 +2,7 @@ package eapli.base.gestaoproducao.gestaomaquina.repository;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.base.gestaoproducao.gestaomaquina.domain.IdentificadorProtocoloComunicacao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.framework.domain.repositories.DomainRepository;
 
@@ -18,6 +19,8 @@ public interface MaquinaRepository extends DomainRepository<CodigoInternoMaquina
     Optional<Maquina> findByIdentifier(CodigoInternoMaquina identifier);
 
     Iterable<Maquina> findByLinhaProducao(IdentificadorLinhaProducao o);
+
+    Optional<Maquina> findByidentificadorProtocoloComunicacao(IdentificadorProtocoloComunicacao identifier);
 
 	/**
 	 * @return a list with all maquinas

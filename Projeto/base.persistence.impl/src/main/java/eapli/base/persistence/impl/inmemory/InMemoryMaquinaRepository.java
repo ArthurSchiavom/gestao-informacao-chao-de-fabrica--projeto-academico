@@ -3,6 +3,7 @@ package eapli.base.persistence.impl.inmemory;
 import com.google.common.collect.Lists;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.base.gestaoproducao.gestaomaquina.domain.IdentificadorProtocoloComunicacao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
@@ -24,6 +25,11 @@ public class InMemoryMaquinaRepository extends InMemoryDomainRepository<CodigoIn
     public Iterable<Maquina> findByLinhaProducao(IdentificadorLinhaProducao linhaProducao) {
         return null;
 
+    }
+
+    @Override
+    public Optional<Maquina> findByidentificadorProtocoloComunicacao(IdentificadorProtocoloComunicacao identifier) {
+        return Optional.empty();
     }
 
     @Override
