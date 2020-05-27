@@ -3,7 +3,13 @@ package eapli.base.gestaoproducao.gestaomaquina.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -18,8 +24,39 @@ public class FicheiroConfiguracao implements ValueObject, Comparable<FicheiroCon
     @XmlValue
     public final String descricao;
 
-    public FicheiroConfiguracao() {
-        descricao = null;
+    @XmlTransient
+    @Transient
+    public File file;
+
+    protected FicheiroConfiguracao(){
+        this.descricao=null;
+        this.file=null;
+    }
+
+    public FicheiroConfiguracao(String descricao, String nomeFicheiro) throws IOException {
+        if ((descricao.trim().length()==0 || nomeFicheiro.trim().length()==0)){
+            throw new IllegalArgumentException("Campo nao pode ser vazio!");
+        }
+        this.descricao = descricao;
+        if (!criarFicheiro(nomeFicheiro,descricao)) throw new FileNotFoundException("Caminho nao encontrado!");
+    }
+
+    private boolean criarFicheiro(String nomeFicheiro,String descricao) throws IOException {
+        String path="test_material\\ficheirosConfiguracao\\"+nomeFicheiro+".txt";
+        FileWriter myWriter;
+        File file=new File(path);
+        if (!file.exists()) {
+            if (file.createNewFile()) {
+                myWriter = new FileWriter(path);
+                myWriter.write(descricao);
+                myWriter.close();
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            throw new IOException("Ficheiro ja existente!");
+        }
     }
 
     @Override

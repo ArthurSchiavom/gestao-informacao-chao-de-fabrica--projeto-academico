@@ -7,7 +7,6 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.IdentificadorProtocoloComu
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -35,5 +34,10 @@ public class InMemoryMaquinaRepository extends InMemoryDomainRepository<CodigoIn
     @Override
     public List<Maquina> findAllList() {
         return Lists.newArrayList(this.findAll());
+    }
+
+    @Override
+    public List<Maquina> maquinasSemFicheiroDeConfiguracao() {
+        return null;
     }
 }

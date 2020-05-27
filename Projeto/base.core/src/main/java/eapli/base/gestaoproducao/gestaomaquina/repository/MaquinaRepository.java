@@ -5,7 +5,6 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomaquina.domain.IdentificadorProtocoloComunicacao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.framework.domain.repositories.DomainRepository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -26,4 +25,7 @@ public interface MaquinaRepository extends DomainRepository<CodigoInternoMaquina
 	 * @return a list with all maquinas
 	 */
 	List<Maquina> findAllList();
+
+	List<Maquina> maquinasSemFicheiroDeConfiguracao();
+
 }

@@ -19,9 +19,7 @@ public class EntityUtils {
         return entityClassMap;
     }
 
-    public static
-            <ID_CLASS extends Comparable<ID_CLASS>,
-            ENTITY_CLASS extends AggregateRoot<ID_CLASS>>
+    public static <ID_CLASS extends Comparable<ID_CLASS>, ENTITY_CLASS extends AggregateRoot<ID_CLASS>>
                 Map<String, ENTITY_CLASS> mapIdStringToEntity(Collection<ENTITY_CLASS> entities) {
 
         Map<String, ENTITY_CLASS> entityClassMap = new HashMap<>();
