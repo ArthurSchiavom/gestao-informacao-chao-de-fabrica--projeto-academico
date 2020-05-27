@@ -12,9 +12,10 @@ public class CodigoInternoMaquina implements ValueObject, Comparable<CodigoInter
 	private static final long serialVersionUID = 1L;
 
 	@XmlValue
-	private String codigoInterno;
+	public final String codigoInterno;
 
 	protected CodigoInternoMaquina() {
+		codigoInterno=null;
 	}
 
 	public CodigoInternoMaquina(String codigoInterno) throws IllegalArgumentException {
@@ -41,9 +42,7 @@ public class CodigoInternoMaquina implements ValueObject, Comparable<CodigoInter
 
 	@Override
 	public String toString() {
-		return "CodigoInternoMaquina{" +
-				"codigoInterno='" + codigoInterno + '\'' +
-				'}';
+		return codigoInterno;
 	}
 
 	@Override

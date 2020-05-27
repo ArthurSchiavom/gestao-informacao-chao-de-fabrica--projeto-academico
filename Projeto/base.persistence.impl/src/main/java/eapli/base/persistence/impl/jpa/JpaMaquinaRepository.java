@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import eapli.base.Application;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.base.gestaoproducao.gestaomaquina.domain.IdentificadorProtocoloComunicacao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -33,6 +34,14 @@ public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInt
         return matchOne("e."+ Maquina.identityAttributeName()+"=:"+Maquina.identityAttributeName(), params);
     }
 
+
+    @Override
+    public Optional<Maquina> findByidentificadorProtocoloComunicacao(IdentificadorProtocoloComunicacao identifier) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("var", identifier);
+        return matchOne("e.identificadorProtocoloComunicacao=:var", params);
+    }
+
     /**
      * encontra as máquinas todas numa linha de produção
      * @param idLinhaProd a procurar
@@ -50,4 +59,8 @@ public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInt
         return Lists.newArrayList(this.findAll());
     }
 
+    @Override
+    public List<Maquina> maquinasSemFicheiroDeConfiguracao() {
+        return this.createQuery("SELECT p FROM Maquina p WHERE p.ficheiroConfiguracao is NULL", Maquina.class).getResultList();
+    }
 }

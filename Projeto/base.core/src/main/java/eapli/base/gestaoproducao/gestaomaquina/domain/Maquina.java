@@ -3,6 +3,8 @@ package eapli.base.gestaoproducao.gestaomaquina.domain;
 import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
+import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.MaquinaDTO;
+import eapli.base.infrastructure.application.HasDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import javax.persistence.EmbeddedId;
@@ -29,7 +31,7 @@ import java.util.Date;
  * https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=29442
  */
 @Entity
-public class Maquina implements AggregateRoot<CodigoInternoMaquina> {
+public class Maquina implements AggregateRoot<CodigoInternoMaquina>, HasDTO<MaquinaDTO>{
 
     @Version
     private Long version;
@@ -58,6 +60,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina> {
     private IdentificadorLinhaProducao linhaProducao;
 
     protected Maquina() {
+        ficheiroConfiguracao=null;
         dataInstalacao = null;
     }
 
@@ -123,5 +126,18 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina> {
 
     public void setOrdemLinhaProducao(OrdemLinhaProducao ordemLinhaProducao) {
         this.ordemLinhaProducao = ordemLinhaProducao;
+    }
+
+    public void setFicheiroConfiguracao(FicheiroConfiguracao ficheiroConfiguracao) {
+        this.ficheiroConfiguracao = ficheiroConfiguracao;
+    }
+
+    public FicheiroConfiguracao getFicheiroConfiguracao() {
+        return ficheiroConfiguracao;
+    }
+
+    @Override
+    public MaquinaDTO toDTO() {
+        return new MaquinaDTO(numeroSerie.numeroSerie,codigoInternoMaquina.codigoInterno,""+ordemLinhaProducao.ordemLinhaProducao,""+identificadorProtocoloComunicacao.identificadorProtocoloComunicao,marca,modelo,descricaoMaquina,linhaProducao.identifier);
     }
 }
