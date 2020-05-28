@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ConsultarErrosProcessamentoUI extends AbstractUI {
 
-	ConsultarErrosProcessamentoController controller = new ConsultarErrosProcessamentoController();
+	private final ConsultarErrosProcessamentoController controller = new ConsultarErrosProcessamentoController();
 
 	@Override
 	protected boolean doShow() {

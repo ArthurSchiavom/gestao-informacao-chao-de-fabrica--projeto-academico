@@ -46,7 +46,7 @@ public class ConsultarErrosProcessamentoController {
 
 	public List<NotificacaoErroDTO> listarErrosProcessamento() {
 		NotificacaoErroRepository notifErroRepo = PersistenceContext.repositories().notificacoesErros();
-		List<NotificacaoErro> listNotifErros = notifErroRepo.findAllNaoArquivadosfilteredByTipoErroAndLinhaProd(
+		List<NotificacaoErro> listNotifErros = notifErroRepo.findAllPorTratarfilteredByTipoErroAndLinhaProd(
 				tipoErro, lProd);
 		return Collections.unmodifiableList(DTOUtils.toDTOList(listNotifErros));
 	}

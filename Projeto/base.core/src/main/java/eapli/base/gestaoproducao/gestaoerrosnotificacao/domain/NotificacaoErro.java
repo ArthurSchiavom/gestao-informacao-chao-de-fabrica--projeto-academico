@@ -25,7 +25,7 @@ public class NotificacaoErro implements AggregateRoot<Long>, HasDTO<NotificacaoE
 
 	public final TipoErroNotificacao tipoErroNotificacao;
 
-	public final EstadoErroNotificacao estadoErro;
+	private EstadoErroNotificacao estadoErro;
 
 	/**
 	 * Cria uma nova notificação de erro
@@ -69,6 +69,21 @@ public class NotificacaoErro implements AggregateRoot<Long>, HasDTO<NotificacaoE
 
 	public static String identityAttributeName() {
 		return "id";
+	}
+
+	boolean arquivar() {
+		if(estadoErro == EstadoErroNotificacao.ARQUIVADO) {
+			return false; //Não se pode arquivar se já estiver arquivado
+		}
+		estadoErro = EstadoErroNotificacao.ARQUIVADO;
+		return true;
+	}
+
+	boolean isArquivado() {
+		if(estadoErro == EstadoErroNotificacao.ARQUIVADO) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

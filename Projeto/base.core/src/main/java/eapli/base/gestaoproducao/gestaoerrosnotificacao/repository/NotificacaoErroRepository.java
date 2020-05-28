@@ -12,11 +12,18 @@ public interface NotificacaoErroRepository extends DomainRepository<Long, Notifi
 	 * Encontra todas as notificações de erros de processamento filtradas por tipo de erro
 	 * e por linha de produção
 	 *
-	 * @param tipo o tipo de erro pelo qual pretendemos filtrar
+	 * @param tipo        o tipo de erro pelo qual pretendemos filtrar
 	 * @param idLinhaProd o id da linha de produção pela qual pretendemos filtrar
 	 * @return uma lista com todas as notificações dos erros de processamento que correspondam
 	 * aos filtros introduzidos
 	 */
-	List<NotificacaoErro> findAllNaoArquivadosfilteredByTipoErroAndLinhaProd(TipoErroNotificacao tipo,
-	                                                                         IdentificadorLinhaProducao idLinhaProd);
+	List<NotificacaoErro> findAllPorTratarfilteredByTipoErroAndLinhaProd(TipoErroNotificacao tipo,
+	                                                                     IdentificadorLinhaProducao idLinhaProd);
+
+	/**
+	 * Encontra todas as notificações de erro de processamento filtradas por não estarem arquivadas
+	 *
+	 * @return uma lista com notificações de erro não filtradas
+	 */
+	List<NotificacaoErro> findAllNaoArquivados();
 }

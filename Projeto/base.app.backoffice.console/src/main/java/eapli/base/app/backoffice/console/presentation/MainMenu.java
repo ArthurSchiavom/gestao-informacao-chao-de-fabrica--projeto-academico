@@ -33,6 +33,7 @@ import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordempro
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ImportarOrdensProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.exportacao.exportacaoXML.ExportacaoFicheiroXMLChaoDeFabricaUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao.EspecificarDepositoUI;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.arquivar.ArquivarNotificacoesErroUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.consultar.ConsultarErrosProcessamentoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaolinhaproducao.especificacao.EspecificarLinhaProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao.EspecificarFicheiroConfiguracaoAction;
@@ -94,6 +95,7 @@ public class MainMenu extends AbstractUI {
 	private static final int REGISTAR_LINHAPRODUCAO = 4;
 	private static final int EXPORTAR_XML = 5;
 	private static final int CONSULTAR_ERROS = 6;
+	private static final int ARQUIVAR_ERROS = 7;
 
 
 	// SETTINGS
@@ -233,6 +235,7 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new EspecificarLinhaProducaoUI()::show);
 		menu.addItem(EXPORTAR_XML, "Exportar XML do Chão de Fábrica", new ExportacaoFicheiroXMLChaoDeFabricaUI()::show);
 		menu.addItem(CONSULTAR_ERROS, "Consultar Erros de Processamento por tratar", new ConsultarErrosProcessamentoUI()::show);
+		menu.addItem(ARQUIVAR_ERROS, "Arquivar Erros de Processamento", new ArquivarNotificacoesErroUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

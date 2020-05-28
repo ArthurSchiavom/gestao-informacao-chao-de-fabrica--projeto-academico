@@ -33,8 +33,8 @@ public class JpaNotificacoesErroRepository
 	 * No entanto isto não é possivel com este repositório
 	 */
 	@Override
-	public List<NotificacaoErro> findAllNaoArquivadosfilteredByTipoErroAndLinhaProd(TipoErroNotificacao tipo,
-                                                                            IdentificadorLinhaProducao idLinhaProd) {
+	public List<NotificacaoErro> findAllPorTratarfilteredByTipoErroAndLinhaProd(TipoErroNotificacao tipo,
+	                                                                            IdentificadorLinhaProducao idLinhaProd) {
 		TypedQuery<NotificacaoErro> tq = this.createQuery("SELECT e FROM NotificacaoErro e " +
 				"WHERE e.tipoErroNotificacao = :erro AND " +
 				"e.idLinhaProd = :idLinha AND " +
@@ -42,6 +42,14 @@ public class JpaNotificacoesErroRepository
 		tq.setParameter("erro", tipo);
 		tq.setParameter("idLinha", idLinhaProd);
 		tq.setParameter("estado", EstadoErroNotificacao.ATIVO);
+		return tq.getResultList();
+	}
+
+	@Override
+	public List<NotificacaoErro> findAllNaoArquivados() {
+		TypedQuery<NotificacaoErro> tq = this.createQuery("SELECT e FROM NotificacaoErro e " +
+				"WHERE e.estadoErro = :estado", NotificacaoErro.class);
+		tq.setParameter("estado", EstadoErroNotificacao.ARQUIVADO);
 		return tq.getResultList();
 	}
 }
