@@ -13,6 +13,7 @@
 #include <errno.h>
 
 #define UDP_BUFFER_SIZE 512
+#define TIMEOUT_SECONDS 3
 
 // read a string from stdin protecting buffer overflow
 #define GETS(B, S) {fgets(B,S-2,stdin);B[strlen(B)-1]=0;}
@@ -57,9 +58,15 @@ Built_Payload build_payload(Payload payload) {
     return resultado;
 }
 
+struct timeval to;
+
 int start_tcp_connection(char *target, char *porta) {
     int err, sock;
     struct addrinfo req, *list;
+
+    to.tv_sec = TIMEOUT_SECONDS;
+    to.tv_usec = 0;
+    setsockopt (sock,SOL_SOCKET,SO_RCVTIMEO,(char *)&to, sizeof(to));
 
     bzero((char *) &req, sizeof(req));
     // let getaddrinfo set the family depending on the supplied server address
@@ -77,6 +84,7 @@ int start_tcp_connection(char *target, char *porta) {
         return -1;
     }
     if (connect(sock, (struct sockaddr *) list->ai_addr, list->ai_addrlen) == -1) {
+        perror("Falha ao tentar conectar ao socket");
         freeaddrinfo(list);
         close(sock);
         return -1;

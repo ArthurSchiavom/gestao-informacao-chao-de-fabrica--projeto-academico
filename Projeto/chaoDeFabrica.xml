@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cdfab:chaoDeFabrica xmlns:cdfab="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:SchemaLocation="chaoDeFabrica.xsd">
+<cdfab:chaoDeFabrica 
+xmlns:cdfab="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica chaoDeFabrica.xsd">
     <cdfab:linhasDeProducao>
         <cdfab:linhaDeProducao identificador="Linha 5">
-            <estado>SUSPENSO</estado>
+            <estado>INATIVO</estado>
         </cdfab:linhaDeProducao>
         <cdfab:linhaDeProducao identificador="Linha 6">
-            <estado>SUSPENSO</estado>
+            <estado>INATIVO</estado>
         </cdfab:linhaDeProducao>
         <cdfab:linhaDeProducao identificador="Linha de Produção 1">
-            <estado>SUSPENSO</estado>
+            <estado>INATIVO</estado>
         </cdfab:linhaDeProducao>
         <cdfab:linhaDeProducao identificador="Linha de Produção 2">
-            <estado>SUSPENSO</estado>
-        </cdfab:linhaDeProducao>
-        <cdfab:linhaDeProducao identificador="0">
-            <estado>SUSPENSO</estado>
+            <estado>INATIVO</estado>
         </cdfab:linhaDeProducao>
     </cdfab:linhasDeProducao>
     <cdfab:depositos>
@@ -138,61 +137,5 @@
             <linhaProducao>Linha 6</linhaProducao>
         </cdfab:maquina>
     </cdfab:maquinas>
-    <cdfab:ordensDeProducao>
-        <cdfab:ordemProducao identificador="1111111">
-            <quantidadeAProduzir>1550</quantidadeAProduzir>
-            <encomendas>
-                <idEncomenda>2</idEncomenda>
-                <idEncomenda>3</idEncomenda>
-                <idEncomenda>4</idEncomenda>
-                <idEncomenda>5</idEncomenda>
-                <idEncomenda>6</idEncomenda>
-            </encomendas>
-            <dataEmissao>15-10-2013</dataEmissao>
-            <dataPrevistaExecucao>15-12-2015</dataPrevistaExecucao>
-            <estado>CONCLUIDA</estado>
-            <produtos/>
-        </cdfab:ordemProducao>
-        <cdfab:ordemProducao identificador="1111112">
-            <quantidadeAProduzir>50000</quantidadeAProduzir>
-            <encomendas>
-                <idEncomenda>113</idEncomenda>
-                <idEncomenda>420</idEncomenda>
-            </encomendas>
-            <dataEmissao>15-10-2013</dataEmissao>
-            <dataPrevistaExecucao>15-12-2015</dataPrevistaExecucao>
-            <estado>PENDENTE</estado>
-            <produtos/>
-        </cdfab:ordemProducao>
-        <cdfab:ordemProducao identificador="1111113">
-            <quantidadeAProduzir>1000</quantidadeAProduzir>
-            <encomendas>
-                <idEncomenda>1</idEncomenda>
-            </encomendas>
-            <dataEmissao>15-10-2013</dataEmissao>
-            <dataPrevistaExecucao>15-12-2016</dataPrevistaExecucao>
-            <estado>SUSPENSA</estado>
-            <produtos/>
-        </cdfab:ordemProducao>
-        <cdfab:ordemProducao identificador="1111115">
-            <quantidadeAProduzir>150</quantidadeAProduzir>
-            <encomendas>
-                <idEncomenda>123</idEncomenda>
-            </encomendas>
-            <dataEmissao>15-10-2013</dataEmissao>
-            <dataPrevistaExecucao>16-12-2015</dataPrevistaExecucao>
-            <estado>CONCLUIDA</estado>
-            <produtos/>
-        </cdfab:ordemProducao>
-        <cdfab:ordemProducao identificador="1234567">
-            <quantidadeAProduzir>2800</quantidadeAProduzir>
-            <encomendas>
-                <idEncomenda>123</idEncomenda>
-            </encomendas>
-            <dataEmissao>15-10-2013</dataEmissao>
-            <dataPrevistaExecucao>16-12-2015</dataPrevistaExecucao>
-            <estado>EM_EXECUCAO</estado>
-            <produtos/>
-        </cdfab:ordemProducao>
-    </cdfab:ordensDeProducao>
+    <cdfab:ordensDeProducao/>
 </cdfab:chaoDeFabrica>

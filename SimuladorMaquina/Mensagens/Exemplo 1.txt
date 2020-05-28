@@ -1,3 +1,47 @@
+
+        // TODO ARTHUR - REMOVE
+        // TODO ARTHUR - REMOVE
+        // TODO ARTHUR - REMOVE
+        // TODO ARTHUR - REMOVE
+
+        SchemaOutputResolver sor = new MySchemaOutputResolver();
+        try {
+            context.generateSchema(sor);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // TODO ARTHUR - REMOVE
+        // TODO ARTHUR - REMOVE
+        // TODO ARTHUR - REMOVE
+        // TODO ARTHUR - REMOVE
+
+
+    // TODO ARTHUR - REMOVE
+    // TODO ARTHUR - REMOVE
+    // TODO ARTHUR - REMOVE
+    // TODO ARTHUR - REMOVE
+    // TODO ARTHUR - REMOVE
+    private class MySchemaOutputResolver extends SchemaOutputResolver {
+        @Override
+        public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+            File file = new File("attempt.xml");
+            StreamResult result = new StreamResult(file);
+            result.setSystemId(file.toURI().toURL().toString());
+            return result;
+        }
+    }
+    // TODO ARTHUR - REMOVE
+    // TODO ARTHUR - REMOVE
+    // TODO ARTHUR - REMOVE
+    // TODO ARTHUR - REMOVE
+    // TODO ARTHUR - REMOVE
+
+
+
+
+
+
 ## Exemplo 1: ##
 
 ### Tipos de Mensagens ###

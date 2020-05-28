@@ -46,7 +46,7 @@ void test_handshake() {
 int main(int argc, char **argv) {
     if (argc < N_ARGS) {
         printf("Algumentos necessários em falta. Os argumentos necessários (por ordem) são: ID da máquina, intervalo de cadência em segundos, "
-               "caminho para o ficheiro de mensagens e endereço do sistema central.\n\n");
+               "caminho para o ficheiro de mensagens, endereço do sistema central e endereço do SMM.\n\n");
         return 1;
     }
 

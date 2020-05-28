@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica" xmlns:cdfab="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica" xmlns:tns="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import schemaLocation="schema2.xsd"/>
+
+  <xs:element name="chaoDeFabrica" type="tns:chaoDeFabrica"/>
+
+  <xs:complexType name="chaoDeFabrica">
+    <xs:sequence>
+      <xs:element name="linhasDeProducao" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="linhaDeProducao" type="linhaProducao" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="depositos" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="deposito" type="deposito" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="categorias" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="categoria" type="categoria" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="produtos" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="produto" type="produto" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="materiais" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="material" type="material" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="fichasDeProducao" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="fichaProducao" type="fichaDeProducao" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="maquinas" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="maquina" type="maquina" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ordensDeProducao" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="ordemProducao" type="ordemProducao" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
