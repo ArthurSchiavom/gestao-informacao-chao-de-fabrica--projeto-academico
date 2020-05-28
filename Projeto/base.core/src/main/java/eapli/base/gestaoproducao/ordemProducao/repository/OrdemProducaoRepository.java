@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface OrdemProducaoRepository  extends DomainRepository<Identificador, OrdemProducao> {
 
     /**
-     * Finds a production line by it's identifier
-     * @param identifier the identifier of the production line we are trying to find
+     * Finds a production line by it's id
+     * @param identifier the id of the production line we are trying to find
      * @return a production line or null
      */
     Optional<OrdemProducao> findByIdentifier(Identificador identifier);

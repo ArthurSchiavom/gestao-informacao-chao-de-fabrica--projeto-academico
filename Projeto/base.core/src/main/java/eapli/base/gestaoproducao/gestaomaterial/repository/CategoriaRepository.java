@@ -10,8 +10,8 @@ import java.util.Optional;
 public interface CategoriaRepository extends DomainRepository<CodigoAlfanumericoCategoria, Categoria> {
 
     /**
-     * Finds a Categoria by it's identifier
-     * @param identifier the identifier of the Categoria
+     * Finds a Categoria by it's id
+     * @param identifier the id of the Categoria
      * @return a Categoria or null
      */
     Optional<Categoria> findByIdentifier(CodigoAlfanumericoCategoria identifier);

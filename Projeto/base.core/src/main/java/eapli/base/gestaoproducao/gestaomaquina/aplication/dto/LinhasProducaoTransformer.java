@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.gestaomaquina.aplication.dto;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
-import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhaProducaoDTO;
+import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class LinhasProducaoTransformer {
 
         for(LinhaProducao linha : linhas){
 
-            linhasDTO.add(new LinhaProducaoDTO(linha.identifier));
+            linhasDTO.add(new LinhaProducaoDTO(linha.identity().toString()));
         }
 
         return linhasDTO;

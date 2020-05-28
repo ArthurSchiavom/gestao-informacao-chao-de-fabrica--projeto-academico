@@ -1,7 +1,7 @@
 package eapli.base.app.common.console.presentation.formatter;
 
+import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.MaquinaDTO;
-import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 

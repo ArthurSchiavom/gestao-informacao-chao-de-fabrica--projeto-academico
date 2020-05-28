@@ -31,7 +31,7 @@ public class JpaLinhaProducaoRepository
 	public Optional<LinhaProducao> findByIdentifier(IdentificadorLinhaProducao identifier) {
 		final Map<String, Object> params = new HashMap<>();
 		params.put(LinhaProducao.identityAttributeName(), identifier);
-		return matchOne("e."+ LinhaProducao.identityAttributeName()+"=:identifier", params);
+		return matchOne("e."+ LinhaProducao.identityAttributeName()+"=:id", params);
 		//visto pelo dos profs
 	}
 

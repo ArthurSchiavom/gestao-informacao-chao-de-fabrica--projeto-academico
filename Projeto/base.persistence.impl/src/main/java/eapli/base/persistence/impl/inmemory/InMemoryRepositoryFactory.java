@@ -3,6 +3,7 @@ package eapli.base.persistence.impl.inmemory;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
@@ -100,6 +101,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public MaquinaRepository maquinas(TransactionalContext autoTx) {
 		return maquinas(autoTx);
+	}
+
+	@Override
+	public NotificacaoErroRepository notificacoesErros() {
+		return notificacoesErros(null);
+	}
+
+	@Override
+	public NotificacaoErroRepository notificacoesErros(TransactionalContext autoTx) {
+		return notificacoesErros(autoTx);
 	}
 
 	@Override

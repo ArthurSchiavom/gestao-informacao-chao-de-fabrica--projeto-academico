@@ -1,61 +1,32 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
-import eapli.framework.domain.model.DomainEntities;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Version;
 
-@Entity
-public abstract class Mensagem implements AggregateRoot<Long> {
+//TODO THIS IS BAREBONES CLASS NEEDS PROPER IMPLEMENTATION
+public class Mensagem implements AggregateRoot<Long> {
 
 	@Version
 	private Long version;
 
 	@Id
 	@GeneratedValue
-	public final Long identifier; // can be public bc its final
-	public final TipoDeMensagem tipo;
-	public final TimestampEmissao tempoEmissao;
-
-
-
-	protected Mensagem() {
-		//FOR ORM
-		this.identifier = null;
-		this.tipo = null;
-		this.tempoEmissao = null;
-	}
+	private Long pk;
 
 	public static String identityAttributeName() {
-		return "identifier";
+		return "id";
 	}
 
 	@Override
-	public boolean equals(final Object o) {
-		return DomainEntities.areEqual(this, o);
-	}
-
-	@Override
-	public int hashCode() {
-		return DomainEntities.hashCode(this);
-	}
-
-	@Override
-	public boolean sameAs(final Object other) {
-		return DomainEntities.areEqual(this, other);
+	public boolean sameAs(Object other) {
+		return false;
 	}
 
 	@Override
 	public Long identity() {
-		return this.identifier;
-	}
-
-	@Override
-	public String toString() {
-		return "Mensagem{" +
-				"identifier=" + identifier +
-				", tipo=" + tipo +
-				", tempoEmissao=" + tempoEmissao +
-				'}';
+		return null;
 	}
 }

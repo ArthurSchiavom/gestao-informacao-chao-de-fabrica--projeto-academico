@@ -3,6 +3,7 @@ package eapli.base.persistence.impl.jpa;
 import eapli.base.Application;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
@@ -109,6 +110,16 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	public MaquinaRepository maquinas(TransactionalContext autoTx) {
 		return new JpaMaquinaRepository(autoTx);
 	}
+
+    @Override
+    public NotificacaoErroRepository notificacoesErros() {
+        return new JpaNotificacoesErroRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public NotificacaoErroRepository notificacoesErros(TransactionalContext autoTx) {
+        return new JpaNotificacoesErroRepository(autoTx);
+    }
 
     @Override
     public OrdemProducaoRepository ordemProducao() {
