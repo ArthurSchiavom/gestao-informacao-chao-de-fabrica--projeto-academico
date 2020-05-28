@@ -29,7 +29,7 @@ public class JpaCategoriaRepository extends JpaAutoTxRepository<Categoria, Codig
     public Optional<Categoria> findByIdentifier(CodigoAlfanumericoCategoria identifier) {
         final Map<String, Object> params = new HashMap<>();
         params.put(Categoria.identityAttributeName(), identifier);
-        return matchOne("e."+ Categoria.identityAttributeName()+"=:identifier", params);
+        return matchOne("e."+ Categoria.identityAttributeName()+"=:id", params);
         //TODO verificar se isto funciona, é capaz de nao funcionar se o match depender do toString
     }
 

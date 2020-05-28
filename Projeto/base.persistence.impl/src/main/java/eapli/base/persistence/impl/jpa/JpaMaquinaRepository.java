@@ -48,7 +48,7 @@ public class JpaMaquinaRepository extends JpaAutoTxRepository<Maquina, CodigoInt
      * @return Iterable de máquinas numa linha de produção
      */
     public Iterable<Maquina> findByLinhaProducao(IdentificadorLinhaProducao idLinhaProd){
-        System.out.println("Linha identifier: " + idLinhaProd);
+        System.out.println("Linha id: " + idLinhaProd);
         final Map<String, Object> params = new HashMap<>();
         params.put("linhaProducao", idLinhaProd);
         return match("e.linhaProducao=:linhaProducao",params);

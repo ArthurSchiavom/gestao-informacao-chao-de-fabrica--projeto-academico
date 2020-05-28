@@ -1,6 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao;
 
-import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhaProducaoDTO;
+import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 import eapli.base.gestaoproducao.gestaomaquina.aplication.especificacao.EspecificarMaquinaController;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;

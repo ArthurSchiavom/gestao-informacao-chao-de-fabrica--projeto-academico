@@ -1,5 +1,7 @@
 package eapli.base.gestaoproducao.gestaolinhasproducao.domain;
 
+import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
+import eapli.base.infrastructure.application.HasDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
@@ -9,7 +11,7 @@ import javax.persistence.Version;
 import javax.xml.bind.annotation.*;
 
 @Entity
-public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> {
+public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao>, HasDTO<LinhaProducaoDTO> {
 
 	@Version
 	private Long version;
@@ -23,7 +25,7 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 
 	public LinhaProducao(final String identifier) {
 		this.identifier = new IdentificadorLinhaProducao(identifier);
-		this.estado = EstadoProcessamentoMensagens.INATIVO;
+		this.estado = EstadoProcessamentoMensagens.SUSPENSO;
 	}
 
 	public LinhaProducao() {
@@ -32,7 +34,7 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 	}
 
 	public static String identityAttributeName() {
-		return "identifier";
+		return "id";
 	}
 
 	@Override
@@ -58,5 +60,10 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao> 
 	@Override
 	public String toString() {
 		return "LinhaProducao{ Identificador: " + identifier.identifier+", estado: "+ estado.toString()+"}";
+	}
+
+	@Override
+	public LinhaProducaoDTO toDTO() {
+		return new LinhaProducaoDTO(identity().toString());
 	}
 }
