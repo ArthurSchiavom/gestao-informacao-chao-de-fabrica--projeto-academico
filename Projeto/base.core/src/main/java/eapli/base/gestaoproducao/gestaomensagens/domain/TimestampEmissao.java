@@ -2,20 +2,19 @@ package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 
 import eapli.framework.domain.model.ValueObject;
-
 import javax.persistence.Embeddable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 @Embeddable
 public class TimestampEmissao implements ValueObject, Comparable<TimestampEmissao> {
 	private static final long serialVersionUID = 1L;
 
-	private LocalDateTime timestamp;
+	private Date timestamp;
 
-	public TimestampEmissao(LocalDateTime timestamp) {
+	public TimestampEmissao(Date timestamp) {
 		if(timestamp == null) { //TODO adicionar mais codigo de verificaçao
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Data inválida");
 		}
 		this.timestamp = timestamp;
 	}

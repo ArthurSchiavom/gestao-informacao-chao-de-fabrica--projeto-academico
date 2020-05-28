@@ -41,7 +41,7 @@ public class ExportadorXMLJABX implements Exportador {
 		try {
 			assert marshaller != null;
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "chaoDeFabrica.xsd");
+			marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica chaoDeFabrica.xsd");
 		} catch (PropertyException e) {
 			LOGGER.error("Erro a definir o formato de output");
 			return false;

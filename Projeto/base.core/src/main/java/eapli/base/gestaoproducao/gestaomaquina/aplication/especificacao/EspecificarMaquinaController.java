@@ -2,7 +2,7 @@ package eapli.base.gestaoproducao.gestaomaquina.aplication.especificacao;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
-import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhaProducaoDTO;
+import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.LinhasProducaoTransformer;
 import eapli.base.gestaoproducao.gestaomaquina.domain.*;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;

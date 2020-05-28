@@ -4,7 +4,6 @@ package eapli.base.gestaoproducao.gestaolinhasproducao.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 
@@ -47,6 +46,6 @@ public class IdentificadorLinhaProducao implements ValueObject, Comparable<Ident
 
 	@Override
 	public int compareTo(IdentificadorLinhaProducao o) {
-		throw new UnsupportedOperationException("Production Line identifier comparator is not implemented");
+		throw new UnsupportedOperationException("Production Line id comparator is not implemented");
 	}
 }

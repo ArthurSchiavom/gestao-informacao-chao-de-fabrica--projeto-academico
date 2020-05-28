@@ -6,6 +6,7 @@ package eapli.base.infrastructure.persistence;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
@@ -170,7 +171,6 @@ public interface RepositoryFactory {
 	 *
 	 * @return repository automatic transaction mode
 	 */
-
 	MaquinaRepository maquinas();
 
 	/**
@@ -179,4 +179,18 @@ public interface RepositoryFactory {
 	 * @return the repository with a certain transactional context
 	 */
 	MaquinaRepository maquinas(TransactionalContext autoTx);
+
+	/**
+	 * repository will be created in auto transaction mode
+	 *
+	 * @return repository automatic transaction mode
+	 */
+	NotificacaoErroRepository notificacoesErros();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return the repository with a certain transactional context
+	 */
+	NotificacaoErroRepository notificacoesErros(TransactionalContext autoTx);
 }
