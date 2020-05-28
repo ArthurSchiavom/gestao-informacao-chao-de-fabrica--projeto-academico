@@ -5,7 +5,12 @@ import eapli.framework.domain.model.DomainEntities;
 
 import javax.persistence.*;
 
+/**
+ * http://www.thejavageek.com/2014/05/14/jpa-single-table-inheritance-example/
+ */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", discriminatorType=DiscriminatorType.STRING)
 public abstract class Mensagem implements AggregateRoot<Long> {
 
 	@Version
@@ -13,11 +18,18 @@ public abstract class Mensagem implements AggregateRoot<Long> {
 
 	@Id
 	@GeneratedValue
-	public final Long identifier; // can be public bc its final
+	private Long identifier; // can be public bc its final
 	public final TipoDeMensagem tipo;
 	public final TimestampEmissao tempoEmissao;
 
 
+	public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao) {
+		if((tipo == null || tempoEmissao == null)){
+			throw new IllegalArgumentException("Mensagem não pode ter parametros null");
+		}
+		this.tipo = tipo;
+		this.tempoEmissao = tempoEmissao;
+	}
 
 	protected Mensagem() {
 		//FOR ORM

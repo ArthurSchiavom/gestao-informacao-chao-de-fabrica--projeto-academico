@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.net.InetAddress;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -58,6 +59,8 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, HasDTO<Maqu
     private String descricaoMaquina; // might change so it's not final
     @XmlElement
     private IdentificadorLinhaProducao linhaProducao;
+    @XmlElement
+    private InetAddress ip;
 
     protected Maquina() {
         ficheiroConfiguracao=null;
@@ -135,6 +138,15 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, HasDTO<Maqu
     @XmlTransient
     public FicheiroConfiguracao getFicheiroConfiguracao() {
         return ficheiroConfiguracao;
+    }
+
+    @XmlTransient
+    public InetAddress getIp() {
+        return ip;
+    }
+
+    public void setIp(InetAddress ip) {
+        this.ip = ip;
     }
 
     @Override
