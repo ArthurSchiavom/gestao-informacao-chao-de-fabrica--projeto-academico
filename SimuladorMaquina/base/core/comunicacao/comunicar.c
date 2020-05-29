@@ -52,7 +52,9 @@ Built_Payload build_payload(Payload payload) {
     unsigned short data_length = reverse_bytes_short(payload.data_length);
     helper_short = &(resultado.content[4]);
     *helper_short = data_length;
-    strcpy(resultado.content + PAYLOAD_STATIC_DATA_SIZE, payload.data);
+    if (data_length > 0) {
+        strcpy(resultado.content + PAYLOAD_STATIC_DATA_SIZE, payload.data);
+    }
 
 
     return resultado;
@@ -149,9 +151,7 @@ int handshake_tcp(int socket) {
     packet.payload.version = CURRENT_PROTOCOL_VERSION;
     packet.payload.code = REQUEST_CODE_HELLO;
     packet.payload.id = id_maquina;
-    packet.payload.data_length = 1;
-    packet.payload.data = malloc(1);
-    packet.payload.data[0] = 0;
+    packet.payload.data_length = 0;
 
     int resultado = send_packet_tcp(packet);
     if (resultado == -1) {

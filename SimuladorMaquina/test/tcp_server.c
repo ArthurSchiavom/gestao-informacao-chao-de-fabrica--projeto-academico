@@ -213,8 +213,14 @@ int main(void) {
                 read(newSock, &(data.data_length), 2);
                 data.id = reverse_bytes_short(data.id);
                 data.data_length = reverse_bytes_short(data.data_length);
-                data.data = malloc(data.data_length);
-                read(newSock, data.data, data.data_length);
+                if (data.data_length > 0) {
+                    data.data = malloc(data.data_length);
+                    read(newSock, data.data, data.data_length);
+                }
+                else {
+                    data.data = malloc(1);
+                    data.data[0] = 0;
+                }
 
                 printf("\nPacket received! %d, %d, %d, %d, %s!\n", data.version, data.code, data.id, data.data_length,
                        data.data);
