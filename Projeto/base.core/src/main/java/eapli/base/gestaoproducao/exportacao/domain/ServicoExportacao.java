@@ -4,9 +4,6 @@ import eapli.base.gestaoproducao.exportacao.application.ExportadorFactory;
 import eapli.base.gestaoproducao.exportacao.application.FormatoExportacao;
 import eapli.base.gestaoproducao.exportacao.application.PathAdapter;
 import eapli.base.gestaoproducao.exportacao.application.xml.ExportadorXMLJABX;
-import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
-import eapli.base.gestaoproducao.exportacao.domain.Exportador;
-import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +14,11 @@ import java.util.Date;
 
 public class ServicoExportacao {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExportadorXMLJABX.class);
+	private final RepositoryFactory repoFact;
+
+	public ServicoExportacao(RepositoryFactory repoFact) {
+		this.repoFact = repoFact;
+	}
 
 	/**
 	 * Exporta os dados da base de dados para um formato escolhido
@@ -40,7 +42,6 @@ public class ServicoExportacao {
 		} catch (IOException e) {
 			LOGGER.error(e.getMessage());
 		}
-		RepositoryFactory repoFact = PersistenceContext.repositories();
 		ChaoDeFabrica.Builder builder = new ChaoDeFabrica.Builder(repoFact);
 		builder.loadCategorias()
 				.loadDepositos()
@@ -49,6 +50,7 @@ public class ServicoExportacao {
 				.loadMaquinas()
 				.loadMateriais()
 				.loadProdutos()
+				.loadNotificacaoesErros()
 				.loadOrdensProducao(dataAFiltrar);
 		if (exportarTempoProd) {
 			builder.loadTemposDeProducao(dataAFiltrar);

@@ -1,7 +1,10 @@
 package eapli.base.gestaoproducao.exportacao.domain;
 
+import com.google.common.collect.Lists;
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
@@ -21,8 +24,8 @@ import eapli.base.infrastructure.persistence.RepositoryFactory;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -66,12 +69,17 @@ public class ChaoDeFabrica {
 	@XmlElement(name = "ordemProducao")
 	private List<OrdemProducao> listaOrdensProducao;
 
+	@XmlElementWrapper(name = "notificacoesErros")
+	@XmlElement(name = "notificacaoErro")
+	private List<NotificacaoErro> listaNotificacoesErro;
+
 	private boolean nothingWasLoaded;
 
 	public ChaoDeFabrica(boolean nothingWasLoaded, List<LinhaProducao> listaLinhaProd, List<Deposito> listaDepositos,
 	                     List<Categoria> listaCategoria, List<Produto> listaProdutos,
 	                     List<Material> listaMateriais, List<FichaDeProducao> listaFichasProducao,
-	                     List<Maquina> listaMaquinas, List<OrdemProducao> listaOrdensProducao) {
+	                     List<Maquina> listaMaquinas, List<OrdemProducao> listaOrdensProducao,
+	                     List<NotificacaoErro> listaNotificacoesErro) {
 		this.nothingWasLoaded = nothingWasLoaded;
 		this.listaLinhaProd = listaLinhaProd;
 		this.listaDepositos = listaDepositos;
@@ -81,6 +89,7 @@ public class ChaoDeFabrica {
 		this.listaFichasProducao = listaFichasProducao;
 		this.listaMaquinas = listaMaquinas;
 		this.listaOrdensProducao = listaOrdensProducao;
+		this.listaNotificacoesErro = listaNotificacoesErro;
 	}
 
 	public ChaoDeFabrica() {
@@ -107,6 +116,7 @@ public class ChaoDeFabrica {
 		private List<FichaDeProducao> listaFichasProducao;
 		private List<Maquina> listaMaquinas;
 		private List<OrdemProducao> listaOrdensProducao;
+		private List<NotificacaoErro> listaNotificacoesErro;
 
 		public Builder(RepositoryFactory repoFact) {
 			this.hasLoadedNothing = true;
@@ -119,70 +129,82 @@ public class ChaoDeFabrica {
 			this.listaFichasProducao = new ArrayList<>();
 			this.listaMaquinas = new ArrayList<>();
 			this.listaOrdensProducao = new ArrayList<>();
+			this.listaNotificacoesErro = new ArrayList<>();
 		}
 
 		public Builder loadLinhasProducao() {
 			LinhaProducaoRepository lProdRepo = repoFact.linhasProducao();
-			this.listaLinhaProd = lProdRepo.findAllList();
+			this.listaLinhaProd = loadList(lProdRepo.findAll());
 			verifyListIsNotEmpty(listaLinhaProd);
 			return this;
 		}
 
 		public Builder loadDepositos() {
 			DepositoRepository depoRepo = repoFact.depositos();
-			this.listaDepositos = depoRepo.findAllList();
+			this.listaDepositos = loadList(depoRepo.findAll());
 			verifyListIsNotEmpty(listaDepositos);
 			return this;
 		}
 
 		public Builder loadCategorias() {
 			CategoriaRepository catRepo = repoFact.categoria();
-			this.listaCategoria = catRepo.findAllList();
+			this.listaCategoria = loadList(catRepo.findAll());
 			verifyListIsNotEmpty(listaCategoria);
 			return this;
 		}
 
 		public Builder loadProdutos() {
 			ProdutoRepository prodRepo = repoFact.produto();
-			this.listaProdutos = prodRepo.findAllList();
+			this.listaProdutos = loadList(prodRepo.findAll());
 			verifyListIsNotEmpty(listaProdutos);
 			return this;
 		}
 
 		public Builder loadMateriais() {
 			MaterialRepository matRepo = repoFact.material();
-			this.listaMateriais = matRepo.findAllList();
+			this.listaMateriais = loadList(matRepo.findAll());
 			verifyListIsNotEmpty(listaMateriais);
 			return this;
 		}
 
 		public Builder loadFichasProducao() {
 			FichaDeProducaoRepository fichaProdRepo = repoFact.fichaDeProducao();
-			this.listaFichasProducao = fichaProdRepo.findAllList();
+			this.listaFichasProducao = loadList(fichaProdRepo.findAll());
 			verifyListIsNotEmpty(listaFichasProducao);
 			return this;
 		}
 
 		public Builder loadMaquinas() {
 			MaquinaRepository maqRepo = repoFact.maquinas();
-			this.listaMaquinas = maqRepo.findAllList();
+			this.listaMaquinas = loadList(maqRepo.findAll());
 			verifyListIsNotEmpty(listaMaquinas);
 			return this;
 		}
 
 		public Builder loadOrdensProducao(Date dataAFiltrar) {
 			OrdemProducaoRepository ordProdRepo = repoFact.ordemProducao();
-			this.listaOrdensProducao = ordProdRepo.findAllwithDateAfter(dataAFiltrar);
+			this.listaOrdensProducao = loadList(ordProdRepo.findAll());
 			verifyListIsNotEmpty(listaOrdensProducao);
 			return this;
 		}
 
-		public void loadTemposDeProducao(Date dataAFiltrar) {
+		public Builder loadTemposDeProducao(Date dataAFiltrar) {
 			throw new UnsupportedOperationException("Tempos de Produção ainda não foram implementados");
 		}
 
-		public void loadDesvios(Date dataAFiltrar) {
+		public Builder loadDesvios(Date dataAFiltrar) {
 			throw new UnsupportedOperationException("Desvios não foram implementados");
+		}
+
+		public Builder loadConsumosReais(Date dataAFiltrar) {
+			throw new UnsupportedOperationException("Desvios não foram implementados");
+		}
+
+		public Builder loadNotificacaoesErros() {
+			NotificacaoErroRepository notifErroRepo = repoFact.notificacoesErros();
+			this.listaNotificacoesErro = loadList(notifErroRepo.findAll());
+			verifyListIsNotEmpty(listaNotificacoesErro);
+			return this;
 		}
 
 		/**
@@ -203,10 +225,20 @@ public class ChaoDeFabrica {
 			}
 		}
 
+		/**
+		 * Converte de um iterable(retornado pelo repositório) numa lista
+		 * @param iterable o iteravel retornado do repositório
+		 * @param <E> o elemento da lista
+		 * @return uma lista de elementos
+		 */
+		private <E> List<E> loadList(Iterable<E> iterable) {
+			return Lists.newArrayList(iterable);
+		}
+
 		public ChaoDeFabrica build() {
 			return new ChaoDeFabrica(hasLoadedNothing, listaLinhaProd, listaDepositos,
 					listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas,
-					listaOrdensProducao);
+					listaOrdensProducao, listaNotificacoesErro);
 		}
 
 	}

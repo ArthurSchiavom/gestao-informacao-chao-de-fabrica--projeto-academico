@@ -140,7 +140,7 @@ public class ExportadorXMLJABXTest {
 		assert ficheiro != null;
 
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,
-				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao);
+				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao, listaNotificacoesErro);
 		assertTrue(exportador.export(ficheiro, chaoDeFabrica));
 	}
 }

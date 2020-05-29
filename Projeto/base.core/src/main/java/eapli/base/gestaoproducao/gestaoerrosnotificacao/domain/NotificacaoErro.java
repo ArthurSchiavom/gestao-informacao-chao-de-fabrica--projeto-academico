@@ -9,6 +9,8 @@ import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
 public class NotificacaoErro implements AggregateRoot<Long>, HasDTO<NotificacaoErroDTO> {
@@ -17,14 +19,19 @@ public class NotificacaoErro implements AggregateRoot<Long>, HasDTO<NotificacaoE
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@XmlAttribute(name = "idNotificacao")
 	public final Long id;
 
+	@XmlElement
 	public final IdentificadorLinhaProducao idLinhaProd;
 
+	@XmlElement
 	public final Long idMensagem;
 
+	@XmlElement
 	public final TipoErroNotificacao tipoErroNotificacao;
 
+	@XmlElement
 	private EstadoErroNotificacao estadoErro;
 
 	/**

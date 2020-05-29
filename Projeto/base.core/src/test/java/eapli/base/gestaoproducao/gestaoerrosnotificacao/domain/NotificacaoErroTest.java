@@ -71,4 +71,16 @@ public class NotificacaoErroTest {
 		notifErro.arquivar();
 		assertTrue(notifErro.isArquivado());
 	}
+
+	@Test
+	public void garantirEqualsNaoUsaOEstado() {
+		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
+		Mockito.when(msgRepo.containsOfIdentity(2L)).thenReturn(true);
+		NotificacaoErro notifErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, 2L,
+				lProdRepo, msgRepo);
+		notifErro.arquivar();
+		NotificacaoErro notificacaoErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, 2L,
+				lProdRepo, msgRepo);
+		assertTrue(notifErro.equals(notificacaoErro));
+	}
 }

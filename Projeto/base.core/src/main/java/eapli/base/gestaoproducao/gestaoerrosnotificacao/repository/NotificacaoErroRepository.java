@@ -26,4 +26,6 @@ public interface NotificacaoErroRepository extends DomainRepository<Long, Notifi
 	 * @return uma lista com notificações de erro não filtradas
 	 */
 	List<NotificacaoErro> findAllNaoArquivados();
+
+	List<NotificacaoErro> findAllList();
 }
