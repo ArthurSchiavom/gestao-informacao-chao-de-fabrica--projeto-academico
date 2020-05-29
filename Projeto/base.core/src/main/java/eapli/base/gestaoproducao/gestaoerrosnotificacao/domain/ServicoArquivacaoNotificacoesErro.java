@@ -2,6 +2,8 @@ package eapli.base.gestaoproducao.gestaoerrosnotificacao.domain;
 
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 
+import java.util.Optional;
+
 public class ServicoArquivacaoNotificacoesErro {
 
 	private final NotificacaoErroRepository repo;
@@ -20,10 +22,11 @@ public class ServicoArquivacaoNotificacoesErro {
 		if (idNotifErro == null) {
 			throw new IllegalArgumentException("ID de Notificação de erro submetido era inválida");
 		}
-		NotificacaoErro notifErro = repo.ofIdentity(idNotifErro).orElse(null);
-		if (notifErro == null) {
+		Optional<NotificacaoErro> optNotifErro = repo.ofIdentity(idNotifErro);
+		if (!optNotifErro.isPresent()) {
 			throw new IllegalArgumentException("ID de Notificação de erro sumetido era inexistente");
 		}
+		NotificacaoErro notifErro = optNotifErro.get();
 		if (!notifErro.arquivar()) {
 			throw new IllegalArgumentException("Notificação de erro submetida já estava arquivada");
 		}

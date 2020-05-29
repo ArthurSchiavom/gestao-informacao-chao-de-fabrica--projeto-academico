@@ -28,7 +28,8 @@ public class ServicoArquivacaoNotificacoesErroTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void garantirQueIdExisteNaBaseDeDados() {
-		Mockito.when(repo.ofIdentity(2L)).thenReturn(null);
+		NotificacaoErro notifErro = Mockito.mock(NotificacaoErro.class);
+		Mockito.when(repo.ofIdentity(2L)).thenReturn(Optional.of(notifErro));
 		servico.arquivar(2L);
 	}
 

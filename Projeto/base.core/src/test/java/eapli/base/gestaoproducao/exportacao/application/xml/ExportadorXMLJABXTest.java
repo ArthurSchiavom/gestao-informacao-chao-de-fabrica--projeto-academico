@@ -2,9 +2,14 @@ package eapli.base.gestaoproducao.exportacao.application.xml;
 
 import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
+import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomaquina.domain.*;
 import eapli.base.gestaoproducao.gestaomaterial.domain.*;
+import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.application.ProdutoBuilder;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
@@ -138,6 +143,15 @@ public class ExportadorXMLJABXTest {
 			e.printStackTrace();
 		}
 		assert ficheiro != null;
+
+		LinhaProducaoRepository lProdRepo = Mockito.mock(LinhaProducaoRepository.class);
+		MensagemRepository msgRepo = Mockito.mock(MensagemRepository.class);
+		Mockito.when(lProdRepo.containsOfIdentity(new IdentificadorLinhaProducao("LINHAPROD_1"))).thenReturn(true);
+		Mockito.when(msgRepo.containsOfIdentity(2L)).thenReturn(true);
+
+		List<NotificacaoErro> listaNotificacoesErro = new ArrayList<>();
+		NotificacaoErro notifErro = new NotificacaoErro(new IdentificadorLinhaProducao("LINHAPROD_1"),
+				TipoErroNotificacao.DADOS_INVALIDOS, 2L, lProdRepo, msgRepo);
 
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,
 				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao, listaNotificacoesErro);

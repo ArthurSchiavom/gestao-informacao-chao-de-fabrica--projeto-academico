@@ -34,7 +34,7 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao>,
 	}
 
 	public static String identityAttributeName() {
-		return "id";
+		return "identifier";
 	}
 
 	@Override
