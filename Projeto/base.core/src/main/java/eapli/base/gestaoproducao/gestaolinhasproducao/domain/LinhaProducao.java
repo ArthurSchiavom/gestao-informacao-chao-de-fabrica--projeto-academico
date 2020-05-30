@@ -5,9 +5,7 @@ import eapli.base.infrastructure.application.HasDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Version;
+import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 @Entity
@@ -21,6 +19,7 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao>,
 	public final IdentificadorLinhaProducao identifier; // can be public bc its final
 
 	@XmlElement
+	@Enumerated(EnumType.STRING)
 	private EstadoProcessamentoMensagens estado;
 
 	public LinhaProducao(final String identifier) {
@@ -62,8 +61,18 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao>,
 		return "LinhaProducao{ Identificador: " + identifier.identifier+", estado: "+ estado.toString()+"}";
 	}
 
+	public String estadoProcessamentoMensagens(){
+		switch (this.estado){
+			case ATIVO:
+				return "ATIVO";
+			case SUSPENSO:
+				return "SUSPENSO";
+		}
+		return null;
+	}
+
 	@Override
 	public LinhaProducaoDTO toDTO() {
-		return new LinhaProducaoDTO(identity().toString());
+		return new LinhaProducaoDTO(identity().toString(),estadoProcessamentoMensagens());
 	}
 }

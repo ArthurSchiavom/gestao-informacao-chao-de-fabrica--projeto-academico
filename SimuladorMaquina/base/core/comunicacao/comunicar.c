@@ -23,18 +23,18 @@ typedef struct Built_Payload {
     char *content;
 } Built_Payload;
 
-int reverse_bytes_int(int num) {
-    int swapped = ((num >> 24) & 0xff) | // move byte 3 to byte 0
-                  ((num << 8) & 0xff0000) | // move byte 1 to byte 2
-                  ((num >> 8) & 0xff00) | // move byte 2 to byte 1
-                  ((num << 24) & 0xff000000); // byte 0 to byte 3
-    return swapped;
-}
-
-short reverse_bytes_short(short num) {
-    short swapped = (num >> 8) | (num << 8);
-    return swapped;
-}
+//int reverse_bytes_int(int num) {
+//    int swapped = ((num >> 24) & 0xff) | // move byte 3 to byte 0
+//                  ((num << 8) & 0xff0000) | // move byte 1 to byte 2
+//                  ((num >> 8) & 0xff00) | // move byte 2 to byte 1
+//                  ((num << 24) & 0xff000000); // byte 0 to byte 3
+//    return swapped;
+//}
+//
+//short reverse_bytes_short(short num) {
+//    short swapped = (num >> 8) | (num << 8);
+//    return swapped;
+//}
 
 Built_Payload build_payload(Payload payload) {
     Built_Payload resultado;
@@ -45,11 +45,11 @@ Built_Payload build_payload(Payload payload) {
     resultado.content[0] = payload.version;
     resultado.content[1] = payload.code;
 
-    unsigned short id = reverse_bytes_short(payload.id);
+    unsigned short id = payload.id;
     unsigned short *helper_short = &(resultado.content[2]);
     *helper_short = id;
 
-    unsigned short data_length = reverse_bytes_short(payload.data_length);
+    unsigned short data_length = payload.data_length;
     helper_short = &(resultado.content[4]);
     *helper_short = data_length;
     if (data_length > 0) {
@@ -120,8 +120,8 @@ Packet_tcp receive_packet_tcp(int socket) {
     read(socket, &(received_payload.code), 1);
     read(socket, &(received_payload.id), 2);
     read(socket, &(received_payload.data_length), 2);
-    received_payload.id = reverse_bytes_short(received_payload.id);
-    received_payload.data_length = reverse_bytes_short(received_payload.data_length);
+    received_payload.id = received_payload.id;
+    received_payload.data_length = received_payload.data_length;
 
     int success;
     if (received_payload.data_length == 0) {

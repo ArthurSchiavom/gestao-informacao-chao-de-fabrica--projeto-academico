@@ -5,9 +5,11 @@ package eapli.base.gestaoproducao.gestaolinhasproducao.dto;
  */
 public class LinhaProducaoDTO {
     public final String identificadorLinhaProducao;
+    public final String estado;
 
-    public LinhaProducaoDTO(String identificadorLinhaProducao) {
+    public LinhaProducaoDTO(String identificadorLinhaProducao,String estado) {
         this.identificadorLinhaProducao = identificadorLinhaProducao;
+        this.estado=estado;
     }
 
     @Override

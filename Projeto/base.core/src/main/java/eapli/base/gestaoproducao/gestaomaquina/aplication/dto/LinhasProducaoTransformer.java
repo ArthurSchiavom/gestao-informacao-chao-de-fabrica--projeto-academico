@@ -15,8 +15,7 @@ public class LinhasProducaoTransformer {
         List<LinhaProducaoDTO> linhasDTO = new ArrayList<>();
 
         for(LinhaProducao linha : linhas){
-
-            linhasDTO.add(new LinhaProducaoDTO(linha.identity().toString()));
+            linhasDTO.add(new LinhaProducaoDTO(linha.identity().toString(),linha.estadoProcessamentoMensagens()));
         }
 
         return linhasDTO;

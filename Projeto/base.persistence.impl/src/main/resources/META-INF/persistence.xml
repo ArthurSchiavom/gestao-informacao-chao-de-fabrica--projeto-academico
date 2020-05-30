@@ -18,6 +18,7 @@
         <class>eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao</class>
         <class>eapli.base.gestaoproducao.gestaomaquina.domain.Maquina</class>
         <class>eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro</class>
+        <class>eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/BaseDados_LAPR4_2020_G3"/>
