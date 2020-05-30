@@ -15,7 +15,7 @@ S9 -> Fim de Atividade
 ### Estrutura das Mensagens (Formato normalizado): ###
 
 C0 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
-C9 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
+C9 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito;Lote
 P1 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
 P2 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
 
