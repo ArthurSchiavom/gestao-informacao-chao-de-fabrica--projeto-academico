@@ -3,6 +3,7 @@
 #include "../core/boot/boot.h"
 #include "../core/comunicacao/comunicar.h"
 #include "../core/comunicacao/envio_mensagens_carregadas.h"
+#include "../core/utils/const.h"
 #include <string.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -29,7 +30,7 @@ void test_packet_transfer() {
     packet.payload.data_length = 7;
     packet.payload.data = malloc(7);
     strcpy(packet.payload.data, "HELLO!");
-    send_packet_tcp(packet);
+    send_packet_tcp(packet, TRUE);
     close_tcp_connection(socket);
     printf("ended\n");
 }
@@ -38,7 +39,7 @@ void test_handshake() {
     printf("A iniciar conexão\n");
     int socket = start_tcp_connection("labs-ssh5.dei.isep.ipp.pt", PORTA_SISTEMA_CENTRAL);
     printf("Conexão completa, handshake_tcp a começar\n");
-    int resultado = handshake_tcp(socket);
+    int resultado = handshake_tcp(socket, TRUE);
     printf("Resultado: %d\n", resultado);
     close_tcp_connection(socket);
 }

@@ -30,13 +30,13 @@ typedef struct Built_Payload {
 //                  ((num << 24) & 0xff000000); // byte 0 to byte 3
 //    return swapped;
 //}
-//
-//short reverse_bytes_short(short num) {
-//    short swapped = (num >> 8) | (num << 8);
-//    return swapped;
-//}
 
-Built_Payload build_payload(Payload payload) {
+short reverse_bytes_short(short num) {
+    short swapped = (num >> 8) | (num << 8);
+    return swapped;
+}
+
+Built_Payload build_payload(Payload payload, short inverterBytesDeNumeros) {
     Built_Payload resultado;
     int built_payload_size = PAYLOAD_STATIC_DATA_SIZE + payload.data_length;
     resultado.size = built_payload_size;
@@ -46,10 +46,16 @@ Built_Payload build_payload(Payload payload) {
     resultado.content[1] = payload.code;
 
     unsigned short id = payload.id;
+    if (inverterBytesDeNumeros == TRUE) {
+        id = reverse_bytes_short(id);
+    }
     unsigned short *helper_short = &(resultado.content[2]);
     *helper_short = id;
 
     unsigned short data_length = payload.data_length;
+    if (inverterBytesDeNumeros == TRUE) {
+        data_length = reverse_bytes_short(data_length);
+    }
     helper_short = &(resultado.content[4]);
     *helper_short = data_length;
     if (data_length > 0) {
@@ -94,8 +100,8 @@ int start_tcp_connection(char *target, char *porta) {
     return sock;
 }
 
-int send_packet_tcp(Packet_tcp packet) {
-    Built_Payload payload = build_payload(packet.payload);
+int send_packet_tcp(Packet_tcp packet, short inverterBytesDeNumeros) {
+    Built_Payload payload = build_payload(packet.payload, inverterBytesDeNumeros);
     int success = write(packet.socket, payload.content, payload.size);
 
     if (success == -1) {
@@ -145,7 +151,7 @@ Packet_tcp receive_packet_tcp(int socket) {
     return result;
 }
 
-int handshake_tcp(int socket) {
+int handshake_tcp(int socket, short inverterBytesDeNumeros) {
     Packet_tcp packet;
     packet.socket = socket;
     packet.payload.version = CURRENT_PROTOCOL_VERSION;
@@ -153,7 +159,7 @@ int handshake_tcp(int socket) {
     packet.payload.id = id_maquina;
     packet.payload.data_length = 0;
 
-    int resultado = send_packet_tcp(packet);
+    int resultado = send_packet_tcp(packet, inverterBytesDeNumeros);
     if (resultado == -1) {
         return -1;
     }
@@ -174,7 +180,7 @@ int ligar_ao_servidor_central() {
         return -1;
     }
 
-    int resultado = handshake_tcp(sock);
+    int resultado = handshake_tcp(sock, TRUE);
     if (resultado == REQUEST_CODE_ACK) {
         socket_sistema_central = sock;
         return sock;

@@ -36,7 +36,7 @@ _Noreturn void modulo_envio_mensagens() {
             resultado.socket = -1;
             while (resultado.payload.code != REQUEST_CODE_ACK) {
                 limpar_data_resultado = FALSE;
-                int sucesso = send_packet_tcp(packet);
+                int sucesso = send_packet_tcp(packet, TRUE);
                 if (sucesso != -1) {
                     resultado = receive_packet_tcp(socket_sistema_central);
                     limpar_data_resultado = TRUE;
