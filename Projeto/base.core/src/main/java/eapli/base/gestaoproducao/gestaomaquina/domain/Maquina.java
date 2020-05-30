@@ -59,7 +59,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, HasDTO<Maqu
     private String descricaoMaquina; // might change so it's not final
     @XmlElement
     private IdentificadorLinhaProducao linhaProducao;
-    @XmlElement
+
     private InetAddress ip;
 
     protected Maquina() {
@@ -124,6 +124,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, HasDTO<Maqu
                 ", modelo='" + modelo + '\'' +
                 ", descricaoMaquina='" + descricaoMaquina + '\'' +
                 ", linhaProducao=" + linhaProducao.identifier +
+                ", identificador protocolo: "+ identificadorProtocoloComunicacao.identificadorProtocoloComunicao +
                 '}';
     }
 

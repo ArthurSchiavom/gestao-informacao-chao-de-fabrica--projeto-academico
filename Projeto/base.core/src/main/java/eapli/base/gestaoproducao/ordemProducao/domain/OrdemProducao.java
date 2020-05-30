@@ -5,6 +5,7 @@ import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -73,7 +74,7 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
 
         Date dataAtual = new Date(System.currentTimeMillis());
 
-        if (dataPrevistaExecucao.compareTo(dataEmissao) >= 0 && dataAtual.compareTo(dataEmissao) >= 0) {
+        if (dataPrevistaExecucao.compareTo(dataEmissao) >= 0 && dataAtual.compareTo(dataEmissao) >= 0 && identificadorEncomendaList != null && identificadorEncomendaList.size() != 0) {
 
             this.identificador = identificador;
             this.quantidadeAProduzir = quantidadeAProduzir;

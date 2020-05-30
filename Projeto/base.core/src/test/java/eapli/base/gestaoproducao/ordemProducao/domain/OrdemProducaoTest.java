@@ -16,26 +16,31 @@ import static org.junit.Assert.*;
 
 public class OrdemProducaoTest {
 
-    OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), new ArrayList<>(),
-            new Date(),
-            new Date(), Estado.EM_EXECUCAO);
-    OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234), new ArrayList<>(),
-            new Date(),
-            new Date(), Estado.EM_EXECUCAO);
-    OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123), new ArrayList<>(),
-            new Date(),
-            new Date(), Estado.EM_EXECUCAO);
 
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorDataNoFuturo() {
+        List<IdentificadorEncomenda> encomendas = new ArrayList<>();
+        encomendas.add(new IdentificadorEncomenda("123"));
+        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String s = "12-12-2030";
         Date data;
 
         try {
             data = sdf.parse(s);
-            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123), new ArrayList<>(),
+            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+                    new ArrayList<>(),
                     data,
                     new Date(), Estado.EM_EXECUCAO);
 
@@ -46,13 +51,27 @@ public class OrdemProducaoTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorQuantidadeNegativa() {
+        List<IdentificadorEncomenda> encomendas = new ArrayList<>();
+        encomendas.add(new IdentificadorEncomenda("123"));
+        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String s = "12-12-2030";
         Date data;
 
         try {
             data = sdf.parse(s);
-            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(-1), new ArrayList<>(),
+            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(-1),
+                    new ArrayList<>(),
                     new Date(),
                     new Date(), Estado.EM_EXECUCAO);
 
@@ -62,13 +81,27 @@ public class OrdemProducaoTest {
 
     @Test
     public void testConstructorDataCorreta() {
+        List<IdentificadorEncomenda> encomendas = new ArrayList<>();
+        encomendas.add(new IdentificadorEncomenda("123"));
+        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String s = "12-12-2030";
         Date data;
 
         try {
             data = sdf.parse(s);
-            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123), new ArrayList<>(),
+            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+                    encomendas,
                     new Date(),
                     data, Estado.EM_EXECUCAO);
 
@@ -83,16 +116,55 @@ public class OrdemProducaoTest {
 
     @Test
     public void identity() {
+        List<IdentificadorEncomenda> encomendas = new ArrayList<>();
+        encomendas.add(new IdentificadorEncomenda("123"));
+        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
         assertEquals(op1.identity(), new Identificador("dak"));
     }
 
     @Test
     public void gerarOrdensProducaoDTO() {
+        List<IdentificadorEncomenda> encomendas = new ArrayList<>();
+        encomendas.add(new IdentificadorEncomenda("123"));
+        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
         assertTrue(OrdemProducao.gerarOrdensProducaoDTO(op).information.equals(new OrdemProducaoDTO(op).information));
     }
 
     @Test
     public void testGerarOrdensProducaoDTO() {
+        List<IdentificadorEncomenda> encomendas = new ArrayList<>();
+        encomendas.add(new IdentificadorEncomenda("123"));
+        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
+        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+                encomendas,
+                new Date(),
+                new Date(), Estado.EM_EXECUCAO);
         List<OrdemProducao> ordens = new ArrayList<>();
         ordens.add(op);
         ordens.add(op1);
