@@ -192,4 +192,57 @@
   </xs:complexType>
 
 
+  <xs:complexType name="agendamentoDeProcessamento">
+    <xs:all>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" />
+      <xs:element name="fimTimestampEpochMili" type="timestampEpochMili" />
+      <xs:element name="inicioTimestampEpochMili" type="timestampEpochMili" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="material">
+    <xs:all>
+      <xs:element name="unidadeDeMedida" type="unidadeDeMedida" />
+      <xs:element name="descricao" type="stringNaoVazia" />
+      <xs:element name="fichaTecnicaPDF" type="fichaTecnicaPDF" />
+      <xs:element name="categoria" type="stringNaoVazia" />
+    </xs:all>
+    <xs:attribute name="codigoInternoMaterial" type="codigoInternoMaterial" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="fichaTecnicaPDF">
+    <xs:all>
+      <xs:element name="path" type="stringNaoVazia" minOccurs="0"/>
+      <xs:element name="nome" type="stringNaoVazia" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="maquina">
+    <xs:all>
+      <xs:element name="numeroSerie" type="stringNaoVazia" />
+      <xs:element name="ordemLinhaProducao" type="intPositivo" />
+      <xs:element name="ficheiroConfiguracao" type="stringNaoVazia" minOccurs="0" />
+      <xs:element name="identificadorProtocoloComunicacao" type="xs:int" />
+      <xs:element name="dataInstalacao" type="data" />
+      <xs:element name="marca" type="stringNaoVazia" />
+      <xs:element name="modelo" type="stringNaoVazia" />
+      <xs:element name="descricaoMaquina" type="stringNaoVazia" />
+      <xs:element name="linhaProducao" type="identificadorLinhaDeProducao" />
+    </xs:all>
+    <xs:attribute name="codigoInterno" type="codigoInternoMaquina" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="produtosProduzidos">
+    <xs:sequence>
+      <xs:element name="produtoProduzido" type="produtoProduzido" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="produtoProduzido">
+    <xs:all>
+      <xs:element name="identificadorLote" type="identificadorLote" />
+      <xs:element name="quantidadeProduto" type="stringNaoVazia" />
+      <xs:element name="codigoUnicoProduto" type="codigoUnicoProduto" />
+    </xs:all>
+  </xs:complexType>
 </xs:schema>
