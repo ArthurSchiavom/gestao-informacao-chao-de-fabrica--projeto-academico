@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+
+  <xs:simpleType name="doublePositivo">
+    <xs:restriction base="xs:double">
+      <xs:minExclusive value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="data">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="((0[1-9]|[12][0-9]|3[01])-(01|03|05|07|08|10|12)-[0-9]{4})|((0[1-9]|[12][0-9]|30)-(04|06|09|11)-[0-9]{4})|((0[1-9]|[12][0-9])-(02)-[0-9]{4})" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="timestampEpochMili">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="0" />
+      <xs:maxExclusive value="10000000000" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="stringNaoVazia">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="intPositivo">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="descricaoBreveProduto">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="30" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+  <xs:simpleType name="identificadorLinhaDeProducao">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="codigoDeposito">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="identificadorOrdemProducao">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="identificadorLote">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="codigoInternoMaquina">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="idMateriaPrima">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="codigoInternoMaterial">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="codigoUnicoProduto">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="codigoAlfanumericoCategoria">
+    <xs:restriction base="stringNaoVazia" />
+  </xs:simpleType>
+
+  <xs:simpleType name="idMovimentoStock">
+    <xs:restriction base="xs:int" />
+  </xs:simpleType>
+
+  <xs:simpleType name="uniqueValFichaDeProducao">
+    <xs:restriction base="xs:int" />
+  </xs:simpleType>
+
+
+  <xs:simpleType name="estadoProcessamentoMensagens">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ATIVO" />
+      <xs:enumeration value="INATIVO" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tipoDeMateriaPrima">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MATERIAL" />
+      <xs:enumeration value="PRODUTO" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="unidadeDeMedida">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UNIDADES" />
+      <xs:enumeration value="KILOGRAMA" />
+      <xs:enumeration value="GRAMA" />
+      <xs:enumeration value="METRO" />
+      <xs:enumeration value="CENTIMETRO" />
+      <xs:enumeration value="MILIMETRO" />
+      <xs:enumeration value="LITRO" />
+      <xs:enumeration value="DECILITRO" />
+      <xs:enumeration value="CENTILITRO" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="estadoDeErroDeProcessamento">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ATIVA" />
+      <xs:enumeration value="ARQUIVADA" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tipoDeErroDeProcessamento">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DESCONHECIDO" /> <!-- Ainda não definidos -->
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  
+
+  <xs:complexType name="notificacaoDeErroDeProcessamento">
+    <xs:all>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" />
+      <xs:element name="tipo" type="tipoDeErroDeProcessamento" />
+      <xs:element name="estado" type="estadoDeErroDeProcessamento" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="linhaProducao">
+    <xs:all>
+      <xs:element name="estado" type="estadoProcessamentoMensagens" />
+    </xs:all>
+    <xs:attribute name="identificador" type="identificadorLinhaDeProducao" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="deposito">
+    <xs:all>
+      <xs:element name="descricao" type="stringNaoVazia" />
+    </xs:all>
+    <xs:attribute name="codigo" type="codigoDeposito" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="categoria">
+    <xs:all>
+      <xs:element name="descricao" type="stringNaoVazia" />
+    </xs:all>
+    <xs:attribute name="codigoAlfanumericoCategoria" type="codigoAlfanumericoCategoria" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="produto">
+    <xs:all>
+      <xs:element name="codigoComercial" type="stringNaoVazia" />
+      <xs:element name="fichaDeProducao" type="fichaDeProducao" minOccurs="0" />
+      <xs:element name="categoriaDeProduto" type="stringNaoVazia" />
+      <xs:element name="descricaoBreve" type="descricaoBreveProduto" />
+      <xs:element name="descricaoCompleta" type="stringNaoVazia" />
+      <xs:element name="unidadeDeMedida" type="unidadeDeMedida" />
+    </xs:all>
+    <xs:attribute name="codigoUnico" type="codigoUnicoProduto" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="fichaDeProducao">
+    <xs:sequence>
+      <xs:element name="quantidadesDeMateriaPrima" type="quantidadeDeMateriaPrima" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="uniqueVal" type="uniqueValFichaDeProducao" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="quantidadeDeMateriaPrima">
+    <xs:all>
+      <xs:element name="quantidade" type="doublePositivo" />
+      <xs:element name="materiaPrima" type="idMateriaPrima" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="materiaPrima">
+    <xs:all>
+      <xs:element name="tipoDeMateriaPrima" type="tipoDeMateriaPrima" />
+      <xs:element name="idMateria" type="idMateriaPrima" />
+    </xs:all>
+  </xs:complexType>
+
+
+</xs:schema>

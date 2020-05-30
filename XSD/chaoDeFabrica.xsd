@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica" xmlns:cdfab="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica" xmlns:tns="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import schemaLocation="schema2.xsd" />
+
+  <xs:element name="chaoDeFabrica" type="tns:chaoDeFabrica">
+
+    <xs:key name="linhasDeProducaoKey">
+      <xs:selector xpath="cdfab:linhasDeProducao/cdfab:linhaDeProducao" />
+      <xs:field xpath="@identificador" />
+    </xs:key>
+
+    <xs:key name="depositosKey">
+      <xs:selector xpath="cdfab:depositos/cdfab:deposito" />
+      <xs:field xpath="@codigo" />
+    </xs:key>
+
+    <xs:key name="produtosKey">
+      <xs:selector xpath="cdfab:produtos/cdfab:produto" />
+      <xs:field xpath="@codigoUnico" />
+    </xs:key>
+
+    <xs:key name="categoriasKey">
+      <xs:selector xpath="cdfab:categorias/cdfab:categoria" />
+      <xs:field xpath="@codigoAlfanumericoCategoria" />
+    </xs:key>
+
+    <xs:key name="fichasDeProducaoKey">
+      <xs:selector xpath="cdfab:fichasDeProducao/cdfab:fichaProducao" />
+      <xs:field xpath="@uniqueVal" />
+    </xs:key>
+
+    <xs:keyref name="lref" refer="cdfab:linhasDeProducaoKey">
+      <xs:selector xpath="cdfab:notificacoesDeErroDeProcessamento/cdfab:notificacaoDeErroDeProcessamento" />
+      <xs:field xpath="linhaDeProducao" />
+    </xs:keyref>
+  </xs:element>
+  
+
+  <xs:complexType name="chaoDeFabrica">
+    <xs:all>
+      <xs:element name="notificacoesDeErroDeProcessamento">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="notificacaoDeErroDeProcessamento" type="notificacaoDeErroDeProcessamento" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="linhasDeProducao">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="linhaDeProducao" type="linhaProducao" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="depositos">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="deposito" type="deposito" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="categorias">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="categoria" type="categoria" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="produtos">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="produto" type="produto" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="fichasDeProducao">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="fichaProducao" type="fichaDeProducao" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+</xs:schema>
