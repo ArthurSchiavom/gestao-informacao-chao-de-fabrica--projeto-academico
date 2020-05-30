@@ -13,6 +13,7 @@ import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
+import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.InMemoryUserRepository;
@@ -152,6 +153,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	public TransactionalContext newTransactionalContext() {
 		// in memory does not support transactions...
 		return null;
+	}
+
+	@Override
+	public AgendamentoDeProcessamentoRepository agendamentoDeProcessamento() {
+		return new InMemoryAgendamentoDeProcessamentoRepository();
+	}
+
+	@Override
+	public AgendamentoDeProcessamentoRepository agendamentoDeProcessamento(TransactionalContext autoTx) {
+		return agendamentoDeProcessamento(autoTx);
 	}
 
 }

@@ -14,6 +14,7 @@ import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
+import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
@@ -193,4 +194,20 @@ public interface RepositoryFactory {
 	 * @return the repository with a certain transactional context
 	 */
 	NotificacaoErroRepository notificacoesErros(TransactionalContext autoTx);
+
+
+	/**
+	 * repository will be created in auto transaction mode
+	 * @return repository automatic transaction mode
+	 */
+	AgendamentoDeProcessamentoRepository agendamentoDeProcessamento();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return the repository with a certain transactional context
+	 */
+	AgendamentoDeProcessamentoRepository agendamentoDeProcessamento(TransactionalContext autoTx);
+
+
 }

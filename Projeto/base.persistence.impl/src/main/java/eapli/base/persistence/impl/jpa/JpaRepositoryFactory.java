@@ -12,6 +12,7 @@ import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoReposi
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
+import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.JpaAutoTxUserRepository;
@@ -150,5 +151,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public FichaDeProducaoRepository fichaDeProducao(TransactionalContext autoTx) {
         return new JpaFichaDeProducaoRepository(autoTx);
+    }
+
+    @Override
+    public AgendamentoDeProcessamentoRepository agendamentoDeProcessamento() {
+        return new JpaAgendamentoDeProcessamentoRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public AgendamentoDeProcessamentoRepository agendamentoDeProcessamento(TransactionalContext autoTx) {
+        return new JpaAgendamentoDeProcessamentoRepository(autoTx);
     }
 }

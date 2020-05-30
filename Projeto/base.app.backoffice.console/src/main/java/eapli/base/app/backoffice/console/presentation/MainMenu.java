@@ -44,6 +44,7 @@ import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoprodu
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.EspecificarFichaDeProducaoAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.EspecificarProdutoAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.ImportarCatalogoProdutosAction;
+import eapli.base.app.backoffice.console.presentation.servicoDeProcessamentoMensagens.ProcessamentoDeMensagensUI;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -97,6 +98,8 @@ public class MainMenu extends AbstractUI {
 	private static final int CONSULTAR_ERROS = 6;
 	private static final int ARQUIVAR_ERROS = 7;
 
+	// SERVICO DE PROCESSAMENTO MENSAGENS
+	private static final int PROCESSAMENTO_DE_MENSAGENS_SISTEMA=1;
 
 	// SETTINGS
 	private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
@@ -106,10 +109,13 @@ public class MainMenu extends AbstractUI {
 	private static final int USERS_OPTION = 2;
 	private static final int PRODUCAO_OPTION = 3;
 	private static final int FABRICA_OPTION = 4;
-	private static final int SETTINGS_OPTION = 5;
-	private static final int TRACEABILITY_OPTION = 6;
-	private static final int MEALS_OPTION = 7;
-	private static final int REPORTING_DISHES_OPTION = 8;
+	private static final int PROCESSAMENTO_OPTION=5;
+	private static final int SETTINGS_OPTION = 6;
+	private static final int TRACEABILITY_OPTION = 7;
+	private static final int MEALS_OPTION = 8;
+	private static final int REPORTING_DISHES_OPTION = 9;
+
+
 
 	private static final String SEPARATOR_LABEL = "--------------";
 
@@ -162,6 +168,8 @@ public class MainMenu extends AbstractUI {
 			mainMenu.addSubMenu(FABRICA_OPTION, fabricaMenu);
 			final Menu settingsMenu = buildAdminSettingsMenu();
 			mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
+			final Menu processamentoMenu= buildServicoDeProcessamentoDeMensagensMenu();
+			mainMenu.addSubMenu(PROCESSAMENTO_OPTION,processamentoMenu);
 
 		}
 
@@ -238,6 +246,18 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(ARQUIVAR_ERROS, "Arquivar Erros de Processamento", new ArquivarNotificacoesErroUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
+		return menu;
+	}
+
+	/**
+	 * Menu Servico de Processamento de Mensagens
+	 *
+	 * @return
+	 */
+	private Menu buildServicoDeProcessamentoDeMensagensMenu(){
+		final Menu menu = new Menu("Processamento Mensagens >"); // nao tem acentos, por causa do UTF-8 no terminal
+		menu.addItem(PROCESSAMENTO_DE_MENSAGENS_SISTEMA,"Processar Mensagens Sistema",new ProcessamentoDeMensagensUI()::show);
+		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 		return menu;
 	}
 }
