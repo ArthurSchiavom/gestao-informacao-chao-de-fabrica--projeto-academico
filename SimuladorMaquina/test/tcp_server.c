@@ -36,10 +36,10 @@ typedef struct Built_Payloadd {
     char *content;
 } Built_Payloadd;
 
-short reverse_bytes_short(short num) {
-    short swapped = (num >> 8) | (num << 8);
-    return swapped;
-}
+//short reverse_bytes_short(short num) {
+//    short swapped = (num >> 8) | (num << 8);
+//    return swapped;
+//}
 
 Built_Payloadd build_payload(Payloadd payload) {
     Built_Payloadd resultado;
@@ -50,11 +50,11 @@ Built_Payloadd build_payload(Payloadd payload) {
     resultado.content[0] = payload.version;
     resultado.content[1] = payload.code;
 
-    unsigned short id = reverse_bytes_short(payload.id);
+    unsigned short id = payload.id;
     unsigned short *helper_short = &(resultado.content[2]);
     *helper_short = id;
 
-    unsigned short data_length = reverse_bytes_short(payload.data_length);
+    unsigned short data_length = payload.data_length;
     helper_short = &(resultado.content[4]);
     *helper_short = data_length;
     strcpy(resultado.content + 6, payload.data);
@@ -113,8 +113,8 @@ Packett receive_packet_tcpp(int socket) {
     read(socket, &(result.payload.id), 2);
     read(socket, &(result.payload.data_length), 2);
 
-    result.payload.id = reverse_bytes_short(result.payload.id);
-    result.payload.data_length = reverse_bytes_short(result.payload.id);
+    result.payload.id = result.payload.id;
+    result.payload.data_length = result.payload.id;
 
     int success;
     if (result.payload.data_length == 0) {
@@ -211,8 +211,8 @@ int main(void) {
                 read(newSock, &(data.code), 1);
                 read(newSock, &(data.id), 2);
                 read(newSock, &(data.data_length), 2);
-                data.id = reverse_bytes_short(data.id);
-                data.data_length = reverse_bytes_short(data.data_length);
+                data.id = data.id;
+                data.data_length = data.data_length;
                 if (data.data_length > 0) {
                     data.data = malloc(data.data_length);
                     read(newSock, data.data, data.data_length);
