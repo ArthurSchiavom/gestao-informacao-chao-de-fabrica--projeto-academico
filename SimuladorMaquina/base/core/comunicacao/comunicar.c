@@ -32,7 +32,7 @@ typedef struct Built_Payload {
 //}
 
 short reverse_bytes_short(short num) {
-    short swapped = (num >> 8) | (num << 8);
+    short swapped = ((num<<8)&0xff00) | ((num>>8)&0x00ff);
     return swapped;
 }
 
