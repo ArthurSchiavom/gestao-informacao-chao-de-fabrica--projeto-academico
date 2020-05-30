@@ -25,7 +25,7 @@ public class ProcessarMensagemProtocoloHello implements ProcessarMensagensProtoc
     public ProcessarMensagemProtocoloHello(Byte version, Byte code, char idMaquinaProtocolo,
                                            char tamanhoData, String rawData) {
         mensagemProtocoloComunicacao = new MensagemProtocoloComunicacao(version, code, idMaquinaProtocolo,
-                (char) 0, null);
+                tamanhoData, rawData);
         //TODO: guardar no log
     }
 
@@ -39,16 +39,14 @@ public class ProcessarMensagemProtocoloHello implements ProcessarMensagensProtoc
             return mensagemNACK();
         }
 
-        System.out.println("Maquina existe? wat "+ maq);
-//        InetSocketAddress sockaddr = (InetSocketAddress) s.getRemoteSocketAddress();
-//        InetAddress inaddr = sockaddr.getAddress();
-
         InetAddress sockaddr = s.getInetAddress();
 
 
         // guardar IP na máquina
 
         maq.setIp(sockaddr);
+
+        repo.save(maq);
 
         //sucesso retorna ACK
         return mensagemACK();

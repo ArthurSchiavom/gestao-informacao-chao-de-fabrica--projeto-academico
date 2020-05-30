@@ -32,13 +32,9 @@ public class ProcessarMensagemProtocoloMSG implements ProcessarMensagensProtocol
     public MensagemProtocoloComunicacao processarMensagem(Socket s) {
         Maquina maq;
         if ((maq = maquinaIdentificadorExiste(mensagemProtocoloComunicacao.idProtocolo)) == null) {
-
             //falha, retorna NACK
             return mensagemNACK();
         }
-
-//        InetSocketAddress sockaddr = (InetSocketAddress) s.getRemoteSocketAddress();
-//        InetAddress inaddr = sockaddr.getAddress();
 
         InetAddress sockaddr = s.getInetAddress();
 
@@ -47,6 +43,8 @@ public class ProcessarMensagemProtocoloMSG implements ProcessarMensagensProtocol
             // o IP recebido é diferente do IP recebido
             return mensagemNACK();
         }
+
+        //Processar mensagens
 
         //sucesso retorna ACK
         return mensagemACK();

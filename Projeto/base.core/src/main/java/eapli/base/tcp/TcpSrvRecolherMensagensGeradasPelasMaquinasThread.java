@@ -11,9 +11,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
+
+import static java.lang.Thread.sleep;
 
 public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnable {
 
@@ -29,83 +29,80 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
 
     @Override
     public void run() {
-
         char maquinaID, tamanhoData;
         int maquinaIDPlaceHolder, tamanhoDataPlaceHolder;
         Byte version, code;
-
-        ByteBuffer bb = ByteBuffer.allocate(2);
-        bb.order(ByteOrder.LITTLE_ENDIAN);
-
+        boolean read = true;
         byte[] rawData;
-        String dataString = null;
+        String dataString = "";
+
         InetAddress clientIP = s.getInetAddress();
         System.out.println("New client connection from " + clientIP.getHostAddress() +
                 ", port number " + s.getPort());
         try {
             sOut = new DataOutputStream(s.getOutputStream());
             sIn = new DataInputStream(s.getInputStream());
-            System.out.println("get streams");
-            version = sIn.readByte(); // read version
-            System.out.println("recebido version: " + version.intValue());
-            code = sIn.readByte(); // read code
-            System.out.println("recebido code: " + code.intValue());
+            while(read) {
 
-            maquinaIDPlaceHolder = sIn.readShort() & 0xFFFF; // read unsigned short
-            maquinaID = (char) maquinaIDPlaceHolder;
+                System.out.println("get streams");
+                version = sIn.readByte(); // read version
+                System.out.println("recebido version: " + version.intValue());
+                code = sIn.readByte(); // read code
+                System.out.println("recebido code: " + code.intValue());
 
-            System.out.println("recebido maquinaID: " + (int) maquinaID);
+                maquinaIDPlaceHolder = sIn.readShort() & 0xFFFF; // read unsigned short
+                maquinaID = (char) maquinaIDPlaceHolder;
 
-            tamanhoDataPlaceHolder = sIn.readShort() & 0xFFFF; // read unsigned short
-            tamanhoData = (char) tamanhoDataPlaceHolder;
+                System.out.println("recebido maquinaID: " + (int) maquinaID);
 
-            System.out.println("recebido tamanho data: " + (int) tamanhoData);
+                tamanhoDataPlaceHolder = sIn.readShort() & 0xFFFF; // read unsigned short
+                tamanhoData = (char) tamanhoDataPlaceHolder;
 
+                System.out.println("recebido tamanho data: " + (int) tamanhoData);
 
-//            if (tamanhoData > 0) {
-//                rawData = new byte[tamanhoData];
-//                sIn.readFully(rawData);
-//                dataString = new String(rawData, StandardCharsets.UTF_8); // UTF-8
-//            int readData = 0;
-//            String dataLine;
-////
-//            while (readData < tamanhoData) {
-//                rawData = new byte[tamanhoData];
-//                readData += sIn.read(rawData); // return the numbers of bytes read
-//                dataLine = new String(rawData, StandardCharsets.UTF_8);
-//                dataString += dataLine; // concat line to String that holds the whole text
-//            }
+                int readData = 0;
+                String dataLine;
+//
+                while (readData < tamanhoData) {
+                    rawData = new byte[tamanhoData];
+                    readData += sIn.read(rawData); // return the numbers of bytes read
+                    dataLine = new String(rawData, StandardCharsets.UTF_8);
+                    dataString += dataLine; // concat line to String that holds the whole text
+                }
 
-//            }
+                //Factory pattern
+                ProcessarMensagensProtocolosStrategy mens =
+                        ProcessarMensagemProtocoloFactory.getProcessarMensagemProtocolo(version, code, maquinaID,
+                                tamanhoData, dataString);
+                if(mens == null){
+                    break;
+                }
 
-            //Factory pattern
-            ProcessarMensagensProtocolosStrategy mens =
-                    ProcessarMensagemProtocoloFactory.getProcessarMensagemProtocolo(version, code, maquinaID,
-                            tamanhoData, dataString);
+                MensagemProtocoloComunicacao mensagemProtocoloComunicacao = mens.processarMensagem(s);
 
-            MensagemProtocoloComunicacao mensagemProtocoloComunicacao = mens.processarMensagem(s);
+                escreveMensagem(mensagemProtocoloComunicacao, sOut);
 
-            escreveMensagem(mensagemProtocoloComunicacao, sOut);
+                sleep(1000);
+                if(sIn.available() == 0){ // if nothing is available to read, break from loop
+                    System.out.println("broke from the loop");
+                    read = false;
+                }
+                System.out.println("Client " + clientIP.getHostAddress() + ",port number: " + s.getPort() +
+                        " disconnected");
 
-            System.out.println(mensagemProtocoloComunicacao.idProtocolo);
-            System.out.println(mensagemProtocoloComunicacao.version);
-            System.out.println(mensagemProtocoloComunicacao.mensagem);
-
-            System.out.println("Client " + clientIP.getHostAddress() + ",port number: " + s.getPort() +
-                    " disconnected");
-
-//            sOut.flush();
+            }
             sOut.close();
             sIn.close();
             s.close();
         } catch (IOException e) {
 //            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * Escreve a MensagemProtocoloComunicaçao através do socket
-     *
      *
      * @throws IOException
      */
@@ -117,10 +114,10 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
         sOut.write(mensagemProtocoloComunicacao.tamanhoRawData);
         if (mensagemProtocoloComunicacao.tamanhoRawData > 0 && mensagemProtocoloComunicacao.mensagem != null) {
             sOut.write(mensagemProtocoloComunicacao.mensagem.getBytes());
-            System.out.println("mensagem escrita, version: " +mensagemProtocoloComunicacao.version +"\ncode: " + mensagemProtocoloComunicacao.code+"\nidProt: "+mensagemProtocoloComunicacao.idProtocolo+"\ntamanho: "+ mensagemProtocoloComunicacao.tamanhoRawData);
+            System.out.println("mensagem escrita, version: " + mensagemProtocoloComunicacao.version + "\ncode: " + mensagemProtocoloComunicacao.code + "\nidProt: " + mensagemProtocoloComunicacao.idProtocolo + "\ntamanho: " + mensagemProtocoloComunicacao.tamanhoRawData);
         }
 
-        System.out.println("mensagem escrita, version: " +(mensagemProtocoloComunicacao.version  & 0xFF) +"\ncode: " + (mensagemProtocoloComunicacao.code  & 0xFF)+"\nidProt: "+ (short) (mensagemProtocoloComunicacao.idProtocolo & 0xFFFF ) +"\ntamanho: "+ (short) (mensagemProtocoloComunicacao.tamanhoRawData & 0xFFFF));
+        System.out.println("mensagem escrita, version: " + (mensagemProtocoloComunicacao.version & 0xFF) + "\ncode: " + (mensagemProtocoloComunicacao.code & 0xFF) + "\nidProt: " + (short) (mensagemProtocoloComunicacao.idProtocolo & 0xFFFF) + "\ntamanho: " + (short) (mensagemProtocoloComunicacao.tamanhoRawData & 0xFFFF));
 
         return true;
     }
