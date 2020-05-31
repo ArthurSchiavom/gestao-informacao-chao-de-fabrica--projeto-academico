@@ -34,7 +34,8 @@ import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordempro
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.exportacao.exportacaoXML.ExportacaoFicheiroXMLChaoDeFabricaUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao.EspecificarDepositoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.arquivar.ArquivarNotificacoesErroUI;
-import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.consultar.ConsultarErrosProcessamentoUI;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.consultar.ConsultarErrosProcessamentoArquivadosUI;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.consultar.ConsultarErrosProcessamentoAtivosUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaolinhaproducao.especificacao.EspecificarLinhaProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao.EspecificarFicheiroConfiguracaoAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao.EspecificarMaquinaAction;
@@ -47,7 +48,6 @@ import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoprodu
 import eapli.base.app.backoffice.console.presentation.servicoDeProcessamentoMensagens.ProcessamentoDeMensagensUI;
 import eapli.base.app.backoffice.console.servicoComunicacaoComMaquinas.ImportarFicheirosMaquinasUI;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
-import eapli.base.tcp.TcpSrvRecolherMensagensGeradasPelasMaquinas;
 import eapli.base.tcp.processamento.TcpUI;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -63,11 +63,6 @@ import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
-/**
- * TODO split this class in more specialized classes for each menu
- *
- * @author Paulo Gandra Sousa
- */
 public class MainMenu extends AbstractUI {
 
 	private static final String RETURN_LABEL = "Return ";
@@ -98,8 +93,9 @@ public class MainMenu extends AbstractUI {
 	private static final int REGISTAR_DEPOSITO = 3;
 	private static final int REGISTAR_LINHAPRODUCAO = 4;
 	private static final int EXPORTAR_XML = 5;
-	private static final int CONSULTAR_ERROS = 6;
-	private static final int ARQUIVAR_ERROS = 7;
+	private static final int CONSULTAR_ERROS_ATIVOS = 6;
+	private static final int CONSULTAR_ERROS_ARQUIVADOS = 7;
+	private static final int ARQUIVAR_ERROS = 8;
 
 	// SERVICOS
 	private static final int PROCESSAMENTO_DE_MENSAGENS_SISTEMA=1;
@@ -247,10 +243,11 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new EspecificarDepositoUI()::show);
 		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new EspecificarLinhaProducaoUI()::show);
 		menu.addItem(EXPORTAR_XML, "Exportar XML do Chão de Fábrica", new ExportacaoFicheiroXMLChaoDeFabricaUI()::show);
-		menu.addItem(CONSULTAR_ERROS, "Consultar Erros de Processamento por tratar", new ConsultarErrosProcessamentoUI()::show);
+		menu.addItem(CONSULTAR_ERROS_ATIVOS, "Consultar Erros de Processamento por Tratar", new ConsultarErrosProcessamentoAtivosUI()::show);
+		menu.addItem(CONSULTAR_ERROS_ARQUIVADOS, "Consultar Erros de Processamento Arquivados", new ConsultarErrosProcessamentoArquivadosUI()::show);
 		menu.addItem(ARQUIVAR_ERROS, "Arquivar Erros de Processamento", new ArquivarNotificacoesErroUI()::show);
 		try {
-			menu.addItem(8, "Arquivar Erros de Processamento", new TcpUI()::show);
+			menu.addItem(9, "Arquivar Erros de Processamento", new TcpUI()::show);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

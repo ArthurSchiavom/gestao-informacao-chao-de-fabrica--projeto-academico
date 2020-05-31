@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.gestaolinhasproducao.domain;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
-import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 @Entity
-public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao>, HasDTO<LinhaProducaoDTO> {
+public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao>, ConvertableToDTO<LinhaProducaoDTO> {
 
 	@Version
 	private Long version;

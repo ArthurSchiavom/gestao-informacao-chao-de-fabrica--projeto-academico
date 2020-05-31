@@ -36,10 +36,10 @@ typedef struct Built_Payloadd {
     char *content;
 } Built_Payloadd;
 
-//short reverse_bytes_short(short num) {
-//    short swapped = (num >> 8) | (num << 8);
-//    return swapped;
-//}
+short reverse_bytes_short(short num) {
+    short swapped = (num >> 8) | (num << 8);
+    return swapped;
+}
 
 Built_Payloadd build_payload(Payloadd payload) {
     Built_Payloadd resultado;
@@ -211,8 +211,8 @@ int main(void) {
                 read(newSock, &(data.code), 1);
                 read(newSock, &(data.id), 2);
                 read(newSock, &(data.data_length), 2);
-                data.id = data.id;
-                data.data_length = data.data_length;
+                data.id = reverse_bytes_short(data.id);
+                data.data_length = reverse_bytes_short(data.data_length);
                 if (data.data_length > 0) {
                     data.data = malloc(data.data_length);
                     read(newSock, data.data, data.data_length);

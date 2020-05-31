@@ -1,17 +1,11 @@
 package eapli.base.gestaoproducao.gestaomateriaprima.domain;
 
-import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
 import eapli.base.gestaoproducao.gestaomateriaprima.application.dto.MateriaPrimaDTO;
-import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
-import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
-import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
-import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.framework.domain.model.ValueObject;
-import eapli.framework.domain.repositories.DomainRepository;
 
-import javax.annotation.Nullable;
 import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -19,7 +13,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class MateriaPrima implements ValueObject, Serializable, HasDTO<MateriaPrimaDTO> {
+public class MateriaPrima implements ValueObject, Serializable, ConvertableToDTO<MateriaPrimaDTO> {
 
     private static final long serialVersionUID = 1L;
 

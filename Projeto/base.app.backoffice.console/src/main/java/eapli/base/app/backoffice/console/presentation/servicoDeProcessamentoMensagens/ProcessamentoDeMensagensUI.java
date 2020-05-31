@@ -23,10 +23,10 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
         System.out.println(lista.size());
         if (lista.isEmpty()) {
             System.out.println("Não há nenhuma linha de producao registada.\n");
-            UserInteractionFlow.enterToContinue();
+            UserInteractionFlow.enterParaContinuar();
             return false;
         }
-        String maquinasSemFicheiroDeConfiguracaoDisplay = ConsoleTables.tabelaDeLinhasDeProducao(lista);
+        String maquinasSemFicheiroDeConfiguracaoDisplay = ConsoleTables.tabelaDeLinhasDeProducao(lista, true, 0);
         System.out.println(maquinasSemFicheiroDeConfiguracaoDisplay + "\n\n");
         boolean continuar = true;
         try {

@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.gestaoerrosnotificacao.repository;
 
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.EstadoErroNotificacao;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
@@ -26,4 +27,6 @@ public interface NotificacaoErroRepository extends DomainRepository<Long, Notifi
 	 * @return uma lista com notificações de erro não filtradas
 	 */
 	List<NotificacaoErro> findAllNaoArquivados();
+
+    List<NotificacaoErro> findAll(List<String> idsLinhasProducaoSelecionadas, List<TipoErroNotificacao> tiposNotificaoErroSelecionados, List<EstadoErroNotificacao> estadoErroNotificacaosSelecionados);
 }

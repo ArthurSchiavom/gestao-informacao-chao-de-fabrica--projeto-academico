@@ -11,13 +11,12 @@ import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class JpaNotificacoesErroRepository
 		extends JpaAutoTxRepository<NotificacaoErro, Long, Long>
 		implements NotificacaoErroRepository {
+
 	public JpaNotificacoesErroRepository(TransactionalContext autoTx) {
 		super(autoTx, LinhaProducao.identityAttributeName());
 	}
@@ -50,6 +49,80 @@ public class JpaNotificacoesErroRepository
 		TypedQuery<NotificacaoErro> tq = this.createQuery("SELECT e FROM NotificacaoErro e " +
 				"WHERE e.estadoErro = :estado", NotificacaoErro.class);
 		tq.setParameter("estado", EstadoErroNotificacao.ARQUIVADO);
+		return tq.getResultList();
+	}
+
+	@Override
+	public List<NotificacaoErro> findAll(List<String> idsLinhasProducaoSelecionadas, List<TipoErroNotificacao> tiposNotificaoErroSelecionados, List<EstadoErroNotificacao> estadoErroNotificacaosSelecionados) {
+		// Pode ser facilmente melhorado com a Spring Data API
+		int lengthLinhasDeProducao = idsLinhasProducaoSelecionadas.size();
+		int lengthTipos = tiposNotificaoErroSelecionados.size();
+		int lengthEstados = estadoErroNotificacaosSelecionados.size();
+
+		StringBuilder queryRaw = new StringBuilder();
+
+		queryRaw.append("SELECT e FROM NotificacaoErro e");
+		if (lengthLinhasDeProducao > 0 || lengthTipos > 0 || lengthEstados > 0) {
+			queryRaw.append(" WHERE");
+		}
+
+		if (lengthLinhasDeProducao > 0) {
+			queryRaw.append(" (");
+			queryRaw.append(" e.idLinhaProd.identifier = '")
+					.append(idsLinhasProducaoSelecionadas.get(0))
+					.append("'");
+
+			for (int i = 1; i < lengthLinhasDeProducao; i++) {
+				queryRaw.append(" OR e.idLinhaProd.identifier = '")
+						.append(idsLinhasProducaoSelecionadas.get(i))
+						.append("'");
+			}
+
+			queryRaw.append(" )");
+		}
+
+		int counter = 1;
+		if (lengthTipos > 0) {
+			if (lengthLinhasDeProducao > 0) {
+				queryRaw.append(" AND");
+			}
+
+			queryRaw.append(" (");
+			queryRaw.append(" e.tipoErroNotificacao = :val").append(counter++);
+
+			for (int i = 1; i < lengthTipos; i++) {
+				queryRaw.append(" OR e.tipoErroNotificacao = :val").append(counter++);
+			}
+
+			queryRaw.append(" )");
+		}
+
+
+		if (lengthEstados > 0) {
+			if (lengthLinhasDeProducao > 0 || lengthTipos > 0) {
+				queryRaw.append(" AND");
+			}
+
+			queryRaw.append(" (");
+			queryRaw.append(" e.estadoErro = :val").append(counter++);
+
+			for (int i = 1; i < lengthEstados; i++) {
+				queryRaw.append(" OR e.estadoErro = :val").append(counter++);
+			}
+
+			queryRaw.append(" )");
+		}
+
+		TypedQuery<NotificacaoErro> tq = this.createQuery(queryRaw.toString(), NotificacaoErro.class);
+		counter = 1;
+
+		for (int i = 0; i < lengthTipos; i++) {
+			tq.setParameter("val" + counter++, tiposNotificaoErroSelecionados.get(i));
+		}
+		for (int i = 0; i < lengthEstados; i++) {
+			tq.setParameter("val" + counter++, estadoErroNotificacaosSelecionados.get(i));
+		}
+
 		return tq.getResultList();
 	}
 }

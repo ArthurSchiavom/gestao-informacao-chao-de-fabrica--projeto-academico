@@ -3,7 +3,7 @@ package eapli.base.gestaoproducao.gestaomaterial.domain;
 
 import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
 import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
-import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 @Entity
-public class Material implements AggregateRoot<CodigoInternoMaterial>, HasDTO<MaterialDTO> {
+public class Material implements AggregateRoot<CodigoInternoMaterial>, ConvertableToDTO<MaterialDTO> {
 
 	@Version
 	private Long version;

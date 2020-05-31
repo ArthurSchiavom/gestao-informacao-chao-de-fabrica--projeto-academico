@@ -2,7 +2,7 @@ package eapli.base.processamentoMensagens.domain;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInternoMaterial;
-import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.base.processamentoMensagens.application.DTO.AgendamentoDeProcessamentoDTO;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 @Entity
-public class AgendamentoDeProcessamento implements AggregateRoot<Long>, HasDTO<AgendamentoDeProcessamentoDTO> {
+public class AgendamentoDeProcessamento implements AggregateRoot<Long>, ConvertableToDTO<AgendamentoDeProcessamentoDTO> {
     @Version
     private Long version;
 

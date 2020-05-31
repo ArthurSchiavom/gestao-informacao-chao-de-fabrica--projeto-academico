@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class ResultadoImportacaoFicheiroPresentationUtils {
 
-    //TODO: fazer isto de maneira generica para os 2
     public static String construirMensagemResultado(ResultadoImportacaoLinhaALinha resultado) {
         StringBuilder sb = new StringBuilder();
         sb.append("Número de produtos importados com sucesso: ").append(resultado.nSucessos)

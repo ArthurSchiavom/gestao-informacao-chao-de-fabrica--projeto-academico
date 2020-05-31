@@ -1,7 +1,7 @@
 package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.consultar;
 
 import eapli.base.app.backoffice.console.presentation.UIUtils;
-import eapli.base.gestaoproducao.gestaoerrosnotificacao.application.consultar.ConsultarErrosProcessamentoController;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.application.consultar.ConsultarErrosProcessamentoAtivosController;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.NotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
@@ -10,9 +10,9 @@ import eapli.framework.util.Console;
 
 import java.util.List;
 
-public class ConsultarErrosProcessamentoUI extends AbstractUI {
+public class ConsultarErrosProcessamentoAtivosUI extends AbstractUI {
 
-	private final ConsultarErrosProcessamentoController controller = new ConsultarErrosProcessamentoController();
+	private final ConsultarErrosProcessamentoAtivosController controller = new ConsultarErrosProcessamentoAtivosController();
 
 	@Override
 	protected boolean doShow() {

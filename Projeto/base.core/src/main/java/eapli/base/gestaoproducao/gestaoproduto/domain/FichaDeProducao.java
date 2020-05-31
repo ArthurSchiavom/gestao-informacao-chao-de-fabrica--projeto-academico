@@ -3,7 +3,7 @@ package eapli.base.gestaoproducao.gestaoproduto.domain;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.QuantidadeDeMateriaPrima;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.FichaDeProducaoDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMateriaPrimaDTO;
-import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.base.utilities.Lists;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class FichaDeProducao implements AggregateRoot<Integer>, HasDTO<FichaDeProducaoDTO> {
+public class FichaDeProducao implements AggregateRoot<Integer>, ConvertableToDTO<FichaDeProducaoDTO> {
 
     @Version
     private Long version;
