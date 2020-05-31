@@ -5,8 +5,6 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import eapli.base.tcp.processamento.ProcessarMensagemProtocoloFactory;
 import eapli.base.tcp.processamento.ProcessarMensagensProtocolosStrategy;
-
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -17,24 +15,34 @@ import java.nio.charset.StandardCharsets;
 
 public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnable {
 
-    private Socket sock;
-    private BufferedOutputStream sOut;
-    private DataInputStream sIn;
+
     private MaquinaRepository repository = PersistenceContext.repositories().maquinas();
+
+    private Socket sock;
 
     public TcpSrvRecolherMensagensGeradasPelasMaquinasThread(Socket cliSock) {
         sock = cliSock;
         try {
             sock.setTcpNoDelay(true);
         } catch (SocketException e) {
-            System.out.println("\n\n\n\nwtf\n\n\n\n");
         }
     }
 
 
     @Override
     public void run() {
-        ProcessarMensagensProtocolosStrategy mens = lerMensagemTcp(sock);
+        DataOutputStream sOut;
+        DataInputStream sIn;
+        try {
+            sOut = new DataOutputStream(sock.getOutputStream());
+            sIn = new DataInputStream(sock.getInputStream());
+
+        } catch (IOException e) {
+            return;
+        }
+
+        ProcessarMensagensProtocolosStrategy mens = lerMensagemTcp(sock, sIn);
+
 
         if (mens == null) {
 //            break;
@@ -43,24 +51,21 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
         MensagemProtocoloComunicacao mensagemProtocoloComunicacao = mens.processarMensagem(sock);
 
         try {
-            escreveMensagemTcp(mensagemProtocoloComunicacao, sock);
+            escreveMensagemTcp(mensagemProtocoloComunicacao, sOut);
 
 
             System.out.println("Client " + sock.getInetAddress().getHostAddress() + ",port number: " + sock.getPort() +
                     " disconnected");
             sOut.flush();
-
+//
             Thread.sleep(10000);
-
-            System.out.println("Waiting done");
+//
+//            System.out.println("Waiting done");
 
             sOut.close();
             sIn.close();
             sock.close();
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException|InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -71,9 +76,7 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
      * @throws IOException
      */
     public boolean escreveMensagemTcp(MensagemProtocoloComunicacao mensagemProtocoloComunicacao,
-                                      Socket s) throws IOException {
-
-        sOut = new BufferedOutputStream(s.getOutputStream());
+                                      DataOutputStream sOut) throws IOException {
 
         sOut.write(mensagemProtocoloComunicacao.version);
         sOut.write(mensagemProtocoloComunicacao.code);
@@ -93,7 +96,7 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
     /**
      * Le mensagem tcp do client
      */
-    public ProcessarMensagensProtocolosStrategy lerMensagemTcp(Socket s) {
+    public ProcessarMensagensProtocolosStrategy lerMensagemTcp(Socket s, DataInputStream sIn) {
         char maquinaID, tamanhoData;
         int maquinaIDPlaceHolder, tamanhoDataPlaceHolder;
         Byte version, code;
@@ -104,9 +107,6 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
         System.out.println("New client connection from " + clientIP.getHostAddress() +
                 ", port number " + s.getPort());
         try {
-//            sOut = new BufferedOutputStream(s.getOutputStream());
-            sIn = new DataInputStream(s.getInputStream());
-
             System.out.println("get streams");
             version = sIn.readByte(); // read version
             System.out.println("recebido version: " + version.intValue());

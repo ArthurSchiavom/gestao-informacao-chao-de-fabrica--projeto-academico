@@ -68,7 +68,7 @@ public final class BaseBackoffice extends BaseApplication {
         new Thread(new TcpSrvRecolherMensagensGeradasPelasMaquinas()).start();
 
         try {
-            Thread.sleep(1);
+            Thread.sleep(1); // para nao aparecer a meio do login
         } catch (InterruptedException e) {
         }
 

@@ -47,8 +47,6 @@ import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoprodu
 import eapli.base.app.backoffice.console.presentation.servicoDeProcessamentoMensagens.ProcessamentoDeMensagensUI;
 import eapli.base.app.backoffice.console.servicoComunicacaoComMaquinas.ImportarFicheirosMaquinasUI;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
-import eapli.base.tcp.TcpSrvRecolherMensagensGeradasPelasMaquinas;
-import eapli.base.tcp.processamento.TcpUI;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -249,11 +247,6 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(EXPORTAR_XML, "Exportar XML do Chão de Fábrica", new ExportacaoFicheiroXMLChaoDeFabricaUI()::show);
 		menu.addItem(CONSULTAR_ERROS, "Consultar Erros de Processamento por tratar", new ConsultarErrosProcessamentoUI()::show);
 		menu.addItem(ARQUIVAR_ERROS, "Arquivar Erros de Processamento", new ArquivarNotificacoesErroUI()::show);
-		try {
-			menu.addItem(8, "Arquivar Erros de Processamento", new TcpUI()::show);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
