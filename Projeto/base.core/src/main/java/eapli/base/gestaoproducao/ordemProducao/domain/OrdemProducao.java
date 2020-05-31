@@ -58,7 +58,7 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
     @XmlElement
     private Estado estado;
 
-    @XmlElement(name = "codigoProduto")
+    @XmlElement
     private CodigoUnico produto;
 
     /**

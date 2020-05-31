@@ -125,14 +125,15 @@
 
   <xs:simpleType name="estadoDeErroDeProcessamento">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="ATIVA" />
-      <xs:enumeration value="ARQUIVADA" />
+      <xs:enumeration value="ATIVO" />
+      <xs:enumeration value="ARQUIVADO" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="tipoDeErroDeProcessamento">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="DESCONHECIDO" /> <!-- Ainda não definidos -->
+      <xs:enumeration value="DADOS_INVALIDOS" />
+      <xs:enumeration value="ELEMENTOS_INEXISTENTES" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -340,9 +341,9 @@
       <xs:element name="inicioExecucao" type="data" minOccurs="0"/>
       <xs:element name="estado" type="estado" />
       <xs:element name="produto" type="codigoUnicoProduto" />
-      <xs:element name="produtosProduzidos" type="produtosProduzidos" />
-      <xs:element name="dadosCalculados" type="dadosCalculadosOrdem" />
-      <xs:element name="usosDeMaquina" type="usosDeMaquina" />
+      <xs:element name="produtosProduzidos" type="produtosProduzidos" minOccurs="0" /> <!-- minOccurs = 0 porque ainda não foram implementados em código -->
+      <xs:element name="dadosCalculados" type="dadosCalculadosOrdem" minOccurs="0" /> <!-- minOccurs = 0 porque ainda não foram implementados em código -->
+      <xs:element name="usosDeMaquina" type="usosDeMaquina" minOccurs="0" /> <!-- minOccurs = 0 porque ainda não foram implementados em código -->
     </xs:all>
     <xs:attribute name="identificador" type="identificadorOrdemProducao" use="required" />
   </xs:complexType>

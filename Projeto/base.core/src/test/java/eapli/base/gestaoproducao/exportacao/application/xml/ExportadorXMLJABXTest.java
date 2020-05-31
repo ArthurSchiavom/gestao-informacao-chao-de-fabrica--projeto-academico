@@ -172,7 +172,7 @@ public class ExportadorXMLJABXTest {
 		List<OrdemProducao> listaOrdensProducao = new ArrayList<>();
 		try {
 			listaOrdensProducao.add(new OrdemProducao(new Identificador("ORDEM1"), new QuantidadeAProduzir(1550),
-					listaIdentificadoresEncomenda, dateEmissao, datePrevEx, Estado.CONCLUIDA, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent)));
+					listaIdentificadoresEncomenda, dateEmissao, datePrevEx, Estado.CONCLUIDA, CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent)));
 		} catch (IllegalDomainValueException e) {
 			e.printStackTrace();
 		}
@@ -193,6 +193,7 @@ public class ExportadorXMLJABXTest {
 		List<NotificacaoErro> listaNotificacoesErro = new ArrayList<>();
 		NotificacaoErro notifErro = new NotificacaoErro(new IdentificadorLinhaProducao("LINHAPROD_1"),
 				TipoErroNotificacao.DADOS_INVALIDOS, 2L, lProdRepo, msgRepo);
+		listaNotificacoesErro.add(notifErro);
 
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,
 				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao, listaNotificacoesErro);
@@ -215,10 +216,12 @@ public class ExportadorXMLJABXTest {
 
 			//Unmarshal xml file
 			ChaoDeFabrica chaoDeFabrica1 = (ChaoDeFabrica) jaxbUnmarshaller.unmarshal(ficheiro);
+			assertNotNull(chaoDeFabrica1);
 		}
 		catch (JAXBException | SAXException e)
 		{
 			e.printStackTrace();
+			fail("XSD FALHOU");
 		}
 	}
 }

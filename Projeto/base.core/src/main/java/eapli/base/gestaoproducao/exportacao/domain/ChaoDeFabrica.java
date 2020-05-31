@@ -69,8 +69,8 @@ public class ChaoDeFabrica {
 	@XmlElement(name = "ordemProducao")
 	private List<OrdemProducao> listaOrdensProducao;
 
-	@XmlElementWrapper(name = "notificacoesErros")
-	@XmlElement(name = "notificacaoErro")
+	@XmlElementWrapper(name = "notificacoesDeErroDeProcessamento")
+	@XmlElement(name = "notificacaoDeErroDeProcessamento")
 	private List<NotificacaoErro> listaNotificacoesErro;
 
 	private boolean nothingWasLoaded;

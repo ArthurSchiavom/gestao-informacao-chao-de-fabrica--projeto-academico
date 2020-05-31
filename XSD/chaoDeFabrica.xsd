@@ -179,7 +179,7 @@
 
   <xs:complexType name="chaoDeFabrica">
     <xs:all>
-      <xs:element name="mensagens">
+      <xs:element name="mensagens" minOccurs="0"> <!-- TODO - tirar o minOccurs="0", ainda não implementado em código -->
         <xs:complexType>
           <xs:sequence>
             <xs:element name="mensagemInicioDeAtividade" type="mensagemInicioDeAtividade" minOccurs="0" maxOccurs="unbounded"/>
@@ -193,14 +193,14 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="movimentosStock">
+      <xs:element name="movimentosStock" minOccurs="0"> <!-- TODO - tirar o minOccurs="0", ainda não implementado em código -->
         <xs:complexType>
           <xs:sequence>
             <xs:element name="movimentoStock" type="movimentoStock" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="agendamentosDeProcessamento">
+      <xs:element name="agendamentosDeProcessamento" minOccurs="0"> <!-- TODO - tirar o minOccurs="0", ainda não implementado em código -->
         <xs:complexType>
           <xs:sequence>
             <xs:element name="agendamentoDeProcessamento" type="agendamentoDeProcessamento" minOccurs="0" maxOccurs="unbounded"/>

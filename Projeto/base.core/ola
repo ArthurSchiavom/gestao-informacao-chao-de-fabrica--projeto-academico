@@ -67,8 +67,14 @@
             <dataEmissao>15-10-2013</dataEmissao>
             <dataPrevistaExecucao>15-10-2015</dataPrevistaExecucao>
             <estado>CONCLUIDA</estado>
-            <produtos/>
+            <produto>COD1</produto>
         </cdfab:ordemProducao>
     </cdfab:ordensDeProducao>
-    <cdfab:notificacoesErros/>
+    <cdfab:notificacoesDeErroDeProcessamento>
+        <cdfab:notificacaoDeErroDeProcessamento>
+            <linhaDeProducao>LINHAPROD_1</linhaDeProducao>
+            <tipo>DADOS_INVALIDOS</tipo>
+            <estado>ATIVO</estado>
+        </cdfab:notificacaoDeErroDeProcessamento>
+    </cdfab:notificacoesDeErroDeProcessamento>
 </cdfab:chaoDeFabrica>
