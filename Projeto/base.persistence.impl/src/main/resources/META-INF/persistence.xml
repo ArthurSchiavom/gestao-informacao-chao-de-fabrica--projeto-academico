@@ -19,7 +19,14 @@
         <class>eapli.base.gestaoproducao.gestaomaquina.domain.Maquina</class>
         <class>eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro</class>
         <class>eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento</class>
-
+        <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemConsumo</class>
+        <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemEntregaDeProducao</class>
+        <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemEstorno</class>
+        <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemFimDeAtividade</class>
+        <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemInicioDeAtividade</class>
+        <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemParagemForcada</class>
+        <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemProducao</class>
+        <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemRetomoDeActividade</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/BaseDados_LAPR4_2020_G3"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>

@@ -104,6 +104,11 @@ public class ProcessamentoDeMensagensController {
         }
     }
 
+
+    public void iniciarProcessamento(){
+
+    }
+
     /**
      * Verifica se a data inicio é antes da data final
      * @param dataInicio Data inicio em formato String

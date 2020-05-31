@@ -21,10 +21,10 @@ public class MensagemInicioDeAtividade extends Mensagem implements AggregateRoot
         dataHora = null;
     }
 
-    public MensagemInicioDeAtividade(TimestampEmissao tempoEmissao,
+    public MensagemInicioDeAtividade(Date tempoEmissao,
                                      CodigoInternoMaquina maquinaID, Date dataHora,
                                      Identificador ordemID) {
-        super(TipoDeMensagem.INICIO_DE_ATIVIDADE, tempoEmissao);
+        super(TipoDeMensagem.INICIO_DE_ATIVIDADE, new TimestampEmissao(tempoEmissao));
 
         if(tempoEmissao == null || maquinaID == null || dataHora == null ){
             throw new IllegalArgumentException("Não pode haver parametros null no Inicio de atividade mensagem"); // excepto o Ordem id que pode ser nulo

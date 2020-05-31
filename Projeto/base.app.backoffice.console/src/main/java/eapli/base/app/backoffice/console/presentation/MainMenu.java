@@ -45,6 +45,7 @@ import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoprodu
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.EspecificarProdutoAction;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao.ImportarCatalogoProdutosAction;
 import eapli.base.app.backoffice.console.presentation.servicoDeProcessamentoMensagens.ProcessamentoDeMensagensUI;
+import eapli.base.app.backoffice.console.servicoComunicacaoComMaquinas.ImportarFicheirosMaquinasUI;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.tcp.TcpSrvRecolherMensagensGeradasPelasMaquinas;
 import eapli.base.tcp.processamento.TcpUI;
@@ -100,8 +101,9 @@ public class MainMenu extends AbstractUI {
 	private static final int CONSULTAR_ERROS = 6;
 	private static final int ARQUIVAR_ERROS = 7;
 
-	// SERVICO DE PROCESSAMENTO MENSAGENS
+	// SERVICOS
 	private static final int PROCESSAMENTO_DE_MENSAGENS_SISTEMA=1;
+	private static final int IMPORTAR_MENSAGENS_DISPONIVEIS_SISTEMA=2;
 
 	// SETTINGS
 	private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
@@ -168,10 +170,11 @@ public class MainMenu extends AbstractUI {
 			mainMenu.addSubMenu(PRODUCAO_OPTION, producaoMenu);
 			final Menu fabricaMenu = buildGestorChaoFabricaMenu();
 			mainMenu.addSubMenu(FABRICA_OPTION, fabricaMenu);
-			final Menu settingsMenu = buildAdminSettingsMenu();
-			mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
 			final Menu processamentoMenu= buildServicoDeProcessamentoDeMensagensMenu();
 			mainMenu.addSubMenu(PROCESSAMENTO_OPTION,processamentoMenu);
+			final Menu settingsMenu = buildAdminSettingsMenu();
+			mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
+
 
 		}
 
@@ -262,8 +265,9 @@ public class MainMenu extends AbstractUI {
 	 * @return
 	 */
 	private Menu buildServicoDeProcessamentoDeMensagensMenu(){
-		final Menu menu = new Menu("Processamento Mensagens >"); // nao tem acentos, por causa do UTF-8 no terminal
+		final Menu menu = new Menu("Servicos >"); // nao tem acentos, por causa do UTF-8 no terminal
 		menu.addItem(PROCESSAMENTO_DE_MENSAGENS_SISTEMA,"Processar Mensagens Sistema",new ProcessamentoDeMensagensUI()::show);
+		menu.addItem(IMPORTAR_MENSAGENS_DISPONIVEIS_SISTEMA,"Importar Mensagens disponiveis no sistema",new ImportarFicheirosMaquinasUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 		return menu;
 	}

@@ -20,6 +20,7 @@ public abstract class Mensagem implements AggregateRoot<Long> {
     @Id
     @GeneratedValue
     private Long identifier; // can be public bc its final
+    @Column(insertable=false, updatable=false)
     public final TipoDeMensagem tipo;
     public final TimestampEmissao tempoEmissao;
 

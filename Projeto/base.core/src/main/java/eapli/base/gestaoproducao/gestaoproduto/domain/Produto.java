@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.gestaoproduto.domain;
 
+import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
 import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.FichaDeProducaoDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
@@ -23,7 +24,6 @@ public class Produto implements AggregateRoot<CodigoUnico>, HasDTO<ProdutoDTO> {
     @EmbeddedId
     @XmlAttribute
     public CodigoUnico codigoUnico;
-
     @Column(unique=true)
     @XmlElement
     public CodigoComercial codigoComercial;
