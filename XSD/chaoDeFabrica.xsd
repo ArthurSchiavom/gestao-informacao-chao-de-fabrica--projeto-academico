@@ -4,7 +4,6 @@
   <xs:import schemaLocation="schema2.xsd" />
 
   <xs:element name="chaoDeFabrica" type="tns:chaoDeFabrica">
-
     <xs:key name="linhasDeProducaoKey">
       <xs:selector xpath="cdfab:linhasDeProducao/cdfab:linhaDeProducao" />
       <xs:field xpath="@identificador" />
@@ -32,6 +31,21 @@
 
     <xs:keyref name="lref" refer="cdfab:linhasDeProducaoKey">
       <xs:selector xpath="cdfab:notificacoesDeErroDeProcessamento/cdfab:notificacaoDeErroDeProcessamento" />
+      <xs:field xpath="linhaDeProducao" />
+    </xs:keyref>
+
+    <xs:key name="materialKey">
+      <xs:selector xpath="cdfab:materiais/cdfab:material" />
+      <xs:field xpath="@codigoInternoMaterial" />
+    </xs:key>
+
+    <xs:key name="maquinasKey">
+      <xs:selector xpath="cdfab:maquinas/cdfab:maquina" />
+      <xs:field xpath="@codigoInterno" />
+    </xs:key>
+
+    <xs:keyref name="linhasDeProducaoRef2" refer="cdfab:linhasDeProducaoKey">
+      <xs:selector xpath="cdfab:agendamentosDeProcessamento/cdfab:agendamentoDeProcessamento" />
       <xs:field xpath="linhaDeProducao" />
     </xs:keyref>
   </xs:element>
@@ -78,6 +92,27 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="fichaProducao" type="fichaDeProducao" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="agendamentosDeProcessamento">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="agendamentoDeProcessamento" type="agendamentoDeProcessamento" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="materiais">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="material" type="material" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="maquinas">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="maquina" type="maquina" minOccurs="0" maxOccurs="unbounded" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
