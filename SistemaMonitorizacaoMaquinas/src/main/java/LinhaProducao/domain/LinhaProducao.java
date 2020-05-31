@@ -5,10 +5,7 @@ import LinhaProducao.domain.Maquina.IdMaquina;
 import LinhaProducao.domain.Maquina.Maquina;
 import Mensagens.domain.Codigos;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LinhaProducao {
 	private static final String CODIGO_INVALIDO = "Foi recebido um pacote com um código inválido";
@@ -67,6 +64,14 @@ public class LinhaProducao {
 	public Maquina procurarPorMaquina(IdMaquina idMaquina) {
 		synchronized (listaMaquinas) {
 			return listaMaquinas.stream().filter(maquina -> maquina.identity().equals(idMaquina)).findFirst().orElse(null);
+		}
+	}
+
+	public void verificarInatividade(Date date, int tempo) {
+		synchronized (listaMaquinas) {
+			for(Maquina maquina : listaMaquinas) {
+				maquina.verificarInatividade(date, tempo);
+			}
 		}
 	}
 

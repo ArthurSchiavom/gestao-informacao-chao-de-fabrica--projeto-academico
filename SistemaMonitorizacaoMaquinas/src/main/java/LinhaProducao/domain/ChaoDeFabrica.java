@@ -2,6 +2,7 @@ package LinhaProducao.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,6 +45,14 @@ public class ChaoDeFabrica {
 	public LinhaProducao procurarPorLinhaProducao(int idLinhaProducao) {
 		synchronized (listaLinhasProducao) {
 			return listaLinhasProducao.stream().filter(linhaProd -> linhaProd.identity() == idLinhaProducao).findFirst().orElse(null);
+		}
+	}
+
+	public void verificarInatividade(Date date, int tempo) {
+		synchronized (listaLinhasProducao) {
+			for(LinhaProducao linhaProducao : listaLinhasProducao) {
+				linhaProducao.verificarInatividade(date, tempo);
+			}
 		}
 	}
 }

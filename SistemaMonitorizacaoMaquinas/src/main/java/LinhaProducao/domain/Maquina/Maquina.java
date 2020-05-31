@@ -49,4 +49,17 @@ public class Maquina {
 	public IdMaquina identity() {
 		return id;
 	}
+
+	/**
+	 * Verifica se uma máquina está indisponivel há mais de uma certa quantidade de tempo
+	 * e se estiver define o estado como sendo indisponivel
+	 * @param date o segundo em que a verificação foi efetuada
+	 * @param tempo o tempo que a máquina deve ficar sem ser atualizada para ser considerada indisponivel
+	 */
+	public void verificarInatividade(Date date, int tempo) {
+		long diffInMilies = Math.abs(date.getTime() - lastUpdated.getTime());
+		if(diffInMilies > tempo*1000) {
+			estado = EstadoMaquina.INDISPONIVEL;
+		}
+	}
 }
