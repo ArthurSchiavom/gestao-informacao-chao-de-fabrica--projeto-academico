@@ -2,8 +2,7 @@ package eapli.base.gestaoproducao.gestaomateriaprima.domain;
 
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMateriaPrimaDTO;
 import eapli.base.gestaoproducao.medicao.QuantidadePositiva;
-import eapli.base.infrastructure.application.HasDTO;
-import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
@@ -12,7 +11,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comparable<QuantidadeDeMateriaPrima>, HasDTO<QuantidadeDeMateriaPrimaDTO> {
+public class QuantidadeDeMateriaPrima implements ValueObject, Serializable, Comparable<QuantidadeDeMateriaPrima>, ConvertableToDTO<QuantidadeDeMateriaPrimaDTO> {
 
     private static final long serialVersionUID = 1L;
 

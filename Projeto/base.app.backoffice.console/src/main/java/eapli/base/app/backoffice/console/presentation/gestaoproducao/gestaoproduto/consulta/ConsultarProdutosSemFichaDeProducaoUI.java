@@ -16,13 +16,13 @@ public class ConsultarProdutosSemFichaDeProducaoUI extends AbstractUI {
         List<ProdutoDTO> resultado = controller.iniciar();
         if (resultado.size() == 0) {
             System.out.println("Nenhum produto sem ficha de produção registado.");
-            UserInteractionFlow.enterToContinue();
+            UserInteractionFlow.enterParaContinuar();
             return false;
         }
 
         String resultadoDisplay = ConsoleTables.tabelaDeProdutos(resultado);
         System.out.println(resultadoDisplay);
-        UserInteractionFlow.enterToContinue();
+        UserInteractionFlow.enterParaContinuar();
         return false;
     }
 

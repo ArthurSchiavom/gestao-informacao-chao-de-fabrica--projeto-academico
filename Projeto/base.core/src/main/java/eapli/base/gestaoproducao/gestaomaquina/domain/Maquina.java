@@ -4,7 +4,7 @@ import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.MaquinaDTO;
-import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import javax.persistence.EmbeddedId;
@@ -32,7 +32,7 @@ import java.util.Date;
  * https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=29442
  */
 @Entity
-public class Maquina implements AggregateRoot<CodigoInternoMaquina>, HasDTO<MaquinaDTO>{
+public class Maquina implements AggregateRoot<CodigoInternoMaquina>, ConvertableToDTO<MaquinaDTO> {
 
     @Version
     private Long version;

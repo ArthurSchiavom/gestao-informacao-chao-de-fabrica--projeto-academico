@@ -1,18 +1,18 @@
 package eapli.base.gestaoproducao.gestaoerrosnotificacao.dto;
 
-import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
-
 public class NotificacaoErroDTO {
 	public final Long identifier;
 	public final String idLinhaProd;
 	public final Long idMensagem;
-	public final TipoErroNotificacao tipoErroNotificacao;
+	public final String tipoErroNotificacao;
+	public final String estadoErro;
 
-	public NotificacaoErroDTO(Long identifier, String idLinhaProd, Long idMensagem, TipoErroNotificacao tipoErroNotificacao) {
+	public NotificacaoErroDTO(Long identifier, String idLinhaProd, Long idMensagem, String tipoErroNotificacao, String estadoErro) {
 		this.identifier = identifier;
 		this.idLinhaProd = idLinhaProd;
 		this.idMensagem = idMensagem;
 		this.tipoErroNotificacao = tipoErroNotificacao;
+		this.estadoErro = estadoErro;
 	}
 
 	@Override
@@ -20,6 +20,7 @@ public class NotificacaoErroDTO {
 		return "Notificação Erro " + identifier + ": \n" +
 				"  Linha de Produção: " + idLinhaProd + "\n" +
 				"  ID de Mensagem: " + idMensagem + "\n" +
-				"  Tipo de Erro: " + tipoErroNotificacao;
+				"  Tipo de Erro: " + tipoErroNotificacao + "\n" +
+				"  Estado do Erro: " + estadoErro;
 	}
 }

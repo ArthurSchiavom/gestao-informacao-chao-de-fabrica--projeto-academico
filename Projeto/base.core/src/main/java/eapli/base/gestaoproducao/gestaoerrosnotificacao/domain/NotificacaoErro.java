@@ -4,7 +4,7 @@ import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.NotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
-import eapli.base.infrastructure.application.HasDTO;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 @Entity
-public class NotificacaoErro implements AggregateRoot<Long>, HasDTO<NotificacaoErroDTO> {
+public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<NotificacaoErroDTO> {
 	@Version
 	private Long version;
 
@@ -58,6 +58,7 @@ public class NotificacaoErro implements AggregateRoot<Long>, HasDTO<NotificacaoE
 		if (!msgRepo.containsOfIdentity(idMensagem)) {
 			throw new IllegalArgumentException("Mensagem introduzida não existe");
 		}
+
 		this.id = null;
 		this.idLinhaProd = idLinhaProd;
 		this.idMensagem = idMensagem;
@@ -115,6 +116,6 @@ public class NotificacaoErro implements AggregateRoot<Long>, HasDTO<NotificacaoE
 
 	@Override
 	public NotificacaoErroDTO toDTO() {
-		return new NotificacaoErroDTO(id, idLinhaProd.toString(), idMensagem, tipoErroNotificacao);
+		return new NotificacaoErroDTO(id, idLinhaProd.toString(), idMensagem, tipoErroNotificacao.nomeDisplay, estadoErro.nomeDisplay);
 	}
 }

@@ -1,6 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoproduto.especificacao;
 
-import eapli.base.app.backoffice.console.presentation.menu.OptionSelector;
+import eapli.base.app.common.console.presentation.interaction.OptionSelector;
 import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.EspecificarProdutoController;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.utilities.wrappers.Updateable;

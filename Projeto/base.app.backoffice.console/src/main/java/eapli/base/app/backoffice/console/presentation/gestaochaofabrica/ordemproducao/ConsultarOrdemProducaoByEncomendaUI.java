@@ -23,7 +23,7 @@ public class ConsultarOrdemProducaoByEncomendaUI extends AbstractUI {
             System.out.println("Não foi encontrado nenhuma ordem de produção com esse identificador de encomenda.");
         }
 
-        UserInteractionFlow.enterToContinue();
+        UserInteractionFlow.enterParaContinuar();
 
         return false;
     }

@@ -1,11 +1,9 @@
 package eapli.base.gestaoproducao.gestaoproduto.domain;
 
-import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
 import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.FichaDeProducaoDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
-import eapli.base.infrastructure.application.HasDTO;
-import eapli.base.utilities.Reflection;
+import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
@@ -14,7 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 @Entity
-public class Produto implements AggregateRoot<CodigoUnico>, HasDTO<ProdutoDTO> {
+public class Produto implements AggregateRoot<CodigoUnico>, ConvertableToDTO<ProdutoDTO> {
 
     private static final long serialVersionUID = 1L;
 

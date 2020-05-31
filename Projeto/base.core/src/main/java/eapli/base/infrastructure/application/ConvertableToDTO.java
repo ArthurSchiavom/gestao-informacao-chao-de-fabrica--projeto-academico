@@ -1,5 +1,5 @@
 package eapli.base.infrastructure.application;
 
-public interface HasDTO<E> {
+public interface ConvertableToDTO<E> {
     E toDTO();
 }

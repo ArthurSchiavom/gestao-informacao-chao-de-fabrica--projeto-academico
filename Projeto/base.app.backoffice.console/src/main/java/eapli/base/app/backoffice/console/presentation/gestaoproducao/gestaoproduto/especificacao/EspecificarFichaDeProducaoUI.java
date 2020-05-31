@@ -25,7 +25,7 @@ public class EspecificarFichaDeProducaoUI extends AbstractUI {
 
         if (produtosSemFichaDeProducao.isEmpty()) {
             System.out.println("Não há nenhum produto sem ficha de produção.\n");
-            UserInteractionFlow.enterToContinue();
+            UserInteractionFlow.enterParaContinuar();
             return false;
         }
 
@@ -68,7 +68,7 @@ public class EspecificarFichaDeProducaoUI extends AbstractUI {
             System.out.println("Ocorreu um erro: " + e.getMessage());
         }
 
-        UserInteractionFlow.enterToContinue();
+        UserInteractionFlow.enterParaContinuar();
         return false;
     }
 

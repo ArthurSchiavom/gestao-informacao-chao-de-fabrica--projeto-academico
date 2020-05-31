@@ -1,7 +1,7 @@
 package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaterial.especificacao;
 
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaterial.ListCategoriaService;
-import eapli.base.app.backoffice.console.presentation.menu.OptionSelector;
+import eapli.base.app.common.console.presentation.interaction.OptionSelector;
 import eapli.base.app.common.console.presentation.interaction.UserInteractionFlow;
 import eapli.base.gestaoproducao.gestaomaterial.application.EspecificarMaterialController;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;

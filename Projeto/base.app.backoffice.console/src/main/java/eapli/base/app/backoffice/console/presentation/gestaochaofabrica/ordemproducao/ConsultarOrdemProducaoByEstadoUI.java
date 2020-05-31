@@ -35,7 +35,7 @@ public class ConsultarOrdemProducaoByEstadoUI extends AbstractUI {
             System.out.println("Não foi encontrada nenhuma ordem de produção nesse estado.");
         }
 
-        UserInteractionFlow.enterToContinue();
+        UserInteractionFlow.enterParaContinuar();
 
         return false;
     }

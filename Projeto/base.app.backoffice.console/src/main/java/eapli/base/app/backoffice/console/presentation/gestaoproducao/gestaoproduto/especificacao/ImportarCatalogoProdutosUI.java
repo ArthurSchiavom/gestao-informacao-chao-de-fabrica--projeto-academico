@@ -27,7 +27,7 @@ public class ImportarCatalogoProdutosUI extends AbstractUI {
         ResultadoImportacaoLinhaALinha resultado = controller.iniciar(caminho, substituir.val);
 
         System.out.println("\n\n" + ResultadoImportacaoFicheiroPresentationUtils.construirMensagemResultado(resultado) + "\n");
-        UserInteractionFlow.enterToContinue();
+        UserInteractionFlow.enterParaContinuar();
 
         return false;
     }

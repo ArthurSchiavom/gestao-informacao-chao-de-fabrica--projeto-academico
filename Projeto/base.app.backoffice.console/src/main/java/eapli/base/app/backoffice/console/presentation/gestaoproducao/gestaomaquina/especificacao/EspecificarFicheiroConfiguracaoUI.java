@@ -16,7 +16,7 @@ public class EspecificarFicheiroConfiguracaoUI extends AbstractUI {
         List<MaquinaDTO> maquinasSemFicheiroDeConfiguracao = controller.maquinasSemFicheiroDeConfiguracao();
         if (maquinasSemFicheiroDeConfiguracao.isEmpty()) {
             System.out.println("Não há nenhuma maquina sem ficheiro de configuracao.\n");
-            UserInteractionFlow.enterToContinue();
+            UserInteractionFlow.enterParaContinuar();
             return false;
         }
 
@@ -44,7 +44,7 @@ public class EspecificarFicheiroConfiguracaoUI extends AbstractUI {
             System.out.println("Ocorreu um erro: "+ e.getMessage());
         }
 
-        UserInteractionFlow.enterToContinue();
+        UserInteractionFlow.enterParaContinuar();
         return false;
     }
 
