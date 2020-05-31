@@ -139,7 +139,8 @@
 
   <xs:simpleType name="codigoCausaDeParagem">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="DESCONHECIDO" /> <!-- Ainda não definidos -->
+      <xs:enumeration value="DESCONHECIDO" />
+      <xs:enumeration value="DESCONHECIDO" />
     </xs:restriction>
   </xs:simpleType>
 
