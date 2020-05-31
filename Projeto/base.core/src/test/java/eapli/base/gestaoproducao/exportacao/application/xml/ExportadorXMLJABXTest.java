@@ -9,12 +9,16 @@ import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomaquina.domain.*;
 import eapli.base.gestaoproducao.gestaomaterial.domain.*;
+import eapli.base.gestaoproducao.gestaomateriaprima.domain.MateriaPrima;
+import eapli.base.gestaoproducao.gestaomateriaprima.domain.QuantidadeDeMateriaPrima;
+import eapli.base.gestaoproducao.gestaomateriaprima.domain.TipoDeMateriaPrima;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.application.ProdutoBuilder;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.medicao.QuantidadePositiva;
 import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.ordemProducao.domain.*;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
@@ -24,7 +28,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
+import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -120,8 +131,19 @@ public class ExportadorXMLJABXTest {
 			e.printStackTrace();
 		}
 
+		List<QuantidadeDeMateriaPrima> listaQuantidadeMateriaPrima = new ArrayList<>();
+		try {
+			QuantidadeDeMateriaPrima quantidadeMateriaPrima = QuantidadeDeMateriaPrima.valueOf(QuantidadePositiva.valueOf(2), MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, "2"));
+			listaQuantidadeMateriaPrima.add(quantidadeMateriaPrima);
+		} catch (IllegalDomainValueException e) {
+			e.printStackTrace();
+		}
 		List<FichaDeProducao> listaFichasProducao = new ArrayList<>();
-		listaFichasProducao.add(new FichaDeProducao());
+		try {
+			listaFichasProducao.add(FichaDeProducao.valueOf(listaQuantidadeMateriaPrima));
+		} catch (IllegalDomainValueException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			NumeroSerie.definirRegrasNumeroSerie("10", "1");
@@ -175,5 +197,28 @@ public class ExportadorXMLJABXTest {
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,
 				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao, listaNotificacoesErro);
 		assertTrue(exportador.export(ficheiro, chaoDeFabrica));
+		exportador.export(new File("ola"), chaoDeFabrica);
+
+		JAXBContext jaxbContext;
+		try
+		{
+			//Get JAXBContext
+			jaxbContext = JAXBContext.newInstance(ChaoDeFabrica.class);
+
+			//Create Unmarshaller
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			//Setup schema validator
+			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema employeeSchema = sf.newSchema(new File("../../XSD/chaoDeFabrica.xsd"));
+			jaxbUnmarshaller.setSchema(employeeSchema);
+
+			//Unmarshal xml file
+			ChaoDeFabrica chaoDeFabrica1 = (ChaoDeFabrica) jaxbUnmarshaller.unmarshal(ficheiro);
+		}
+		catch (JAXBException | SAXException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

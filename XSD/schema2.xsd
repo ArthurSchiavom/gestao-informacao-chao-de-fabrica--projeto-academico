@@ -281,7 +281,7 @@
   <xs:complexType name="quantidadeDeMateriaPrima">
     <xs:all>
       <xs:element name="quantidade" type="doublePositivo" />
-      <xs:element name="materiaPrima" type="idMateriaPrima" />
+      <xs:element name="materiaPrima" type="materiaPrima" />
     </xs:all>
   </xs:complexType>
 
