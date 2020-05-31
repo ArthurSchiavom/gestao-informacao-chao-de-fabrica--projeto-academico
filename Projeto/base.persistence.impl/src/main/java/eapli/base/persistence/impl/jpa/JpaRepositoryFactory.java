@@ -8,6 +8,7 @@ import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRe
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
+import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
@@ -161,5 +162,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public AgendamentoDeProcessamentoRepository agendamentoDeProcessamento(TransactionalContext autoTx) {
         return new JpaAgendamentoDeProcessamentoRepository(autoTx);
+    }
+
+    @Override
+    public MensagemRepository mensagem() {
+        return new JpaMensagemRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public MensagemRepository mensagem(TransactionalContext autoTx) {
+        return new JpaMensagemRepository(autoTx);
     }
 }

@@ -113,6 +113,16 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="estado">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PENDENTE" />
+      <xs:enumeration value="SUSPENSA" />
+      <xs:enumeration value="EM_EXECUCAO" />
+      <xs:enumeration value="EXECUCAO_PARADA_TEMPORARIAMENTE" />
+      <xs:enumeration value="CONCLUIDA" />
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="estadoDeErroDeProcessamento">
     <xs:restriction base="xs:string">
       <xs:enumeration value="ATIVA" />
@@ -126,8 +136,99 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="codigoCausaDeParagem">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DESCONHECIDO" /> <!-- Ainda não definidos -->
+    </xs:restriction>
+  </xs:simpleType>
+
 
   
+
+  <xs:complexType name="mensagemInicioDeAtividade">
+    <xs:all>
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0" />
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="mensagemFimDeAtividade">
+    <xs:all>
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0" />
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="mensagemParagemForcada">
+    <xs:all>
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="codigoCausaDeParagem" type="codigoCausaDeParagem" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="mensagemRetomaDeAtividade">
+    <xs:all>
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="mensagemDeConsumo">
+    <xs:all>
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="quantidadeDeMateriaPrima" type="quantidadeDeMateriaPrima" />
+      <xs:element name="deposito" type="codigoDeposito" minOccurs="0" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="mensagemDeProducao">
+    <xs:all>
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="produto" type="codigoUnicoProduto" />
+      <xs:element name="quantidade" type="doublePositivo" />
+      <xs:element name="lote" type="identificadorLote" minOccurs="0" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="mensagemDeEntregaDeProducao">
+    <xs:all>
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="quantidade" type="doublePositivo" />
+      <xs:element name="produto" type="codigoUnicoProduto" />
+      <xs:element name="deposito" type="codigoDeposito" />
+      <xs:element name="lote" type="identificadorLote" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="mensagemDeEstorno">
+    <xs:all>
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="quantidadeDeMateriaPrima" type="quantidadeDeMateriaPrima" />
+      <xs:element name="deposito" type="codigoDeposito" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="movimentoStock">
+    <xs:all>
+      <xs:element name="quantidadeDeMateriaPrima" type="quantidadeDeMateriaPrima" />
+      <xs:element name="deposito" type="codigoDeposito" />
+    </xs:all>
+    <xs:attribute name="id" type="idMovimentoStock" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="agendamentoDeProcessamento">
+    <xs:all>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" />
+      <xs:element name="fimTimestampEpochMili" type="timestampEpochMili" />
+      <xs:element name="inicioTimestampEpochMili" type="timestampEpochMili" />
+    </xs:all>
+  </xs:complexType>
 
   <xs:complexType name="notificacaoDeErroDeProcessamento">
     <xs:all>
@@ -191,15 +292,6 @@
     </xs:all>
   </xs:complexType>
 
-
-  <xs:complexType name="agendamentoDeProcessamento">
-    <xs:all>
-      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" />
-      <xs:element name="fimTimestampEpochMili" type="timestampEpochMili" />
-      <xs:element name="inicioTimestampEpochMili" type="timestampEpochMili" />
-    </xs:all>
-  </xs:complexType>
-
   <xs:complexType name="material">
     <xs:all>
       <xs:element name="unidadeDeMedida" type="unidadeDeMedida" />
@@ -230,6 +322,81 @@
       <xs:element name="linhaProducao" type="identificadorLinhaDeProducao" />
     </xs:all>
     <xs:attribute name="codigoInterno" type="codigoInternoMaquina" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ordemProducao">
+    <xs:all>
+      <xs:element name="quantidadeAProduzir" type="intPositivo" />
+      <xs:element name="encomendas">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="idEncomenda" type="stringNaoVazia" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="dataEmissao" type="data" />
+      <xs:element name="dataPrevistaExecucao" type="data" />
+      <xs:element name="fimExecucao" type="data" />
+      <xs:element name="inicioExecucao" type="data" />
+      <xs:element name="estado" type="estado" />
+      <xs:element name="produto" type="codigoUnicoProduto" />
+      <xs:element name="produtosProduzidos" type="produtosProduzidos" />
+      <xs:element name="dadosCalculados" type="dadosCalculadosOrdem" />
+      <xs:element name="usosDeMaquina" type="usosDeMaquina" />
+    </xs:all>
+    <xs:attribute name="identificador" type="identificadorOrdemProducao" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="usosDeMaquina">
+    <xs:sequence>
+      <xs:element name="usoDeMaquina" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="inicioExecucao" type="timestampEpochMili" />
+            <xs:element name="fimExecucao" type="timestampEpochMili" />
+            <xs:element name="pausaExecucao" type="timestampEpochMili" />
+            <xs:element name="retomaExecucao" type="timestampEpochMili" />
+            <xs:element name="movimentoStock" type="idMovimentoStock" />
+            <xs:element name="maquina" type="codigoInternoMaquina" />
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dadosCalculadosOrdem">
+    <xs:all>
+      <xs:element name="consumosReais">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="consumoReal" type="quantidadeDeMateriaPrima" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="consumosEsperados">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="consumoEsperado" type="quantidadeDeMateriaPrima" minOccurs="1" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="estornos">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="estorno" type="quantidadeDeMateriaPrima" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="desviosDeConsumo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="desvioDeConsumo" type="quantidadeDeMateriaPrima" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="tempoBrutoExecucao" type="timestampEpochMili" />
+      <xs:element name="tempoEfetivoExecucao" type="timestampEpochMili" />
+    </xs:all>
   </xs:complexType>
 
   <xs:complexType name="produtosProduzidos">

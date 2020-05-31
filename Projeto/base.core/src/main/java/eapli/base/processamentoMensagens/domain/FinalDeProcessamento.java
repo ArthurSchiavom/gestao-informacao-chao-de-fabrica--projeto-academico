@@ -20,8 +20,8 @@ public class FinalDeProcessamento implements ValueObject,Comparable<FinalDeProce
     }
 
     public FinalDeProcessamento(String data,String tempo) throws ParseException {
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        String dataTempo=data+'T'+tempo;
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dataTempo=data+" "+tempo;
         this.dataTempoFinal=format.parse(dataTempo);
     }
 

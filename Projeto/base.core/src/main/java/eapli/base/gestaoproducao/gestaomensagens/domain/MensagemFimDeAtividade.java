@@ -23,12 +23,11 @@ public class MensagemFimDeAtividade extends Mensagem implements AggregateRoot<Lo
         dataHora = null;
     }
 
-    public MensagemFimDeAtividade(TimestampEmissao tempoEmissao,
-                                  CodigoInternoMaquina maquinaID, Date dataHora,
+    public MensagemFimDeAtividade(CodigoInternoMaquina maquinaID, Date dataHora,
                                   Identificador ordemID) {
-        super(TipoDeMensagem.FIM_DE_ATIVIDADE, tempoEmissao);
+        super(TipoDeMensagem.FIM_DE_ATIVIDADE, new TimestampEmissao(dataHora));
 
-        if (tempoEmissao == null || maquinaID == null || dataHora == null) {
+        if (maquinaID == null || dataHora == null) {
             throw new IllegalArgumentException("Não pode haver parametros null no Fim de atividade mensagem"); //
             // excepto o Ordem id que pode ser nulo
         }

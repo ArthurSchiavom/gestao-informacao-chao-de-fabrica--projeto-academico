@@ -4,8 +4,12 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
+@DiscriminatorValue(value=TipoDeMensagem.Values.PRODUCAO)
 public class MensagemProducao extends Mensagem{
     //P1 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
     //Produto e quantidade são parametros obrigatorios ,lote opcional
