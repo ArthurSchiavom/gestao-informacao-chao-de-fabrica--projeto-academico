@@ -16,7 +16,7 @@ public class Categoria implements AggregateRoot<CodigoAlfanumericoCategoria> {
     private Long version;
 
     @EmbeddedId
-    @XmlAttribute(name = "codigoAlfanumerico")
+    @XmlAttribute(name = "codigoAlfanumericoCategoria")
     public final CodigoAlfanumericoCategoria codigoAlfanumericoCategoria;
     @XmlElement
     private String descricao; // might change so it's not final

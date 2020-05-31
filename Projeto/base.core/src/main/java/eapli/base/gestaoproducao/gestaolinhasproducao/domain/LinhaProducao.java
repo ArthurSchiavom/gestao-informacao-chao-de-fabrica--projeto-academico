@@ -24,7 +24,7 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao>,
 
 	public LinhaProducao(final String identifier) {
 		this.identifier = new IdentificadorLinhaProducao(identifier);
-		this.estado = EstadoProcessamentoMensagens.SUSPENSO;
+		this.estado = EstadoProcessamentoMensagens.INATIVO;
 	}
 
 	public LinhaProducao() {
@@ -65,8 +65,8 @@ public class LinhaProducao implements AggregateRoot<IdentificadorLinhaProducao>,
 		switch (this.estado){
 			case ATIVO:
 				return "ATIVO";
-			case SUSPENSO:
-				return "SUSPENSO";
+			case INATIVO:
+				return "INATIVO";
 		}
 		return null;
 	}

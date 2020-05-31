@@ -37,7 +37,7 @@ public class FichaDeProducao implements AggregateRoot<Integer>, ConvertableToDTO
     @XmlElement
     public List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima;
 
-    public FichaDeProducao() {
+    protected FichaDeProducao() {
         uniqueVal = 0;
     }
 
