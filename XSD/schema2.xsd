@@ -336,8 +336,8 @@
       </xs:element>
       <xs:element name="dataEmissao" type="data" />
       <xs:element name="dataPrevistaExecucao" type="data" />
-      <xs:element name="fimExecucao" type="data" />
-      <xs:element name="inicioExecucao" type="data" />
+      <xs:element name="fimExecucao" type="data" minOccurs="0"/>
+      <xs:element name="inicioExecucao" type="data" minOccurs="0"/>
       <xs:element name="estado" type="estado" />
       <xs:element name="produto" type="codigoUnicoProduto" />
       <xs:element name="produtosProduzidos" type="produtosProduzidos" />
