@@ -125,20 +125,22 @@
 
   <xs:simpleType name="estadoDeErroDeProcessamento">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="ATIVA" />
-      <xs:enumeration value="ARQUIVADA" />
+      <xs:enumeration value="ATIVO" />
+      <xs:enumeration value="ARQUIVADO" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="tipoDeErroDeProcessamento">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="DESCONHECIDO" /> <!-- Ainda não definidos -->
+      <xs:enumeration value="DADOS_INVALIDOS" />
+      <xs:enumeration value="ELEMENTOS_INEXISTENTES" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="codigoCausaDeParagem">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="DESCONHECIDO" /> <!-- Ainda não definidos -->
+      <xs:enumeration value="DESCONHECIDO" />
+      <xs:enumeration value="DESCONHECIDO" />
     </xs:restriction>
   </xs:simpleType>
 

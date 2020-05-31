@@ -91,8 +91,8 @@ xsi:schemaLocation="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180
 	<cdfab:notificacoesDeErroDeProcessamento>
 		<cdfab:notificacaoDeErroDeProcessamento>
 			<linhaDeProducao>linha 2</linhaDeProducao>
-			<tipo>DESCONHECIDO</tipo>
-			<estado>ARQUIVADA</estado>
+			<tipo>ELEMENTOS_INEXISTENTES</tipo>
+			<estado>ARQUIVADO</estado>
 		</cdfab:notificacaoDeErroDeProcessamento>
 	</cdfab:notificacoesDeErroDeProcessamento>
 	<cdfab:linhasDeProducao>
