@@ -26,7 +26,7 @@ public class CodigoUnico implements ValueObject, Serializable, Comparable<Codigo
         codigoUnicoValor = null;
     }
 
-    protected CodigoUnico(String codigoUnico, @Nullable ProdutoRepository repo) throws IllegalDomainValueException {
+    public CodigoUnico(String codigoUnico, @Nullable ProdutoRepository repo) throws IllegalDomainValueException {
         if (codigoUnico == null) {
             throw new IllegalArgumentException("O código único deve existir e não ser vazio");
         }

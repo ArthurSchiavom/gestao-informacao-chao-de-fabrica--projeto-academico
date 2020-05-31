@@ -11,6 +11,7 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.*;
 import eapli.base.gestaoproducao.gestaomaterial.domain.*;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.application.ProdutoBuilder;
+import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
@@ -18,6 +19,7 @@ import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.ordemProducao.domain.*;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -30,14 +32,27 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 
 public class ExportadorXMLJABXTest {
 	private final ExportadorXMLJABX exportador = new ExportadorXMLJABX();
 
 	@Rule
 	public final TemporaryFolder folder = new TemporaryFolder();
+
+	private static final Optional<Produto> optionalIsPresent = Optional.of(Mockito.mock(Produto.class));
+	private static final Optional<Produto> optionalIsNotPresent = Optional.ofNullable(null);
+	private static final ProdutoRepository produtoRepositoryIsPresent = Mockito.mock(ProdutoRepository.class);
+	private static final ProdutoRepository produtoRepositoryIsNotPresent = Mockito.mock(ProdutoRepository.class);
+
+	@BeforeClass
+	public static void startup() {
+		Mockito.when(produtoRepositoryIsPresent.produtoDeCodigoUnico(any())).thenReturn(optionalIsPresent);
+		Mockito.when(produtoRepositoryIsNotPresent.produtoDeCodigoUnico(any())).thenReturn(optionalIsNotPresent);
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void garantirQueNaoSePodeExportarUmChaoDeVazioNulo() {
@@ -133,8 +148,12 @@ public class ExportadorXMLJABXTest {
 		listaIdentificadoresEncomenda.add(new IdentificadorEncomenda("ENCOMENDA1"));
 
 		List<OrdemProducao> listaOrdensProducao = new ArrayList<>();
-		listaOrdensProducao.add(new OrdemProducao(new Identificador("ORDEM1"), new QuantidadeAProduzir(1550),
-				listaIdentificadoresEncomenda, dateEmissao, datePrevEx, Estado.CONCLUIDA));
+		try {
+			listaOrdensProducao.add(new OrdemProducao(new Identificador("ORDEM1"), new QuantidadeAProduzir(1550),
+					listaIdentificadoresEncomenda, dateEmissao, datePrevEx, Estado.CONCLUIDA, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent)));
+		} catch (IllegalDomainValueException e) {
+			e.printStackTrace();
+		}
 
 		File ficheiro = null;
 		try {

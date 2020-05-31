@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-class JpaProdutoRepository
+public class JpaProdutoRepository
         extends JpaAutoTxRepository<Produto, CodigoUnico, CodigoUnico>
         implements ProdutoRepository {
 

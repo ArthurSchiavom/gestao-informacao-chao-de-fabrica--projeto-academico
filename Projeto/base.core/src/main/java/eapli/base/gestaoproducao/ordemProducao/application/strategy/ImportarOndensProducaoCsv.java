@@ -2,6 +2,9 @@ package eapli.base.gestaoproducao.ordemProducao.application.strategy;
 
 import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinha;
 import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinhaTransformer;
+import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
+import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
+import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.domain.*;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.application.files.CsvFileScanner;
@@ -9,12 +12,15 @@ import eapli.base.infrastructure.application.files.EmptyFileException;
 import eapli.base.infrastructure.application.files.FileScanner;
 import eapli.base.infrastructure.application.files.InvalidHeaderException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.infrastructure.persistence.RepositoryFactory;
+
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy {
 
@@ -26,18 +32,21 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
     private static final int INDEX_DATA_PREVISTA_EXECUCAO = 3;
     private static final int INDEX_ESTADO = 4;
     private static final int INDEX_ENCOMENDAS_ID = 5;
-    private static final int N_CAMPOS = 6;
+    private static final int INDEX_PRODUTO = 6;
+    private static final int N_CAMPOS = 7;
 
     private final String CHARSET_NAME = "UTF-8";
 
     @Override
     public ResultadoImportacaoLinhaALinha importarOrdensProducao(String path, boolean substituirSeExistir) {
+        ProdutoRepository repository = PersistenceContext.repositories().produto();
+
         ResultadoImportacaoLinhaALinhaTransformer transformer = new ResultadoImportacaoLinhaALinhaTransformer();
         FileScanner<String[]> scanner;
         try {
             scanner = new CsvFileScanner(SEPARADOR, path,
                     CHARSET_NAME, "Identificador", "Quantidade a produzir", "Data emissão", "Data prevista execução",
-                    "Estado", "EncomendasID");
+                    "Estado", "EncomendasID","Produto");
         } catch (FileNotFoundException | InvalidHeaderException | EmptyFileException e) {
             transformer.addFalha(0, e.getMessage());
             transformer.incrementarFalhas();
@@ -54,6 +63,7 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
         Date dataEmissao, dataPrevistaExecucao;
         List<IdentificadorEncomenda> encomendas;
         OrdemProducao op;
+        CodigoUnico produto;
         OrdemProducaoRepository repo = PersistenceContext.repositories().ordemProducao();
 
         while (scanner.hasNext()) {
@@ -74,6 +84,17 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
                 encomendas = getEncomendas(next[INDEX_ENCOMENDAS_ID]);
                 dataEmissao = getData(next[INDEX_DATA_EMISSAO]);
                 dataPrevistaExecucao = getData(next[INDEX_DATA_PREVISTA_EXECUCAO]);
+//                produto = new CodigoUnico(next[INDEX_PRODUTO], null);
+                System.out.println(next[INDEX_PRODUTO]+"\n\n\n\n\n\n\n");
+                Optional<Produto> prod = repository.produtoDeCodigoUnico(next[INDEX_PRODUTO]);
+
+                if(!prod.isPresent()){
+                    transformer.addFalha(nLinha,"Produto nao existe.");
+                    transformer.incrementarFalhas();
+                }
+
+                produto = prod.get().codigoUnico;
+
 
                 try {
                     quantidadeAProduzir = new QuantidadeAProduzir(Integer.parseInt(next[INDEX_QUANTIDADE_A_PRODUZIR]));
@@ -85,7 +106,7 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
                 }
 
                 try {
-                    op = new OrdemProducao(id, quantidadeAProduzir, encomendas, dataEmissao, dataPrevistaExecucao,estado);
+                    op = new OrdemProducao(id, quantidadeAProduzir, encomendas, dataEmissao, dataPrevistaExecucao,estado, produto);
                 } catch(IllegalArgumentException ex){
                     transformer.addFalha(0, ex.getMessage());
                     transformer.incrementarFalhas();

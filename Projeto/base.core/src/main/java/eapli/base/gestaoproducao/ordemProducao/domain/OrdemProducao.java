@@ -2,6 +2,7 @@ package eapli.base.gestaoproducao.ordemProducao.domain;
 
 import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
+import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -57,10 +58,8 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
     @XmlElement
     private Estado estado;
 
-    @ElementCollection
-    @XmlElementWrapper(name = "produtos")
     @XmlElement(name = "codigoProduto")
-    private List<CodigoUnico> produtos;
+    private CodigoUnico produto;
 
     /**
      * Do moodle:
@@ -70,7 +69,7 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
      */
     public OrdemProducao(Identificador identificador, QuantidadeAProduzir quantidadeAProduzir,
                          List<IdentificadorEncomenda> identificadorEncomendaList, Date dataEmissao,
-                         Date dataPrevistaExecucao, Estado estado) throws IllegalArgumentException {
+                         Date dataPrevistaExecucao, Estado estado, CodigoUnico produto) throws IllegalArgumentException {
 
         Date dataAtual = new Date(System.currentTimeMillis());
 
@@ -82,7 +81,7 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
             this.dataEmissao = dataEmissao;
             this.dataPrevistaExecucao = dataPrevistaExecucao;
             this.estado = estado;
-            this.produtos = new ArrayList<>();
+            this.produto = produto;
         } else {
             throw new IllegalArgumentException("Datas não válidas");
         }
@@ -135,18 +134,9 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
     @Override
     public String toString() {
 
-
-        String produtosString = produtos.stream().map(Object::toString)
-                .collect(Collectors.joining(", "));
-//        for(Produto p : produtos){
-//            produtosString += p + "\n";
-//        }
-
         String idEncomendaString = identificadorEncomendaList.stream().map(Object::toString)
                 .collect(Collectors.joining(", "));
-//        for(IdentificadorEncomenda p : identificadorEncomendaList){
-//            idEncomendaString += p + "\n";
-//        }
+
 
         return "OrdemProducao{" +
                 "identificador=" + identificador.identificador +
@@ -155,7 +145,7 @@ public class OrdemProducao implements AggregateRoot<Identificador> {
                 "\n dataEmissao=" + dataEmissao +
                 "\n dataPrevistaExecucao=" + dataPrevistaExecucao +
                 "\n estado=" + estado +
-                "\n produtos=" + produtosString +
+                "\n produto=" + produto.codigoUnicoValor +
                 '}';
     }
 }
