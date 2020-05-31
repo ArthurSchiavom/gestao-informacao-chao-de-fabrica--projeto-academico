@@ -84,8 +84,6 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
                 encomendas = getEncomendas(next[INDEX_ENCOMENDAS_ID]);
                 dataEmissao = getData(next[INDEX_DATA_EMISSAO]);
                 dataPrevistaExecucao = getData(next[INDEX_DATA_PREVISTA_EXECUCAO]);
-//                produto = new CodigoUnico(next[INDEX_PRODUTO], null);
-                System.out.println(next[INDEX_PRODUTO]+"\n\n\n\n\n\n\n");
                 Optional<Produto> prod = repository.produtoDeCodigoUnico(next[INDEX_PRODUTO]);
 
                 if(!prod.isPresent()){
