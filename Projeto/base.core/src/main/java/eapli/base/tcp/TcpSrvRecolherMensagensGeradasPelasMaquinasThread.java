@@ -22,10 +22,6 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
 
     public TcpSrvRecolherMensagensGeradasPelasMaquinasThread(Socket cliSock) {
         sock = cliSock;
-        try {
-            sock.setTcpNoDelay(true);
-        } catch (SocketException e) {
-        }
     }
 
 
@@ -80,15 +76,15 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
 
         sOut.write(mensagemProtocoloComunicacao.version);
         sOut.write(mensagemProtocoloComunicacao.code);
-        sOut.write(mensagemProtocoloComunicacao.idProtocolo);
-        sOut.write(mensagemProtocoloComunicacao.tamanhoRawData);
+        sOut.writeChar(mensagemProtocoloComunicacao.idProtocolo);
+        sOut.writeChar(mensagemProtocoloComunicacao.tamanhoRawData);
         if (mensagemProtocoloComunicacao.tamanhoRawData > 0 && mensagemProtocoloComunicacao.mensagem != null) {
             sOut.write(mensagemProtocoloComunicacao.mensagem.getBytes());
-            System.out.println("mensagem escrita, version: " + mensagemProtocoloComunicacao.version + "\ncode: " + mensagemProtocoloComunicacao.code + "\nidProt: " + mensagemProtocoloComunicacao.idProtocolo + "\ntamanho: " + mensagemProtocoloComunicacao.tamanhoRawData);
+            System.out.println("1- mensagem escrita, version: " + mensagemProtocoloComunicacao.version + "\ncode: " + mensagemProtocoloComunicacao.code + "\nidProt: " + mensagemProtocoloComunicacao.idProtocolo + "\ntamanho: " + mensagemProtocoloComunicacao.tamanhoRawData);
         }
         sOut.flush();
 
-        System.out.println("mensagem escrita, version: " + (mensagemProtocoloComunicacao.version & 0xFF) + "\ncode: " + (mensagemProtocoloComunicacao.code & 0xFF) + "\nidProt: " + (short) (mensagemProtocoloComunicacao.idProtocolo & 0xFFFF) + "\ntamanho: " + (short) (mensagemProtocoloComunicacao.tamanhoRawData & 0xFFFF));
+        System.out.println("2- mensagem escrita, version: " + (mensagemProtocoloComunicacao.version & 0xFF) + "\ncode: " + (mensagemProtocoloComunicacao.code & 0xFF) + "\nidProt: " + (short) (mensagemProtocoloComunicacao.idProtocolo & 0xFFFF) + "\ntamanho: " + (short) (mensagemProtocoloComunicacao.tamanhoRawData & 0xFFFF));
 
         return true;
     }
