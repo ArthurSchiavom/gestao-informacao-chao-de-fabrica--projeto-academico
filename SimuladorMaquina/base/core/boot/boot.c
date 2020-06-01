@@ -18,7 +18,7 @@ int boot(char *id_maquina_param, char *intervalo_segundos_param,
     endereco_smm = malloc(strlen(endereco_smm_param) + 1);
     strcpy(endereco_smm, endereco_smm_param);
 
-    int sucesso = ligar_ao_servidor_central();
+    int sucesso = handshake_servidor_central();
 
     if (sucesso == -1) {
         return -1;

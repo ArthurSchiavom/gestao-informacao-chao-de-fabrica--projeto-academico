@@ -18,6 +18,17 @@
 // read a string from stdin protecting buffer overflow
 #define GETS(B, S) {fgets(B,S-2,stdin);B[strlen(B)-1]=0;}
 
+typedef struct Packet_tcp {
+    Payload payload;
+    int socket;
+} Packet_tcp;
+
+typedef struct Packet_udp {
+    Payload payload;
+    char *endereco;
+    char *porta;
+} Packet_udp;
+
 typedef struct Built_Payload {
     int size;
     char *content;
@@ -75,6 +86,7 @@ int start_tcp_connection(char *target, char *porta) {
     to.tv_sec = TIMEOUT_SECONDS;
     to.tv_usec = 0;
     setsockopt (sock,SOL_SOCKET,SO_RCVTIMEO,(char *)&to, sizeof(to));
+    setsockopt (sock,SOL_SOCKET,SO_SNDTIMEO,(char *)&to, sizeof(to));
 
     bzero((char *) &req, sizeof(req));
     // let getaddrinfo set the family depending on the supplied server address
@@ -100,57 +112,60 @@ int start_tcp_connection(char *target, char *porta) {
     return sock;
 }
 
-int send_packet_tcp(Packet_tcp packet, short inverterBytesDeNumeros) {
+/**
+ * @return TRUE em caso de sucesso e FALSE caso contrário
+ */
+int send_packet_tcp_on_open_socket(Packet_tcp packet, short inverterBytesDeNumeros) {
     Built_Payload payload = build_payload(packet.payload, inverterBytesDeNumeros);
     int success = write(packet.socket, payload.content, payload.size);
 
     if (success == -1) {
-        return -1;
+        return FALSE;
     }
     return TRUE;
 }
 
+/**
+ * @return TRUE em caso de sucesso e FALSE caso contrário
+ */
+int receive_packet_tcp_on_open_socket(int socket, Payload *resultado) {
+    resultado->version = 0;
+    resultado->code = 0;
+    int sucesso = read(socket, &(resultado->version), 1);
+    if (sucesso == -1)
+        return FALSE;
+    sucesso = read(socket, &(resultado->code), 1);
+    if (sucesso == -1)
+        return FALSE;
+    sucesso = read(socket, &(resultado->id), 2);
+    if (sucesso == -1)
+        return FALSE;
+    sucesso = read(socket, &(resultado->data_length), 2);
+    if (sucesso == -1)
+        return FALSE;
+    resultado->id = resultado->id;
+    resultado->data_length = resultado->data_length;
 
-void close_tcp_connection(int socket) {
-    close(socket);
-}
-
-Packet_tcp receive_packet_tcp(int socket) {
-    Packet_tcp result;
-
-    Payload received_payload;
-
-    received_payload.version = 0;
-    received_payload.code = 0;
-    read(socket, &(received_payload.version), 1);
-    read(socket, &(received_payload.code), 1);
-    read(socket, &(received_payload.id), 2);
-    read(socket, &(received_payload.data_length), 2);
-    received_payload.id = received_payload.id;
-    received_payload.data_length = received_payload.data_length;
-
-    int success;
-    if (received_payload.data_length == 0) {
-        received_payload.data_length = 1;
+    if (resultado->data_length == 0) {
+        resultado->data_length = 1;
         char *dummy = malloc(1);
         dummy[0] = 0;
-        received_payload.data = dummy;
-        success = 1;
+        resultado->data = dummy;
     } else {
-        received_payload.data = malloc(received_payload.data_length);
-        read(socket, received_payload.data, received_payload.data_length);
+        resultado->data = malloc(resultado->data_length);
+        sucesso = read(socket, resultado->data, resultado->data_length);
+        if (sucesso == -1) {
+            free(resultado->data);
+            return FALSE;
+        }
     }
-
-    if (success == -1) {
-        result.socket = -1;
-    }
-
-    result.payload = received_payload;
-    result.socket = socket;
     
-    return result;
+    return TRUE;
 }
 
+/**
+ * @return (1) -1 em caso de não conseguir contactar o servidor ou (2) o código de resposta do servidor caso contrário
+ */
 int handshake_tcp(int socket, short inverterBytesDeNumeros) {
     Packet_tcp packet;
     packet.socket = socket;
@@ -159,34 +174,58 @@ int handshake_tcp(int socket, short inverterBytesDeNumeros) {
     packet.payload.id = id_maquina;
     packet.payload.data_length = 0;
 
-    int resultado = send_packet_tcp(packet, inverterBytesDeNumeros);
-    if (resultado == -1) {
-        return -1;
-    }
-    Packet_tcp reply = receive_packet_tcp(socket);
-
-    if (reply.socket == -1) {
+    int resultado = send_packet_tcp_on_open_socket(packet, inverterBytesDeNumeros);
+    if (resultado == FALSE) {
         return -1;
     }
 
-    return reply.payload.code;
+    Payload resultado_send;
+
+    int reply = receive_packet_tcp_on_open_socket(socket, &resultado_send);
+
+    if (reply == FALSE) {
+        return -1;
+    }
+
+    return resultado_send.code;
 }
 
-int ligar_ao_servidor_central() {
-    close(socket_sistema_central);
-    socket_sistema_central = -1;
+/**
+ * @return (1) -1 em caso de não conseguir contactar o servidor ou (2) o código de resposta do servidor caso contrário
+ */
+int handshake_servidor_central() {
     int sock = start_tcp_connection(endereco_sistema_central, PORTA_SISTEMA_CENTRAL);
     if (sock == -1) {
         return -1;
     }
 
     int resultado = handshake_tcp(sock, TRUE);
-    if (resultado == REQUEST_CODE_ACK) {
-        socket_sistema_central = sock;
-        return sock;
+
+    close(sock);
+    return resultado;
+}
+
+/**
+ * @return TRUE em caso de sucesso e FALSE caso contrário
+ */
+int enviar_packet_tcp(char *target, char *porta, Payload payload, Payload *resultado, short inverterBytesDeNumeros) {
+    int sock = start_tcp_connection(target, porta);
+    if (sock == -1) {
+        return FALSE;
     }
 
-    return -1;
+    Packet_tcp packet;
+    packet.payload = payload;
+    packet.socket = sock;
+
+    int sucesso = send_packet_tcp_on_open_socket(packet, inverterBytesDeNumeros);
+
+    if (sucesso == TRUE) {
+        sucesso = receive_packet_tcp_on_open_socket(sock, &resultado);
+    }
+
+    close(sock);
+    return sucesso;
 }
 
 

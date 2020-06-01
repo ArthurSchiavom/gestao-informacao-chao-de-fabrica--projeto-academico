@@ -10,51 +10,51 @@
 #include "../utils/const.h"
 
 _Noreturn void modulo_envio_mensagens() {
-    Packet_tcp packet;
-    packet.payload.version = CURRENT_PROTOCOL_VERSION;
-    packet.payload.code = REQUEST_CODE_MSG;
-    packet.payload.id = id_maquina;
+    Payload payload;
+    payload.version = CURRENT_PROTOCOL_VERSION;
+    payload.code = REQUEST_CODE_MSG;
+    payload.id = id_maquina;
 
     int tamanho_mensagem;
     char *message = malloc(1);
 
-    short desconectado = FALSE;
     short limpar_data_resultado;
+    int sucesso;
     while (1) {
         if (*(proxima_mensagem()) == 0) {
             sleep(3); // Espera pela geração de novas mensagens. Caso tal seja implementado no futuro, no caso qual basta alterar o método proxima_mensagem()
         } else {
-            packet.socket = socket_sistema_central;
             tamanho_mensagem = (int) strlen(mensagem_atual()) + 1;
             message = realloc(message, tamanho_mensagem);
             strcpy(message, mensagem_atual());
-            packet.payload.data_length = tamanho_mensagem;
-            packet.payload.data = message;
+            payload.data_length = tamanho_mensagem;
+            payload.data = message;
 
-            Packet_tcp resultado;
-            resultado.payload.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
-            resultado.socket = -1;
-            while (resultado.payload.code != REQUEST_CODE_ACK) {
-                limpar_data_resultado = FALSE;
-                int sucesso = send_packet_tcp(packet, TRUE);
-                if (sucesso != -1) {
-                    resultado = receive_packet_tcp(socket_sistema_central);
-                    limpar_data_resultado = TRUE;
+            Payload resultado;
+            resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
+            resultado.version = -1;
+            short desconectado = FALSE;
+            while (resultado.code != REQUEST_CODE_ACK) {
+                limpar_data_resultado = TRUE;
+                sucesso = enviar_packet_tcp(endereco_sistema_central, PORTA_SISTEMA_CENTRAL, payload, &resultado, TRUE);
+                if (sucesso == FALSE) {
+                    limpar_data_resultado = FALSE;
                 }
 
-                if (resultado.socket == -1 || resultado.payload.code != REQUEST_CODE_ACK) {
+                if (sucesso == FALSE || resultado.code != REQUEST_CODE_ACK) {
                     desconectado = TRUE;
-
                     printf("Desconectado do sistema central - tentativa de reconexão em 3s\n");
-                    if (resultado.payload.code == REQUEST_CODE_NACK) {
-                        resultado.payload.data = realloc(resultado.payload.data, resultado.payload.data_length + 1);
-                        resultado.payload.data[resultado.payload.data_length] = 0; // caso não tenha sido enviada com um zero no final
-                        printf("Mensagem do sistema central: %s\n", resultado.payload.data);
+                    if (resultado.code == REQUEST_CODE_NACK) {
+                        resultado.data = realloc(resultado.data, resultado.data_length + 1);
+                        resultado.data[resultado.data_length] = 0; // caso não tenha sido enviada com um zero no final
+                        printf("Mensagem do sistema central: %s\n", resultado.data);
                     }
-
                     sleep(3);
 
-                    packet.socket = ligar_ao_servidor_central();
+                    int sucesso = handshake_servidor_central();
+                    if (sucesso == -1 || sucesso == REQUEST_CODE_NACK) {
+                        resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
+                    }
                 } else {
                     if (desconectado) {
                         desconectado = FALSE;
@@ -63,7 +63,7 @@ _Noreturn void modulo_envio_mensagens() {
                 }
 
                 if (limpar_data_resultado) {
-                    free(resultado.payload.data);
+                    free(resultado.data);
                 }
             }
         }

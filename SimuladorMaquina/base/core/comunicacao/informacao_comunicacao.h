@@ -17,7 +17,6 @@
 
 int intervalo_entre_mensagens_segundos;
 char *endereco_sistema_central;
-int socket_sistema_central;
 char *endereco_smm;
 
 typedef struct Payload {
@@ -27,16 +26,5 @@ typedef struct Payload {
     unsigned short data_length;
     char *data;
 } Payload;
-
-typedef struct Packet_tcp {
-    Payload payload;
-    int socket;
-} Packet_tcp;
-
-typedef struct Packet_udp {
-    Payload payload;
-    char *endereco;
-    char *porta;
-} Packet_udp;
 
 #endif //SIMULADORMAQUINA_INFORMACAO_COMUNICACAO_H
