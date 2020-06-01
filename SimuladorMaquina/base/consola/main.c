@@ -11,34 +11,6 @@
 #define INDEX_PARAM_ENDERECO_SMM 5
 #define N_ARGS 6
 
-// TODO - REMOVE AFTER INTEROPERABILITY WITH SERVER IS CONFIRMED
-//void test_packet_transfer() {
-//    printf("starting\n");
-//    int socket = start_tcp_connection("labs-ssh5.dei.isep.ipp.pt", PORTA_SISTEMA_CENTRAL);
-//    printf("Socket: %d\n", socket);
-//    printf("started\n");
-//    Packet_tcp packet;
-//    packet.socket = socket;
-//    packet.payload.version = CURRENT_PROTOCOL_VERSION;
-//    packet.payload.code = REQUEST_CODE_HELLO;
-//    packet.payload.id = 123;
-//    packet.payload.data_length = 7;
-//    packet.payload.data = malloc(7);
-//    strcpy(packet.payload.data, "HELLO!");
-//    send_packet_tcp(packet, TRUE);
-//    close_tcp_connection(socket);
-//    printf("ended\n");
-//}
-//
-//void test_handshake() {
-//    printf("A iniciar conexão\n");
-//    int socket = start_tcp_connection("labs-ssh5.dei.isep.ipp.pt", PORTA_SISTEMA_CENTRAL);
-//    printf("Conexão completa, handshake_tcp a começar\n");
-//    int resultado = handshake_tcp(socket, TRUE);
-//    printf("Resultado: %d\n", resultado);
-//    close_tcp_connection(socket);
-//}
-
 int main(int argc, char **argv) {
     if (argc < N_ARGS) {
         printf("Algumentos necessários em falta. Os argumentos necessários (por ordem) são: ID da máquina, intervalo de cadência em segundos, "

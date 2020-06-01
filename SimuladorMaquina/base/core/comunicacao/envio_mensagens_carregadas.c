@@ -9,6 +9,69 @@
 #include "comunicar.h"
 #include "../utils/const.h"
 
+void reconectar_sistema_central() {
+    printf("Falha ao tentar contactar o servidor central, a tentar reconectar.");
+
+    int success = FALSE;
+    int should_sleep = FALSE;
+    while (success != TRUE) {
+        printf("\n");
+        Payload resultado;
+        success = handshake_tcp(endereco_sistema_central, PORTA_SISTEMA_CENTRAL, &resultado);
+        if (success == FALSE) {
+            printf("Servidor central não alcançado. Próxima tentativa em %d segundos.\n", TEMPO_ESPERA_RECONEXAO_SCM_SEGUNDOS);
+            should_sleep = TRUE;
+        }
+
+        if (success == TRUE) {
+            if (resultado.code == REQUEST_CODE_NACK) {
+                printf("O servidor central recusou a tentativa de conexão por não reconhecer a máquina.");
+                if (resultado.data[0] != 0) {
+                    printf(": %s", resultado.data);
+                }
+                printf(". Próxima tentativa em %d segundos.\n", TEMPO_ESPERA_RECONEXAO_SCM_SEGUNDOS);
+                should_sleep = TRUE;
+            }
+            else if (resultado.code != REQUEST_CODE_ACK) {
+                printf("O servidor central recusou a tentativa de conexão por motivos desconhecidos. Próxima tentativa em %d segundos.\n", TEMPO_ESPERA_RECONEXAO_SCM_SEGUNDOS);
+                should_sleep = TRUE;
+            }
+            else {
+                printf("Reconectado ao sistema central.\n");
+                success = TRUE;
+            }
+
+            free(resultado.data);
+        }
+
+        if (should_sleep) {
+            sleep(TEMPO_ESPERA_RECONEXAO_SCM_SEGUNDOS);
+        }
+    }
+}
+
+void tentar_enviar_mensagem(Payload payload) {
+    short limpar_data_resultado;
+    int sucesso;
+
+    Payload resultado;
+    resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
+    resultado.version = -1;
+    while (resultado.code != REQUEST_CODE_ACK) {
+        limpar_data_resultado = TRUE;
+        sucesso = enviar_packet_tcp(endereco_sistema_central, PORTA_SISTEMA_CENTRAL, payload, &resultado, TRUE);
+        if (sucesso == FALSE || resultado.code != REQUEST_CODE_ACK) {
+            limpar_data_resultado = FALSE;
+            reconectar_sistema_central();
+            resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
+        }
+
+        if (limpar_data_resultado) {
+            free(resultado.data);
+        }
+    }
+}
+
 _Noreturn void modulo_envio_mensagens() {
     Payload payload;
     payload.version = CURRENT_PROTOCOL_VERSION;
@@ -18,8 +81,6 @@ _Noreturn void modulo_envio_mensagens() {
     int tamanho_mensagem;
     char *message = malloc(1);
 
-    short limpar_data_resultado;
-    int sucesso;
     while (1) {
         if (*(proxima_mensagem()) == 0) {
             sleep(3); // Espera pela geração de novas mensagens. Caso tal seja implementado no futuro, no caso qual basta alterar o método proxima_mensagem()
@@ -30,46 +91,7 @@ _Noreturn void modulo_envio_mensagens() {
             payload.data_length = tamanho_mensagem;
             payload.data = message;
 
-            Payload resultado;
-            resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
-            resultado.version = -1;
-            short desconectado = FALSE;
-            while (resultado.code != REQUEST_CODE_ACK) {
-                limpar_data_resultado = TRUE;
-                sucesso = enviar_packet_tcp(endereco_sistema_central, PORTA_SISTEMA_CENTRAL, payload, &resultado, TRUE);
-                if (sucesso == FALSE) {
-                    limpar_data_resultado = FALSE;
-                }
-
-                if (sucesso == FALSE || resultado.code != REQUEST_CODE_ACK) {
-                    desconectado = TRUE;
-                    printf("Desconectado do sistema central - tentativa de reconexão em 3s\n");
-                    if (resultado.code == REQUEST_CODE_NACK) {
-                        resultado.data = realloc(resultado.data, resultado.data_length + 1);
-                        resultado.data[resultado.data_length] = 0; // caso não tenha sido enviada com um zero no final
-                        printf("Mensagem do sistema central: %s\n", resultado.data);
-                    }
-
-                    sleep(TEMPO_RECONEXAO_SCM_SEGUNDOS);
-
-                    sucesso = handshake_servidor_central();
-                    if (sucesso == -1) {
-                        resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
-                    }
-                    else {
-                        resultado.code = sucesso;
-                    }
-                } else {
-                    if (desconectado) {
-                        desconectado = FALSE;
-                        printf("Reconectado ao sistema central\n\n");
-                    }
-                }
-
-                if (limpar_data_resultado) {
-                    free(resultado.data);
-                }
-            }
+            tentar_enviar_mensagem(payload);
         }
         sleep(intervalo_entre_mensagens_segundos);
     }
@@ -78,6 +100,11 @@ _Noreturn void modulo_envio_mensagens() {
 }
 
 int iniciar_envio_mensagens(pthread_t *t) {
+    Payload payload;
+    int sucesso = handshake_tcp(endereco_sistema_central, PORTA_SISTEMA_CENTRAL, &payload);
+    if (sucesso == TRUE)
+        free(payload.data);
+
     int success = pthread_create(t, NULL, modulo_envio_mensagens, NULL);
     if (success != 0) {
         return -1;

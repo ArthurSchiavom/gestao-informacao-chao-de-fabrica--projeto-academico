@@ -34,14 +34,6 @@ typedef struct Built_Payload {
     char *content;
 } Built_Payload;
 
-//int reverse_bytes_int(int num) {
-//    int swapped = ((num >> 24) & 0xff) | // move byte 3 to byte 0
-//                  ((num << 8) & 0xff0000) | // move byte 1 to byte 2
-//                  ((num >> 8) & 0xff00) | // move byte 2 to byte 1
-//                  ((num << 24) & 0xff000000); // byte 0 to byte 3
-//    return swapped;
-//}
-
 short reverse_bytes_short(short num) {
     short swapped = ((num<<8)&0xff00) | ((num>>8)&0x00ff);
     return swapped;
@@ -94,17 +86,14 @@ int start_tcp_connection(char *target, char *porta) {
     req.ai_socktype = SOCK_STREAM;
     err = getaddrinfo(target, porta, &req, &list);
     if (err) {
-        printf("Falha ao tentar obter endereço IP: %s\n", gai_strerror(err));
         return -1;
     }
     sock = socket(list->ai_family, list->ai_socktype, list->ai_protocol);
     if (sock == -1) {
-        perror("Falha ao tentar abrir socket");
         freeaddrinfo(list);
         return -1;
     }
     if (connect(sock, (struct sockaddr *) list->ai_addr, list->ai_addrlen) == -1) {
-        perror("Falha ao tentar conectar ao socket");
         freeaddrinfo(list);
         close(sock);
         return -1;
@@ -143,12 +132,12 @@ int receive_packet_tcp_on_open_socket(int socket, Payload *resultado) {
     sucesso = read(socket, &(resultado->data_length), 2);
     if (sucesso == -1)
         return FALSE;
-    resultado->id = resultado->id;
-    resultado->data_length = resultado->data_length;
+    resultado->id = reverse_bytes_short(resultado->id);
+    resultado->data_length = reverse_bytes_short(resultado->data_length);
 
     if (resultado->data_length == 0) {
         resultado->data_length = 1;
-        char *dummy = malloc(1);
+        char *dummy = malloc(resultado->data_length);
         dummy[0] = 0;
         resultado->data = dummy;
     } else {
@@ -160,19 +149,13 @@ int receive_packet_tcp_on_open_socket(int socket, Payload *resultado) {
         }
     }
 
-    printf("version: %d; code: %d, id: %d, data length: %d", resultado->version, resultado->code, resultado->id, resultado->data_length);
-    if (resultado->data_length > 0) {
-        printf("; data: %s", resultado->data);
-    }
-    printf("\n");
-    
     return TRUE;
 }
 
 /**
- * @return (1) -1 em caso de não conseguir contactar o servidor ou (2) o código de resposta do servidor caso contrário
+ * @return (1) FALSE em caso de não conseguir contactar o servidor ou (2) o código de resposta do servidor caso contrário
  */
-int handshake_tcp(int socket, short inverterBytesDeNumeros) {
+int handshake_tcp_socket_aberto(int socket, Payload *resultado, short inverterBytesDeNumeros) {
     Packet_tcp packet;
     packet.socket = socket;
     packet.payload.version = CURRENT_PROTOCOL_VERSION;
@@ -180,39 +163,31 @@ int handshake_tcp(int socket, short inverterBytesDeNumeros) {
     packet.payload.id = id_maquina;
     packet.payload.data_length = 0;
 
-    int resultado = send_packet_tcp_on_open_socket(packet, inverterBytesDeNumeros);
-    if (resultado == FALSE) {
+    int sucesso = send_packet_tcp_on_open_socket(packet, inverterBytesDeNumeros);
+    if (sucesso == FALSE) {
         return -1;
     }
 
-    Payload resultado_send;
+    int reply = receive_packet_tcp_on_open_socket(socket, resultado);
 
-    int reply = receive_packet_tcp_on_open_socket(socket, &resultado_send);
-
-    if (reply == FALSE) {
-        return -1;
-    }
-
-    return resultado_send.code;
+    return reply;
 }
 
-/**
- * @return (1) -1 em caso de não conseguir contactar o servidor ou (2) o código de resposta do servidor caso contrário
- */
-int handshake_servidor_central() {
-    int sock = start_tcp_connection(endereco_sistema_central, PORTA_SISTEMA_CENTRAL);
+int handshake_tcp(char *endereco, char *porta, Payload *resultado) {
+    int sock = start_tcp_connection(endereco, porta);
     if (sock == -1) {
-        return -1;
+        return FALSE;
     }
 
-    int resultado = handshake_tcp(sock, TRUE);
+    int sucesso = handshake_tcp_socket_aberto(sock, resultado, TRUE);
 
     close(sock);
-    return resultado;
+    return sucesso;
 }
 
 /**
- * @return TRUE em caso de sucesso e FALSE caso contrário
+ * @return TRUE em caso de sucesso e FALSE caso contrário. No primeiro caso, o payload estará preenchido com a resposta do servidor
+ * e o campo data deve ser sempre manualmente libertado da memória.
  */
 int enviar_packet_tcp(char *target, char *porta, Payload payload, Payload *resultado, short inverterBytesDeNumeros) {
     int sock = start_tcp_connection(target, porta);
@@ -227,7 +202,7 @@ int enviar_packet_tcp(char *target, char *porta, Payload payload, Payload *resul
     int sucesso = send_packet_tcp_on_open_socket(packet, inverterBytesDeNumeros);
 
     if (sucesso == TRUE) {
-        sucesso = receive_packet_tcp_on_open_socket(sock, &resultado);
+        sucesso = receive_packet_tcp_on_open_socket(sock, resultado);
     }
 
     close(sock);
