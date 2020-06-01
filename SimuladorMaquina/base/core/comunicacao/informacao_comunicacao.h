@@ -14,6 +14,7 @@
 #define REQUEST_CODE_NACK 151
 
 #define PAYLOAD_STATIC_DATA_SIZE 6
+#define TEMPO_RECONEXAO_SCM_SEGUNDOS 3
 
 int intervalo_entre_mensagens_segundos;
 char *endereco_sistema_central;

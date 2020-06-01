@@ -159,6 +159,12 @@ int receive_packet_tcp_on_open_socket(int socket, Payload *resultado) {
             return FALSE;
         }
     }
+
+    printf("version: %d; code: %d, id: %d, data length: %d", resultado->version, resultado->code, resultado->id, resultado->data_length);
+    if (resultado->data_length > 0) {
+        printf("; data: %s", resultado->data);
+    }
+    printf("\n");
     
     return TRUE;
 }

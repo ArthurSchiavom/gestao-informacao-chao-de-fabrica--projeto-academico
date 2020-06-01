@@ -49,11 +49,15 @@ _Noreturn void modulo_envio_mensagens() {
                         resultado.data[resultado.data_length] = 0; // caso não tenha sido enviada com um zero no final
                         printf("Mensagem do sistema central: %s\n", resultado.data);
                     }
-                    sleep(3);
 
-                    int sucesso = handshake_servidor_central();
-                    if (sucesso == -1 || sucesso == REQUEST_CODE_NACK) {
+                    sleep(TEMPO_RECONEXAO_SCM_SEGUNDOS);
+
+                    sucesso = handshake_servidor_central();
+                    if (sucesso == -1) {
                         resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
+                    }
+                    else {
+                        resultado.code = sucesso;
                     }
                 } else {
                     if (desconectado) {
