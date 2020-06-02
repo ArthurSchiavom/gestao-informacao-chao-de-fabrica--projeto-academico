@@ -12,6 +12,9 @@ import eapli.base.gestaoproducao.gestaomaterial.domain.*;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.MateriaPrima;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.QuantidadeDeMateriaPrima;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.TipoDeMateriaPrima;
+import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
+import eapli.base.gestaoproducao.gestaomensagens.domain.TimestampEmissao;
+import eapli.base.gestaoproducao.gestaomensagens.domain.TipoDeMensagem;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.application.ProdutoBuilder;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
@@ -53,6 +56,7 @@ public class ExportadorXMLJABXTest {
 
 	@Rule
 	public final TemporaryFolder folder = new TemporaryFolder();
+	MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()));
 
 	private static final Optional<Produto> optionalIsPresent = Optional.of(Mockito.mock(Produto.class));
 	private static final Optional<Produto> optionalIsNotPresent = Optional.ofNullable(null);
@@ -188,11 +192,11 @@ public class ExportadorXMLJABXTest {
 		LinhaProducaoRepository lProdRepo = Mockito.mock(LinhaProducaoRepository.class);
 		MensagemRepository msgRepo = Mockito.mock(MensagemRepository.class);
 		Mockito.when(lProdRepo.containsOfIdentity(new IdentificadorLinhaProducao("LINHAPROD_1"))).thenReturn(true);
-		Mockito.when(msgRepo.containsOfIdentity(2L)).thenReturn(true);
+		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);
 
 		List<NotificacaoErro> listaNotificacoesErro = new ArrayList<>();
 		NotificacaoErro notifErro = new NotificacaoErro(new IdentificadorLinhaProducao("LINHAPROD_1"),
-				TipoErroNotificacao.DADOS_INVALIDOS, 2L, lProdRepo, msgRepo);
+				TipoErroNotificacao.DADOS_INVALIDOS, mid, lProdRepo, msgRepo);
 		listaNotificacoesErro.add(notifErro);
 
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,

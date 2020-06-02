@@ -117,7 +117,7 @@ public class ProcessamentoDeMensagensController {
         Date dataInicio=agendamentoDeProcessamento.inicioDeProcessamento.dataTempoInicio;
         Date dataFinal=agendamentoDeProcessamento.finalDeProcessamento.dataTempoFinal;
         for (Mensagem mensagem:listaMensagensNaoProcessadasBaseDados){
-            Date dataEmissao=mensagem.tempoEmissao.timestamp;
+            Date dataEmissao=mensagem.mensagemID.tempoEmissao.timestamp;
             if (dataInicio.before(dataEmissao) && dataFinal.after(dataEmissao)){ //Verificar se esta entre as duas datas selecionadas
                 listaMensagensDentroDosLimites.add(mensagem);
             }

@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @DiscriminatorValue(value=TipoDeMensagem.Values.CONSUMO)
-public class MensagemConsumo extends Mensagem implements AggregateRoot<Long> {
+public class MensagemConsumo extends Mensagem implements AggregateRoot<MensagemID> {
     public final CodigoDeposito codigo;
     public final Date dataHora;
     private int quantidadeProduzir;

@@ -5,6 +5,7 @@ import eapli.base.Application;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomensagens.domain.EstadoProcessamento;
 import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
+import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -14,7 +15,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 
-public class JpaMensagemRepository extends JpaAutoTxRepository<Mensagem,Long,Long> implements MensagemRepository {
+public class JpaMensagemRepository extends JpaAutoTxRepository<Mensagem, MensagemID,MensagemID> implements MensagemRepository {
 
     public JpaMensagemRepository(TransactionalContext autoTx) {
         super(autoTx, Mensagem.identityAttributeName());

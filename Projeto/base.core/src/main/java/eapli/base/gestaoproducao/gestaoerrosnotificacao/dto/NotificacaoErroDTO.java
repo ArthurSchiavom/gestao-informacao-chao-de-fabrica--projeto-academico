@@ -1,13 +1,15 @@
 package eapli.base.gestaoproducao.gestaoerrosnotificacao.dto;
 
+import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
+
 public class NotificacaoErroDTO {
 	public final Long identifier;
 	public final String idLinhaProd;
-	public final Long idMensagem;
+	public final MensagemID idMensagem;
 	public final String tipoErroNotificacao;
 	public final String estadoErro;
 
-	public NotificacaoErroDTO(Long identifier, String idLinhaProd, Long idMensagem, String tipoErroNotificacao, String estadoErro) {
+	public NotificacaoErroDTO(Long identifier, String idLinhaProd, MensagemID idMensagem, String tipoErroNotificacao, String estadoErro) {
 		this.identifier = identifier;
 		this.idLinhaProd = idLinhaProd;
 		this.idMensagem = idMensagem;

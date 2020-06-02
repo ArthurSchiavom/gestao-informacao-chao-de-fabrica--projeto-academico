@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @DiscriminatorValue(value=TipoDeMensagem.Values.ESTORNO)
-public class MensagemEstorno extends Mensagem implements AggregateRoot<Long> {
+public class MensagemEstorno extends Mensagem implements AggregateRoot<MensagemID> {
     public final CodigoDeposito codigo;
     public final Date dataHora;
     public final CodigoUnico codigoUnico;

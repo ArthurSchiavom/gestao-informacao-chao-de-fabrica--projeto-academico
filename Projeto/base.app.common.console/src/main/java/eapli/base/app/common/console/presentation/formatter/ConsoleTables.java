@@ -1,6 +1,5 @@
 package eapli.base.app.common.console.presentation.formatter;
 
-import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.EstadoNotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.NotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.TipoNotificacaoErroDTO;
@@ -12,7 +11,6 @@ import eapli.base.processamentoMensagens.application.DTO.AgendamentoDeProcessame
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class ConsoleTables {
 
@@ -133,7 +131,8 @@ public class ConsoleTables {
             if (numerar)
                 linha.add(Integer.toString(contador++));
             linha.add(notificacao.idLinhaProd);
-            linha.add(Long.toString(notificacao.idMensagem));
+            linha.add(notificacao.idMensagem.tipoDeMensagem.toString());
+            linha.add(notificacao.idMensagem.tempoEmissao.timestamp.toString());
             linha.add(notificacao.tipoErroNotificacao);
             linha.add(notificacao.estadoErro);
             tabelaRaw.add(linha);

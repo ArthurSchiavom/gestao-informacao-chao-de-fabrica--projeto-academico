@@ -1,14 +1,16 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.framework.domain.model.AggregateRoot;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
 @DiscriminatorValue(value=TipoDeMensagem.Values.RETOMA_ATIVIDADE)
-public class MensagemRetomoDeActividade extends Mensagem {
+public class MensagemRetomoDeActividade extends Mensagem implements AggregateRoot<MensagemID> {
     //S1 -> Máquina;TipoMsg;DataHora;Erro
     public final Date dataHora;
     public final String erro;

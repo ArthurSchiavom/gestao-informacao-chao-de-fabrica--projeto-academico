@@ -1,10 +1,7 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
-import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
-import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
-import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -19,21 +16,18 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
-public abstract class Mensagem implements AggregateRoot<Long> {
+public abstract class Mensagem implements AggregateRoot<MensagemID> {
 
     @Version
     private Long version;
 
-    @Id
-    @GeneratedValue
-    private Long identifier; // can be public bc its final
+    @EmbeddedId
+    public final MensagemID mensagemID;
+
     @XmlElement
     @Enumerated(EnumType.STRING)
     private EstadoProcessamento estadoProcessamento;
 
-    @Column(insertable=false, updatable=false)
-    public final TipoDeMensagem tipo;
-    public final TimestampEmissao tempoEmissao;
     public final CodigoInternoMaquina codigoInternoMaquina;
     @ManyToOne
     private LinhaProducao linhaProducao;
@@ -45,8 +39,8 @@ public abstract class Mensagem implements AggregateRoot<Long> {
         if ((tipo == null || tempoEmissao == null||codigoInternoMaquina==null)) {
             throw new IllegalArgumentException("Mensagem não pode ter parametros null");
         }
-        this.tipo = tipo;
-        this.tempoEmissao = tempoEmissao;
+        this.mensagemID = new MensagemID(tipo,tempoEmissao);
+
         this.estadoProcessamento=EstadoProcessamento.NAO_PROCESSADO;
         this.codigoInternoMaquina=codigoInternoMaquina;
     }
@@ -54,8 +48,7 @@ public abstract class Mensagem implements AggregateRoot<Long> {
         if ((tipo == null || tempoEmissao == null||codigoInternoMaquina==null)) {
             throw new IllegalArgumentException("Mensagem não pode ter parametros null");
         }
-        this.tipo = tipo;
-        this.tempoEmissao = tempoEmissao;
+        this.mensagemID = new MensagemID(tipo,tempoEmissao);
         this.estadoProcessamento=EstadoProcessamento.NAO_PROCESSADO;
         this.codigoInternoMaquina=codigoInternoMaquina;
         this.ordemProducao=ordemProducao;
@@ -63,12 +56,10 @@ public abstract class Mensagem implements AggregateRoot<Long> {
 
     protected Mensagem() {
         //FOR ORM
-        this.identifier = null;
-        this.tipo = null;
-        this.tempoEmissao = null;
         this.codigoInternoMaquina=null;
         this.linhaProducao=null;
         this.ordemProducao=null;
+        this.mensagemID = null;
     }
 
     public void setLinhaProducao(LinhaProducao linhaProducao) {
@@ -88,12 +79,12 @@ public abstract class Mensagem implements AggregateRoot<Long> {
     }
 
     public static String identityAttributeName() {
-        return "identifier";
+        return "mensagemID";
     }
 
     @Override
-    public boolean sameAs(Object other) {
-        return DomainEntities.areEqual(this, other);
+    public boolean sameAs(Object o) {
+        return DomainEntities.areEqual(this, o);
     }
 
     @Override
@@ -101,28 +92,27 @@ public abstract class Mensagem implements AggregateRoot<Long> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mensagem mensagem = (Mensagem) o;
-        return tipo == mensagem.tipo &&
-                tempoEmissao.equals(mensagem.tempoEmissao);
+        return this.mensagemID.equals(((Mensagem) o).mensagemID);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tipo, tempoEmissao,estadoProcessamento,codigoInternoMaquina);
+        return Objects.hash(mensagemID,estadoProcessamento,codigoInternoMaquina);
     }
 
     @Override
-    public Long identity() {
-        return identifier;
+    public MensagemID identity() {
+        return mensagemID;
     }
 
     @Override
     public String toString() {
         return "Mensagem{" +
                 "version=" + version +
-                ", identifier=" + identifier +
                 ", estadoProcessamento=" + estadoProcessamento +
-                ", tipo=" + tipo +
-                ", tempoEmissao=" + tempoEmissao +
+                ", tipo=" + mensagemID.tipoDeMensagem +
+                ", tempoEmissao=" + mensagemID.tempoEmissao +
                 ", codigoInternoMaquina=" + codigoInternoMaquina +
                 '}';
     }

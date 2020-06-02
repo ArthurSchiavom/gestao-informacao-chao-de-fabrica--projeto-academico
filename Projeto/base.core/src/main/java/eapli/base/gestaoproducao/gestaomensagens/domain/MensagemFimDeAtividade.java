@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @DiscriminatorValue(value = TipoDeMensagem.Values.FIM_DE_ATIVIDADE)
-public class MensagemFimDeAtividade extends Mensagem implements AggregateRoot<Long> {
+public class MensagemFimDeAtividade extends Mensagem implements AggregateRoot<MensagemID> {
 
     //Máquina;TipoMsg;DataHora;OrdemProducao
     public final Date dataHora;

@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.gestaomensagens.domain;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
+import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @DiscriminatorValue(value=TipoDeMensagem.Values.PRODUCAO)
-public class MensagemProducao extends Mensagem{
+public class MensagemProducao extends Mensagem implements AggregateRoot<MensagemID> {
     //P1 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
     //Produto e quantidade são parametros obrigatorios ,lote opcional
     public final Date dataHora;

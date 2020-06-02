@@ -5,6 +5,7 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import eapli.base.tcp.processamento.ProcessarMensagemProtocoloFactory;
 import eapli.base.tcp.processamento.ProcessarMensagensProtocolosStrategy;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -52,16 +53,11 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
 
             System.out.println("Client " + sock.getInetAddress().getHostAddress() + ",port number: " + sock.getPort() +
                     " disconnected");
-            sOut.flush();
-//
-            Thread.sleep(10000);
-//
-//            System.out.println("Waiting done");
 
             sOut.close();
             sIn.close();
             sock.close();
-        } catch (IOException|InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -80,11 +76,9 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
         sOut.writeChar(mensagemProtocoloComunicacao.tamanhoRawData);
         if (mensagemProtocoloComunicacao.tamanhoRawData > 0 && mensagemProtocoloComunicacao.mensagem != null) {
             sOut.write(mensagemProtocoloComunicacao.mensagem.getBytes());
-            System.out.println("1- mensagem escrita, version: " + mensagemProtocoloComunicacao.version + "\ncode: " + mensagemProtocoloComunicacao.code + "\nidProt: " + mensagemProtocoloComunicacao.idProtocolo + "\ntamanho: " + mensagemProtocoloComunicacao.tamanhoRawData);
         }
         sOut.flush();
 
-        System.out.println("2- mensagem escrita, version: " + (mensagemProtocoloComunicacao.version & 0xFF) + "\ncode: " + (mensagemProtocoloComunicacao.code & 0xFF) + "\nidProt: " + (short) (mensagemProtocoloComunicacao.idProtocolo & 0xFFFF) + "\ntamanho: " + (short) (mensagemProtocoloComunicacao.tamanhoRawData & 0xFFFF));
 
         return true;
     }
@@ -103,24 +97,23 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
         System.out.println("New client connection from " + clientIP.getHostAddress() +
                 ", port number " + s.getPort());
         try {
-            System.out.println("get streams");
             version = sIn.readByte(); // read version
-            System.out.println("recebido version: " + version.intValue());
+//            System.out.println("recebido version: " + version.intValue());
             code = sIn.readByte(); // read code
-            System.out.println("recebido code: " + code.intValue());
+//            System.out.println("recebido code: " + code.intValue());
 
             maquinaIDPlaceHolder = sIn.readShort() & 0xFFFF; // read unsigned short
             maquinaID = (char) maquinaIDPlaceHolder;
 
-            System.out.println("recebido maquinaID: " + (int) maquinaID);
+//            System.out.println("recebido maquinaID: " + (int) maquinaID);
 
             tamanhoDataPlaceHolder = sIn.readShort() & 0xFFFF; // read unsigned short
             tamanhoData = (char) tamanhoDataPlaceHolder;
 
-            System.out.println("recebido tamanho data: " + (int) tamanhoData);
+//            System.out.println("recebido tamanho data: " + (int) tamanhoData);
 
             int readData = 0;
-            String dataLine;
+            String dataLine = null;
 
             while (readData < tamanhoData) {
                 rawData = new byte[tamanhoData];
@@ -128,6 +121,10 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
                 dataLine = new String(rawData, StandardCharsets.UTF_8);
                 dataString += dataLine; // concat line to String that holds the whole text
             }
+
+            System.out.println("data length: " + tamanhoDataPlaceHolder);
+            if (dataLine != null)
+                System.out.println("string recebida: " + dataString);
 
             //Factory pattern
             ProcessarMensagensProtocolosStrategy mens =

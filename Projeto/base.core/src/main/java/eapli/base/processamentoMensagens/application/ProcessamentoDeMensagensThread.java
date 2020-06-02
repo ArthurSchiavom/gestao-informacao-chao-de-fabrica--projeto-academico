@@ -46,7 +46,7 @@ public class ProcessamentoDeMensagensThread implements Runnable {
         Optional<Maquina> mp;
         OrdemProducao ordemProducao=null;
         for (Mensagem mensagem:listaDeMensagemAProcessar){
-            switch (mensagem.tipo) {
+            switch (mensagem.mensagemID.tipoDeMensagem) {
                 case CONSUMO:
                     MensagemConsumo mensagemConsumo=(MensagemConsumo)mensagem;
                     codigoDeposito=mensagemConsumo.codigo;

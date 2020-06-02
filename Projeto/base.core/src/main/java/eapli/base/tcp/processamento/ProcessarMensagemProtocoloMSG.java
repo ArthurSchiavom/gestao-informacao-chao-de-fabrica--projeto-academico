@@ -3,7 +3,9 @@ package eapli.base.tcp.processamento;
 import eapli.base.gestaoproducao.gestaomaquina.domain.IdentificadorProtocoloComunicacao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
+import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.servicoComunicacaoComMaquinas.MessageFactory;
 import eapli.base.tcp.domain.MensagemProtocoloCodes;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import java.net.InetAddress;
@@ -46,6 +48,18 @@ public class ProcessarMensagemProtocoloMSG implements ProcessarMensagensProtocol
 
         //Processar mensagens
 
+
+        Mensagem mens ;
+        MessageFactory mf = new MessageFactory();
+        try {
+            mens = mf.getMessageType(mensagemProtocoloComunicacao.mensagem.split(";"));
+        } catch (Exception e) {
+            return mensagemNACK();
+        }
+
+        PersistenceContext.repositories().mensagem().save(mens);
+
+        System.out.println("MSG sucesso");
         //sucesso retorna ACK
         return mensagemACK();
     }

@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.gestaoerrosnotificacao.domain;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.NotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.framework.domain.model.AggregateRoot;
@@ -27,7 +28,7 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 	public final IdentificadorLinhaProducao idLinhaProd;
 
 	@XmlTransient
-	public final Long idMensagem;
+	public final MensagemID idMensagem;
 
 	@XmlElement(name = "tipo")
 	public final TipoErroNotificacao tipoErroNotificacao;
@@ -45,8 +46,8 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 	 * @param msgRepo       o repositório das mensagens
 	 */
 	public NotificacaoErro(IdentificadorLinhaProducao idLinhaProd, TipoErroNotificacao tipoErro,
-	                       Long idMensagem, LinhaProducaoRepository linhaProdRepo,
-	                       MensagemRepository msgRepo) {
+						   MensagemID idMensagem, LinhaProducaoRepository linhaProdRepo,
+						   MensagemRepository msgRepo) {
 		if (idLinhaProd == null || idMensagem == null || tipoErro == null) {
 			throw new IllegalArgumentException("Values can't be null");
 		}
