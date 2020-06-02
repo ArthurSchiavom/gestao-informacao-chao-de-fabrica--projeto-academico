@@ -10,21 +10,18 @@ import java.util.Date;
 @DiscriminatorValue(value = TipoDeMensagem.Values.PARAGEM_FORCADA)
 public class MensagemParagemForcada extends Mensagem {
     //S8 -> Máquina;TipoMsg;DataHora
-    public final CodigoInternoMaquina maquinaID;
     public final Date dataHora;
 
 
     protected  MensagemParagemForcada() {
-        this.maquinaID = null;
         this.dataHora = null;
     }
 
 
     public MensagemParagemForcada(CodigoInternoMaquina maquinaID, Date dataHora) {
-        super(TipoDeMensagem.PARAGEM_FORCADA,new TimestampEmissao(dataHora));
-        if (maquinaID==null && dataHora==null )
+        super(TipoDeMensagem.PARAGEM_FORCADA,new TimestampEmissao(dataHora),maquinaID);
+        if (dataHora==null )
             throw new IllegalArgumentException("Parametros dados incorrectos!");
-        this.maquinaID = maquinaID;
         this.dataHora = dataHora;
     }
 }

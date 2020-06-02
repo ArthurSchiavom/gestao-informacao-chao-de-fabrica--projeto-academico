@@ -12,28 +12,25 @@ import java.util.Date;
 @Entity
 @DiscriminatorValue(value=TipoDeMensagem.Values.ESTORNO)
 public class MensagemEstorno extends Mensagem implements AggregateRoot<Long> {
-    private final CodigoDeposito codigo;
-    private final CodigoInternoMaquina codigoInternoMaquina;
+    public final CodigoDeposito codigo;
     public final Date dataHora;
-    private final CodigoUnico codigoUnico;
+    public final CodigoUnico codigoUnico;
     private int quantidadeProduzir;
 
-protected MensagemEstorno(){
-    this.codigo=null;
-    this.codigoInternoMaquina=null;
-    this.dataHora=null;
-    this.codigoUnico=null;
-}
+    protected MensagemEstorno() {
+        this.codigo = null;
+        this.dataHora = null;
+        this.codigoUnico = null;
+    }
 
-public MensagemEstorno(CodigoUnico codigoUnico, CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir) {
-    super(TipoDeMensagem.CONSUMO,new TimestampEmissao(dataHora));
-    if (codigoInternoMaquina ==null && codigoUnico==null && dataHora==null && quantidadeProduzir<=0)
-        throw new IllegalArgumentException("Parametros dados incorrectos!");
-    this.codigoUnico = codigoUnico;
-    this.codigo = codigo;
-    this.codigoInternoMaquina = codigoInternoMaquina;
-    this.dataHora = dataHora;
-    this.quantidadeProduzir = quantidadeProduzir;
-}
+    public MensagemEstorno(CodigoUnico codigoUnico, CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir) {
+        super(TipoDeMensagem.CONSUMO, new TimestampEmissao(dataHora), codigoInternoMaquina);
+        if (codigoUnico == null && dataHora == null && quantidadeProduzir <= 0)
+            throw new IllegalArgumentException("Parametros dados incorrectos!");
+        this.codigoUnico = codigoUnico;
+        this.codigo = codigo;
+        this.dataHora = dataHora;
+        this.quantidadeProduzir = quantidadeProduzir;
+    }
 
 }

@@ -10,7 +10,7 @@ import java.util.Objects;
 public class TimestampEmissao implements ValueObject, Comparable<TimestampEmissao> {
 	private static final long serialVersionUID = 1L;
 
-	private Date timestamp;
+	public final Date timestamp;
 
 	public TimestampEmissao(Date timestamp) {
 		if(timestamp == null) { //TODO adicionar mais codigo de verificaçao
