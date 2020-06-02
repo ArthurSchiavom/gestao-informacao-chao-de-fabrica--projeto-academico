@@ -1,8 +1,14 @@
 package eapli.base.processamentoMensagens.application;
 
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
+import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
+import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
+import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.infrastructure.application.DTOUtils;
 import eapli.base.infrastructure.application.EntityUtils;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -18,7 +24,9 @@ import java.util.*;
 
 public class ProcessamentoDeMensagensController {
     private final AgendamentoDeProcessamentoRepository agendamentoDeProcessamentoRepository;
+    private final MensagemRepository mensagemRepository;
     private final LinhaProducaoRepository linhaProducaoRepository;
+    private final MaquinaRepository maquinaRepository;
     private  AgendamentoDeProcessamento agendamentoDeProcessamento;
     private List<AgendamentoDeProcessamento> listaDeAgendamentosBaseDados;
     private List<AgendamentoDeProcessamento> listaDeNovosAgendamentos;
@@ -26,9 +34,12 @@ public class ProcessamentoDeMensagensController {
     private List<LinhaProducaoDTO> listaLinhaProducaoDTO;
     private List<LinhaProducao> linhaProducaoAlvo;
     private Map<String,LinhaProducao> identificador_LinhaProducao;
+    private Thread[] threads;
 
     public ProcessamentoDeMensagensController() {
         this.agendamentoDeProcessamentoRepository = PersistenceContext.repositories().agendamentoDeProcessamento();
+        this.maquinaRepository=PersistenceContext.repositories().maquinas();
+        this.mensagemRepository=PersistenceContext.repositories().mensagem();
         this.linhaProducaoRepository=PersistenceContext.repositories().linhasProducao();
         this.listaLinhasProducao=linhaProducaoRepository.findAllList();
         this.listaLinhaProducaoDTO= Collections.unmodifiableList(DTOUtils.toDTOList(listaLinhasProducao));
@@ -36,10 +47,19 @@ public class ProcessamentoDeMensagensController {
         this.listaDeAgendamentosBaseDados=new ArrayList<>();
         this.listaDeNovosAgendamentos=new ArrayList<>();
         this.identificador_LinhaProducao=Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(listaLinhasProducao));
+        threads=new Thread[linhaProducaoAlvo.size()];
     }
 
 
-
+    /**
+     *
+     * @param dataInicio data inicio de agendamento
+     * @param dataFinal data final de agendamento
+     * @param tempoInicial tempo inicio de agendamento
+     * @param tempoFinal tempo final de agendamento
+     * @return retorna true caso o que foi inserido é valido
+     * @throws ParseException
+     */
     public boolean validarInput(String dataInicio, String dataFinal, String tempoInicial, String tempoFinal) throws ParseException {
         int diferencaDias=validarDatas(dataInicio,dataFinal);
         validarTempo(tempoInicial,tempoFinal,diferencaDias);
@@ -54,45 +74,23 @@ public class ProcessamentoDeMensagensController {
         return true;
     }
 
+    /**
+     * Retorna uma lista de linhas de producao
+     * @return
+     */
     public List<LinhaProducaoDTO> listaDeLinhasDeProducao(){
         return listaLinhaProducaoDTO;
     }
 
+    /**
+     * Seleciona linha de producao que prentede agendar o processamento
+     * @param idsLinhaProducao Lista do tipo String
+     */
     public void selecionarLinhaProducao(List<String> idsLinhaProducao){
         for (String alvos:idsLinhaProducao){
             LinhaProducao alvo=identificador_LinhaProducao.get(alvos.trim());
             linhaProducaoAlvo.add(alvo);
         }
-    }
-
-    public List<AgendamentoDeProcessamentoDTO> listaDeAgendamentos(){
-        for (LinhaProducao linhaProducao:linhaProducaoAlvo)
-            this.listaDeAgendamentosBaseDados.addAll(agendamentoDeProcessamentoRepository.obterAgendamentosPorLinhaDeProducao(linhaProducao));
-        List<AgendamentoDeProcessamentoDTO> lista=Collections.unmodifiableList(DTOUtils.toDTOList(listaDeAgendamentosBaseDados));
-        return lista;
-    }
-
-    /**
-     *
-     * @return retorna verdadeiro se ha disponibilidade e falso caso contrario
-     */
-    public boolean verificarDisponibilidade(){
-        Date dataInicioDate=agendamentoDeProcessamento.inicioDeProcessamento.dataTempoInicio;
-        Date dataFinalDate=agendamentoDeProcessamento.finalDeProcessamento.dataTempoFinal;
-        for (LinhaProducao linhaProducao:linhaProducaoAlvo) {
-            List<AgendamentoDeProcessamento> listaIndividual = agendamentoDeProcessamentoRepository.obterAgendamentosPorLinhaDeProducao(linhaProducao);
-            if (listaIndividual!=null) {
-                for (AgendamentoDeProcessamento agm : listaIndividual) {
-                    Date dataInicioDateLS = agm.inicioDeProcessamento.dataTempoInicio;
-                    Date dataFinalDateLS = agm.finalDeProcessamento.dataTempoFinal;
-                    // start1<=end2 and start2<=end1 (Verificar se ha colisoes)
-                    if (dataInicioDate.compareTo(dataFinalDateLS) <= 0 && dataInicioDateLS.compareTo(dataFinalDate) <= 0)
-                        throw new IllegalArgumentException("Periodo de tempo introduzido coincide com um dos agendamentos ja registados!");
-                }
-            }
-            listaIndividual.clear();
-        }
-        return true;
     }
 
     /**
@@ -105,8 +103,49 @@ public class ProcessamentoDeMensagensController {
     }
 
 
-    public void iniciarProcessamento(){
+    public  void iniciarProcessamento() throws InterruptedException {
+        int i;
+        Map<IdentificadorLinhaProducao,List<Mensagem>> listaDeMensagensDeCadaLinhaDeProducao=new HashMap<>();
+        for (i=0;i<linhaProducaoAlvo.size();i++){
+            listaDeMensagensDeCadaLinhaDeProducao.put(linhaProducaoAlvo.get(i).identifier,new ArrayList<>());
+        }
+        List<Mensagem> listaMensagensDentroDosLimites=new ArrayList<>();
+        List<Mensagem> listaMensagensNaoProcessadasBaseDados= mensagemRepository.obterListaMensagensNaoProcessadas();
+        System.out.println("AQUI NAO");
+        if (listaMensagensNaoProcessadasBaseDados.isEmpty() || listaMensagensNaoProcessadasBaseDados==null)
+            throw new IllegalArgumentException("Sem mensagens registadas na base de dados");
+        Date dataInicio=agendamentoDeProcessamento.inicioDeProcessamento.dataTempoInicio;
+        Date dataFinal=agendamentoDeProcessamento.finalDeProcessamento.dataTempoFinal;
+        for (Mensagem mensagem:listaMensagensNaoProcessadasBaseDados){
+            Date dataEmissao=mensagem.tempoEmissao.timestamp;
+            if (dataInicio.before(dataEmissao) && dataFinal.after(dataEmissao)){ //Verificar se esta entre as duas datas selecionadas
+                listaMensagensDentroDosLimites.add(mensagem);
+            }
+            if (listaMensagensDentroDosLimites.size()==0){
+                throw new IllegalArgumentException("Não há mensagens para processar para o periodo proposto!");
+            }
+        }
+        System.out.println("\nFuncionou------------------\n\n");
+        for (Mensagem mensagem:listaMensagensDentroDosLimites){
+            CodigoInternoMaquina codigoInternoMaquina=mensagem.codigoInternoMaquina;
+            Optional<Maquina> opt=maquinaRepository.findByIdentifier(codigoInternoMaquina);
+            Maquina maquina=opt.get();
+            if (listaDeMensagensDeCadaLinhaDeProducao.containsKey(maquina))
+                listaDeMensagensDeCadaLinhaDeProducao.get(maquina).add(mensagem);
+        }
 
+        //Criacao das THREADS
+        for (i=0;i<linhaProducaoAlvo.size();i++){
+            List<Mensagem> lista=listaDeMensagensDeCadaLinhaDeProducao.get(i);
+            LinhaProducao linhaProducao=linhaProducaoAlvo.get(i);
+            ProcessamentoDeMensagensThread processamentoDeMensagensThread=new ProcessamentoDeMensagensThread(lista,linhaProducao,mensagemRepository,linhaProducaoRepository);
+            threads[i]=new Thread(processamentoDeMensagensThread);
+            threads[i].start();
+        }
+        //Esperar que terminem
+        for (Thread thread:threads){
+            thread.join();
+        }
     }
 
     /**

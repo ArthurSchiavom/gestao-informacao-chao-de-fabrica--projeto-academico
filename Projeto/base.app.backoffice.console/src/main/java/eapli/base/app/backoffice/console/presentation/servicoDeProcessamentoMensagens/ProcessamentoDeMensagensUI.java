@@ -1,10 +1,8 @@
 package eapli.base.app.backoffice.console.presentation.servicoDeProcessamentoMensagens;
 
 import eapli.base.app.common.console.presentation.formatter.ConsoleTables;
-import eapli.base.app.common.console.presentation.formatter.SimpleConsoleMessages;
 import eapli.base.app.common.console.presentation.interaction.UserInteractionFlow;
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
-import eapli.base.processamentoMensagens.application.DTO.AgendamentoDeProcessamentoDTO;
 import eapli.base.processamentoMensagens.application.ProcessamentoDeMensagensController;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
@@ -31,11 +29,6 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
         boolean continuar = true;
         try {
             listaDeEscolhas(lista);
-            List<AgendamentoDeProcessamentoDTO> listaDeAgendamentos=controller.listaDeAgendamentos();
-            if (!listaDeAgendamentos.isEmpty()){
-                String materiaisDisplay = ConsoleTables.tabelaDeAgendamentoDeProcessamentoDeMensagens(listaDeAgendamentos);
-                System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + materiaisDisplay + "\n\nProssiga com o seu agendamento atendendo aos periodos registados.\n");
-            }
             String dataInicio=Console.readNonEmptyLine("Insira a data de inicio de processamento (YYYY-MM-DD)","Este campo nao pode ser vazio");
             String tempoInicio=Console.readNonEmptyLine("Insira a Hora/Min de inicio de processamento (HH:MM)","Este campo nao pode ser vazio");
             String dataFinal=Console.readNonEmptyLine("Insira a data final de processamento (YYYY-MM-DD)","Este campo nao pode ser vazio");
@@ -43,10 +36,6 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
 
             if (!controller.validarInput(dataInicio,dataFinal,tempoInicio,tempoFinal))
                 return false;
-            if (controller.verificarDisponibilidade()) {
-                controller.registar();
-                System.out.println("Efetuado agendamento com sucesso!");
-            }
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e){

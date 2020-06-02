@@ -1,8 +1,6 @@
 package eapli.base.servicoComunicacaoComMaquinas;
 
-import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.infrastructure.application.files.EmptyFileException;
-import eapli.base.infrastructure.persistence.PersistenceContext;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,15 +43,6 @@ public class ImportarFicheirosMaquinasController {
         }
         for (Thread thread:threads){
             thread.join();
-        }
-        for (i=0;i<files.size();i++) {
-            Path from = Paths.get("test_material\\Mensagens\\" + files.get(i).getName());
-            Path to = Paths.get("test_material\\MensagensProcessadas\\" + files.get(i).getName());
-            try {
-                Path temp = Files.move(from, to);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 

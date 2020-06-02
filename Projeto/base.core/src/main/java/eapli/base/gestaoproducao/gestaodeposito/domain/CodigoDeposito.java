@@ -13,7 +13,7 @@ public class CodigoDeposito implements ValueObject, Comparable<CodigoDeposito> {
 	private static final long serialVersionUID = 1L;
 
 	@XmlValue
-	private final String codigo;
+	public final String codigo;
 
 	public CodigoDeposito(String codigo) {
 		if(codigo == null || codigo.trim().isEmpty() || !StringPredicates.isSingleWord(codigo)) {

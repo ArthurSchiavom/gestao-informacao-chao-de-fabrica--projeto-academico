@@ -8,6 +8,10 @@ import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class ImportarFicheirosMaquinasThread implements Runnable {
@@ -34,9 +38,15 @@ public class ImportarFicheirosMaquinasThread implements Runnable {
                 if (mensagem!=null)
                     mensagemRepository.save(mensagem);
             } catch (IllegalDomainValueException e) {
-                e.printStackTrace();
+                throw new IllegalArgumentException("Falha ao criar a mensagem");
             }
         }
-
+        Path from = Paths.get("test_material\\Mensagens\\" + file.getName());
+        Path to = Paths.get("test_material\\MensagensProcessadas\\" + file.getName());
+        try {
+            Path temp = Files.move(from, to);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
