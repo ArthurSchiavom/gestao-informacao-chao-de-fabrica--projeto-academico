@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
+import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.framework.domain.model.ValueObject;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -9,22 +10,26 @@ import java.util.Objects;
 @Embeddable
 public class MensagemID implements ValueObject, Serializable, Comparable<MensagemID>{
 
+    public final CodigoInternoMaquina codigoInternoMaquina;
     @Column(insertable=false, updatable=false)
     public final TipoDeMensagem tipoDeMensagem;
     @Column(insertable=false, updatable=false)
     public final TimestampEmissao tempoEmissao;
 
+
     public MensagemID() {
         tipoDeMensagem = null;
         tempoEmissao = null;
+        codigoInternoMaquina=null;
     }
 
-    public MensagemID(TipoDeMensagem tipoDeMensagem, TimestampEmissao tempoEmissao) {
-        if(tipoDeMensagem == null || tempoEmissao == null){
+    public MensagemID(TipoDeMensagem tipoDeMensagem, TimestampEmissao tempoEmissao,CodigoInternoMaquina codigoInternoMaquina) {
+        if(tipoDeMensagem == null || tempoEmissao == null || codigoInternoMaquina==null){
             throw new IllegalArgumentException("Campos da mensagemID não podem ser  nulos");
         }
         this.tipoDeMensagem = tipoDeMensagem;
         this.tempoEmissao = tempoEmissao;
+        this.codigoInternoMaquina=codigoInternoMaquina;
     }
 
     @Override

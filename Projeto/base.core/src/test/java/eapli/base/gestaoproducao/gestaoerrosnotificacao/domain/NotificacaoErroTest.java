@@ -2,6 +2,7 @@ package eapli.base.gestaoproducao.gestaoerrosnotificacao.domain;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.base.gestaoproducao.gestaomensagens.domain.TimestampEmissao;
 import eapli.base.gestaoproducao.gestaomensagens.domain.TipoDeMensagem;
@@ -18,7 +19,7 @@ public class NotificacaoErroTest {
 	private LinhaProducaoRepository lProdRepo = Mockito.mock(LinhaProducaoRepository.class);
 	private MensagemRepository msgRepo = Mockito.mock(MensagemRepository.class);
 	private IdentificadorLinhaProducao idDummy = new IdentificadorLinhaProducao("dummy");
-	MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()));
+	MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()),new CodigoInternoMaquina("123"));
 
 	@Test(expected = IllegalArgumentException.class)
 	public void garantirQueNotificacaoDeErroTemLinhaProducao() {

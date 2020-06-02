@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 
 
 public class ImportarFicheirosMaquinasThread implements Runnable {
@@ -20,6 +21,7 @@ public class ImportarFicheirosMaquinasThread implements Runnable {
     private File file;
     private MensagemRepository mensagemRepository;
     private MessageFactory messageFactory;
+    public static final int MYSQL_DUPLICATE_PK = 1062;
 
     public ImportarFicheirosMaquinasThread(FileScanner fileScanner, File file) {
         this.fileScanner = fileScanner;
@@ -39,6 +41,7 @@ public class ImportarFicheirosMaquinasThread implements Runnable {
                     mensagemRepository.save(mensagem);
             } catch (IllegalDomainValueException e) {
                 throw new IllegalArgumentException("Falha ao criar a mensagem");
+            } catch(Exception e) {
             }
         }
         Path from = Paths.get("test_material\\Mensagens\\" + file.getName());

@@ -30,7 +30,6 @@ public class MessageFactory {
         OrdemProducao ordemPrd=null;
         Identificador ordemID;
         String erro;
-        Optional<OrdemProducao> ordemProducao;
         int quantidade;
         switch (vec[1]) {
             case "C0":
@@ -74,12 +73,7 @@ public class MessageFactory {
                 System.out.println("S0");
                 if (vec.length==4) {
                     ordemID = new Identificador(vec[3].trim());
-                    ordemProducao=ordemProducaoRepository.findByIdentifier(ordemID);
-                    try{
-                        ordemPrd = ordemProducao.get();
-                    }catch (NoSuchElementException e){
-                        throw new NoSuchElementException("Ordem de producao nao existe, verifique a sua mensagem!");
-                    }
+                    ordemPrd=getOrdemDeProducaoPorIdentificador(ordemID);
                 }
                 return new MensagemFimDeAtividade(codigoInternoMaquina,date,ordemPrd);
             case "S1":
@@ -96,16 +90,20 @@ public class MessageFactory {
                 //Máquina;TipoMsg;DataHora;OrdemProducao
                 if (vec.length==4) {
                     ordemID = new Identificador(vec[3].trim());
-                    ordemProducao=ordemProducaoRepository.findByIdentifier(ordemID);
-                    try{
-                        ordemPrd = ordemProducao.get();
-                    }catch (NoSuchElementException e){
-                        throw new NoSuchElementException("Ordem de producao nao existe, verifique a sua mensagem!");
-                    }
+                    ordemPrd=getOrdemDeProducaoPorIdentificador(ordemID);
                 }
                 return new MensagemFimDeAtividade(codigoInternoMaquina,date,ordemPrd);
             default:
                 throw new IllegalArgumentException("Nao foi encontrado o tipo de mensagem correspondente -> Tipo Mensagem nao encontrada: " + vec[0]);
         }
+    }
+
+
+    private OrdemProducao getOrdemDeProducaoPorIdentificador(Identificador identificador){
+        Optional<OrdemProducao> ordemProducao;
+        ordemProducao=ordemProducaoRepository.findByIdentifier(identificador);
+        if (!ordemProducao.isPresent())
+            throw new NoSuchElementException("Ordem de producao nao existe, verifique a sua mensagem!");
+        return ordemProducao.get();
     }
 }

@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.gestaoerrosnotificacao.domain;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.base.gestaoproducao.gestaomensagens.domain.TimestampEmissao;
 import eapli.base.gestaoproducao.gestaomensagens.domain.TipoDeMensagem;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class ServicoArquivacaoNotificacoesErroTest {
 	private final NotificacaoErroRepository repo = Mockito.mock(NotificacaoErroRepository.class);
 	private final ServicoArquivacaoNotificacoesErro servico = new ServicoArquivacaoNotificacoesErro(repo);
-	MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()));
+	MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()),new CodigoInternoMaquina("123"));
 
 	private LinhaProducaoRepository lProdRepo = Mockito.mock(LinhaProducaoRepository.class);
 	private MensagemRepository msgRepo = Mockito.mock(MensagemRepository.class);
@@ -40,7 +41,7 @@ public class ServicoArquivacaoNotificacoesErroTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void garantirQueNaoSePodeArquivarNotificacaoArquivada() {
-		MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()));
+		MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()),new CodigoInternoMaquina(""));
 		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);
 		NotificacaoErro notifErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid,
@@ -52,7 +53,7 @@ public class ServicoArquivacaoNotificacoesErroTest {
 
 	@Test
 	public void garantirQueNotificacaoFicaArquivada() {
-		MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()));
+		MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()),new CodigoInternoMaquina("123"));
 
 		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);

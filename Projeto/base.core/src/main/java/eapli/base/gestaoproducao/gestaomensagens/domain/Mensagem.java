@@ -28,7 +28,6 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
     @Enumerated(EnumType.STRING)
     private EstadoProcessamento estadoProcessamento;
 
-    public final CodigoInternoMaquina codigoInternoMaquina;
     @ManyToOne
     private LinhaProducao linhaProducao;
     @ManyToOne
@@ -39,24 +38,20 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         if ((tipo == null || tempoEmissao == null||codigoInternoMaquina==null)) {
             throw new IllegalArgumentException("Mensagem não pode ter parametros null");
         }
-        this.mensagemID = new MensagemID(tipo,tempoEmissao);
-
+        this.mensagemID = new MensagemID(tipo,tempoEmissao,codigoInternoMaquina);
         this.estadoProcessamento=EstadoProcessamento.NAO_PROCESSADO;
-        this.codigoInternoMaquina=codigoInternoMaquina;
     }
     public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina,OrdemProducao ordemProducao) {
         if ((tipo == null || tempoEmissao == null||codigoInternoMaquina==null)) {
             throw new IllegalArgumentException("Mensagem não pode ter parametros null");
         }
-        this.mensagemID = new MensagemID(tipo,tempoEmissao);
+        this.mensagemID = new MensagemID(tipo,tempoEmissao,codigoInternoMaquina);
         this.estadoProcessamento=EstadoProcessamento.NAO_PROCESSADO;
-        this.codigoInternoMaquina=codigoInternoMaquina;
         this.ordemProducao=ordemProducao;
     }
 
     protected Mensagem() {
         //FOR ORM
-        this.codigoInternoMaquina=null;
         this.linhaProducao=null;
         this.ordemProducao=null;
         this.mensagemID = null;
@@ -98,7 +93,7 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(mensagemID,estadoProcessamento,codigoInternoMaquina);
+        return Objects.hash(mensagemID,estadoProcessamento);
     }
 
     @Override
@@ -113,7 +108,6 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
                 ", estadoProcessamento=" + estadoProcessamento +
                 ", tipo=" + mensagemID.tipoDeMensagem +
                 ", tempoEmissao=" + mensagemID.tempoEmissao +
-                ", codigoInternoMaquina=" + codigoInternoMaquina +
                 '}';
     }
 }

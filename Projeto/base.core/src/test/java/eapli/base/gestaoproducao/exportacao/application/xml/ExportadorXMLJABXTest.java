@@ -56,7 +56,7 @@ public class ExportadorXMLJABXTest {
 
 	@Rule
 	public final TemporaryFolder folder = new TemporaryFolder();
-	MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()));
+	MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()),new CodigoInternoMaquina("123"));
 
 	private static final Optional<Produto> optionalIsPresent = Optional.of(Mockito.mock(Produto.class));
 	private static final Optional<Produto> optionalIsNotPresent = Optional.ofNullable(null);
