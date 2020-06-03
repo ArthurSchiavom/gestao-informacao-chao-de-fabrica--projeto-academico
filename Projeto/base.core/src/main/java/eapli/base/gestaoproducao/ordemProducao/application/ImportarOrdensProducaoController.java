@@ -2,7 +2,7 @@ package eapli.base.gestaoproducao.ordemProducao.application;
 
 
 import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinha;
-import eapli.base.gestaoproducao.ordemProducao.application.strategy.ImportarOndensProducaoCsv;
+import eapli.base.gestaoproducao.ordemProducao.application.strategy.ImportarOrdensProducaoCsv;
 import eapli.base.gestaoproducao.ordemProducao.application.strategy.ImportarOrdensProducaoStrategy;
 
 public class ImportarOrdensProducaoController {
@@ -14,7 +14,7 @@ public class ImportarOrdensProducaoController {
      *  a partir de uma variavel recebida nos parametros da funçao
      */
     public ResultadoImportacaoLinhaALinha importarOrdensProducao(String caminhoParaOFicheiro, boolean substituirSeExistir){
-        ImportarOrdensProducaoStrategy imp = new ImportarOndensProducaoCsv();
+        ImportarOrdensProducaoStrategy imp = new ImportarOrdensProducaoCsv();
         return imp.importarOrdensProducao(caminhoParaOFicheiro,substituirSeExistir);
     }
 

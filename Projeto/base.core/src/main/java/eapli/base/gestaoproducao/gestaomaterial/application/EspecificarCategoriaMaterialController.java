@@ -6,7 +6,6 @@ import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
 public class EspecificarCategoriaMaterialController {
-    //TODO add authz maybe
     private final CategoriaRepository repository = PersistenceContext.repositories().categoria();
 
     /**

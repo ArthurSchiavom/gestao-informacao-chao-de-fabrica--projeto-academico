@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public abstract class ProcessarMensagensProtocolosStrategy {
     public final String NOME_FICHEIRO = "logMensagem.txt";
-    private static char version = 0; // current version
+    private static byte version = 0; // current version
 
 
     public abstract MensagemProtocoloComunicacao processarMensagem(Socket s);
@@ -54,7 +54,7 @@ public abstract class ProcessarMensagensProtocolosStrategy {
         }
     }
 
-    public static char getVersion() {
+    public static byte getVersion() {
         return version;
     }
 }

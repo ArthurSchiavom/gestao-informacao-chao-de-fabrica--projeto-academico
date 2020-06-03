@@ -20,7 +20,6 @@ import java.util.Optional;
 public class ProcessarMensagemProtocoloMSG extends ProcessarMensagensProtocolosStrategy {
 
     public final MensagemProtocoloComunicacao mensagemProtocoloComunicacao;
-    public final String NOME_FICHEIRO = "logMensagem.txt";
 
     private MaquinaRepository repo = PersistenceContext.repositories().maquinas();
 
@@ -28,7 +27,6 @@ public class ProcessarMensagemProtocoloMSG extends ProcessarMensagensProtocolosS
                                          char tamanhoData, String rawData) {
         mensagemProtocoloComunicacao = new MensagemProtocoloComunicacao(version, code, idMaquinaProtocolo,
                 tamanhoData, rawData);
-        //TODO: guardar no log
     }
 
     @Override

@@ -29,7 +29,6 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinas implements Runnable {
 
             while (true) {
                 cliSock = sock.accept();
-                System.out.println("entrou");
                 new Thread(new TcpSrvRecolherMensagensGeradasPelasMaquinasThread(cliSock)).start();
             }
         } catch (IOException e) {

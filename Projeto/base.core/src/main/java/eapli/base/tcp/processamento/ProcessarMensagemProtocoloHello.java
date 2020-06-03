@@ -24,7 +24,6 @@ public class ProcessarMensagemProtocoloHello extends ProcessarMensagensProtocolo
                                            char tamanhoData, String rawData) {
         mensagemProtocoloComunicacao = new MensagemProtocoloComunicacao(version, code, idMaquinaProtocolo,
                 tamanhoData, rawData);
-        //TODO: guardar no log
     }
 
     @Override

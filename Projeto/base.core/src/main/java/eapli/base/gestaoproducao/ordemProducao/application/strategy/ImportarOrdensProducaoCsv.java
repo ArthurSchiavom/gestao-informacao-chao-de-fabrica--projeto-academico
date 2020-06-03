@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy {
+public class ImportarOrdensProducaoCsv implements ImportarOrdensProducaoStrategy {
 
     private static final String SEPARADOR = ",";
     private static final String SEPARADOR_ENCOMENDAS = ";";

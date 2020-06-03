@@ -2,8 +2,10 @@ package eapli.base.tcp;
 
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.tcp.domain.MensagemProtocoloCodes;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import eapli.base.tcp.processamento.ProcessarMensagemProtocoloFactory;
+import eapli.base.tcp.processamento.ProcessarMensagemProtocoloMSG;
 import eapli.base.tcp.processamento.ProcessarMensagensProtocolosStrategy;
 
 import java.io.DataInputStream;
@@ -41,8 +43,15 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
         ProcessarMensagensProtocolosStrategy mens = lerMensagemTcp(sock, sIn);
 
 
-        if (mens == null) {
-//            break;
+        if (mens == null) { // return NACK if given code doesn't exist
+            MensagemProtocoloComunicacao ps =
+                    new MensagemProtocoloComunicacao(ProcessarMensagensProtocolosStrategy.getVersion(), (byte) MensagemProtocoloCodes.NACK.getCode(),
+                            (char) 0, (char) 0, null);
+            try {
+                escreveMensagemTcp(ps,sOut);
+            } catch (IOException e) {
+                return;
+            }
         }
 
         MensagemProtocoloComunicacao mensagemProtocoloComunicacao = mens.processarMensagem(sock);
@@ -51,7 +60,8 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
             escreveMensagemTcp(mensagemProtocoloComunicacao, sOut);
 
 
-//            System.out.println("Client " + sock.getInetAddress().getHostAddress() + ",port number: " + sock.getPort() +
+//            System.out.println("Client " + sock.getInetAddress().getHostAddress() + ",port number: " + sock.getPort
+//            () +
 //                    " disconnected");
 
             sOut.close();
