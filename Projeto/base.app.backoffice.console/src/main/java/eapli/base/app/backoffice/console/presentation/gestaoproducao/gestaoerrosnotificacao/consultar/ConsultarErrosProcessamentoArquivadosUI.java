@@ -43,6 +43,10 @@ public class ConsultarErrosProcessamentoArquivadosUI extends AbstractUI {
 
     private void mostrarResultado(ConsultarErrosProcessamentoController controller) {
         List<NotificacaoErroDTO> resultado = controller.buscarResultado();
+        if (resultado.isEmpty()) {
+            System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + "** RESULTADO **\n\nNão há notificações nas condições especificadas.\n\n");
+            return;
+        }
         String resultadoDisplay = ConsoleTables.tabela(resultado, false, 0);
         System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + "** RESULTADO **\n\n" + resultadoDisplay + "\n\n");
     }

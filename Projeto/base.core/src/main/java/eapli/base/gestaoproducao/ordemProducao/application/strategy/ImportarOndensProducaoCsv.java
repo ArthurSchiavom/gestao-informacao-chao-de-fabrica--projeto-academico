@@ -12,7 +12,6 @@ import eapli.base.infrastructure.application.files.EmptyFileException;
 import eapli.base.infrastructure.application.files.FileScanner;
 import eapli.base.infrastructure.application.files.InvalidHeaderException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.infrastructure.persistence.RepositoryFactory;
 
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -57,7 +56,7 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
 
         String next[];
 
-        Identificador id;
+        IdentificadorOrdemProducao id;
         QuantidadeAProduzir quantidadeAProduzir;
         Estado estado;
         Date dataEmissao, dataPrevistaExecucao;
@@ -79,7 +78,7 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
             }
 
             try {
-                id = new Identificador(next[INDEX_IDENTIFICADOR]);
+                id = new IdentificadorOrdemProducao(next[INDEX_IDENTIFICADOR]);
                 estado = Estado.valueOf(next[INDEX_ESTADO]);
                 encomendas = getEncomendas(next[INDEX_ENCOMENDAS_ID]);
                 dataEmissao = getData(next[INDEX_DATA_EMISSAO]);
@@ -95,7 +94,7 @@ public class ImportarOndensProducaoCsv implements ImportarOrdensProducaoStrategy
 
 
                 try {
-                    quantidadeAProduzir = new QuantidadeAProduzir(Integer.parseInt(next[INDEX_QUANTIDADE_A_PRODUZIR]));
+                    quantidadeAProduzir = new QuantidadeAProduzir(Double.parseDouble(next[INDEX_QUANTIDADE_A_PRODUZIR]));
                 } catch (NumberFormatException ex) {
                     transformer.addFalha(nLinha, "Quantidade a produzir não é um número");
                     transformer.incrementarFalhas();

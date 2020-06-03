@@ -1,26 +1,21 @@
 package eapli.base.persistence.impl.jpa;
 
-import com.google.common.collect.Lists;
 import eapli.base.Application;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
-import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.ordemProducao.domain.Estado;
-import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
-import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorEncomenda;
+import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.*;
 
-public class JpaOrdemProducaoRepository extends JpaAutoTxRepository<OrdemProducao, Identificador,
-		Identificador>
+public class JpaOrdemProducaoRepository extends JpaAutoTxRepository<OrdemProducao, IdentificadorOrdemProducao,
+        IdentificadorOrdemProducao>
 		implements OrdemProducaoRepository {
 
 	public JpaOrdemProducaoRepository(TransactionalContext autoTx) {
@@ -33,7 +28,7 @@ public class JpaOrdemProducaoRepository extends JpaAutoTxRepository<OrdemProduca
 	}
 
 	@Override
-	public Optional<OrdemProducao> findByIdentifier(Identificador identifier) {
+	public Optional<OrdemProducao> findByIdentifier(IdentificadorOrdemProducao identifier) {
 		final Map<String, Object> params = new HashMap<>();
 		params.put(OrdemProducao.identityAttributeName(), identifier);
 		return matchOne("e." + OrdemProducao.identityAttributeName() + "=:" + OrdemProducao.identityAttributeName(),

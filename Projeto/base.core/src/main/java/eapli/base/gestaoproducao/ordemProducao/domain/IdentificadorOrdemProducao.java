@@ -10,18 +10,21 @@ import java.util.Objects;
  * Identificador da ordem de produção
  */
 @Embeddable
-public class Identificador implements ValueObject, Comparable<Identificador> {
+public class IdentificadorOrdemProducao implements ValueObject, Comparable<IdentificadorOrdemProducao> {
 
     private static final long serialVersionUID = 1L;
 
     @XmlValue
     public final String identificador;
 
-    public Identificador() {
+    public IdentificadorOrdemProducao() {
         identificador = "";
     }
 
-    public Identificador(String identificador) {
+    public IdentificadorOrdemProducao(String identificador) {
+        if (identificador == null || identificador.isEmpty()) {
+            throw new IllegalArgumentException("O identificador de ordem deve existir.");
+        }
         this.identificador = identificador;
     }
 
@@ -29,7 +32,7 @@ public class Identificador implements ValueObject, Comparable<Identificador> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Identificador that = (Identificador) o;
+        IdentificadorOrdemProducao that = (IdentificadorOrdemProducao) o;
         return identificador.equals(that.identificador);
     }
 
@@ -46,7 +49,7 @@ public class Identificador implements ValueObject, Comparable<Identificador> {
     }
 
     @Override
-    public int compareTo(Identificador obj) {
+    public int compareTo(IdentificadorOrdemProducao obj) {
         return this.identificador.compareTo(obj.identificador);
     }
 }

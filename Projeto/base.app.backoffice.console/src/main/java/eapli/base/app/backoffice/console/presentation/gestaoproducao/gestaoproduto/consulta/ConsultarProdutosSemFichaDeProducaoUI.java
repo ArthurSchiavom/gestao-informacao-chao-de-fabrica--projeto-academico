@@ -20,7 +20,7 @@ public class ConsultarProdutosSemFichaDeProducaoUI extends AbstractUI {
             return false;
         }
 
-        String resultadoDisplay = ConsoleTables.tabelaDeProdutos(resultado);
+        String resultadoDisplay = ConsoleTables.tabela(resultado, false, 0);
         System.out.println(resultadoDisplay);
         UserInteractionFlow.enterParaContinuar();
         return false;

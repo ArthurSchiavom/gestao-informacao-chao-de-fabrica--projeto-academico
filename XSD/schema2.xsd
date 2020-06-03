@@ -328,7 +328,7 @@
 
   <xs:complexType name="ordemProducao">
     <xs:all>
-      <xs:element name="quantidadeAProduzir" type="intPositivo" />
+      <xs:element name="quantidadeAProduzir" type="doublePositivo" />
       <xs:element name="encomendas">
         <xs:complexType>
           <xs:sequence>

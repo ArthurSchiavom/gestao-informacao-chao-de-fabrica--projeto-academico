@@ -1,10 +1,9 @@
 package eapli.base.gestaoproducao.gestaoproduto.application;
 
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
-import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
+import eapli.base.comum.domain.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.gestaoproduto.domain.*;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
-import eapli.framework.domain.repositories.TransactionalContext;
 
 import javax.annotation.Nullable;
 

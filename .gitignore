@@ -125,3 +125,8 @@ buildNumber.properties
 
 *.db
 Projeto/.idea/
+Projeto/base.core/ola
+Projeto/base.core/PDF.pdf
+Projeto/test_material/outputPDF/Aco.pdf
+Projeto/test_material/outputPDF/Cobre.pdf
+Projeto/test_material/outputPDF/Ferro.pdf

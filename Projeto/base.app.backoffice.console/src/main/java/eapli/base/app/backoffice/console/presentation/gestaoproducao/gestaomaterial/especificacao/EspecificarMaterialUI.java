@@ -2,12 +2,10 @@ package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomate
 
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaterial.ListCategoriaService;
 import eapli.base.app.common.console.presentation.interaction.OptionSelector;
-import eapli.base.app.common.console.presentation.interaction.UserInteractionFlow;
 import eapli.base.gestaoproducao.gestaomaterial.application.EspecificarMaterialController;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
 import eapli.base.gestaoproducao.gestaomaterial.domain.FichaTecnicaPDF;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
-import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.utilities.wrappers.Updateable;
 import eapli.framework.presentation.console.AbstractUI;

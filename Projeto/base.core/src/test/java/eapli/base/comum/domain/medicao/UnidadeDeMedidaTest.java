@@ -1,4 +1,4 @@
-package eapli.base.gestaoproducao.medicao;
+package eapli.base.comum.domain.medicao;
 
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import org.junit.Test;

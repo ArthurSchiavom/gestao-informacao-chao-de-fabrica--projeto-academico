@@ -5,7 +5,7 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomensagens.domain.*;
 import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
-import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
+import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
@@ -28,7 +28,7 @@ public class MessageFactory {
         IdentificadorDeLote identificadorDeLote=null;
         CodigoUnico codigoUnico;
         OrdemProducao ordemPrd=null;
-        Identificador ordemID;
+        IdentificadorOrdemProducao ordemID;
         String erro;
         int quantidade;
         switch (vec[1]) {
@@ -72,7 +72,7 @@ public class MessageFactory {
                 //Ordem opc
                 System.out.println("S0");
                 if (vec.length==4) {
-                    ordemID = new Identificador(vec[3].trim());
+                    ordemID = new IdentificadorOrdemProducao(vec[3].trim());
                     ordemPrd=getOrdemDeProducaoPorIdentificador(ordemID);
                 }
                 return new MensagemFimDeAtividade(codigoInternoMaquina,date,ordemPrd);
@@ -89,7 +89,7 @@ public class MessageFactory {
                 System.out.println("S9");
                 //Máquina;TipoMsg;DataHora;OrdemProducao
                 if (vec.length==4) {
-                    ordemID = new Identificador(vec[3].trim());
+                    ordemID = new IdentificadorOrdemProducao(vec[3].trim());
                     ordemPrd=getOrdemDeProducaoPorIdentificador(ordemID);
                 }
                 return new MensagemFimDeAtividade(codigoInternoMaquina,date,ordemPrd);
@@ -99,7 +99,7 @@ public class MessageFactory {
     }
 
 
-    private OrdemProducao getOrdemDeProducaoPorIdentificador(Identificador identificador){
+    private OrdemProducao getOrdemDeProducaoPorIdentificador(IdentificadorOrdemProducao identificador){
         Optional<OrdemProducao> ordemProducao;
         ordemProducao=ordemProducaoRepository.findByIdentifier(identificador);
         if (!ordemProducao.isPresent())

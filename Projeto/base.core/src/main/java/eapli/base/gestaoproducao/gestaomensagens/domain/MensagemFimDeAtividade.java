@@ -1,7 +1,6 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
-import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.framework.domain.model.AggregateRoot;
 

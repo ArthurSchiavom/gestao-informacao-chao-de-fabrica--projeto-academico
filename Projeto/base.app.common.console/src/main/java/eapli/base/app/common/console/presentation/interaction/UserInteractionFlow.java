@@ -44,7 +44,7 @@ public class UserInteractionFlow {
         return valores;
     }
 
-    public static <T> List<T> solicitarEscolhaItensSeparadosPorVirgula(String prompt, String separador, String mensagemInputForaDosLimites, List<T> opcoesOrdenadas, int numero_primeira_opcao, boolean usarWildcard, int wildcard) {
+    public static <T> List<T> solicitarEscolhaItensSeparadosPorVirgula(String promptRepetitivo, String separador, String mensagemInputForaDosLimites, List<T> opcoesOrdenadas, int numero_primeira_opcao, boolean usarWildcard, int wildcard) {
         List<T> resultado = null;
 
         int limiteInferior = numero_primeira_opcao;
@@ -52,7 +52,7 @@ public class UserInteractionFlow {
 
         boolean valido = false;
         while (!valido) {
-            int[] valores = solicitarListaInteiros(prompt, separador);
+            int[] valores = solicitarListaInteiros(promptRepetitivo, separador);
             resultado = new ArrayList<>();
 
             if (usarWildcard && valores[0] == wildcard) {
@@ -75,5 +75,10 @@ public class UserInteractionFlow {
         }
 
         return resultado;
+    }
+
+    public static <T> List<T> solicitarEscolhaItensSeparadosPorVirgula(String primeiroPrompt, String promptRepetitivo, String separador, String mensagemInputForaDosLimites, List<T> opcoesOrdenadas, int numero_primeira_opcao, boolean usarWildcard, int wildcard) {
+        System.out.println(primeiroPrompt + "\n");
+        return solicitarEscolhaItensSeparadosPorVirgula(promptRepetitivo, separador, mensagemInputForaDosLimites, opcoesOrdenadas, numero_primeira_opcao, usarWildcard, wildcard);
     }
 }

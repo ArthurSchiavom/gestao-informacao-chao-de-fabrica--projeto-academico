@@ -1,5 +1,8 @@
 package eapli.base.gestaoproducao.ordemProducao.domain;
 
+import com.google.common.math.DoubleMath;
+import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -11,18 +14,18 @@ public class QuantidadeAProduzir implements ValueObject, Comparable<QuantidadeAP
     private static final long serialVersionUID = 1L;
 
     @XmlValue
-    public final int quantidade;
+    public final double quantidade;
 
-    public QuantidadeAProduzir() {
+    private QuantidadeAProduzir() {
         quantidade = 0;
     }
 
-    public QuantidadeAProduzir(int quantidade) throws IllegalArgumentException{
-        if(quantidade >= 0) {
-            this.quantidade = quantidade;
-        }else{
-            throw new IllegalArgumentException("Quantidade não pode ser menor que 0");
+    public QuantidadeAProduzir(double quantidade) throws IllegalDomainValueException {
+        if (quantidade <= 0) {
+            throw new IllegalDomainValueException("A quantidade de produto que uma ordem deve produzir tem que ser maior que 0.", IllegalDomainValueType.ILLEGAL_VALUE);
         }
+
+        this.quantidade = quantidade;
     }
 
 
@@ -48,7 +51,7 @@ public class QuantidadeAProduzir implements ValueObject, Comparable<QuantidadeAP
     }
 
     @Override
-    public int compareTo(QuantidadeAProduzir quantidadeAProduzir) {
-        return this.quantidade-quantidadeAProduzir.quantidade;
+    public int compareTo(QuantidadeAProduzir outro) {
+        return DoubleMath.fuzzyCompare(this.quantidade, outro.quantidade, 0.00000001d);
     }
 }

@@ -1,4 +1,4 @@
-package eapli.base.gestaoproducao.medicao;
+package eapli.base.comum.domain.medicao;
 
 import com.google.common.math.DoubleMath;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
@@ -6,7 +6,6 @@ import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;

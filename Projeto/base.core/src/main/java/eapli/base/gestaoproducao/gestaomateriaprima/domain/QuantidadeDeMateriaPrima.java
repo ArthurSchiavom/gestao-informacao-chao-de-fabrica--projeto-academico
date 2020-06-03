@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.gestaomateriaprima.domain;
 
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMateriaPrimaDTO;
-import eapli.base.gestaoproducao.medicao.QuantidadePositiva;
+import eapli.base.comum.domain.medicao.QuantidadePositiva;
 import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.framework.domain.model.ValueObject;
 
