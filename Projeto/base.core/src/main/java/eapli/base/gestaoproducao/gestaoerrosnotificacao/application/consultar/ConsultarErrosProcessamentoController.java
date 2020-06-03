@@ -7,9 +7,15 @@ import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.EstadoNotificacaoErr
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.NotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.TipoNotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
+import eapli.base.gestaoproducao.gestaomensagens.domain.TimestampEmissao;
+import eapli.base.gestaoproducao.gestaomensagens.domain.TipoDeMensagem;
+import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.infrastructure.application.DTOUtils;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
@@ -40,9 +46,6 @@ public class ConsultarErrosProcessamentoController {
         linhasProducaoDTO = Collections.unmodifiableList(DTOUtils.toDTOList(linhasDeProducao));
         tiposNotificaoErroDTO = Collections.unmodifiableList(DTOUtils.toDTOList(TipoErroNotificacao.values()));
         estadosNotificacaoErroDTO = Collections.unmodifiableList(DTOUtils.toDTOList(EstadoErroNotificacao.values()));
-
-
-        // selecione as linhas de prod; seleciona; selecione os tipos de erro; seleciona; selecione os estados; seleciona; imprime o resultado
     }
 
     /**

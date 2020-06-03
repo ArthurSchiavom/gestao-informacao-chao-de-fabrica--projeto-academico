@@ -118,6 +118,8 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 
 	@Override
 	public NotificacaoErroDTO toDTO() {
-		return new NotificacaoErroDTO(id, idLinhaProd.toString(), idMensagem, tipoErroNotificacao.nomeDisplay, estadoErro.nomeDisplay);
+		return new NotificacaoErroDTO(id, idLinhaProd.toString(), tipoErroNotificacao.nomeDisplay,
+				estadoErro.nomeDisplay, idMensagem.tempoEmissao.timestamp,
+				idMensagem.tipoDeMensagem.nomeDisplay, idMensagem.codigoInternoMaquina.codigoInterno);
 	}
 }

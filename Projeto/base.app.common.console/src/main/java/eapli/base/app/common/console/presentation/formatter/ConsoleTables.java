@@ -9,8 +9,11 @@ import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 import eapli.base.processamentoMensagens.application.DTO.AgendamentoDeProcessamentoDTO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 public class ConsoleTables {
 
@@ -127,18 +130,24 @@ public class ConsoleTables {
         if (numerar)
             headers.add("Numero");
         headers.add("Linha de Produção");
-        headers.add("ID da Mensagem");
         headers.add("Tipo de Erro");
         headers.add("Estado do Erro");
+        headers.add("Data de Emissão da Mensagem");
+        headers.add("Tipo de Mensagem");
+        headers.add("Máquina");
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         ArrayList<ArrayList<String>> tabelaRaw = new ArrayList<>();
         for (NotificacaoErroDTO notificacao : lista) {
             ArrayList<String> linha = new ArrayList<>();
             if (numerar)
                 linha.add(Integer.toString(nLinha++));
             linha.add(notificacao.idLinhaProd);
-            linha.add(notificacao.idMensagem.tipoDeMensagem.nomeDisplay);
             linha.add(notificacao.tipoErroNotificacao);
             linha.add(notificacao.estadoErro);
+            linha.add(dateFormat.format(notificacao.dataEmissaoMensagem));
+            linha.add(notificacao.tipoMensagem);
+            linha.add(notificacao.maquina);
             tabelaRaw.add(linha);
         }
         ConsoleTable tabela = new ConsoleTable(headers, tabelaRaw);
