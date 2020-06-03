@@ -127,7 +127,7 @@ public class ProcessamentoDeMensagensController {
         }
         System.out.println("\nFuncionou------------------\n\n");
         for (Mensagem mensagem:listaMensagensDentroDosLimites){
-            CodigoInternoMaquina codigoInternoMaquina=mensagem.codigoInternoMaquina;
+            CodigoInternoMaquina codigoInternoMaquina=mensagem.mensagemID.codigoInternoMaquina;
             Optional<Maquina> opt=maquinaRepository.findByIdentifier(codigoInternoMaquina);
             Maquina maquina=opt.get();
             if (listaDeMensagensDeCadaLinhaDeProducao.containsKey(maquina))
