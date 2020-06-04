@@ -12,19 +12,16 @@ import java.util.Date;
 @DiscriminatorValue(value=TipoDeMensagem.Values.RETOMA_ATIVIDADE)
 public class MensagemRetomoDeActividade extends Mensagem implements AggregateRoot<MensagemID> {
     //S1 -> Máquina;TipoMsg;DataHora;Erro
-    public final Date dataHora;
     public final String erro;
 
     protected MensagemRetomoDeActividade() {
-        this.dataHora = null;
         this.erro = null;
     }
 
     public MensagemRetomoDeActividade(CodigoInternoMaquina codigoInternoMaquina, Date dataHora, String erro) {
         super(TipoDeMensagem.RETOMA_ATIVIDADE,new TimestampEmissao(dataHora),codigoInternoMaquina);
-        if ( dataHora ==null && erro==null)
+        if ( erro==null)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
-        this.dataHora = dataHora;
         this.erro = erro;
     }
 }

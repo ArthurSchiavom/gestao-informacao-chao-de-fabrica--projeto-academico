@@ -2,6 +2,7 @@ package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -30,8 +31,8 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
 
     @ManyToOne
     private LinhaProducao linhaProducao;
-    @ManyToOne
-    private OrdemProducao ordemProducao;
+    
+    private Identificador identificadorOrdemDeProducao;
 
 
     public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina) {
@@ -41,19 +42,19 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         this.mensagemID = new MensagemID(tipo,tempoEmissao,codigoInternoMaquina);
         this.estadoProcessamento=EstadoProcessamento.NAO_PROCESSADO;
     }
-    public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina,OrdemProducao ordemProducao) {
+    public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina,Identificador ordemProducao) {
         if ((tipo == null || tempoEmissao == null||codigoInternoMaquina==null)) {
             throw new IllegalArgumentException("Mensagem não pode ter parametros null");
         }
         this.mensagemID = new MensagemID(tipo,tempoEmissao,codigoInternoMaquina);
         this.estadoProcessamento=EstadoProcessamento.NAO_PROCESSADO;
-        this.ordemProducao=ordemProducao;
+        this.identificadorOrdemDeProducao=ordemProducao;
     }
 
     protected Mensagem() {
         //FOR ORM
         this.linhaProducao=null;
-        this.ordemProducao=null;
+        this.identificadorOrdemDeProducao=null;
         this.mensagemID = null;
     }
 
@@ -61,16 +62,16 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         this.linhaProducao = linhaProducao;
     }
 
-    public void setOrdemProducao(OrdemProducao ordemProducao) {
-        this.ordemProducao = ordemProducao;
+    public void setIdentificadorOrdemDeProducao(Identificador identificadorOrdemDeProducao) {
+        this.identificadorOrdemDeProducao = identificadorOrdemDeProducao;
     }
 
     public void setEstadoProcessamento(EstadoProcessamento estadoProcessamento) {
         this.estadoProcessamento = estadoProcessamento;
     }
 
-    public OrdemProducao getOrdemProducao() {
-        return ordemProducao;
+    public Identificador getIdentificadorOrdemDeProducao() {
+        return identificadorOrdemDeProducao;
     }
 
     public static String identityAttributeName() {

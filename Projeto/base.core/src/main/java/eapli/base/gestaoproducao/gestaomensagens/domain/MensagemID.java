@@ -2,8 +2,8 @@ package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.framework.domain.model.ValueObject;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,6 +11,7 @@ import java.util.Objects;
 public class MensagemID implements ValueObject, Serializable, Comparable<MensagemID>{
 
     public final CodigoInternoMaquina codigoInternoMaquina;
+    @Enumerated(EnumType.STRING)
     @Column(insertable=false, updatable=false)
     public final TipoDeMensagem tipoDeMensagem;
     @Column(insertable=false, updatable=false)

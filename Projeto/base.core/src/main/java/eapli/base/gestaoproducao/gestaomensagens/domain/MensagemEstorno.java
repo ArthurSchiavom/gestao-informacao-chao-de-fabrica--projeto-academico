@@ -13,24 +13,24 @@ import java.util.Date;
 @DiscriminatorValue(value=TipoDeMensagem.Values.ESTORNO)
 public class MensagemEstorno extends Mensagem implements AggregateRoot<MensagemID> {
     public final CodigoDeposito codigo;
-    public final Date dataHora;
     public final CodigoUnico codigoUnico;
     private int quantidadeProduzir;
 
     protected MensagemEstorno() {
         this.codigo = null;
-        this.dataHora = null;
         this.codigoUnico = null;
     }
 
     public MensagemEstorno(CodigoUnico codigoUnico, CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir) {
         super(TipoDeMensagem.CONSUMO, new TimestampEmissao(dataHora), codigoInternoMaquina);
-        if (codigoUnico == null && dataHora == null && quantidadeProduzir <= 0)
+        if (codigoUnico == null && dataHora == null)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
         this.codigoUnico = codigoUnico;
         this.codigo = codigo;
-        this.dataHora = dataHora;
         this.quantidadeProduzir = quantidadeProduzir;
     }
 
+    public int getQuantidadeProduzir() {
+        return quantidadeProduzir;
+    }
 }

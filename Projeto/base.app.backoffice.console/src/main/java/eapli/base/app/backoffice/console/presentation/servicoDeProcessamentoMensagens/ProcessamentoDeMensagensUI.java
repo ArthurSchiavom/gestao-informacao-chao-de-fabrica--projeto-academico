@@ -1,6 +1,7 @@
 package eapli.base.app.backoffice.console.presentation.servicoDeProcessamentoMensagens;
 
 import eapli.base.app.common.console.presentation.formatter.ConsoleTables;
+import eapli.base.app.common.console.presentation.formatter.SimpleConsoleMessages;
 import eapli.base.app.common.console.presentation.interaction.UserInteractionFlow;
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 import eapli.base.processamentoMensagens.application.ProcessamentoDeMensagensController;
@@ -33,13 +34,16 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
             String tempoInicio=Console.readNonEmptyLine("Insira a Hora/Min de inicio de processamento (HH:MM)","Este campo nao pode ser vazio");
             String dataFinal=Console.readNonEmptyLine("Insira a data final de processamento (YYYY-MM-DD)","Este campo nao pode ser vazio");
             String tempoFinal=Console.readNonEmptyLine("Insira a Hora/Min final de processamento (HH:MM)","Este campo nao pode ser vazio");
-
             if (!controller.validarInput(dataInicio,dataFinal,tempoInicio,tempoFinal))
                 return false;
+            System.out.println(SimpleConsoleMessages.CLEAR_SCREEN +"Inicio de processamento!");
+            controller.iniciarProcessamento();
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e){
             System.out.println("Erro: "+ e.getMessage());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         return continuar;
     }

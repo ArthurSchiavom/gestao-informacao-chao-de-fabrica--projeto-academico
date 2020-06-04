@@ -14,20 +14,17 @@ import java.util.Date;
 public class MensagemFimDeAtividade extends Mensagem implements AggregateRoot<MensagemID> {
 
     //Máquina;TipoMsg;DataHora;OrdemProducao
-    public final Date dataHora;
 
     protected MensagemFimDeAtividade() {
         super();
-        dataHora = null;
     }
 
-    public MensagemFimDeAtividade(CodigoInternoMaquina maquinaID, Date dataHora, OrdemProducao ordem) {
+    public MensagemFimDeAtividade(CodigoInternoMaquina maquinaID, Date dataHora, Identificador ordem) {
         super(TipoDeMensagem.FIM_DE_ATIVIDADE, new TimestampEmissao(dataHora),maquinaID,ordem);
 
         if (dataHora == null) {
             throw new IllegalArgumentException("Não pode haver parametros null no Fim de atividade mensagem"); //
             // excepto o Ordem id que pode ser nulo
         }
-        this.dataHora = dataHora;
     }
 }

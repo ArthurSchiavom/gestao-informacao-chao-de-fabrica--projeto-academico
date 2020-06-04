@@ -111,29 +111,28 @@ public class ProcessamentoDeMensagensController {
         }
         List<Mensagem> listaMensagensDentroDosLimites=new ArrayList<>();
         List<Mensagem> listaMensagensNaoProcessadasBaseDados= mensagemRepository.obterListaMensagensNaoProcessadas();
-        System.out.println("AQUI NAO");
-        if (listaMensagensNaoProcessadasBaseDados.isEmpty() || listaMensagensNaoProcessadasBaseDados==null)
+        if (listaMensagensNaoProcessadasBaseDados.isEmpty())
             throw new IllegalArgumentException("Sem mensagens registadas na base de dados");
         Date dataInicio=agendamentoDeProcessamento.inicioDeProcessamento.dataTempoInicio;
         Date dataFinal=agendamentoDeProcessamento.finalDeProcessamento.dataTempoFinal;
         for (Mensagem mensagem:listaMensagensNaoProcessadasBaseDados){
             Date dataEmissao=mensagem.mensagemID.tempoEmissao.timestamp;
-            if (dataInicio.before(dataEmissao) && dataFinal.after(dataEmissao)){ //Verificar se esta entre as duas datas selecionadas
+            System.out.println(dataEmissao);
+            if ((dataInicio.compareTo(dataEmissao)<=0) && (dataFinal.compareTo(dataEmissao)>=0)){ //Verificar se esta entre as duas datas selecionadas
                 listaMensagensDentroDosLimites.add(mensagem);
             }
-            if (listaMensagensDentroDosLimites.size()==0){
-                throw new IllegalArgumentException("Não há mensagens para processar para o periodo proposto!");
-            }
         }
-        System.out.println("\nFuncionou------------------\n\n");
+        if (listaMensagensDentroDosLimites.size()==0){
+            throw new IllegalArgumentException("Não há mensagens para processar para o periodo proposto!");
+        }
         for (Mensagem mensagem:listaMensagensDentroDosLimites){
-            CodigoInternoMaquina codigoInternoMaquina=mensagem.codigoInternoMaquina;
+            CodigoInternoMaquina codigoInternoMaquina=mensagem.mensagemID.codigoInternoMaquina;
             Optional<Maquina> opt=maquinaRepository.findByIdentifier(codigoInternoMaquina);
             Maquina maquina=opt.get();
-            if (listaDeMensagensDeCadaLinhaDeProducao.containsKey(maquina))
-                listaDeMensagensDeCadaLinhaDeProducao.get(maquina).add(mensagem);
+            if (listaDeMensagensDeCadaLinhaDeProducao.containsKey(maquina.getLinhaProducao()))
+                listaDeMensagensDeCadaLinhaDeProducao.get(maquina.getLinhaProducao()).add(mensagem);
         }
-
+        System.out.println("BORING");
         //Criacao das THREADS
         for (i=0;i<linhaProducaoAlvo.size();i++){
             List<Mensagem> lista=listaDeMensagensDeCadaLinhaDeProducao.get(i);

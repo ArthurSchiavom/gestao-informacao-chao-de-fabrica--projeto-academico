@@ -5,6 +5,7 @@ import eapli.base.servicoComunicacaoComMaquinas.ImportarFicheirosMaquinasControl
 import eapli.framework.presentation.console.AbstractUI;
 
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 
 
 public class ImportarFicheirosMaquinasUI extends AbstractUI {
@@ -15,13 +16,9 @@ public class ImportarFicheirosMaquinasUI extends AbstractUI {
             System.out.println("Inicio da importacao");
             controller.iniciarAImportacao();
             System.out.println("Fim da importacao");
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | FileNotFoundException | EmptyFileException e) {
             e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (EmptyFileException e) {
-            e.printStackTrace();
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException | NoSuchElementException e){
             System.out.println("Erro: "+e.getMessage());
         }
         return false;

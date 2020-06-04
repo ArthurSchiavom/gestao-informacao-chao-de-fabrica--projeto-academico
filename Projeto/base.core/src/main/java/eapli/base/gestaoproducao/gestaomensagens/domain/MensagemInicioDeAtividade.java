@@ -12,15 +12,12 @@ import java.util.Date;
 public class MensagemInicioDeAtividade extends Mensagem implements AggregateRoot<MensagemID> {
 
     //Máquina;TipoMsg;DataHora;OrdemProducao
-    public final Date dataHora;
 
     protected MensagemInicioDeAtividade() {
         super();
-        dataHora = null;
     }
 
-    public MensagemInicioDeAtividade(Date tempoEmissao, CodigoInternoMaquina maquinaID, Date dataHora, OrdemProducao ordem) {
+    public MensagemInicioDeAtividade(Date tempoEmissao, CodigoInternoMaquina maquinaID, Identificador ordem) {
         super(TipoDeMensagem.INICIO_DE_ATIVIDADE, new TimestampEmissao(tempoEmissao),maquinaID,ordem);
-        this.dataHora = dataHora;
     }
 }

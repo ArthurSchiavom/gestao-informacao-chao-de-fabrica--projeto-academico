@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.framework.domain.model.ValueObject;
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.Objects;
 

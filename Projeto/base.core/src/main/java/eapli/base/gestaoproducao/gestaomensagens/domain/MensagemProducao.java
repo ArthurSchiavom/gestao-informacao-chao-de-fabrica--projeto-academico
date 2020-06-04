@@ -5,8 +5,7 @@ import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,14 +13,11 @@ import java.util.Date;
 public class MensagemProducao extends Mensagem implements AggregateRoot<MensagemID> {
     //P1 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
     //Produto e quantidade são parametros obrigatorios ,lote opcional
-    public final Date dataHora;
     public  final CodigoUnico codigoUnico;
     private int quantidade;
     public final IdentificadorDeLote identificadorDeLote;
 
-
     protected MensagemProducao(){
-        dataHora=null;
         codigoUnico=null;
         identificadorDeLote=null;
     }
@@ -30,10 +26,12 @@ public class MensagemProducao extends Mensagem implements AggregateRoot<Mensagem
         super(TipoDeMensagem.PRODUCAO,new TimestampEmissao(dataHora),codigoInternoMaquina);
         if (codigoUnico==null && dataHora==null && quantidade<=0)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
-        this.dataHora = dataHora;
         this.codigoUnico = codigoUnico;
         this.quantidade = quantidade;
         this.identificadorDeLote = identificadorDeLote;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
 }

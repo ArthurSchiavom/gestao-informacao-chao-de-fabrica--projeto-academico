@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.NoSuchElementException;
 
 
 public class ImportarFicheirosMaquinasThread implements Runnable {
@@ -34,22 +35,19 @@ public class ImportarFicheirosMaquinasThread implements Runnable {
     public void run() {
         int i;
         fileScanner.validarCampos();
-        for (String[] vec:fileScanner.listaDeMensagens){
+        for (String[] vec : fileScanner.listaDeMensagens) {
             try {
-                Mensagem mensagem=messageFactory.getMessageType(vec);
-                if (mensagem!=null)
+                Mensagem mensagem = messageFactory.getMessageType(vec);
+                if (mensagem != null)
                     mensagemRepository.save(mensagem);
-            } catch (IllegalDomainValueException e) {
-                throw new IllegalArgumentException("Falha ao criar a mensagem");
-            } catch(Exception e) {
+            } catch (Exception e) {
             }
-        }
-        Path from = Paths.get("test_material\\Mensagens\\" + file.getName());
-        Path to = Paths.get("test_material\\MensagensProcessadas\\" + file.getName());
-        try {
-            Path temp = Files.move(from, to);
-        } catch (IOException e) {
-            e.printStackTrace();
+            Path from = Paths.get("test_material\\Mensagens\\" + file.getName());
+            Path to = Paths.get("test_material\\MensagensProcessadas\\" + file.getName());
+            try {
+                Path temp = Files.move(from, to);
+            } catch (IOException e) {
+            }
         }
     }
 }

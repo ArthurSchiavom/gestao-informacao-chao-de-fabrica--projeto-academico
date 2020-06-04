@@ -99,6 +99,10 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, Convertable
             return ordemLinhaProducao;
     }
 
+    public IdentificadorLinhaProducao getLinhaProducao() {
+        return linhaProducao;
+    }
+
     @Override
     public boolean equals(final Object o) {
         return DomainEntities.areEqual(this, o);
