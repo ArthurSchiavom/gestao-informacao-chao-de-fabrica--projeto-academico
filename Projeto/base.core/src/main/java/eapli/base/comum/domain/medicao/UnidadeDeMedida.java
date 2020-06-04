@@ -1,10 +1,9 @@
-package eapli.base.gestaoproducao.medicao;
+package eapli.base.comum.domain.medicao;
 
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlValue;
 
 public enum UnidadeDeMedida {
     UNIDADES("UN", "unidades"),

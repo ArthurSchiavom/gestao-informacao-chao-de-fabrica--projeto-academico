@@ -39,12 +39,12 @@ public class MensagemID implements ValueObject, Serializable, Comparable<Mensage
         if (o == null || getClass() != o.getClass()) return false;
         MensagemID that = (MensagemID) o;
         return tipoDeMensagem == that.tipoDeMensagem &&
-                tempoEmissao.equals(that.tempoEmissao);
+                tempoEmissao.equals(that.tempoEmissao) && codigoInternoMaquina.equals(that.codigoInternoMaquina);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tipoDeMensagem, tempoEmissao);
+        return Objects.hash(tipoDeMensagem, tempoEmissao,codigoInternoMaquina);
     }
 
     @Override

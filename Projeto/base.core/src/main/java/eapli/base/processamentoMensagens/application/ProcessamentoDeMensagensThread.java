@@ -14,7 +14,7 @@ import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
-import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
+import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -53,7 +53,7 @@ public class ProcessamentoDeMensagensThread implements Runnable {
         CodigoDeposito codigoDeposito;
         Produto produto;
         Maquina maquina;
-        Identificador idOrdemProducao=null;
+        IdentificadorOrdemProducao idOrdemProducao=null;
         OrdemProducao ordemProducao;
         Date dataEmissao;
         int quantidadeAProduzir;
@@ -218,7 +218,7 @@ public class ProcessamentoDeMensagensThread implements Runnable {
     }
 
 
-    public void enriquecerMensagens(Identificador identificadorOrdemProducao, Mensagem mensagem,LinhaProducao linhaProducao){
+    public void enriquecerMensagens(IdentificadorOrdemProducao identificadorOrdemProducao, Mensagem mensagem,LinhaProducao linhaProducao){
         transactionalContext.beginTransaction();
         mensagem.setLinhaProducao(linhaProducao);
         mensagem.setIdentificadorOrdemDeProducao(identificadorOrdemProducao);
@@ -256,7 +256,7 @@ public class ProcessamentoDeMensagensThread implements Runnable {
         return produto.get();
     }
 
-    private OrdemProducao getOrdemDeProducaoPorIdentificador(Identificador identificador){
+    private OrdemProducao getOrdemDeProducaoPorIdentificador(IdentificadorOrdemProducao identificador){
         Optional<OrdemProducao> ordemProducao;
         ordemProducao=ordemProducaoRepository.findByIdentifier(identificador);
         if (!ordemProducao.isPresent())

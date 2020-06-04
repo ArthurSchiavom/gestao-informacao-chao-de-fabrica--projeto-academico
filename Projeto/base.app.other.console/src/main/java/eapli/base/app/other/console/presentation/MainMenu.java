@@ -38,11 +38,6 @@ import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
-/**
- * TODO split this class in more specialized classes for each menu
- *
- * @author Paulo Gandra Sousa
- */
 public class MainMenu extends AbstractUI {
 
     private static final String SEPARATOR_LABEL = "--------------";

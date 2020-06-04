@@ -2,8 +2,10 @@ package eapli.base.tcp;
 
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.tcp.domain.MensagemProtocoloCodes;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import eapli.base.tcp.processamento.ProcessarMensagemProtocoloFactory;
+import eapli.base.tcp.processamento.ProcessarMensagemProtocoloMSG;
 import eapli.base.tcp.processamento.ProcessarMensagensProtocolosStrategy;
 
 import java.io.DataInputStream;
@@ -41,8 +43,15 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
         ProcessarMensagensProtocolosStrategy mens = lerMensagemTcp(sock, sIn);
 
 
-        if (mens == null) {
-//            break;
+        if (mens == null) { // return NACK if given code doesn't exist
+            MensagemProtocoloComunicacao ps =
+                    new MensagemProtocoloComunicacao(ProcessarMensagensProtocolosStrategy.getVersion(), (byte) MensagemProtocoloCodes.NACK.getCode(),
+                            (char) 0, (char) 0, null);
+            try {
+                escreveMensagemTcp(ps,sOut);
+            } catch (IOException e) {
+                return;
+            }
         }
 
         MensagemProtocoloComunicacao mensagemProtocoloComunicacao = mens.processarMensagem(sock);
@@ -51,8 +60,9 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
             escreveMensagemTcp(mensagemProtocoloComunicacao, sOut);
 
 
-            System.out.println("Client " + sock.getInetAddress().getHostAddress() + ",port number: " + sock.getPort() +
-                    " disconnected");
+//            System.out.println("Client " + sock.getInetAddress().getHostAddress() + ",port number: " + sock.getPort
+//            () +
+//                    " disconnected");
 
             sOut.close();
             sIn.close();
@@ -94,8 +104,8 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
         String dataString = "";
 
         InetAddress clientIP = s.getInetAddress();
-        System.out.println("New client connection from " + clientIP.getHostAddress() +
-                ", port number " + s.getPort());
+//        System.out.println("New client connection from " + clientIP.getHostAddress() +
+//                ", port number " + s.getPort());
         try {
             version = sIn.readByte(); // read version
 //            System.out.println("recebido version: " + version.intValue());
@@ -122,9 +132,9 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
                 dataString += dataLine; // concat line to String that holds the whole text
             }
 
-            System.out.println("data length: " + tamanhoDataPlaceHolder);
-            if (dataLine != null)
-                System.out.println("string recebida: " + dataString);
+//            System.out.println("data length: " + tamanhoDataPlaceHolder);
+//            if (dataLine != null)
+//                System.out.println("string recebida: " + dataString);
 
             //Factory pattern
             ProcessarMensagensProtocolosStrategy mens =

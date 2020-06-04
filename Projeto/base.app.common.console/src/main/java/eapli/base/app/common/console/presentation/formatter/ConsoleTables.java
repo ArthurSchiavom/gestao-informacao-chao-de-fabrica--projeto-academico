@@ -9,8 +9,11 @@ import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 import eapli.base.processamentoMensagens.application.DTO.AgendamentoDeProcessamentoDTO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 public class ConsoleTables {
 
@@ -78,8 +81,11 @@ public class ConsoleTables {
         return tabela.generateTable();
     }
 
-    public static String tabelaDeProdutos(Collection<ProdutoDTO> produtos) {
+    public static String tabelaDeProdutos(Collection<ProdutoDTO> produtos, boolean numerar, int primeiroNumero) {
         ArrayList<String> headers = new ArrayList<>();
+        int nLinha = primeiroNumero;
+        if (numerar)
+            headers.add("Numero");
         headers.add("Código de fabrico");
         headers.add("Código comercial");
         headers.add("Descrição breve");
@@ -88,6 +94,8 @@ public class ConsoleTables {
         ArrayList<ArrayList<String>> tabelaRaw = new ArrayList<>();
         for (ProdutoDTO produtoDTO : produtos) {
             ArrayList<String> linha = new ArrayList<>();
+            if (numerar)
+                linha.add(Integer.toString(nLinha++));
             linha.add(produtoDTO.codigoUnico);
             linha.add(produtoDTO.codigoComercial);
             linha.add(produtoDTO.descricaoBreve);
@@ -118,23 +126,28 @@ public class ConsoleTables {
 
     public static String tabelaNotificacoesErrosDeProcessamento(Collection<NotificacaoErroDTO> lista, boolean numerar, int primeiroNumero) {
         ArrayList<String> headers = new ArrayList<>();
-        int contador = primeiroNumero;
+        int nLinha = primeiroNumero;
         if (numerar)
             headers.add("Numero");
         headers.add("Linha de Produção");
-        headers.add("ID da Mensagem");
         headers.add("Tipo de Erro");
         headers.add("Estado do Erro");
+        headers.add("Data de Emissão da Mensagem");
+        headers.add("Tipo de Mensagem");
+        headers.add("Máquina");
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         ArrayList<ArrayList<String>> tabelaRaw = new ArrayList<>();
         for (NotificacaoErroDTO notificacao : lista) {
             ArrayList<String> linha = new ArrayList<>();
             if (numerar)
-                linha.add(Integer.toString(contador++));
+                linha.add(Integer.toString(nLinha++));
             linha.add(notificacao.idLinhaProd);
-            linha.add(notificacao.idMensagem.tipoDeMensagem.toString());
-            linha.add(notificacao.idMensagem.tempoEmissao.timestamp.toString());
             linha.add(notificacao.tipoErroNotificacao);
             linha.add(notificacao.estadoErro);
+            linha.add(dateFormat.format(notificacao.dataEmissaoMensagem));
+            linha.add(notificacao.tipoMensagem);
+            linha.add(notificacao.maquina);
             tabelaRaw.add(linha);
         }
         ConsoleTable tabela = new ConsoleTable(headers, tabelaRaw);
@@ -142,7 +155,7 @@ public class ConsoleTables {
     }
 
     public static String tabelaTipoNotificacaoErroDTO(Collection<TipoNotificacaoErroDTO> lista, boolean numerar, int primeiroNumero) {
-        int contador = primeiroNumero;
+        int nLinha = primeiroNumero;
         ArrayList<String> headers = new ArrayList<>();
         if (numerar)
             headers.add("Numero");
@@ -151,7 +164,7 @@ public class ConsoleTables {
         for (TipoNotificacaoErroDTO tipo : lista) {
             ArrayList<String> linha = new ArrayList<>();
             if (numerar)
-                linha.add(Integer.toString(contador++));
+                linha.add(Integer.toString(nLinha++));
             linha.add(tipo.nomeDisplay);
             tabelaRaw.add(linha);
         }
@@ -160,7 +173,7 @@ public class ConsoleTables {
     }
 
     public static String tabelaEstadoNotificacaoErroDTO(Collection<EstadoNotificacaoErroDTO> lista, boolean numerar, int primeiroNumero) {
-        int contador = primeiroNumero;
+        int nLinha = primeiroNumero;
         ArrayList<String> headers = new ArrayList<>();
         if (numerar)
             headers.add("Numero");
@@ -169,7 +182,7 @@ public class ConsoleTables {
         for (EstadoNotificacaoErroDTO estado : lista) {
             ArrayList<String> linha = new ArrayList<>();
             if (numerar)
-                linha.add(Integer.toString(contador++));
+                linha.add(Integer.toString(nLinha++));
             linha.add(estado.estado);
             tabelaRaw.add(linha);
         }
@@ -185,6 +198,10 @@ public class ConsoleTables {
 
         if (elem instanceof LinhaProducaoDTO) {
             return tabelaDeLinhasDeProducao((Collection) lista, numerar, primeiroNumero);
+        }
+
+        if (elem instanceof ProdutoDTO) {
+            return tabelaDeProdutos((Collection) lista, numerar, primeiroNumero);
         }
 
         if (elem instanceof NotificacaoErroDTO) {

@@ -1,12 +1,11 @@
 package eapli.base.gestaoproducao.ordemProducao.domain;
 
-import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinha;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
-import eapli.base.gestaoproducao.ordemProducao.application.ImportarOrdensProducaoController;
 import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
+import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -31,18 +30,18 @@ public class OrdemProducaoTest {
         Mockito.when(produtoRepositoryIsPresent.produtoDeCodigoUnico(any())).thenReturn(optionalIsPresent);
         Mockito.when(produtoRepositoryIsNotPresent.produtoDeCodigoUnico(any())).thenReturn(optionalIsNotPresent);
     }
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalDomainValueException.class)
     public void testConstructorDataNoFuturo() throws IllegalDomainValueException {
         List<IdentificadorEncomenda> encomendas = new ArrayList<>();
         encomendas.add(new IdentificadorEncomenda("123"));
-        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+        OrdemProducao op = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(123), encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+        OrdemProducao op1 = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(1234),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+        OrdemProducao op2 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(123),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
@@ -52,8 +51,8 @@ public class OrdemProducaoTest {
 
         try {
             data = sdf.parse(s);
-            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
-                    new ArrayList<>(),
+            OrdemProducao op5 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(123),
+                    encomendas,
                     data,
                     new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
 
@@ -62,18 +61,18 @@ public class OrdemProducaoTest {
     }
 
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalDomainValueException.class)
     public void testConstructorQuantidadeNegativa() throws IllegalDomainValueException {
         List<IdentificadorEncomenda> encomendas = new ArrayList<>();
         encomendas.add(new IdentificadorEncomenda("123"));
-        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+        OrdemProducao op = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(123), encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+        OrdemProducao op1 = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(1234),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+        OrdemProducao op2 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(123),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
@@ -83,8 +82,8 @@ public class OrdemProducaoTest {
 
         try {
             data = sdf.parse(s);
-            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(-1),
-                    new ArrayList<>(),
+            OrdemProducao op5 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(-1),
+                    encomendas,
                     new Date(),
                     new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
 
@@ -96,14 +95,14 @@ public class OrdemProducaoTest {
     public void testConstructorDataCorreta() throws IllegalDomainValueException {
         List<IdentificadorEncomenda> encomendas = new ArrayList<>();
         encomendas.add(new IdentificadorEncomenda("123"));
-        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+        OrdemProducao op = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(123), encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+        OrdemProducao op1 = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(1234),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+        OrdemProducao op2 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(123),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
@@ -113,7 +112,7 @@ public class OrdemProducaoTest {
 
         try {
             data = sdf.parse(s);
-            OrdemProducao op5 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+            OrdemProducao op5 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(123),
                     encomendas,
                     new Date(),
                     data, Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
@@ -131,32 +130,32 @@ public class OrdemProducaoTest {
     public void identity() throws IllegalDomainValueException {
         List<IdentificadorEncomenda> encomendas = new ArrayList<>();
         encomendas.add(new IdentificadorEncomenda("123"));
-        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+        OrdemProducao op = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(123), encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO,CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+        OrdemProducao op1 = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(1234),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+        OrdemProducao op2 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(123),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        assertEquals(op1.identity(), new Identificador("dak"));
+        assertEquals(op1.identity(), new IdentificadorOrdemProducao("dak"));
     }
 
     @Test
     public void gerarOrdensProducaoDTO() throws IllegalDomainValueException {
         List<IdentificadorEncomenda> encomendas = new ArrayList<>();
         encomendas.add(new IdentificadorEncomenda("123"));
-        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+        OrdemProducao op = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(123), encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+        OrdemProducao op1 = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(1234),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+        OrdemProducao op2 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(123),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
@@ -167,14 +166,14 @@ public class OrdemProducaoTest {
     public void testGerarOrdensProducaoDTO() throws IllegalDomainValueException {
         List<IdentificadorEncomenda> encomendas = new ArrayList<>();
         encomendas.add(new IdentificadorEncomenda("123"));
-        OrdemProducao op = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(123), encomendas,
+        OrdemProducao op = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(123), encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op1 = new OrdemProducao(new Identificador("dak"), new QuantidadeAProduzir(1234),
+        OrdemProducao op1 = new OrdemProducao(new IdentificadorOrdemProducao("dak"), new QuantidadeAProduzir(1234),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));
-        OrdemProducao op2 = new OrdemProducao(new Identificador("dake"), new QuantidadeAProduzir(123),
+        OrdemProducao op2 = new OrdemProducao(new IdentificadorOrdemProducao("dake"), new QuantidadeAProduzir(123),
                 encomendas,
                 new Date(),
                 new Date(), Estado.EM_EXECUCAO, CodigoUnico.valueOf("hello", produtoRepositoryIsNotPresent));

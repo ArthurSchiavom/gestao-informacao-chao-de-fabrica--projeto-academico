@@ -4,9 +4,7 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.IdentificadorProtocoloComu
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.tcp.domain.MensagemProtocoloCodes;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
-
 import java.net.*;
 import java.util.Optional;
 
@@ -16,7 +14,7 @@ import java.util.Optional;
  * de volta uma resposta ACK e atualiza/define no seu repositório o endereço de rede da máquina
  * industrial. Caso contrário, uma resposta NACK é retornada
  */
-public class ProcessarMensagemProtocoloHello implements ProcessarMensagensProtocolosStrategy {
+public class ProcessarMensagemProtocoloHello extends ProcessarMensagensProtocolosStrategy {
 
     public final MensagemProtocoloComunicacao mensagemProtocoloComunicacao;
 
@@ -26,17 +24,18 @@ public class ProcessarMensagemProtocoloHello implements ProcessarMensagensProtoc
                                            char tamanhoData, String rawData) {
         mensagemProtocoloComunicacao = new MensagemProtocoloComunicacao(version, code, idMaquinaProtocolo,
                 tamanhoData, rawData);
-        //TODO: guardar no log
     }
 
     @Override
     public MensagemProtocoloComunicacao processarMensagem(Socket s) {
-
+        criarLog(mensagemProtocoloComunicacao.version, mensagemProtocoloComunicacao.code,
+                mensagemProtocoloComunicacao.idProtocolo, mensagemProtocoloComunicacao.tamanhoRawData,
+                mensagemProtocoloComunicacao.mensagem);
         Maquina maq;
-        if ((maq = maquinaIdentificadorExiste(mensagemProtocoloComunicacao.idProtocolo)) == null) {
+        if ((maq = maquinaIdentificadorExiste(mensagemProtocoloComunicacao.idProtocolo)) == null || mensagemProtocoloComunicacao.version != ProcessarMensagensProtocolosStrategy.getVersion()) {
 
             //falha, retorna NACK
-            return mensagemNACK();
+            return mensagemNACK(mensagemProtocoloComunicacao.version,mensagemProtocoloComunicacao.idProtocolo);
         }
 
         InetAddress sockaddr = s.getInetAddress();
@@ -49,7 +48,7 @@ public class ProcessarMensagemProtocoloHello implements ProcessarMensagensProtoc
         repo.save(maq);
 
         //sucesso retorna ACK
-        return mensagemACK();
+        return mensagemACK(mensagemProtocoloComunicacao.version,mensagemProtocoloComunicacao.idProtocolo);
     }
 
     /**
@@ -71,25 +70,4 @@ public class ProcessarMensagemProtocoloHello implements ProcessarMensagensProtoc
 
         return null;
     }
-
-    /**
-     * Constroi uma MensagemProtocoloComunicao do tipo ACK, com texto vazio
-     */
-    private MensagemProtocoloComunicacao mensagemACK() {
-
-        return new MensagemProtocoloComunicacao(mensagemProtocoloComunicacao.version,
-                (byte) MensagemProtocoloCodes.ACK.getCode(),
-                mensagemProtocoloComunicacao.idProtocolo, (char) 0, null);
-    }
-
-    /**
-     * Constroi uma MensagemProtocoloComunicao do tipo NACK, com texto vazio
-     */
-    private MensagemProtocoloComunicacao mensagemNACK() {
-
-        return new MensagemProtocoloComunicacao(mensagemProtocoloComunicacao.version,
-                (byte) MensagemProtocoloCodes.NACK.getCode(),
-                mensagemProtocoloComunicacao.idProtocolo, (char) 0, null);
-    }
-
 }

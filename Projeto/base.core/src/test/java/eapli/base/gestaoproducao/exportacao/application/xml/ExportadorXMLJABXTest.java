@@ -1,5 +1,7 @@
 package eapli.base.gestaoproducao.exportacao.application.xml;
 
+import eapli.base.comum.domain.medicao.QuantidadePositiva;
+import eapli.base.comum.domain.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
@@ -21,8 +23,6 @@ import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
-import eapli.base.gestaoproducao.medicao.QuantidadePositiva;
-import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.ordemProducao.domain.*;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
@@ -175,7 +175,7 @@ public class ExportadorXMLJABXTest {
 
 		List<OrdemProducao> listaOrdensProducao = new ArrayList<>();
 		try {
-			listaOrdensProducao.add(new OrdemProducao(new Identificador("ORDEM1"), new QuantidadeAProduzir(1550),
+			listaOrdensProducao.add(new OrdemProducao(new IdentificadorOrdemProducao("ORDEM1"), new QuantidadeAProduzir(1550),
 					listaIdentificadoresEncomenda, dateEmissao, datePrevEx, Estado.CONCLUIDA, CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent)));
 		} catch (IllegalDomainValueException e) {
 			e.printStackTrace();

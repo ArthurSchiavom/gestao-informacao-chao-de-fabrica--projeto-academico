@@ -2,8 +2,7 @@ package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
-import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
-import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
+import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 
@@ -31,8 +30,8 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
 
     @ManyToOne
     private LinhaProducao linhaProducao;
-    
-    private Identificador identificadorOrdemDeProducao;
+
+    private IdentificadorOrdemProducao identificadorOrdemDeProducao;
 
 
     public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina) {
@@ -42,7 +41,7 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         this.mensagemID = new MensagemID(tipo,tempoEmissao,codigoInternoMaquina);
         this.estadoProcessamento=EstadoProcessamento.NAO_PROCESSADO;
     }
-    public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina,Identificador ordemProducao) {
+    public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina,IdentificadorOrdemProducao ordemProducao) {
         if ((tipo == null || tempoEmissao == null||codigoInternoMaquina==null)) {
             throw new IllegalArgumentException("Mensagem não pode ter parametros null");
         }
@@ -62,7 +61,7 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         this.linhaProducao = linhaProducao;
     }
 
-    public void setIdentificadorOrdemDeProducao(Identificador identificadorOrdemDeProducao) {
+    public void setIdentificadorOrdemDeProducao(IdentificadorOrdemProducao identificadorOrdemDeProducao) {
         this.identificadorOrdemDeProducao = identificadorOrdemDeProducao;
     }
 
@@ -70,7 +69,7 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         this.estadoProcessamento = estadoProcessamento;
     }
 
-    public Identificador getIdentificadorOrdemDeProducao() {
+    public IdentificadorOrdemProducao getIdentificadorOrdemDeProducao() {
         return identificadorOrdemDeProducao;
     }
 

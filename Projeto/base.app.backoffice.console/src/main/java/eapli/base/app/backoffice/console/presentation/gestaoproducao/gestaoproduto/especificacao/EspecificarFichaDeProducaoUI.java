@@ -29,7 +29,7 @@ public class EspecificarFichaDeProducaoUI extends AbstractUI {
             return false;
         }
 
-        String produtosSemFichaDeProducaoDisplay = ConsoleTables.tabelaDeProdutos(produtosSemFichaDeProducao);
+        String produtosSemFichaDeProducaoDisplay = ConsoleTables.tabela(produtosSemFichaDeProducao, false, 0);
         System.out.println(produtosSemFichaDeProducaoDisplay + "\n\n");
 
         String idProduto = null;
@@ -43,7 +43,7 @@ public class EspecificarFichaDeProducaoUI extends AbstractUI {
         }
 
         List<ProdutoDTO> produtos = controller.produtos();
-        String produtosDisplay = ConsoleTables.tabelaDeProdutos(produtos);
+        String produtosDisplay = ConsoleTables.tabela(produtos, false, 0);
         System.out.println(produtosDisplay + "\n\n");
 
         System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + produtosDisplay + "\n\nO Produto " + idProduto + " foi selecionado.\n");

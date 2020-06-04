@@ -31,6 +31,7 @@ import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSig
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ConsultarOrdemProducaoByEncomendaUI;
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ConsultarOrdemProducaoByEstadoUI;
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ImportarOrdensProducaoUI;
+import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.EspecificarOrdemProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.exportacao.exportacaoXML.ExportacaoFicheiroXMLChaoDeFabricaUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao.EspecificarDepositoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.arquivar.ArquivarNotificacoesErroUI;
@@ -78,12 +79,13 @@ public class MainMenu extends AbstractUI {
 	private static final int REGISTAR_PRODUTO = 1;
 	private static final int REGISTAR_CATEGORIA = 2;
 	private static final int REGISTAR_MATERIAL = 3;
-	private static final int CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO = 4;
-	private static final int REGISTAR_FICHA_DE_PRODUCAO = 5;
-	private static final int REGISTAR_PRODUTO_CATALOGO=6;
-	private static final int IMPORTAR_ORDENS_PRODUCAO = 7;
-	private static final int CONSULTAR_ORDEM_PRODUCAO_ENCOMENDA = 8;
-	private static final int CONSULTAR_ORDEM_PRODUCAO_ESTADO = 9;
+	private static final int REGISTAR_ORDEM_PRODUCAO = 4;
+	private static final int CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO = 5;
+	private static final int REGISTAR_FICHA_DE_PRODUCAO = 6;
+	private static final int REGISTAR_PRODUTO_CATALOGO=7;
+	private static final int IMPORTAR_ORDENS_PRODUCAO = 8;
+	private static final int CONSULTAR_ORDEM_PRODUCAO_ENCOMENDA = 9;
+	private static final int CONSULTAR_ORDEM_PRODUCAO_ESTADO = 10;
 
 
 	// GESTOR CHAO DE FÁBRICA
@@ -215,15 +217,16 @@ public class MainMenu extends AbstractUI {
 		final Menu menu = new Menu("Produção >");
 
 		menu.addItem(REGISTAR_PRODUTO, "Carregar Catálogo de Produtos", new ImportarCatalogoProdutosAction());
-		menu.addItem(REGISTAR_CATEGORIA, "Registar categoria de matéria prima", new EspecificarCategoriaMaterialAction());
-		menu.addItem(REGISTAR_MATERIAL, "Registar material", new EspecificarMaterialAction());
+		menu.addItem(REGISTAR_CATEGORIA, "Registar Categoria de Matéria Prima", new EspecificarCategoriaMaterialAction());
+		menu.addItem(REGISTAR_MATERIAL, "Registar Material", new EspecificarMaterialAction());
+		menu.addItem(REGISTAR_ORDEM_PRODUCAO, "Registar Ordem de Produção", new EspecificarOrdemProducaoUI()::show);
 		menu.addItem(CONSULTAR_PRODUTOS_SEM_FICHA_DE_PRODUCAO, "Produtos Sem Ficha de Produção", new ConsultarProdutosSemFichaDeProducaoAction());
 		menu.addItem(REGISTAR_FICHA_DE_PRODUCAO, "Registar Ficha de Produção",
 				new EspecificarFichaDeProducaoAction());
-		menu.addItem(REGISTAR_PRODUTO_CATALOGO,"Adicionar novo produto no catalogo", new EspecificarProdutoAction());
-		menu.addItem(IMPORTAR_ORDENS_PRODUCAO,"Importar ordens de produção", new ImportarOrdensProducaoUI()::show);
-		menu.addItem(CONSULTAR_ORDEM_PRODUCAO_ENCOMENDA,"Consultar ordens de produção pelo identificador da encomenda", new ConsultarOrdemProducaoByEncomendaUI()::show);
-		menu.addItem(CONSULTAR_ORDEM_PRODUCAO_ESTADO,"Consultar ordens de produção pelo estado", new ConsultarOrdemProducaoByEstadoUI()::show);
+		menu.addItem(REGISTAR_PRODUTO_CATALOGO,"Adicionar Novo Produto no Catalogo", new EspecificarProdutoAction());
+		menu.addItem(IMPORTAR_ORDENS_PRODUCAO,"Importar Ordens de Produção", new ImportarOrdensProducaoUI()::show);
+		menu.addItem(CONSULTAR_ORDEM_PRODUCAO_ENCOMENDA,"Consultar Ordens de Produção pelo Identificador da Encomenda", new ConsultarOrdemProducaoByEncomendaUI()::show);
+		menu.addItem(CONSULTAR_ORDEM_PRODUCAO_ESTADO,"Consultar Ordens de Produção pelo Estado", new ConsultarOrdemProducaoByEstadoUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

@@ -50,7 +50,6 @@ public class MaterialBootstrapper implements Action {
                     "102",
                     categoria3);
         }catch (IOException | IllegalDomainValueException e) {
-            e.printStackTrace();
         }
         return true;
     }

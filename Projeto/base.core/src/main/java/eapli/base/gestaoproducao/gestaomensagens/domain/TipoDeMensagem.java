@@ -4,14 +4,14 @@ import javax.persistence.DiscriminatorColumn;
 
 @DiscriminatorColumn(name = "tipo")
 public enum TipoDeMensagem {
-    INICIO_DE_ATIVIDADE(Values.INICIO_DE_ATIVIDADE), FIM_DE_ATIVIDADE(Values.FIM_DE_ATIVIDADE),
-    PARAGEM_FORCADA(Values.PARAGEM_FORCADA), RETOMA_ATIVIDADE(Values.RETOMA_ATIVIDADE), CONSUMO(Values.CONSUMO),
-    PRODUCAO(Values.PRODUCAO),ENTREGA_DE_PRODUCAO(Values.ENTREGA_DE_PRODUCAO),ESTORNO(Values.ESTORNO);
+    INICIO_DE_ATIVIDADE("Início de atividade"), FIM_DE_ATIVIDADE("Fim de atividade"),
+    PARAGEM_FORCADA("Paragem forçada"), RETOMA_ATIVIDADE("Retoma de atividade"), CONSUMO("Consumo"),
+    PRODUCAO("Produção"),ENTREGA_DE_PRODUCAO("Entrega de produção"),ESTORNO("Estorno");
 
-    private final String value;
+    public final String nomeDisplay;
 
-    private TipoDeMensagem(String value) {
-        this.value = value;
+    private TipoDeMensagem(String nomeDisplay) {
+        this.nomeDisplay = nomeDisplay;
     }
 
     public static class Values {

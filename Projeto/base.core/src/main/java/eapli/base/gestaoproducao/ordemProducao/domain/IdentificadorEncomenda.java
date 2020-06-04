@@ -19,6 +19,14 @@ public class IdentificadorEncomenda implements ValueObject, Comparable<Identific
     }
 
     public IdentificadorEncomenda(String identificador) {
+        if (identificador == null) {
+            throw new IllegalArgumentException("O identificador de encomenda deve existir.");
+        }
+        identificador = identificador.trim();
+        if (identificador.isEmpty()) {
+            throw new IllegalArgumentException("O identificador de encomenda deve existir.");
+        }
+
         this.identificador = identificador;
     }
 

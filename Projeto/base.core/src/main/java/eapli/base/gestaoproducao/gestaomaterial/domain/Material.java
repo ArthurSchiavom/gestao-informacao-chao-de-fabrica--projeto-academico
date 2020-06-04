@@ -2,7 +2,7 @@
 package eapli.base.gestaoproducao.gestaomaterial.domain;
 
 import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
-import eapli.base.gestaoproducao.medicao.UnidadeDeMedida;
+import eapli.base.comum.domain.medicao.UnidadeDeMedida;
 import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;

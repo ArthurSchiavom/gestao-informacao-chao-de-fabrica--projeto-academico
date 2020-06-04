@@ -5,13 +5,15 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomensagens.domain.*;
 import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
-import eapli.base.gestaoproducao.ordemProducao.domain.Identificador;
+import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class MessageFactory {
 
@@ -25,7 +27,7 @@ public class MessageFactory {
         IdentificadorDeLote identificadorDeLote=null;
         CodigoUnico codigoUnico;
         OrdemProducao ordemPrd=null;
-        Identificador ordemID=null;
+        IdentificadorOrdemProducao ordemID=null;
         String erro;
         int quantidade;
         switch (vec[1]) {
@@ -64,9 +66,8 @@ public class MessageFactory {
             case "S0":
                 //Máquina;TipoMsg;DataHora;OrdemProducao
                 //Ordem opc
-                System.out.println("S0");
                 if (vec.length==4) {
-                    ordemID = new Identificador(vec[3].trim());
+                    ordemID = new IdentificadorOrdemProducao(vec[3].trim());
                 }
                 return new MensagemInicioDeAtividade(date,codigoInternoMaquina,ordemID);
             case "S1":
@@ -79,7 +80,7 @@ public class MessageFactory {
             case "S9":
                 //Máquina;TipoMsg;DataHora;OrdemProducao
                 if (vec.length==4) {
-                    ordemID = new Identificador(vec[3].trim());
+                    ordemID = new IdentificadorOrdemProducao(vec[3].trim());
                 }
                 return new MensagemFimDeAtividade(codigoInternoMaquina,date,ordemID);
             default:
@@ -88,24 +89,23 @@ public class MessageFactory {
     }
 
     private Date verificarDataImportada(String data) throws ParseException {
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             long validar = Long.parseLong(data);
-        }catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Data/Tempo fornecido é invalido");
         }
-        if (data.length()!=14)
+        if (data.length() != 14)
             throw new IllegalArgumentException("Data/Tempo com formato invalido!");
-        String ano=data.substring(0,4);
-        String mes=data.substring(4,6);
-        String dia=data.substring(6,8);
-        String hora=data.substring(8,10);
-        String minutos=data.substring(10,12);
-        String segundos=data.substring(12,14);
-        String make=ano+"-"+mes+"-"+dia+" "+hora+":"+minutos+":"+segundos;
-        Date date=format.parse(make);
+        String ano = data.substring(0, 4);
+        String mes = data.substring(4, 6);
+        String dia = data.substring(6, 8);
+        String hora = data.substring(8, 10);
+        String minutos = data.substring(10, 12);
+        String segundos = data.substring(12, 14);
+        String make = ano + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":" + segundos;
+        Date date = format.parse(make);
         return date;
     }
-
 
 }

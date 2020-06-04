@@ -15,6 +15,17 @@ import java.util.List;
 
 public class ConsultarErrosProcessamentoArquivadosUI extends AbstractUI {
 
+    @Override
+    protected boolean doShow() {
+        ConsultarErrosProcessamentoController controller = new ConsultarErrosProcessamentoController();
+
+        prepararController(controller);
+        mostrarResultado(controller);
+
+        UserInteractionFlow.enterParaContinuar();
+        return false;
+    }
+
     private void mostrarTabela(Collection collection) {
         String tabela = ConsoleTables.tabela(collection, true, 1);
         System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + tabela + "\n\n");
@@ -43,19 +54,12 @@ public class ConsultarErrosProcessamentoArquivadosUI extends AbstractUI {
 
     private void mostrarResultado(ConsultarErrosProcessamentoController controller) {
         List<NotificacaoErroDTO> resultado = controller.buscarResultado();
+        if (resultado.isEmpty()) {
+            System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + "** RESULTADO **\n\nNão há notificações nas condições especificadas.\n\n");
+            return;
+        }
         String resultadoDisplay = ConsoleTables.tabela(resultado, false, 0);
         System.out.println(SimpleConsoleMessages.CLEAR_SCREEN + "** RESULTADO **\n\n" + resultadoDisplay + "\n\n");
-    }
-
-    @Override
-    protected boolean doShow() {
-        ConsultarErrosProcessamentoController controller = new ConsultarErrosProcessamentoController();
-
-        prepararController(controller);
-        mostrarResultado(controller);
-
-        UserInteractionFlow.enterParaContinuar();
-        return false;
     }
 
     @Override
