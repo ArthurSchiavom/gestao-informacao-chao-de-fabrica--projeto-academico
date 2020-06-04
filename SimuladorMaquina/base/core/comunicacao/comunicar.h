@@ -2,6 +2,14 @@
 #define SIMULADORMAQUINA_COMUNICAR_H
 
 #include "informacao_comunicacao.h"
+#include "../utils/const.h"
+#include "../maquina/informacao_maquina.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <netdb.h>
 
 
 /**
@@ -20,5 +28,9 @@ int handshake_tcp(char *endereco, char *porta, Payload *resultado);
  * @return TRUE em caso de sucesso e FALSE caso contrário
  */
 int enviar_packet_tcp(char *target, char *porta, Payload payload, Payload *resultado, short inverterBytesDeNumeros);
+
+int receive_packet_tcp_on_open_socket(int socket, Payload *resultado);
+
+int send_packet_tcp_on_open_socket(Packet_tcp packet, short inverterBytesDeNumeros);
 
 #endif //SIMULADORMAQUINA_COMUNICAR_H

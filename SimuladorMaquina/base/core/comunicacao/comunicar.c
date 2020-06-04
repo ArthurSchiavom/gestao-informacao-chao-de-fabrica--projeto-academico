@@ -1,33 +1,7 @@
 #include "comunicar.h"
-#include "../utils/const.h"
-#include "../maquina/informacao_maquina.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <errno.h>
 
 #define UDP_BUFFER_SIZE 512
 #define TIMEOUT_SECONDS 3
-
-// read a string from stdin protecting buffer overflow
-#define GETS(B, S) {fgets(B,S-2,stdin);B[strlen(B)-1]=0;}
-
-typedef struct Packet_tcp {
-    Payload payload;
-    int socket;
-} Packet_tcp;
-
-typedef struct Packet_udp {
-    Payload payload;
-    char *endereco;
-    char *porta;
-} Packet_udp;
 
 typedef struct Built_Payload {
     int size;
@@ -208,5 +182,3 @@ int enviar_packet_tcp(char *target, char *porta, Payload payload, Payload *resul
     close(sock);
     return sucesso;
 }
-
-

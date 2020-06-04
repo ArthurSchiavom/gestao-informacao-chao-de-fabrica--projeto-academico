@@ -12,7 +12,7 @@ public class ProdutoBootstrapper implements Action {
 
     @Override
     public boolean execute() {
-        controller.iniciar(Application.settings().getProperty(AppSettings.BOOTSTRAP_PRODUTO), false);
+        controller.importar(Application.settings().getProperty(AppSettings.BOOTSTRAP_PRODUTO), false);
         return true;
     }
 }

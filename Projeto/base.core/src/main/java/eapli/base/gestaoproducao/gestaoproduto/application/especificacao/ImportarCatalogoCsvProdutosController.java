@@ -21,7 +21,7 @@ public class ImportarCatalogoCsvProdutosController implements ImportarCatalogoPr
     private final String CHARSET_NAME = "UTF-8";
 
     @Override
-    public ResultadoImportacaoLinhaALinha iniciar(String filePath, boolean substituirSeExistir) {
+    public ResultadoImportacaoLinhaALinha importar(String filePath, boolean substituirSeExistir) {
         ResultadoImportacaoLinhaALinhaTransformer transformer = new ResultadoImportacaoLinhaALinhaTransformer();
         FileScanner<String[]> scanner;
         try {

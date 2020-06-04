@@ -3,6 +3,7 @@
 
 #define CURRENT_PROTOCOL_VERSION 0
 #define PORTA_SISTEMA_CENTRAL "6834"
+#define PORTA_RECECAO_MAQUINA "6835"
 #define PORTA_SMM "7194"
 
 #define REQUEST_CODE_HELLO 0
@@ -16,10 +17,6 @@
 #define PAYLOAD_STATIC_DATA_SIZE 6
 #define TEMPO_ESPERA_RECONEXAO_SCM_SEGUNDOS 3
 
-int intervalo_entre_mensagens_segundos;
-char *endereco_sistema_central;
-char *endereco_smm;
-
 typedef struct Payload {
     unsigned char version;
     unsigned char code;
@@ -27,5 +24,20 @@ typedef struct Payload {
     unsigned short data_length;
     char *data;
 } Payload;
+
+typedef struct Packet_tcp {
+    Payload payload;
+    int socket;
+} Packet_tcp;
+
+typedef struct Packet_udp {
+    Payload payload;
+    char *endereco;
+    char *porta;
+} Packet_udp;
+
+int intervalo_entre_mensagens_segundos;
+char *endereco_sistema_central;
+char *endereco_smm;
 
 #endif //SIMULADORMAQUINA_INFORMACAO_COMUNICACAO_H

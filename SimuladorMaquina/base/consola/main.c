@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../core/boot/boot.h"
-#include "../core/comunicacao/envio_mensagens_carregadas.h"
+#include "../core/comunicacao/scm/envio_mensagens_carregadas.h"
+#include "../core/comunicacao/scm/rececao_packets.h"
 #include <string.h>
 #include <pthread.h>
 
@@ -17,26 +18,38 @@ int main(int argc, char **argv) {
                "caminho para o ficheiro de mensagens, endereço do sistema central e endereço do SMM.\n\n");
         return 1;
     }
+    int success1, success2;
 
     printf("\n** A carregar\n");
-    int success = boot(argv[INDEX_PARAM_ID_MAQUINA], argv[INDEX_PARAM_INTERVALO_CADENCIA],
-            argv[INDEX_PARAM_CAMINHO_FICHEIRO_MENSAGENS],
-            argv[INDEX_PARAM_ENDERECO_SISTEMA_CENTRAL],
-            argv[INDEX_PARAM_ENDERECO_SMM]);
+    success1 = boot(argv[INDEX_PARAM_ID_MAQUINA], argv[INDEX_PARAM_INTERVALO_CADENCIA],
+                    argv[INDEX_PARAM_CAMINHO_FICHEIRO_MENSAGENS],
+                    argv[INDEX_PARAM_ENDERECO_SISTEMA_CENTRAL],
+                    argv[INDEX_PARAM_ENDERECO_SMM]);
 
-    if (success == -1) {
+    if (success1 != TRUE) {
         printf("** Falha ao tentar conectar ao sistema central\n");
     }
     printf("** Simulador iniciado\n");
 
     pthread_t t1;
-    success = iniciar_envio_mensagens(&t1);
-    if (success == -1) {
-        printf("Falha ao iniciar a thread de envio de mensagens");
-    } else {
+    success1 = iniciar_envio_mensagens(&t1);
+    if (success1 == TRUE) {
         printf("** Sistema de envio de mensagens inicializado\n");
-        pthread_join(t1, NULL);
+    } else {
+        printf("Falha ao iniciar o envio de mensagens\n");
     }
 
+    pthread_t t2;
+    success2 = iniciar_rececao_packets(&t2);
+    if (success2 == TRUE) {
+        printf("** Sistema de receção de packets inicializado\n");
+    } else {
+        printf("Falha ao inicializar a receção de packets\n");
+    }
+
+    if (success1 == TRUE)
+        pthread_join(t1, NULL);
+    if (success2 == TRUE)
+        pthread_join(t2, NULL);
     return 0;
 }

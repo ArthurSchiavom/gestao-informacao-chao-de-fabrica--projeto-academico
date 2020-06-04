@@ -24,7 +24,7 @@ public class ImportarCatalogoProdutosUI extends AbstractUI {
         optionSelector.show();
 
         ImportarCatalogoProdutosController controller = new ImportarCatalogoCsvProdutosController();
-        ResultadoImportacaoLinhaALinha resultado = controller.iniciar(caminho, substituir.val);
+        ResultadoImportacaoLinhaALinha resultado = controller.importar(caminho, substituir.val);
 
         System.out.println("\n\n" + ResultadoImportacaoFicheiroPresentationUtils.construirMensagemResultado(resultado) + "\n");
         UserInteractionFlow.enterParaContinuar();

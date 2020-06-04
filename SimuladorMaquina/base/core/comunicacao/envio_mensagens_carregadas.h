@@ -1,8 +1,0 @@
-#ifndef SIMULADORMAQUINA_ENVIO_MENSAGENS_CARREGADAS_H
-#define SIMULADORMAQUINA_ENVIO_MENSAGENS_CARREGADAS_H
-
-#include <pthread.h>
-
-int iniciar_envio_mensagens(pthread_t *t);
-
-#endif //SIMULADORMAQUINA_ENVIO_MENSAGENS_CARREGADAS_H
