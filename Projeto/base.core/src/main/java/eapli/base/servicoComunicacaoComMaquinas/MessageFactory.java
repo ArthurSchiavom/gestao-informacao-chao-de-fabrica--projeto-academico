@@ -66,6 +66,7 @@ public class MessageFactory {
             case "S0":
                 //Máquina;TipoMsg;DataHora;OrdemProducao
                 //Ordem opc
+                System.out.println("S0");
                 if (vec.length==4) {
                     ordemID = new IdentificadorOrdemProducao(vec[3].trim());
                 }
