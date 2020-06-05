@@ -5,6 +5,7 @@ import LinhaProducao.domain.Maquina.IdMaquina;
 import LinhaProducao.domain.Maquina.Maquina;
 import Mensagens.domain.Codigos;
 
+import java.net.InetAddress;
 import java.util.*;
 
 public class LinhaProducao {
@@ -18,14 +19,14 @@ public class LinhaProducao {
 		this.listaMaquinas = Collections.synchronizedList(new ArrayList<>());
 	}
 
-	public Maquina adicionarMaquina(IdMaquina idMaquina, Codigos codigo) {
+	public Maquina adicionarMaquina(IdMaquina idMaquina, Codigos codigo, InetAddress ip) {
 		Maquina maquina;
 		switch (codigo) {
 			case ACK:
-				maquina = new Maquina(idMaquina, EstadoMaquina.ATIVO);
+				maquina = new Maquina(idMaquina, EstadoMaquina.ATIVO, ip);
 				break;
 			case NACK:
-				maquina = new Maquina(idMaquina, EstadoMaquina.SUSPENSO);
+				maquina = new Maquina(idMaquina, EstadoMaquina.SUSPENSO, ip);
 				break;
 			default:
 				throw new IllegalArgumentException(CODIGO_INVALIDO);

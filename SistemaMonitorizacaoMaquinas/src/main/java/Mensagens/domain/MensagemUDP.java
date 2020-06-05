@@ -18,7 +18,7 @@ abstract class MensagemUDP{
 			throw new IllegalArgumentException("nenhum valor pode ser null");
 		}
 		byte[] dados = new byte[6 + data.length()];
-		dados[0] = version.value();
+		dados[0] = version.byteValue();
 		dados[1] = codigo.value();
 		dados[2] = idMaquina.leastSignificativeByte();
 		dados[3] = idMaquina.mostSignificativeByte();
@@ -38,23 +38,23 @@ abstract class MensagemUDP{
 		this.udpPacket = packet;
 	}
 
-	public DatagramPacket getUdpPacket() {
+	public final DatagramPacket getUdpPacket() {
 		return udpPacket;
 	}
 
-	public Version getVersion() {
+	public final Version getVersion() {
 		return new Version(Byte.toUnsignedInt(udpPacket.getData()[0]));
 	}
 
-	public Codigos getCodigo() {
+	public final Codigos getCodigo() {
 		return Codigos.searchForCodigo(Byte.toUnsignedInt(udpPacket.getData()[1]));
 	}
 
-	MessageData getMessageData() {
+	final MessageData getMessageData() {
 		return new MessageData(Arrays.copyOfRange(udpPacket.getData(), 4, udpPacket.getLength()));
 	}
 
-	public IdMaquina getIdMaquina() {
+	public final IdMaquina getIdMaquina() {
 		return new IdMaquina(Arrays.copyOfRange(udpPacket.getData(), 2, 4));
 	}
 }

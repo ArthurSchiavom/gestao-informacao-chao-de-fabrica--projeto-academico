@@ -26,6 +26,10 @@ public class Version {
 		return Byte.toUnsignedInt(versao);
 	}
 
+	public byte byteValue() {
+		return versao;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

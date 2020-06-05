@@ -1,5 +1,6 @@
 package LinhaProducao.domain.Maquina;
 
+import java.net.InetAddress;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,14 +11,16 @@ public class Maquina {
 	private final IdMaquina id;
 	private Date lastUpdated;
 	private EstadoMaquina estado;
+	private InetAddress ip;
 
-	public Maquina(IdMaquina idMaquina, EstadoMaquina estado) {
+	public Maquina(IdMaquina idMaquina, EstadoMaquina estado, InetAddress ip) {
 		if(idMaquina == null || estado == null) {
 			throw new IllegalArgumentException("valores de entrada não podem ser null");
 		}
 		this.id = idMaquina;
 		this.lastUpdated = new Date();
 		this.estado = estado;
+		this.ip = ip;
 	}
 
 	/**
