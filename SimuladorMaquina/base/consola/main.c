@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
 
     if (success1 != TRUE) {
         printf("** Falha ao tentar conectar ao sistema central\n");
+        return -1;
     }
     printf("** Simulador iniciado\n");
 

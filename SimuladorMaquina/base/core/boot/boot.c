@@ -18,6 +18,12 @@ int boot(char *id_maquina_param, char *intervalo_segundos_param,
     endereco_smm = malloc(strlen(endereco_smm_param) + 1);
     strcpy(endereco_smm, endereco_smm_param);
 
+    int success = pthread_mutex_init(&mutex_a_reconectar_ao_sistema_central, NULL);
+    if (success != 0) {
+        perror("Falha ao tentar iniciar semáforo.");
+        return FALSE;
+    }
+
     handshake_sistema_central_ate_sucesso();
 
     return TRUE;

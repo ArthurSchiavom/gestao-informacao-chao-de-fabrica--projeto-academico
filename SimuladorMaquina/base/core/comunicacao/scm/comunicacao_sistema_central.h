@@ -7,10 +7,15 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include "../informacao_comunicacao.h"
 #include "../comunicar.h"
 
+#define NOME_SEM_TENTATIVA_RECONEXAO_SCM "REC_SCM"
+
 static int primeira_conexao_ao_sistema_central_terminada = FALSE;
+static int a_reconectar_ao_sistema_central = FALSE;
+static pthread_mutex_t mutex_a_reconectar_ao_sistema_central;
 
 void sleep_ate_primeira_conexao_ser_bem_sucedida();
 

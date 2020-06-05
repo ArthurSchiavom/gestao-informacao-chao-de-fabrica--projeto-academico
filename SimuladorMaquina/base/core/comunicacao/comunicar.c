@@ -1,3 +1,5 @@
+#include <fcntl.h>
+#include <errno.h>
 #include "comunicar.h"
 
 #define UDP_BUFFER_SIZE 512
@@ -46,13 +48,12 @@ Built_Payload build_payload(Payload payload, short inverterBytesDeNumeros) {
 struct timeval to;
 
 int start_tcp_connection(char *target, char *porta) {
+    long arg;
     int err, sock;
     struct addrinfo req, *list;
 
     to.tv_sec = TIMEOUT_SECONDS;
     to.tv_usec = 0;
-    setsockopt (sock,SOL_SOCKET,SO_RCVTIMEO,(char *)&to, sizeof(to));
-    setsockopt (sock,SOL_SOCKET,SO_SNDTIMEO,(char *)&to, sizeof(to));
 
     bzero((char *) &req, sizeof(req));
     // let getaddrinfo set the family depending on the supplied server address
@@ -67,6 +68,10 @@ int start_tcp_connection(char *target, char *porta) {
         freeaddrinfo(list);
         return -1;
     }
+
+    setsockopt (sock,SOL_SOCKET,SO_RCVTIMEO,(char *)&to, sizeof(to));
+    setsockopt (sock,SOL_SOCKET,SO_SNDTIMEO,(char *)&to, sizeof(to));
+
     if (connect(sock, (struct sockaddr *) list->ai_addr, list->ai_addrlen) == -1) {
         freeaddrinfo(list);
         close(sock);
