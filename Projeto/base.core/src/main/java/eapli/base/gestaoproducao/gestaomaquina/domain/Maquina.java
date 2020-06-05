@@ -47,7 +47,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, Convertable
     @XmlElement
     private FicheiroConfiguracao ficheiroConfiguracao;
     @XmlElement
-    private IdentificadorProtocoloComunicacao identificadorProtocoloComunicacao;
+    public final IdentificadorProtocoloComunicacao identificadorProtocoloComunicacao;
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     public final Date dataInstalacao;
@@ -65,6 +65,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, Convertable
     protected Maquina() {
         ficheiroConfiguracao=null;
         dataInstalacao = null;
+        identificadorProtocoloComunicacao = null;
     }
 
     public Maquina(NumeroSerie numeroSerie, CodigoInternoMaquina codigoInterno, OrdemLinhaProducao ordemLinhaProducao,

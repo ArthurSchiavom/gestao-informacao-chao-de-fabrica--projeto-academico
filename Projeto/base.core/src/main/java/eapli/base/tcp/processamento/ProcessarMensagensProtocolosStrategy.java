@@ -46,7 +46,7 @@ public abstract class ProcessarMensagensProtocolosStrategy {
 
         try {
             fw.write("version: " + (int) version + " code: " + (int) code + " protocolo:" + (int) idProtocolo + " tamanho: " +(int)tamanhoRawData);
-            if (tamanhoRawData > 0) {
+            if (tamanhoRawData > 0 && mensagem != null) {
                 fw.write(" enviado: " + mensagem);
             }
             fw.close();

@@ -7,6 +7,8 @@ import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicoComunicacaoComMaquinas.MessageFactory;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
+import eapli.framework.domain.repositories.ConcurrencyException;
+import eapli.framework.domain.repositories.IntegrityViolationException;
 
 import java.net.InetAddress;
 import java.net.Socket;
@@ -25,27 +27,31 @@ public class ProcessarMensagemProtocoloMSG extends ProcessarMensagensProtocolosS
 
     public ProcessarMensagemProtocoloMSG(Byte version, Byte code, char idMaquinaProtocolo,
                                          char tamanhoData, String rawData) {
-        mensagemProtocoloComunicacao = new MensagemProtocoloComunicacao(version, code, idMaquinaProtocolo,
+        mensagemProtocoloComunicacao = new MensagemProtocoloComunicacao(version, code,
+                idMaquinaProtocolo,
                 tamanhoData, rawData);
     }
 
     @Override
     public MensagemProtocoloComunicacao processarMensagem(Socket s) {
         criarLog(mensagemProtocoloComunicacao.version, mensagemProtocoloComunicacao.code,
-                mensagemProtocoloComunicacao.idProtocolo, mensagemProtocoloComunicacao.tamanhoRawData,
+                mensagemProtocoloComunicacao.idProtocolo,
+                mensagemProtocoloComunicacao.tamanhoRawData,
                 mensagemProtocoloComunicacao.mensagem);
         Maquina maq;
         if ((maq = maquinaIdentificadorExiste(mensagemProtocoloComunicacao.idProtocolo)) == null || mensagemProtocoloComunicacao.version != ProcessarMensagensProtocolosStrategy.getVersion()) {
             //falha, retorna NACK
-            return mensagemNACK(mensagemProtocoloComunicacao.version, mensagemProtocoloComunicacao.idProtocolo);
+            return mensagemNACK(mensagemProtocoloComunicacao.version,
+                    mensagemProtocoloComunicacao.idProtocolo);
         }
 
         InetAddress sockaddr = s.getInetAddress();
 
         // verifica se o IP recebido é igual ao IP na máquina
         if (!maq.getIp().equals(sockaddr)) {
-            // o IP recebido é diferente do IP recebido
-            return mensagemNACK(mensagemProtocoloComunicacao.version, mensagemProtocoloComunicacao.idProtocolo);
+            // o IP recebido é diferente do IP da maquina
+            return mensagemNACK(mensagemProtocoloComunicacao.version,
+                    mensagemProtocoloComunicacao.idProtocolo);
 
         }
 
@@ -57,14 +63,22 @@ public class ProcessarMensagemProtocoloMSG extends ProcessarMensagensProtocolosS
         try {
             mens = mf.getMessageType(mensagemProtocoloComunicacao.mensagem.split(";"));
         } catch (Exception e) {
-            return mensagemNACK(mensagemProtocoloComunicacao.version, mensagemProtocoloComunicacao.idProtocolo);
+            return mensagemNACK(mensagemProtocoloComunicacao.version,
+                    mensagemProtocoloComunicacao.idProtocolo);
         }
 
-        PersistenceContext.repositories().mensagem().save(mens);
+        try {
+            PersistenceContext.repositories().mensagem().save(mens);
+        } catch (Exception ex) {
+            System.out.println(mens);
+            return mensagemNACK(mensagemProtocoloComunicacao.version,
+                    mensagemProtocoloComunicacao.idProtocolo);
+        }
 
-        System.out.println("MSG sucesso");
+//        System.out.println("MSG sucesso");
         //sucesso retorna ACK
-        return mensagemACK(mensagemProtocoloComunicacao.version, mensagemProtocoloComunicacao.idProtocolo);
+        return mensagemACK(mensagemProtocoloComunicacao.version,
+                mensagemProtocoloComunicacao.idProtocolo);
     }
 
     /**
@@ -99,7 +113,8 @@ public class ProcessarMensagemProtocoloMSG extends ProcessarMensagensProtocolosS
 //
 //        try {
 //            fw.write("version: " + (int) mensagemProtocoloComunicacao.version + " code: " + (int)
-//            mensagemProtocoloComunicacao.code + " protocolo:" + (int) mensagemProtocoloComunicacao.idProtocolo + "
+//            mensagemProtocoloComunicacao.code + " protocolo:" + (int)
+//            mensagemProtocoloComunicacao.idProtocolo + "
 //            tamanho: " + (int) mensagemProtocoloComunicacao.tamanhoRawData);
 //            if (mensagemProtocoloComunicacao.tamanhoRawData > 0) {
 //                fw.write("enviado: " + mensagemProtocoloComunicacao.mensagem);

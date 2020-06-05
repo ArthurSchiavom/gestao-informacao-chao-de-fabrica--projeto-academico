@@ -13,8 +13,6 @@ public class ProcessarMensagemProtocoloFactory {
             case(1):
                 return new ProcessarMensagemProtocoloMSG(version,code,idMaquinaProtocolo,tamanhoData,rawData);
 
-                //2 config
-
                 //3 reset
 
             // acrescentar os outros tipos de mensagens qnd existirem

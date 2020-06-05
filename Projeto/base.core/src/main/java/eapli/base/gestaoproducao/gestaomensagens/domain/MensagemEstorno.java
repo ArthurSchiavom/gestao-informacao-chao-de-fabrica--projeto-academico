@@ -22,7 +22,7 @@ public class MensagemEstorno extends Mensagem implements AggregateRoot<MensagemI
     }
 
     public MensagemEstorno(CodigoUnico codigoUnico, CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir) {
-        super(TipoDeMensagem.CONSUMO, new TimestampEmissao(dataHora), codigoInternoMaquina);
+        super(TipoDeMensagem.ESTORNO, new TimestampEmissao(dataHora), codigoInternoMaquina);
         if (codigoUnico == null && dataHora == null)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
         this.codigoUnico = codigoUnico;

@@ -183,7 +183,7 @@ public class ChaoDeFabrica {
 
 		public Builder loadOrdensProducao(Date dataAFiltrar) {
 			OrdemProducaoRepository ordProdRepo = repoFact.ordemProducao();
-			this.listaOrdensProducao = loadList(ordProdRepo.findAll());
+			this.listaOrdensProducao = ordProdRepo.findAllwithDateAfter(dataAFiltrar);
 			verifyListIsNotEmpty(listaOrdensProducao);
 			return this;
 		}

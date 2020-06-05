@@ -40,7 +40,7 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
             return;
         }
 
-        ProcessarMensagensProtocolosStrategy mens = lerMensagemTcp(sock, sIn);
+        ProcessarMensagensProtocolosStrategy mens = lerMensagemTcp(sIn);
 
 
         if (mens == null) { // return NACK if given code doesn't exist
@@ -68,7 +68,6 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
             sIn.close();
             sock.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -96,14 +95,14 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
     /**
      * Le mensagem tcp do client
      */
-    public ProcessarMensagensProtocolosStrategy lerMensagemTcp(Socket s, DataInputStream sIn) {
+    public static ProcessarMensagensProtocolosStrategy lerMensagemTcp(DataInputStream sIn) {
         char maquinaID, tamanhoData;
         int maquinaIDPlaceHolder, tamanhoDataPlaceHolder;
         Byte version, code;
         byte[] rawData;
         String dataString = "";
 
-        InetAddress clientIP = s.getInetAddress();
+//        InetAddress clientIP = s.getInetAddress();
 //        System.out.println("New client connection from " + clientIP.getHostAddress() +
 //                ", port number " + s.getPort());
         try {
@@ -123,7 +122,7 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
 //            System.out.println("recebido tamanho data: " + (int) tamanhoData);
 
             int readData = 0;
-            String dataLine = null;
+            String dataLine;
 
             while (readData < tamanhoData) {
                 rawData = new byte[tamanhoData];
