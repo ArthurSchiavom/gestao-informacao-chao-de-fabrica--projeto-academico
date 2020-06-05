@@ -1,4 +1,3 @@
-#include <sys/dirent.h>
 #include <dirent.h>
 #include <errno.h>
 #include "ficheiros.h"
