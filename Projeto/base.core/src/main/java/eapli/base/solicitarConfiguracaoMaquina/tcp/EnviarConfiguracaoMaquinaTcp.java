@@ -4,7 +4,6 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.tcp.domain.MensagemProtocoloCodes;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import eapli.base.tcp.processamento.ProcessarMensagensProtocolosStrategy;
-
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
@@ -27,7 +26,7 @@ public class EnviarConfiguracaoMaquinaTcp {
             sock = new Socket(serverIP, PORT);
             sock.setSoTimeout(10 * 1000); // 10 seconds timeout
         } catch (IOException ex) {
-            System.out.println("Failed to establish TCP connection");
+            throw new IllegalArgumentException("Conexão TCP não estabelecida");
         }
 
         DataOutputStream sOut;
@@ -48,7 +47,7 @@ public class EnviarConfiguracaoMaquinaTcp {
 
             return false;
         } catch (IOException|NullPointerException e) {
-            return false;
+            throw new IllegalArgumentException("Conexão ao socket foi perdida.");
         }
     }
 
@@ -62,12 +61,15 @@ public class EnviarConfiguracaoMaquinaTcp {
         sOut.writeChar(data.idProtocolo);
         sOut.writeChar(data.tamanhoRawData);
         sOut.write(data.mensagem.getBytes());
-        System.out.println(data.mensagem);
 
         sOut.flush();
     }
 
 
+    /**
+     * le a mensagem tcp
+     * @throws IOException em caso de erro com o socket
+     */
     private static MensagemProtocoloComunicacao lerMensagemTcp(DataInputStream sIn) throws IOException {
         char maquinaID, tamanhoData;
         int maquinaIDPlaceHolder, tamanhoDataPlaceHolder;

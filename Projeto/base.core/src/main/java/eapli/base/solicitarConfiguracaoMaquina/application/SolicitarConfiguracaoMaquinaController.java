@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class SolicitarConfiguracaoMaquinaController {
 
-    public boolean enviarConfigPorTcp(String caminho, String codInterno) {
+    public boolean enviarConfigPorTcp(String caminho, String codInterno) throws IllegalArgumentException {
 
         MaquinaRepository repo = PersistenceContext.repositories().maquinas();
         CodigoInternoMaquina cod = new CodigoInternoMaquina(codInterno);
@@ -19,19 +19,17 @@ public class SolicitarConfiguracaoMaquinaController {
         try{
             maq = repo.findByIdentifier(cod).get();
         }catch(Exception ex){
-            return false;
+            throw new IllegalArgumentException("Máquina não existe.");
         }
 
         String data;
         try {
            data = getFicheiro(caminho);
         } catch (FileNotFoundException e) {
-            return false;
+            throw new IllegalArgumentException("Ficheiro não encontrado.");
         }
 
-        EnviarConfiguracaoMaquinaTcp.enviarConfiguracaoMaquinaTcp(data,maq);
-
-        return true;
+        return EnviarConfiguracaoMaquinaTcp.enviarConfiguracaoMaquinaTcp(data,maq);
     }
 
 
@@ -45,6 +43,7 @@ public class SolicitarConfiguracaoMaquinaController {
         while(in.hasNext()){
             data+= in.next();
         }
+        in.close();
         return data;
     }
 }

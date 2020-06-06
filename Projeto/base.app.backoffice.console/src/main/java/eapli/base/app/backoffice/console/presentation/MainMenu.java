@@ -98,6 +98,7 @@ public class MainMenu extends AbstractUI {
 	private static final int CONSULTAR_ERROS_ATIVOS = 6;
 	private static final int CONSULTAR_ERROS_ARQUIVADOS = 7;
 	private static final int ARQUIVAR_ERROS = 8;
+	private static final int SOLICITAR_CONFIG_MAQUINA = 9;
 
 	// SERVICOS
 	private static final int PROCESSAMENTO_DE_MENSAGENS_SISTEMA=1;
@@ -249,7 +250,7 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(CONSULTAR_ERROS_ATIVOS, "Consultar Erros de Processamento por Tratar", new ConsultarErrosProcessamentoAtivosUI()::show);
 		menu.addItem(CONSULTAR_ERROS_ARQUIVADOS, "Consultar Erros de Processamento Arquivados", new ConsultarErrosProcessamentoArquivadosUI()::show);
 		menu.addItem(ARQUIVAR_ERROS, "Arquivar Erros de Processamento", new ArquivarNotificacoesErroUI()::show);
-		menu.addItem(9, "config", new SolicitarConfiguracaoMaquinaUI()::show);
+		menu.addItem(SOLICITAR_CONFIG_MAQUINA, "Configuração de máquina", new SolicitarConfiguracaoMaquinaUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
