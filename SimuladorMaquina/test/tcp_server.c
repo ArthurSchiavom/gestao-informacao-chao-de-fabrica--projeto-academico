@@ -133,8 +133,6 @@ Packett receive_packet_tcpp(int socket) {
         result.socket = -1;
     }
 
-    printf("READ FROM SOCKET: id: %d; length: %d\n", result.payload.id, result.payload.data_length);
-
     return result;
 }
 
@@ -221,9 +219,6 @@ int main(void) {
                     data.data = malloc(1);
                     data.data[0] = 0;
                 }
-
-                printf("\nPacket received! %d, %d, %d, %d, %s!\n", data.version, data.code, data.id, data.data_length,
-                       data.data);
 
                 if (data.code == 155)
                     break;

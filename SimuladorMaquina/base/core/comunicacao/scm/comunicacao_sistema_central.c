@@ -18,7 +18,22 @@ int handshake_sistema_central() {
 }
 
 void reconectar_sistema_central() {
-    printf("Falha ao tentar contactar o servidor central, a tentar reconectar.");
+    char tentar;
+    pthread_mutex_lock(&mutex_a_reconectar_ao_sistema_central);
+    if (a_reconectar_ao_sistema_central == TRUE) {
+        tentar = FALSE;
+    }
+    else {
+        tentar = TRUE;
+        a_reconectar_ao_sistema_central = TRUE;
+    }
+    pthread_mutex_unlock(&mutex_a_reconectar_ao_sistema_central);
+
+    if (tentar == FALSE) {
+        return;
+    }
+
+    printf("Falha ao tentar contactar o servidor central, a tentar reconectar.\n");
 
     int success = FALSE;
     int should_sleep = FALSE;
@@ -56,6 +71,8 @@ void reconectar_sistema_central() {
             sleep(TEMPO_ESPERA_RECONEXAO_SCM_SEGUNDOS);
         }
     }
+
+    a_reconectar_ao_sistema_central = FALSE;
 }
 
 void do_handshake_sistema_central_ate_sucesso() {

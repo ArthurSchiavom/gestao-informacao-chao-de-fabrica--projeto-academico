@@ -50,8 +50,8 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnab
             try {
                 escreveMensagemTcp(ps,sOut);
             } catch (IOException e) {
-                return;
             }
+            return;
         }
 
         MensagemProtocoloComunicacao mensagemProtocoloComunicacao = mens.processarMensagem(sock);

@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <sys/stat.h>
+
+struct stat st = {0};
 
 char** nomes_ficheiros(char *caminho_diretorio, int *n_ficheiros) {
     DIR* dir;
@@ -34,4 +37,10 @@ char** nomes_ficheiros(char *caminho_diretorio, int *n_ficheiros) {
     }
 
     return resultado;
+}
+
+void criar_diretorio(char *caminho) {
+    if (stat(caminho, &st) == -1) {
+        mkdir(caminho, 0700);
+    }
 }

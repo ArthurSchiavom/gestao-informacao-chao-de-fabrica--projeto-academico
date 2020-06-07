@@ -7,6 +7,8 @@
 #define PATH_PASTA_OUTPUT_CONFIG "ficheiros_config/"
 
 char *proximo_caminho_ficheiro_config() {
+    criar_diretorio(PATH_PASTA_OUTPUT_CONFIG);
+
     char **caminhos;
     int actual_tamanho; // para gestão automatica da memória
     int *n_ficheiros = &actual_tamanho;
@@ -86,10 +88,10 @@ void receber_packet(int *socket) {
     resposta.payload.data_length = 0;
 
     if (resultado.id == id_maquina) {
-        resposta.payload.code = REQUEST_CODE_NACK;
+        resposta.payload.code = REQUEST_CODE_ACK;
     }
     else {
-        resposta.payload.code = REQUEST_CODE_ACK;
+        resposta.payload.code = REQUEST_CODE_NACK;
     }
 
     send_packet_tcp_on_open_socket(resposta, TRUE);
