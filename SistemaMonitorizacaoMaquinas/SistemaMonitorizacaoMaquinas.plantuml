@@ -4,7 +4,7 @@ title __SISTEMAMONITORIZACAOMAQUINAS's Class Diagram__\n
 
   namespace  {
     namespace inhaProducao.domain {
-      class LinhaProducao.domain.LinhaProducao {
+      class ChaoDeFabrica.domain.ChaoDeFabrica {
       }
     }
   }
@@ -13,7 +13,7 @@ title __SISTEMAMONITORIZACAOMAQUINAS's Class Diagram__\n
   namespace  {
     namespace inhaProducao.domain {
       namespace Maquina {
-        class LinhaProducao.domain.ChaoDeFabrica {
+        class ChaoDeFabrica.domain.ChaoDeFabrica {
         }
       }
     }
@@ -33,7 +33,7 @@ title __SISTEMAMONITORIZACAOMAQUINAS's Class Diagram__\n
   namespace  {
     namespace inhaProducao.domain {
       namespace Maquina {
-        class LinhaProducao.domain.Maquina.IdMaquina {
+        class ChaoDeFabrica.domain.Maquina.IdMaquina {
         }
       }
     }
@@ -43,7 +43,7 @@ title __SISTEMAMONITORIZACAOMAQUINAS's Class Diagram__\n
   namespace  {
     namespace inhaProducao.domain {
       namespace Maquina {
-        class LinhaProducao.domain.Maquina.Maquina {
+        class ChaoDeFabrica.domain.Maquina.Maquina {
         }
       }
     }
@@ -66,7 +66,7 @@ title __SISTEMAMONITORIZACAOMAQUINAS's Class Diagram__\n
 
   namespace  {
     namespace ensagens.application.broadcast {
-      class Mensagens.application.broadcast.ReceiveAcknowledgmentService {
+      class Mensagens.application.ReceiveAcknowledgmentService {
       }
     }
   }
@@ -136,11 +136,11 @@ title __SISTEMAMONITORIZACAOMAQUINAS's Class Diagram__\n
   }
   
 
-  LinhaProducao.domain.Maquina.Maquina o-- LinhaProducao.domain.Maquina.EstadoMaquina : estado
-  LinhaProducao.domain.Maquina.Maquina o-- LinhaProducao.domain.Maquina.IdMaquina : id
+  ChaoDeFabrica.domain.Maquina.Maquina o-- ChaoDeFabrica.domain.Maquina.EstadoMaquina : estado
+  ChaoDeFabrica.domain.Maquina.Maquina o-- ChaoDeFabrica.domain.Maquina.IdMaquina : id
   Mensagens.application.broadcast.BroadcastHelloService .up.|> java.lang.Runnable
-  Mensagens.application.broadcast.ReceiveAcknowledgmentService .up.|> java.lang.Runnable
-  Mensagens.application.broadcast.ReceiveAcknowledgmentService o-- Mensagens.domain.BroadcastAcknowledge : mensagem
+  Mensagens.application.ReceiveAcknowledgmentService .up.|> java.lang.Runnable
+  Mensagens.application.ReceiveAcknowledgmentService o-- Mensagens.domain.BroadcastAcknowledge : mensagem
   Mensagens.domain.BroadcastAcknowledge -up-|> Mensagens.domain.MensagemUDP
   Mensagens.domain.HelloBroadcast -up-|> Mensagens.domain.MensagemUDP
   Mensagens.domain.MessageData o-- Mensagens.domain.DataLength : length

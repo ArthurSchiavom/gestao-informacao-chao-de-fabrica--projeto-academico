@@ -1,6 +1,5 @@
-package LinhaProducao.domain;
+package ChaoDeFabrica.domain;
 
-import LinhaProducao.domain.ChaoDeFabrica;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

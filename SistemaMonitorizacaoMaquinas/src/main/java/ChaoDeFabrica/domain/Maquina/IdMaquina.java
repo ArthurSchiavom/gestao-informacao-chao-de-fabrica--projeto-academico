@@ -1,4 +1,4 @@
-package LinhaProducao.domain.Maquina;
+package ChaoDeFabrica.domain.Maquina;
 
 import java.util.Arrays;
 
@@ -36,6 +36,10 @@ public class IdMaquina {
 
 	public byte mostSignificativeByte() {
 		return byteVal[1];
+	}
+
+	public int value() {
+		return byteVal[0] | byteVal[1] << 8;
 	}
 
 	@Override

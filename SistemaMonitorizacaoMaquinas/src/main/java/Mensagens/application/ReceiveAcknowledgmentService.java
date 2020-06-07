@@ -1,8 +1,8 @@
-package Mensagens.application.broadcast;
+package Mensagens.application;
 
-import LinhaProducao.domain.LinhaProducao;
-import LinhaProducao.domain.ChaoDeFabrica;
-import LinhaProducao.domain.Maquina.IdMaquina;
+import ChaoDeFabrica.domain.LinhaProducao;
+import ChaoDeFabrica.domain.ChaoDeFabrica;
+import ChaoDeFabrica.domain.Maquina.IdMaquina;
 import Mensagens.domain.BroadcastAcknowledge;
 
 import java.net.DatagramPacket;
@@ -26,7 +26,7 @@ public class ReceiveAcknowledgmentService implements Runnable {
 		if (chaoDeFabrica.verificarQueListaProducaoExiste(idLinhaProducao)) {
 			LinhaProducao linhaProd = chaoDeFabrica.procurarPorLinhaProducao(idLinhaProducao);
 			if (linhaProd.maquinaExiste(mensagem.getIdMaquina())) {
-				linhaProd.atualizarMaquina(idMaquina, mensagem.getCodigo());
+				linhaProd.atualizarMaquina(idMaquina, mensagem.getCodigo(), ipMaquina);
 				linhaProd.adicionarMaquina(idMaquina, mensagem.getCodigo(), ipMaquina);
 			}
 		} else { //Caso a linha de produção não exista, cria-se uma nova linha de produção

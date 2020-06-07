@@ -1,6 +1,6 @@
 package Mensagens.domain;
 
-import LinhaProducao.domain.Maquina.IdMaquina;
+import ChaoDeFabrica.domain.Maquina.IdMaquina;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

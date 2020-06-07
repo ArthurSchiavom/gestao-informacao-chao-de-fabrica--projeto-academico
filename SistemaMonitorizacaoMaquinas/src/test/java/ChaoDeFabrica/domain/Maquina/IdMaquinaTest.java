@@ -1,4 +1,4 @@
-package LinhaProducao.domain.Maquina;
+package ChaoDeFabrica.domain.Maquina;
 
 import org.junit.Test;
 

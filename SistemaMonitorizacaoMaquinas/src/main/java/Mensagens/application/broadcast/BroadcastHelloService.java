@@ -1,5 +1,7 @@
 package Mensagens.application.broadcast;
 
+import Mensagens.application.Port;
+import Mensagens.application.ReceiveAcknowledgmentService;
 import Mensagens.domain.HelloBroadcast;
 import Mensagens.domain.Version;
 
@@ -13,7 +15,7 @@ import java.net.*;
 public class BroadcastHelloService implements Runnable {
 	private static final int TIMEOUT = 100; //em miligsegundos
 	private static final int SLEEP = 30; //em segundos
-	private static final int PORT_SEND = 7194;
+	private boolean canKeepGoing = true;
 
 	@Override
 	public void run() {
@@ -29,12 +31,10 @@ public class BroadcastHelloService implements Runnable {
 		assert socket != null;
 
 		//Envia um broadcast a cada 30 segundos
-		//noinspection InfiniteLoopStatement
-		while (true) {
-
+		while (canKeepGoing) {
 			HelloBroadcast helloMsg = null;
 			try {
-				helloMsg = new HelloBroadcast(version, PORT_SEND);
+				helloMsg = new HelloBroadcast(version, Port.getSMMPort());
 			} catch (UnknownHostException e) {
 				System.out.println("Falha a criar pacote de HELLO broadcast");
 			}
@@ -70,8 +70,16 @@ public class BroadcastHelloService implements Runnable {
 			try {
 				Thread.sleep(SLEEP * 1000);
 			} catch (InterruptedException e) {
-				System.out.println("Erro a esperar durante " + SLEEP + " segundos");
+				//Isto só corre quando o programa é interrompido
 			}
 		}
+		System.out.println("Serviço de broadcast de Hello's encerrado");
+	}
+
+	public void stop() {
+		if(!canKeepGoing) {
+			throw new RuntimeException("Can't stop a already stopped thread");
+		}
+		canKeepGoing = false;
 	}
 }

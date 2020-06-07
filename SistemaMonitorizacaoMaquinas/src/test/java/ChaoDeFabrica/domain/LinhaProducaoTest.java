@@ -1,6 +1,6 @@
-package LinhaProducao.domain;
+package ChaoDeFabrica.domain;
 
-import LinhaProducao.domain.Maquina.IdMaquina;
+import ChaoDeFabrica.domain.Maquina.IdMaquina;
 import Mensagens.domain.Codigos;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class LinhaProducaoTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void atualizarMaquinaComCodigoInvalido() {
 		linhaProducao.adicionarMaquina(idMaquina, Codigos.ACK, ip);
-		linhaProducao.atualizarMaquina(idMaquina, Codigos.HELLO);
+		linhaProducao.atualizarMaquina(idMaquina, Codigos.HELLO, ip);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

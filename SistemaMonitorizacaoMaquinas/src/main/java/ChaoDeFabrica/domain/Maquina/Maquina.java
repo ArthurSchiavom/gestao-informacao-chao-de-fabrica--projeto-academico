@@ -1,4 +1,6 @@
-package LinhaProducao.domain.Maquina;
+package ChaoDeFabrica.domain.Maquina;
+
+import Mensagens.application.reset.SendResetRequestService;
 
 import java.net.InetAddress;
 import java.util.Date;
@@ -36,6 +38,43 @@ public class Maquina {
 		return estado;
 	}
 
+	public IdMaquina identity() {
+		return id;
+	}
+
+	/**
+	 * Verifica se uma máquina está indisponivel há mais de uma certa quantidade de tempo
+	 * e se estiver define o estado como sendo indisponivel
+	 *
+	 * Tenta enviar um pedido de RESET para que possa ficar atualizar o estado em que se encontra
+	 * @param date o segundo em que a verificação foi efetuada
+	 * @param tempo o tempo que a máquina deve ficar sem ser atualizada para ser considerada indisponivel
+	 */
+	public void verificarInatividade(Date date, int tempo, int idLinhaProducao) {
+		long diffInMilies = Math.abs(date.getTime() - lastUpdated.getTime());
+		if(diffInMilies > tempo*1000) {
+			estado = EstadoMaquina.INDISPONIVEL;
+			new Thread(new SendResetRequestService(this, idLinhaProducao)).start();
+		}
+	}
+
+	/**
+	 * Verifica se o ip fornecido é identico ao ip da máquina
+	 * @param ip o ip que pretendemos verificar
+	 * @return verdadeiro se o ip não for igual, falso se for igual
+	 */
+	public boolean addressIsntCorrect(InetAddress ip) {
+		return !this.ip.equals(ip);
+	}
+
+	/**
+	 * O ip que a máquina foi criada
+	 * @return o ip que a máquina foi criada
+	 */
+	public InetAddress address() {
+		return ip;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -49,20 +88,12 @@ public class Maquina {
 		return Objects.hash(id);
 	}
 
-	public IdMaquina identity() {
-		return id;
-	}
-
-	/**
-	 * Verifica se uma máquina está indisponivel há mais de uma certa quantidade de tempo
-	 * e se estiver define o estado como sendo indisponivel
-	 * @param date o segundo em que a verificação foi efetuada
-	 * @param tempo o tempo que a máquina deve ficar sem ser atualizada para ser considerada indisponivel
-	 */
-	public void verificarInatividade(Date date, int tempo) {
-		long diffInMilies = Math.abs(date.getTime() - lastUpdated.getTime());
-		if(diffInMilies > tempo*1000) {
-			estado = EstadoMaquina.INDISPONIVEL;
-		}
+	@Override
+	public String toString() {
+		return "{id=" + id +
+				", lastUpdated=" + lastUpdated +
+				", estado=" + estado +
+				", ip=" + ip +
+				'}';
 	}
 }

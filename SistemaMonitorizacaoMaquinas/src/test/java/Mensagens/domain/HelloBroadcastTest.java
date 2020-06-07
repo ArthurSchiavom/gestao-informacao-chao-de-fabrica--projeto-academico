@@ -1,6 +1,6 @@
 package Mensagens.domain;
 
-import LinhaProducao.domain.Maquina.IdMaquina;
+import ChaoDeFabrica.domain.Maquina.IdMaquina;
 import org.junit.Test;
 
 import java.net.DatagramPacket;

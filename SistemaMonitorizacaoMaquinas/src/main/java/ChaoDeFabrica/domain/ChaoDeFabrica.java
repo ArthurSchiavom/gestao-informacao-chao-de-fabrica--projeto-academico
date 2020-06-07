@@ -1,4 +1,4 @@
-package LinhaProducao.domain;
+package ChaoDeFabrica.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +23,11 @@ public class ChaoDeFabrica {
 
 	private final List<LinhaProducao> listaLinhasProducao;
 
+	/**
+	 * Adiciona uma linha de produção ao chão de fábrica
+	 * @param idLinhaProducao a linha de produção que pretendemos adicionar
+	 * @return a linha de produção adicionada
+	 */
 	public LinhaProducao adicionarLinhaProducao(int idLinhaProducao) {
 		LinhaProducao linhaProducao = new LinhaProducao(idLinhaProducao);
 		synchronized (listaLinhasProducao) {
@@ -31,6 +36,11 @@ public class ChaoDeFabrica {
 		return linhaProducao;
 	}
 
+	/**
+	 * Verifica se uma lista de produção existe
+	 * @param idLinhaProducao o id pelo qual pretendemos procurar
+	 * @return verdadeiro se existir
+	 */
 	public boolean verificarQueListaProducaoExiste(int idLinhaProducao) {
 		synchronized (listaLinhasProducao) {
 			return listaLinhasProducao.stream().anyMatch(linhaProducao -> linhaProducao.identity() == idLinhaProducao);
@@ -48,6 +58,11 @@ public class ChaoDeFabrica {
 		}
 	}
 
+	/**
+	 * Verifica a inatividade de cada máquina registada no chão de fábrica
+	 * @param date o momento que pretendemos verificar
+	 * @param tempo o tempo necessário para ser considerado inativo(em segundos)
+	 */
 	public void verificarInatividade(Date date, int tempo) {
 		synchronized (listaLinhasProducao) {
 			for(LinhaProducao linhaProducao : listaLinhasProducao) {
