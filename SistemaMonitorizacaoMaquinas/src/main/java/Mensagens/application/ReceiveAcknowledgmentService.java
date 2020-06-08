@@ -20,6 +20,9 @@ public class ReceiveAcknowledgmentService implements Runnable {
 	@Override
 	public void run() {
 		int idLinhaProducao = mensagem.getIdLinhaProducao();
+		if(idLinhaProducao == -1) {
+			System.out.println("Mensagem recebida contem id de linha de produção inválido");
+		}
 		IdMaquina idMaquina = mensagem.getIdMaquina();
 		InetAddress ipMaquina = mensagem.getIp();
 		ChaoDeFabrica chaoDeFabrica = ChaoDeFabrica.getInstance();

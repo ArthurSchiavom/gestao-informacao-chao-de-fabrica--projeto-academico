@@ -23,7 +23,7 @@ public class BroadcastHelloService implements Runnable {
 
 		DatagramSocket socket = null;
 		try {
-			socket = new DatagramSocket();
+			socket = new DatagramSocket(Port.getSMMPort());
 			socket.setBroadcast(true);
 		} catch (SocketException e) {
 			System.out.println("Falha a criar socket de broadcast");
