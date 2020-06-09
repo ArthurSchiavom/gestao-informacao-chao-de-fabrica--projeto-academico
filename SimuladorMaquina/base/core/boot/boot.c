@@ -23,7 +23,13 @@ int boot(char *id_maquina_param, char *intervalo_segundos_param,
 
     int success = pthread_mutex_init(&mutex_a_reconectar_ao_sistema_central, NULL);
     if (success != 0) {
-        perror("Falha ao tentar iniciar semáforo.");
+        perror("Falha ao tentar iniciar semáforo para o sistema de reconexão ao sistema central.");
+        return FALSE;
+    }
+
+    success = pthread_mutex_init(&mutex_ultimo_resultado_handshake_scm, NULL);
+    if (success != 0) {
+        perror("Falha ao tentar iniciar semáforo para o último resultado do handshake com o SCM.");
         return FALSE;
     }
 
