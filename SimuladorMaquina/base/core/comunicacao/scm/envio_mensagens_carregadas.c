@@ -9,8 +9,10 @@ void tentar_enviar_mensagem(Payload payload) {
     resultado.version = -1;
     while (resultado.code != REQUEST_CODE_ACK) {
         limpar_data_resultado = TRUE;
-        sucesso = enviar_packet_tcp(endereco_sistema_central, PORTA_SISTEMA_CENTRAL, payload, &resultado, TRUE);
+        sucesso = enviar_packet_tcp_tls(endereco_sistema_central, PORTA_SISTEMA_CENTRAL, payload, &resultado, TRUE);
         if (sucesso == FALSE || resultado.code != REQUEST_CODE_ACK) {
+            //TODO - REMOVE
+            printf("RECONNECT REASON - suc: %d, code: %hu\n", sucesso, resultado.code);
             limpar_data_resultado = FALSE;
             reconectar_sistema_central();
             resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
@@ -52,7 +54,7 @@ _Noreturn void modulo_envio_mensagens() {
 }
 
 int iniciar_envio_mensagens(pthread_t *t) {
-    int success = pthread_create(t, NULL, modulo_envio_mensagens, NULL);
+    int success = pthread_create(t, NULL, (void* (*)(void*)) modulo_envio_mensagens, NULL);
     if (success != 0) {
         return FALSE;
     }

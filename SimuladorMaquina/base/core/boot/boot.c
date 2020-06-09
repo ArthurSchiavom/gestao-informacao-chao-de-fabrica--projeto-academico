@@ -5,11 +5,14 @@
 #include "../mensagem/carregamento_mensagem.h"
 #include "../utils/const.h"
 #include "../comunicacao/scm/comunicacao_sistema_central.h"
+#include "../comunicacao/scm/certificado.h"
 #include <string.h>
 
 int boot(char *id_maquina_param, char *intervalo_segundos_param,
         char *caminho_ficheiro_mensagens_param, char *endereco_sistema_central_param,
-          char *endereco_smm_param) {
+         char *endereco_smm_param,
+         char *nome_fich_key_pem_param) {
+    boot_certificado(nome_fich_key_pem_param);
     id_maquina = (unsigned short) atoi(id_maquina_param);
     intervalo_entre_mensagens_segundos = atoi(intervalo_segundos_param);
     setup_leitor_mensagens(caminho_ficheiro_mensagens_param);

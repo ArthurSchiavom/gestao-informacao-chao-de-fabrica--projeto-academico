@@ -1,6 +1,8 @@
 #include "rececao_packets.h"
 #include "../../utils/const.h"
 #include "../comunicar.h"
+#include "string.h"
+#include "certificado.h"
 
 #define BUF_SIZE 300
 #define SUFIXO_FICHEIRO ".config"
@@ -74,37 +76,46 @@ void tratar_packet_tcp_recebido(Payload *payload_recebido) {
     }
 }
 
-void receber_packet(int *socket) {
+void receber_packet(Ssl_socket_wrapper *wrapper) {
+    SSL *ssl_con = wrapper->con;
     Payload resultado;
-    int sucesso = receive_packet_tcp_on_open_socket(*socket, &resultado);
+    int sucesso = receive_packet_tcp_on_open_ssl_con(ssl_con, &resultado);
+    printf("Packet recebido\n");
+
     if (sucesso == FALSE) {
-        printf("Falha ao tentar ler resposta recebido. - receção de packets\n");
+        printf("Falha ao tentar ler resposta recebida. - receção de packets\n");
+
+        SSL_free(ssl_con);
+        close(wrapper->socket);
+        free(wrapper);
+        return;
     }
 
-    Packet_tcp resposta;
-    resposta.socket = *socket;
+    Packet_ssl resposta;
+    resposta.connection = ssl_con;
     resposta.payload.version = CURRENT_PROTOCOL_VERSION;
     resposta.payload.id = id_maquina;
     resposta.payload.data_length = 0;
 
     if (resultado.id == id_maquina) {
         resposta.payload.code = REQUEST_CODE_ACK;
-    }
-    else {
+    } else {
         resposta.payload.code = REQUEST_CODE_NACK;
     }
 
-    send_packet_tcp_on_open_socket(resposta, TRUE);
+    send_packet_tcp_on_open_ssl_con(resposta, TRUE);
 
     if (resposta.payload.code == REQUEST_CODE_ACK) {
         tratar_packet_tcp_recebido(&resultado);
     }
 
-    close(*socket);
-    free(socket);
+    SSL_free(ssl_con);
+    close(wrapper->socket);
+    free(wrapper);
+    free(resultado.data);
 }
 
-_Noreturn void modulo_rececao_packets() {
+void modulo_rececao_packets() {
     struct sockaddr_storage from;
     int err, sock;
     unsigned int adl;
@@ -137,23 +148,67 @@ _Noreturn void modulo_rececao_packets() {
     freeaddrinfo(list);
 
     listen(sock, SOMAXCONN);
+
+
+    const SSL_METHOD *method;
+    SSL_CTX *ctx;
+
+    method = SSLv23_server_method();
+    ctx = SSL_CTX_new(method);
+
+    // Load server's certificate and key
+    SSL_CTX_use_certificate_file(ctx, caminho_fich_pem, SSL_FILETYPE_PEM);
+    SSL_CTX_use_PrivateKey_file(ctx, caminho_fich_key, SSL_FILETYPE_PEM);
+    if (!SSL_CTX_check_private_key(ctx)) {
+        puts("Erro SSL/TLS: Falha no carregamento do certificado/chave");
+        close(sock);
+        return;
+    }
+
+    // THE CLIENTS' CERTIFICATES ARE TRUSTED
+    SSL_CTX_load_verify_locations(ctx, AUTH_CLIENTS_SSL_CERTS_FILE, NULL);
+
+    // Restrict TLS version and cypher suite
+    SSL_CTX_set_min_proto_version(ctx, TLS1_2_VERSION);
+    SSL_CTX_set_cipher_list(ctx, "HIGH:!aNULL:!kRSA:!PSK:!SRP:!MD5:!RC4");
+
+    // The client must provide a certificate and it must be trusted, the handshake will fail otherwise
+    SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, NULL);
+
     adl = sizeof(from);
     for (;;) {
-        int newSock = accept(sock, (struct sockaddr *) &from, &adl);
+        int new_sock = accept(sock, (struct sockaddr *) &from, &adl);
+
+        SSL *ssl_con = SSL_new(ctx);
+        SSL_set_fd(ssl_con, new_sock);
+        int suc = SSL_accept(ssl_con);
+        if (suc != 1) {
+            int error = SSL_get_error(ssl_con, suc);
+            printf("Erro SSL/TLS: TLS erro no handshake - Code %d\n", error);
+
+            printf("receção de packets tcp: handshake TLS recusado: cliente não autorizado\n");
+            SSL_free(ssl_con);
+            close(new_sock);
+            continue;
+        }
+        X509 *cert = SSL_get_peer_certificate(ssl_con);
+        X509_free(cert);
+
+        Ssl_socket_wrapper *wrapper = malloc(sizeof(Ssl_socket_wrapper));
+        wrapper->con = ssl_con;
+        wrapper->socket = new_sock;
 
         pthread_t t;
-        int *socket_pointer = malloc(sizeof(int));
-        *socket_pointer = newSock;
-        int success = pthread_create(&t, NULL, receber_packet, socket_pointer);
+        int success = pthread_create(&t, NULL, (void* (*)(void*)) receber_packet, wrapper);
         if (success != 0) {
-            printf("Falha ao criar nova thread para receber packet.");
+            printf("Falha ao criar nova thread para ler um packet recebido.\n");
         }
     }
     close(sock);
 }
 
 int iniciar_rececao_packets(pthread_t *t) {
-    int success = pthread_create(t, NULL, modulo_rececao_packets, NULL);
+    int success = pthread_create(t, NULL, (void* (*)(void*)) modulo_rececao_packets, NULL);
     if (success != 0) {
         return FALSE;
     }

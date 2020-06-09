@@ -10,12 +10,14 @@
 #define INDEX_PARAM_CAMINHO_FICHEIRO_MENSAGENS 3
 #define INDEX_PARAM_ENDERECO_SISTEMA_CENTRAL 4
 #define INDEX_PARAM_ENDERECO_SMM 5
-#define N_ARGS 6
+#define INDEX_PARAM_NOME_FICH_KEY_PEM 6
+#define N_ARGS 7
 
 int main(int argc, char **argv) {
     if (argc < N_ARGS) {
         printf("Algumentos necessários em falta. Os argumentos necessários (por ordem) são: ID da máquina, intervalo de cadência em segundos, "
-               "caminho para o ficheiro de mensagens, endereço do sistema central e endereço do SMM.\n\n");
+               "caminho para o ficheiro de mensagens, endereço do sistema central, "
+               "endereço do SMM e nome da máquina (usado para encontrar os ficheiros key e pem).\n\n");
         return 1;
     }
     int success1, success2;
@@ -24,7 +26,8 @@ int main(int argc, char **argv) {
     success1 = boot(argv[INDEX_PARAM_ID_MAQUINA], argv[INDEX_PARAM_INTERVALO_CADENCIA],
                     argv[INDEX_PARAM_CAMINHO_FICHEIRO_MENSAGENS],
                     argv[INDEX_PARAM_ENDERECO_SISTEMA_CENTRAL],
-                    argv[INDEX_PARAM_ENDERECO_SMM]);
+                    argv[INDEX_PARAM_ENDERECO_SMM],
+                    argv[INDEX_PARAM_NOME_FICH_KEY_PEM]);
 
     if (success1 != TRUE) {
         printf("** Falha ao tentar conectar ao sistema central\n");
