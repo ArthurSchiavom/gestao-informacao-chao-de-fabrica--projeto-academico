@@ -2,6 +2,9 @@ package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.Repository.ProdutoProduzidoRepository;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.domain.ProdutoProduzido;
+import eapli.base.gestaoproducao.movimentos.repositoy.MovimentoStockRepository;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
@@ -12,6 +15,7 @@ import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
+import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -172,5 +176,35 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MensagemRepository mensagem(TransactionalContext autoTx) {
         return new JpaMensagemRepository(autoTx);
+    }
+
+    @Override
+    public MovimentoStockRepository movimentoStock() {
+        return new JpaMovimentoStockRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public MovimentoStockRepository movimentoStock(TransactionalContext autoTx) {
+        return new JpaMovimentoStockRepository(autoTx);
+    }
+
+    @Override
+    public UsoDeMaquinaRepository usoDeMaquina() {
+        return new JpaUsoDeMaquinaRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public UsoDeMaquinaRepository usoDeMaquina(TransactionalContext autoTx) {
+        return new JpaUsoDeMaquinaRepository(autoTx);
+    }
+
+    @Override
+    public ProdutoProduzidoRepository produtoProduzido() {
+        return new JpaProdutoProduzidoRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public ProdutoProduzidoRepository produtoProduzido(TransactionalContext autoTx) {
+        return new JpaProdutoProduzidoRepository(autoTx);
     }
 }

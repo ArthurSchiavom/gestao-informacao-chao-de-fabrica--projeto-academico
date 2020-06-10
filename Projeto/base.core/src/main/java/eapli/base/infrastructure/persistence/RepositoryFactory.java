@@ -5,6 +5,9 @@ package eapli.base.infrastructure.persistence;
 
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.Repository.ProdutoProduzidoRepository;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.domain.ProdutoProduzido;
+import eapli.base.gestaoproducao.movimentos.repositoy.MovimentoStockRepository;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
@@ -15,6 +18,7 @@ import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
+import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -222,4 +226,44 @@ public interface RepositoryFactory {
 	 * @return the repository with a certain transactional context
 	 * */
 	MensagemRepository mensagem(TransactionalContext autoTx);
+
+	/**
+	 * Repository will be created in auto transaction mode
+	 * @return repository automatic transaction mode
+	 */
+	MovimentoStockRepository movimentoStock();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return the repository with a certain transactional context
+	 * */
+	MovimentoStockRepository movimentoStock(TransactionalContext autoTx);
+
+	/**
+	 * Repository will be created in auto transaction mode
+	 * @return repository automatic transaction mode
+	 */
+	UsoDeMaquinaRepository usoDeMaquina();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return the repository with a certain transactional context
+	 * */
+	UsoDeMaquinaRepository usoDeMaquina(TransactionalContext autoTx);
+
+	/**
+	 * Repository will be created in auto transaction mode
+	 * @return repository automatic transaction mode
+	 */
+	ProdutoProduzidoRepository produtoProduzido();
+
+	/**
+	 * @param autoTx the transactional context to enroll
+	 *
+	 * @return the repository with a certain transactional context
+	 * */
+	ProdutoProduzidoRepository produtoProduzido(TransactionalContext autoTx);
+
 }

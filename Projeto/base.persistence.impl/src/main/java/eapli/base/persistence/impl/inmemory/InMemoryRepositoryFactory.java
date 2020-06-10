@@ -2,6 +2,8 @@ package eapli.base.persistence.impl.inmemory;
 
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.Repository.ProdutoProduzidoRepository;
+import eapli.base.gestaoproducao.movimentos.repositoy.MovimentoStockRepository;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
@@ -12,6 +14,7 @@ import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
+import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
@@ -174,6 +177,36 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public MensagemRepository mensagem(TransactionalContext autoTx) {
 		return mensagem(autoTx);
+	}
+
+	@Override
+	public MovimentoStockRepository movimentoStock() {
+		return new InMemoryMovimentoStock();
+	}
+
+	@Override
+	public MovimentoStockRepository movimentoStock(TransactionalContext autoTx) {
+		return movimentoStock(autoTx);
+	}
+
+	@Override
+	public UsoDeMaquinaRepository usoDeMaquina() {
+		return new InMemoryUsoDeMaquinaRepository();
+	}
+
+	@Override
+	public UsoDeMaquinaRepository usoDeMaquina(TransactionalContext autoTx) {
+		return usoDeMaquina(autoTx);
+	}
+
+	@Override
+	public ProdutoProduzidoRepository produtoProduzido() {
+		return new InMemoryProdutoProduzido();
+	}
+
+	@Override
+	public ProdutoProduzidoRepository produtoProduzido(TransactionalContext autoTx) {
+		return produtoProduzido(autoTx);
 	}
 
 }

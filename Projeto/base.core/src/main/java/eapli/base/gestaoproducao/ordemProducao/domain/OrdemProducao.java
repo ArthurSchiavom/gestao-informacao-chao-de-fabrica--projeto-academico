@@ -1,8 +1,11 @@
 package eapli.base.gestaoproducao.ordemProducao.domain;
 
 import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.domain.ProdutoProduzido;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
+import eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquina;
+import eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquinaID;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.AggregateRoot;
@@ -35,6 +38,12 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
     @XmlElement(name = "idEncomenda")
     @ElementCollection // to store a List which is a Collection
     private List<IdentificadorEncomenda> identificadorEncomendaList;
+
+    @OneToMany
+    private List<UsoDeMaquina> usoDeMaquinaList;
+
+    @OneToMany
+    private List<ProdutoProduzido> produtosProduzidosList;
 
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
@@ -98,6 +107,7 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
     }
 
     public OrdemProducao() {
+
         identificador = null;
         dataEmissao = null;
         dataPrevistaExecucao = null;

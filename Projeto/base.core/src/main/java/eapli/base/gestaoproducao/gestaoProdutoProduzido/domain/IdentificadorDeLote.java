@@ -1,4 +1,4 @@
-package eapli.base.gestaoproducao.gestaoproduto.application;
+package eapli.base.gestaoproducao.gestaoProdutoProduzido.domain;
 
 
 import eapli.framework.domain.model.ValueObject;

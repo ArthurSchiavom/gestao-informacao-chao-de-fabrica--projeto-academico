@@ -27,6 +27,9 @@
         <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemParagemForcada</class>
         <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemProducao</class>
         <class>eapli.base.gestaoproducao.gestaomensagens.domain.MensagemRetomoDeActividade</class>
+        <class>eapli.base.gestaoproducao.movimentos.domain.MovimentoStock</class>
+        <class>eapli.base.gestaoproducao.gestaoProdutoProduzido.domain.ProdutoProduzido</class>
+        <class>eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquina</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/BaseDados_LAPR4_2020_G3"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>

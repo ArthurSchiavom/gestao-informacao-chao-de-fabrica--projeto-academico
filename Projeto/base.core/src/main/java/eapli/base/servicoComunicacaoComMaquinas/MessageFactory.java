@@ -3,7 +3,7 @@ package eapli.base.servicoComunicacaoComMaquinas;
 import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomensagens.domain.*;
-import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.domain.IdentificadorDeLote;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;

@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
-import eapli.base.gestaoproducao.gestaoproduto.application.IdentificadorDeLote;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.domain.IdentificadorDeLote;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.framework.domain.model.AggregateRoot;
 
