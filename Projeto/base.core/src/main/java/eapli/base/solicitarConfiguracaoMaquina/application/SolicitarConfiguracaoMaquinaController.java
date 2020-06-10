@@ -39,11 +39,16 @@ public class SolicitarConfiguracaoMaquinaController {
      */
     private String getFicheiro(String caminho) throws FileNotFoundException {
         Scanner in = new Scanner(new File(caminho));
-        String data = "";
-        while(in.hasNext()){
-            data+= in.next();
+
+        StringBuilder data = new StringBuilder();
+
+        if(in.hasNextLine()){
+            data.append(in.nextLine());
+        }
+        while(in.hasNextLine()){
+            data.append("\n" + in.nextLine());
         }
         in.close();
-        return data;
+        return data.toString();
     }
 }

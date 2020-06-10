@@ -4,6 +4,8 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.tcp.domain.MensagemProtocoloCodes;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import eapli.base.tcp.processamento.ProcessarMensagensProtocolosStrategy;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
@@ -12,7 +14,7 @@ public class EnviarConfiguracaoMaquinaTcp {
 
     public static final int PORT = 6835;
     private static InetAddress serverIP;
-    private static Socket sock;
+    private static SSLSocket sock;
 
 
     public static boolean enviarConfiguracaoMaquinaTcp(String data, Maquina maquina) {
@@ -21,12 +23,23 @@ public class EnviarConfiguracaoMaquinaTcp {
             return false;
         }
         serverIP = maquina.getIp();
+        SSLSocketFactory sf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+
+
 
         try {
-            sock = new Socket(serverIP, PORT);
+            sock = (SSLSocket) sf.createSocket(serverIP, PORT);
             sock.setSoTimeout(10 * 1000); // 10 seconds timeout
+            sock.setEnabledProtocols(new String[] { "TLSv1.1","TLSv1.2"});
+
         } catch (IOException ex) {
             throw new IllegalArgumentException("Conexão TCP não estabelecida");
+        }
+
+        try {
+            sock.startHandshake();
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Handshake TLS falhou");
         }
 
         DataOutputStream sOut;
@@ -41,7 +54,7 @@ public class EnviarConfiguracaoMaquinaTcp {
 
             MensagemProtocoloComunicacao m = lerMensagemTcp(sIn);
 
-            if(m.code == MensagemProtocoloCodes.ACK.getCode()){
+            if((m.code & 0xFF) == MensagemProtocoloCodes.ACK.getCode()){ // 0xFF because byte is unsigned in java
                 return true;
             }
 

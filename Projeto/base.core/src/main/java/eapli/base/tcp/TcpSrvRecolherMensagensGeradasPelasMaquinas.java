@@ -7,12 +7,10 @@ import java.net.*;
 
 public class TcpSrvRecolherMensagensGeradasPelasMaquinas implements Runnable {
 
-    public static final int PORT_NUMBER = 6834;
-    static final String TRUSTED_STORE="server_J.jks";
-    static final String KEYSTORE_PASS="forgotten";
-
-//    static ServerSocket sock;
-    static SSLServerSocket sock=null;
+    private static final int PORT_NUMBER = 6834;
+    private static final String TRUSTED_STORE="ssl/server_J.jks";
+    private static final String KEYSTORE_PASS="forgotten";
+    private static SSLServerSocket sock=null;
 
 
     @Override
@@ -37,7 +35,6 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinas implements Runnable {
             Socket cliSock;
 
             try {
-//                sock = new ServerSocket(PORT_NUMBER);
                 sock = (SSLServerSocket) sslF.createServerSocket(PORT_NUMBER);
                 sock.setNeedClientAuth(true);
             } catch (IOException ex) {
@@ -50,6 +47,7 @@ public class TcpSrvRecolherMensagensGeradasPelasMaquinas implements Runnable {
                 new Thread(new TcpSrvRecolherMensagensGeradasPelasMaquinasThread(cliSock)).start();
             }
         } catch (IOException e) {
+            System.out.println("Falhou conexão ao socket.");
         }
     }
 }
