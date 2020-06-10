@@ -62,7 +62,7 @@ int run(int argc, char **argv) {
     }
     freeaddrinfo(list);
     while (1) {
-        printf("Request sentence to send (\"exit\" to quit): ");
+        printf("Request sentence to send (\"exit\" to quit): \n");
         GETS(linha, BUF_SIZE);
         if (!strcmp(linha, "exit")) break;
         sendto(sock, linha, strlen(linha), 0, (struct sockaddr *) &serverAddr, serverAddrLen);

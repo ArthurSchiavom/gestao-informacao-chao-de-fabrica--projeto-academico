@@ -1,6 +1,8 @@
 #ifndef SIMULADORMAQUINA_INFORMACAO_COMUNICACAO_H
 #define SIMULADORMAQUINA_INFORMACAO_COMUNICACAO_H
 
+#include <openssl/ossl_typ.h>
+
 #define CURRENT_PROTOCOL_VERSION 0
 #define PORTA_SISTEMA_CENTRAL "6834"
 #define PORTA_RECECAO_MAQUINA "6835"
@@ -17,6 +19,11 @@
 #define PAYLOAD_STATIC_DATA_SIZE 6
 #define TEMPO_ESPERA_RECONEXAO_SCM_SEGUNDOS 3
 
+typedef struct Ssl_socket_wrapper {
+    SSL *con;
+    int socket;
+} Ssl_socket_wrapper;
+
 typedef struct Payload {
     unsigned char version;
     unsigned char code;
@@ -29,6 +36,11 @@ typedef struct Packet_tcp {
     Payload payload;
     int socket;
 } Packet_tcp;
+
+typedef struct Packet_ssl {
+    Payload payload;
+    SSL *connection;
+} Packet_ssl;
 
 typedef struct Packet_udp {
     Payload payload;

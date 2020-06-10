@@ -70,8 +70,7 @@ public class ProcessarMensagemProtocoloMSG extends ProcessarMensagensProtocolosS
         try {
             PersistenceContext.repositories().mensagem().save(mens);
         } catch (Exception ex) {
-            System.out.println(mens);
-            return mensagemNACK(mensagemProtocoloComunicacao.version,
+            return mensagemACK(mensagemProtocoloComunicacao.version,
                     mensagemProtocoloComunicacao.idProtocolo);
         }
 
