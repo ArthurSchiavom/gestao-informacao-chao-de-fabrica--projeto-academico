@@ -16,11 +16,15 @@ public class CodigoDeposito implements ValueObject, Comparable<CodigoDeposito> {
 	public final String codigo;
 
 	public CodigoDeposito(String codigo) {
-		if(codigo == null || codigo.trim().isEmpty() || !StringPredicates.isSingleWord(codigo)) {
+		if(!validarDadosCodigoDeDeposito(codigo)) {
 			throw new IllegalArgumentException("Codigo têm que ser um valor alfanumérico sem espaços " +
 					"e não pode estar vazio");
 		}
 		this.codigo = codigo;
+	}
+
+	public boolean validarDadosCodigoDeDeposito(String codigo){
+		return codigo != null && !codigo.trim().isEmpty() && StringPredicates.isSingleWord(codigo);
 	}
 
 	public CodigoDeposito() {

@@ -34,7 +34,7 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
             String tempoInicio=Console.readNonEmptyLine("Insira a Hora/Min de inicio de processamento (HH:MM)","Este campo nao pode ser vazio");
             String dataFinal=Console.readNonEmptyLine("Insira a data final de processamento (YYYY-MM-DD)","Este campo nao pode ser vazio");
             String tempoFinal=Console.readNonEmptyLine("Insira a Hora/Min final de processamento (HH:MM)","Este campo nao pode ser vazio");
-            if (!controller.validarInput(dataInicio,dataFinal,tempoInicio,tempoFinal))
+            if (!controller.validarInput(dataInicio.trim(),dataFinal.trim(),tempoInicio.trim(),tempoFinal.trim()))
                 return false;
             System.out.println(SimpleConsoleMessages.CLEAR_SCREEN +"Inicio de processamento!");
             controller.iniciarProcessamento();
@@ -51,8 +51,10 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
         int quantidade,contador=0,idLinhaProducao=-1;
         List<String> ids=new ArrayList<>();
         quantidade=Console.readInteger("Pretende efetuar o processamento para quantas linhas de producao?");
+        if (quantidade>lista.size())
+            throw new IllegalArgumentException("Quantidade nao pode ser maior que o numero de linhas de producao disponiveis!");
         while (contador<quantidade) {
-            idLinhaProducao = Console.readInteger("Insira o numero associado á linha de producao que pretende processar as mensagens: ");
+            idLinhaProducao = Console.readInteger("Insira o numero associado a linha de producao que pretende processar as mensagens: ");
             if (idLinhaProducao < 0 || idLinhaProducao >= lista.size()) {
                 System.out.println("ID invalido! Insira novamente");
             }else {

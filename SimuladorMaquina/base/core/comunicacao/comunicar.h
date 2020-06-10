@@ -12,6 +12,12 @@
 #include <netdb.h>
 
 
+typedef struct Built_Payload {
+    int size;
+    char *content;
+} Built_Payload;
+
+
 /**
  * @return (1) o socket em caso de sucesso ou (2) -1 aberto caso contrário
  */
@@ -32,5 +38,9 @@ int enviar_packet_tcp(char *target, char *porta, Payload payload, Payload *resul
 int receive_packet_tcp_on_open_socket(int socket, Payload *resultado);
 
 int send_packet_tcp_on_open_socket(Packet_tcp packet, short inverterBytesDeNumeros);
+
+Built_Payload build_payload(Payload payload, short inverterBytesDeNumeros);
+
+short reverse_bytes_short(short num);
 
 #endif //SIMULADORMAQUINA_COMUNICAR_H

@@ -12,7 +12,6 @@ import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.infrastructure.application.DTOUtils;
 import eapli.base.infrastructure.application.EntityUtils;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.processamentoMensagens.application.DTO.AgendamentoDeProcessamentoDTO;
 import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
 import eapli.base.processamentoMensagens.domain.FinalDeProcessamento;
 import eapli.base.processamentoMensagens.domain.InicioDeProcessamento;
@@ -34,7 +33,7 @@ public class ProcessamentoDeMensagensController {
     private List<LinhaProducaoDTO> listaLinhaProducaoDTO;
     private List<LinhaProducao> linhaProducaoAlvo;
     private Map<String,LinhaProducao> identificador_LinhaProducao;
-    private Thread[] threads;
+    private List<Thread> threads;
 
     public ProcessamentoDeMensagensController() {
         this.agendamentoDeProcessamentoRepository = PersistenceContext.repositories().agendamentoDeProcessamento();
@@ -47,7 +46,7 @@ public class ProcessamentoDeMensagensController {
         this.listaDeAgendamentosBaseDados=new ArrayList<>();
         this.listaDeNovosAgendamentos=new ArrayList<>();
         this.identificador_LinhaProducao=Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(listaLinhasProducao));
-        threads=new Thread[linhaProducaoAlvo.size()];
+        this.threads=new ArrayList<>();
     }
 
 
@@ -105,46 +104,50 @@ public class ProcessamentoDeMensagensController {
 
     public  void iniciarProcessamento() throws InterruptedException {
         int i;
-        Map<IdentificadorLinhaProducao,List<Mensagem>> listaDeMensagensDeCadaLinhaDeProducao=new HashMap<>();
-        for (i=0;i<linhaProducaoAlvo.size();i++){
-            listaDeMensagensDeCadaLinhaDeProducao.put(linhaProducaoAlvo.get(i).identifier,new ArrayList<>());
+        Map<IdentificadorLinhaProducao, List<Mensagem>> listaDeMensagensDeCadaLinhaDeProducao = new HashMap<>();
+        for (i = 0; i < linhaProducaoAlvo.size(); i++) {
+            System.out.println(linhaProducaoAlvo.get(i).identifier);
+            listaDeMensagensDeCadaLinhaDeProducao.put(linhaProducaoAlvo.get(i).identifier, new ArrayList<>());
         }
-        List<Mensagem> listaMensagensDentroDosLimites=new ArrayList<>();
-        List<Mensagem> listaMensagensNaoProcessadasBaseDados= mensagemRepository.obterListaMensagensNaoProcessadas();
+        List<Mensagem> listaMensagensDentroDosLimites = new ArrayList<>();
+        List<Mensagem> listaMensagensNaoProcessadasBaseDados = mensagemRepository.obterListaMensagensNaoProcessadas();
         if (listaMensagensNaoProcessadasBaseDados.isEmpty())
             throw new IllegalArgumentException("Sem mensagens registadas na base de dados");
-        Date dataInicio=agendamentoDeProcessamento.inicioDeProcessamento.dataTempoInicio;
-        Date dataFinal=agendamentoDeProcessamento.finalDeProcessamento.dataTempoFinal;
-        for (Mensagem mensagem:listaMensagensNaoProcessadasBaseDados){
-            Date dataEmissao=mensagem.mensagemID.tempoEmissao.timestamp;
-            System.out.println(dataEmissao);
-            if ((dataInicio.compareTo(dataEmissao)<=0) && (dataFinal.compareTo(dataEmissao)>=0)){ //Verificar se esta entre as duas datas selecionadas
+        Date dataInicio = agendamentoDeProcessamento.inicioDeProcessamento.dataTempoInicio;
+        Date dataFinal = agendamentoDeProcessamento.finalDeProcessamento.dataTempoFinal;
+        for (Mensagem mensagem : listaMensagensNaoProcessadasBaseDados) {
+            Date dataEmissao = mensagem.mensagemID.tempoEmissao.timestamp;
+            if ((dataInicio.compareTo(dataEmissao) <= 0) && (dataFinal.compareTo(dataEmissao) >= 0)) { //Verificar se esta entre as duas datas selecionadas
                 listaMensagensDentroDosLimites.add(mensagem);
             }
         }
-        if (listaMensagensDentroDosLimites.size()==0){
+        if (listaMensagensDentroDosLimites.size() == 0) {
             throw new IllegalArgumentException("Não há mensagens para processar para o periodo proposto!");
         }
-        for (Mensagem mensagem:listaMensagensDentroDosLimites){
-            CodigoInternoMaquina codigoInternoMaquina=mensagem.mensagemID.codigoInternoMaquina;
-            Optional<Maquina> opt=maquinaRepository.findByIdentifier(codigoInternoMaquina);
-            Maquina maquina=opt.get();
-            if (listaDeMensagensDeCadaLinhaDeProducao.containsKey(maquina.getLinhaProducao()))
-                listaDeMensagensDeCadaLinhaDeProducao.get(maquina.getLinhaProducao()).add(mensagem);
+        for (Mensagem mensagem : listaMensagensDentroDosLimites) {
+            Maquina maquina = getMaquinaPorIdentificador(mensagem.mensagemID.codigoInternoMaquina);
+            if (maquina != null) {
+                IdentificadorLinhaProducao idlinhaProducao=maquina.getLinhaProducao();
+                if (listaDeMensagensDeCadaLinhaDeProducao.containsKey(maquina.getLinhaProducao()))
+                    listaDeMensagensDeCadaLinhaDeProducao.get(maquina.getLinhaProducao()).add(mensagem);
+            }
         }
-        System.out.println("BORING");
         //Criacao das THREADS
-        for (i=0;i<linhaProducaoAlvo.size();i++){
-            List<Mensagem> lista=listaDeMensagensDeCadaLinhaDeProducao.get(i);
-            LinhaProducao linhaProducao=linhaProducaoAlvo.get(i);
-            ProcessamentoDeMensagensThread processamentoDeMensagensThread=new ProcessamentoDeMensagensThread(lista,linhaProducao,mensagemRepository,linhaProducaoRepository);
-            threads[i]=new Thread(processamentoDeMensagensThread);
-            threads[i].start();
+        i=0;
+        for (LinhaProducao linhaProducao:linhaProducaoAlvo) {
+            List<Mensagem> lista = listaDeMensagensDeCadaLinhaDeProducao.get(linhaProducao.identifier);
+            if (!lista.isEmpty()) {
+                ProcessamentoDeMensagensThread processamentoDeMensagensThread = new ProcessamentoDeMensagensThread(lista, linhaProducao);
+                threads.add( new Thread(processamentoDeMensagensThread));
+                threads.get(i).start();
+                i++;
+            }
         }
         //Esperar que terminem
         for (Thread thread:threads){
             thread.join();
         }
+
     }
 
     /**
@@ -185,5 +188,13 @@ public class ProcessamentoDeMensagensController {
             if (fim - inicio < 0)
             throw new IllegalArgumentException("Tempo final não pode ser antes do Tempo inicial do mesmo dia!");
         }
+    }
+
+    private Maquina getMaquinaPorIdentificador(CodigoInternoMaquina codigoInternoMaquina){
+        Optional<Maquina> maquina;
+        maquina=maquinaRepository.findByIdentifier(codigoInternoMaquina);
+        if (!maquina.isPresent())
+            return null;
+        return maquina.get();
     }
 }

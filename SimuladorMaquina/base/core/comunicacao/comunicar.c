@@ -5,11 +5,6 @@
 #define UDP_BUFFER_SIZE 512
 #define TIMEOUT_SECONDS 3
 
-typedef struct Built_Payload {
-    int size;
-    char *content;
-} Built_Payload;
-
 short reverse_bytes_short(short num) {
     short swapped = ((num<<8)&0xff00) | ((num>>8)&0x00ff);
     return swapped;
@@ -103,8 +98,12 @@ int receive_packet_tcp_on_open_socket(int socket, Payload *resultado) {
     if (sucesso == -1)
         return FALSE;
     sucesso = read(socket, &(resultado->code), 1);
-    if (sucesso == -1)
+    if (sucesso == -1) {
         return FALSE;
+    }else{
+        ultimo_estado_pedido=resultado->code;
+    }
+    ultimo_estado_pedido=sucesso;
     sucesso = read(socket, &(resultado->id), 2);
     if (sucesso == -1)
         return FALSE;

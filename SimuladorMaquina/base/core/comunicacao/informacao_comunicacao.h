@@ -39,5 +39,6 @@ typedef struct Packet_udp {
 int intervalo_entre_mensagens_segundos;
 char *endereco_sistema_central;
 char *endereco_smm;
+int ultimo_estado_pedido;
 
 #endif //SIMULADORMAQUINA_INFORMACAO_COMUNICACAO_H

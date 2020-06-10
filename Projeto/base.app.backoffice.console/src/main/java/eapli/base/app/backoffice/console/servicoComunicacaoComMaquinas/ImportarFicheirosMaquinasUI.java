@@ -16,7 +16,6 @@ public class ImportarFicheirosMaquinasUI extends AbstractUI {
             System.out.println("Inicio da importacao");
             controller.iniciarAImportacao();
             System.out.println("Fim da importacao");
-        } catch (InterruptedException | FileNotFoundException | EmptyFileException e) {
         } catch (IllegalArgumentException | NoSuchElementException e){
             System.out.println("Erro: "+e.getMessage());
         }

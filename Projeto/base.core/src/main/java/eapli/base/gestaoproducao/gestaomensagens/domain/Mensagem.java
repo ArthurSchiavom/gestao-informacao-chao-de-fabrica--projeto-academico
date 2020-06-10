@@ -1,6 +1,6 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
-import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao;
 import eapli.framework.domain.model.AggregateRoot;
@@ -28,10 +28,10 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
     @Enumerated(EnumType.STRING)
     private EstadoProcessamento estadoProcessamento;
 
-    @ManyToOne
-    private LinhaProducao linhaProducao;
+    private IdentificadorLinhaProducao identificadorLinhaProducao;
 
     private IdentificadorOrdemProducao identificadorOrdemDeProducao;
+
 
 
     public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina) {
@@ -50,15 +50,23 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         this.identificadorOrdemDeProducao=ordemProducao;
     }
 
+
     protected Mensagem() {
         //FOR ORM
-        this.linhaProducao=null;
+        this.identificadorLinhaProducao=null;
         this.identificadorOrdemDeProducao=null;
         this.mensagemID = null;
     }
 
-    public void setLinhaProducao(LinhaProducao linhaProducao) {
-        this.linhaProducao = linhaProducao;
+    public void setLinhaProducao(IdentificadorLinhaProducao linhaProducao) {
+        this.identificadorLinhaProducao = linhaProducao;
+    }
+
+    public boolean enriquecerMensagem(IdentificadorOrdemProducao identificadorOrdemProducao, IdentificadorLinhaProducao identificadorLinhaProducao){
+        this.identificadorLinhaProducao=identificadorLinhaProducao;
+        this.identificadorOrdemDeProducao=identificadorOrdemProducao;
+        this.estadoProcessamento=EstadoProcessamento.PROCESSADO;
+        return true;
     }
 
     public void setIdentificadorOrdemDeProducao(IdentificadorOrdemProducao identificadorOrdemDeProducao) {
@@ -105,9 +113,10 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
     public String toString() {
         return "Mensagem{" +
                 "version=" + version +
+                ", mensagemID=" + mensagemID +
                 ", estadoProcessamento=" + estadoProcessamento +
-                ", tipo=" + mensagemID.tipoDeMensagem +
-                ", tempoEmissao=" + mensagemID.tempoEmissao +
+                ", identificadorLinhaProducao=" + identificadorLinhaProducao +
+                ", identificadorOrdemDeProducao=" + identificadorOrdemDeProducao +
                 '}';
     }
 }

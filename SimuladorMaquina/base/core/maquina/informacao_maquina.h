@@ -2,5 +2,6 @@
 #define SIMULADORMAQUINA_INFORMACAO_MAQUINA_H
 
 unsigned short id_maquina;
+char * id_linha_producao;
 
 #endif //SIMULADORMAQUINA_INFORMACAO_MAQUINA_H

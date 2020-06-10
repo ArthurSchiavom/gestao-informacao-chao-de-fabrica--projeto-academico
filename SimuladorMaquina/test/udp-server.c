@@ -87,31 +87,44 @@ int main(void) {
 // request a IPv6 local address will allow both IPv4 and IPv6 clients to use it
     req.ai_family = AF_INET6;
     req.ai_socktype = SOCK_DGRAM;
-    req.ai_flags = AI_PASSIVE; // local address
+    req.ai_flags = AI_PASSIVE;
+
+// Retorna um ou mais addrinfo structs
     err = getaddrinfo(NULL, SERVER_PORT, &req, &list);
     if (err) {
         printf("Failed to get local address, error: %s\n", gai_strerror(err));
         exit(1);
     }
+
+//Cria um unbound socket e retorna um file descriptor
     sock = socket(list->ai_family, list->ai_socktype, list->ai_protocol);
     if (sock == -1) {
         perror("Failed to open socket");
         freeaddrinfo(list);
         exit(1);
     }
+
+//Associa um endereco de socket a um socket identificado pelo descriptor que nao possui um endereco atribuido
     if (bind(sock, (struct sockaddr *) list->ai_addr, list->ai_addrlen) == -1) {
         perror("Bind failed");
         close(sock);
-        freeaddrinfo(list);
+        freeaddrinfo(list); //Liberta a memoria que foi alocada dinamincamente
         exit(1);
     }
+
     freeaddrinfo(list);
+
+//Escreve uma string para o output
     puts("Listening for UDP requests (IPv6/IPv4). Use CTRL+C to terminate the server");
     adl = sizeof(client);
 
     Packet_udp resposta;
     char *buffer = malloc(UDP_BUFFER_SIZE);
+
+    //Function shall receive a message from a connection-mode or connectionless-mode socket
+    //Returna o tamanho da mensgaem em bytes,0 caso nao haja mensagens e -1 caso de erro.
     recvfrom(sock, buffer, UDP_BUFFER_SIZE, 0, (struct sockaddr *) &client, &adl);
+
     resposta.payload.version = buffer[0];
     resposta.payload.code = buffer[1];
     unsigned short *helper_short = &(buffer[2]);
@@ -125,8 +138,7 @@ int main(void) {
     printf("Received: %d, %d, %d, %d\n", resposta.payload.version, resposta.payload.code, resposta.payload.id,
            resposta.payload.data_length);
 
-    if (!getnameinfo((struct sockaddr *) &client, adl,
-                     cliIPtext, UDP_BUFFER_SIZE, cliPortText, UDP_BUFFER_SIZE, NI_NUMERICHOST | NI_NUMERICSERV)) {
+    if (!getnameinfo((struct sockaddr *) &client, adl,cliIPtext, UDP_BUFFER_SIZE, cliPortText, UDP_BUFFER_SIZE, NI_NUMERICHOST | NI_NUMERICSERV)) {
         printf("Request from node %s, port number %s\n", cliIPtext, cliPortText);
 
 //        req2.ai_family = AF_UNSPEC;

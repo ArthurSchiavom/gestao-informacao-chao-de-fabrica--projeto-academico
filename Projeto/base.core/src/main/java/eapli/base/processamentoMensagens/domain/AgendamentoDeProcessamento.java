@@ -41,6 +41,8 @@ public class AgendamentoDeProcessamento implements AggregateRoot<Long>, Converta
         this.finalDeProcessamento=finalDeProcessamento;
     }
 
+
+
     public static String identityAttributeName() {
         return Reflection.retrieveAttributeName(AgendamentoDeProcessamento.class, CodigoInternoMaterial.class);
     }

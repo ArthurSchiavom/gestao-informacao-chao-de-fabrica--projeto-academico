@@ -2,7 +2,9 @@ package eapli.base.gestaoproducao.gestaoerrosnotificacao.domain;
 
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.NotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.infrastructure.application.ConvertableToDTO;
@@ -31,9 +33,11 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 	public final MensagemID idMensagem;
 
 	@XmlElement(name = "tipo")
+	@Enumerated(EnumType.STRING)
 	public final TipoErroNotificacao tipoErroNotificacao;
 
 	@XmlElement(name = "estado")
+	@Enumerated(EnumType.STRING)
 	private EstadoErroNotificacao estadoErro;
 
 	/**
@@ -75,6 +79,16 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 		this.idMensagem = null;
 		this.tipoErroNotificacao = null;
 		this.estadoErro = null;
+	}
+
+	public static NotificacaoErro gerarNotificacaoDeErro(TipoErroNotificacao tipoErroNotificacao, LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem) {
+		switch (tipoErroNotificacao) {
+			case DADOS_INVALIDOS:
+				return new NotificacaoErro(linhaProducao.identifier, TipoErroNotificacao.DADOS_INVALIDOS, mensagem.identity(), linhaProducaoRepository, mensagemRepository);
+			case ELEMENTOS_INEXISTENTES:
+				return new NotificacaoErro(linhaProducao.identifier, TipoErroNotificacao.ELEMENTOS_INEXISTENTES, mensagem.identity(), linhaProducaoRepository, mensagemRepository);
+		}
+		return null;
 	}
 
 	public static String identityAttributeName() {

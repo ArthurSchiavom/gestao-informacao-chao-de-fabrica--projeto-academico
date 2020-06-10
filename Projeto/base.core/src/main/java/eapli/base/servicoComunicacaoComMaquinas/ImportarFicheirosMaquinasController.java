@@ -29,7 +29,7 @@ public class ImportarFicheirosMaquinasController {
         }
     }
 
-    public void iniciarAImportacao() throws InterruptedException, FileNotFoundException, EmptyFileException,IllegalArgumentException {
+    public void iniciarAImportacao() throws IllegalArgumentException {
         int i;
         if (files.size()==0)
             throw new IllegalArgumentException("A pasta esta vazia!");

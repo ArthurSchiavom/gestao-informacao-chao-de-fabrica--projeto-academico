@@ -7,14 +7,15 @@ import Mensagens.domain.Version;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.Arrays;
 
 /**
  * Está encarrege de enviar mensagens HELLO ás máquinas e criar novas threads por cada máquina
  * que responde
  */
 public class BroadcastHelloService implements Runnable {
-	private static final int TIMEOUT = 100; //em miligsegundos
-	private static final int SLEEP = 30; //em segundos
+	private static final int TIMEOUT = 3000; //em miligsegundos
+	private static final int SLEEP = 5; //em segundos
 	private boolean canKeepGoing = true;
 
 	@Override
@@ -23,7 +24,7 @@ public class BroadcastHelloService implements Runnable {
 
 		DatagramSocket socket = null;
 		try {
-			socket = new DatagramSocket(Port.getSMMPort());
+			socket = new DatagramSocket();
 			socket.setBroadcast(true);
 		} catch (SocketException e) {
 			System.out.println("Falha a criar socket de broadcast");
@@ -52,7 +53,7 @@ public class BroadcastHelloService implements Runnable {
 					try {
 						socket.receive(helloMsg.getUdpPacket());
 						System.out.println("Received response from " + helloMsg.getUdpPacket().getAddress());
-
+						System.out.println(Arrays.toString(helloMsg.getUdpPacket().getData()));
 						ReceiveAcknowledgmentService acknowledgmentService = new ReceiveAcknowledgmentService(helloMsg.getUdpPacket());
 						Thread acknowledgeThread = new Thread(acknowledgmentService);
 						acknowledgeThread.start();
