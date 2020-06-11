@@ -13,6 +13,7 @@ import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
+import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
@@ -25,7 +26,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -73,13 +73,17 @@ public class ChaoDeFabrica {
 	@XmlElement(name = "notificacaoDeErroDeProcessamento")
 	private List<NotificacaoErro> listaNotificacoesErro;
 
+	@XmlElementWrapper(name = "mensagens")
+	@XmlElement(name = "mensagem")
+	private List<Mensagem> listaMensagens;
+
 	private boolean nothingWasLoaded;
 
 	public ChaoDeFabrica(boolean nothingWasLoaded, List<LinhaProducao> listaLinhaProd, List<Deposito> listaDepositos,
 	                     List<Categoria> listaCategoria, List<Produto> listaProdutos,
 	                     List<Material> listaMateriais, List<FichaDeProducao> listaFichasProducao,
 	                     List<Maquina> listaMaquinas, List<OrdemProducao> listaOrdensProducao,
-	                     List<NotificacaoErro> listaNotificacoesErro) {
+	                     List<NotificacaoErro> listaNotificacoesErro, List<Mensagem> listaMensagens) {
 		this.nothingWasLoaded = nothingWasLoaded;
 		this.listaLinhaProd = listaLinhaProd;
 		this.listaDepositos = listaDepositos;
@@ -90,6 +94,7 @@ public class ChaoDeFabrica {
 		this.listaMaquinas = listaMaquinas;
 		this.listaOrdensProducao = listaOrdensProducao;
 		this.listaNotificacoesErro = listaNotificacoesErro;
+		this.listaMensagens = listaMensagens;
 	}
 
 	public ChaoDeFabrica() {
@@ -117,6 +122,7 @@ public class ChaoDeFabrica {
 		private List<Maquina> listaMaquinas;
 		private List<OrdemProducao> listaOrdensProducao;
 		private List<NotificacaoErro> listaNotificacoesErro;
+		private List<Mensagem> listaMensagens;
 
 		public Builder(RepositoryFactory repoFact) {
 			this.hasLoadedNothing = true;
@@ -130,6 +136,7 @@ public class ChaoDeFabrica {
 			this.listaMaquinas = new ArrayList<>();
 			this.listaOrdensProducao = new ArrayList<>();
 			this.listaNotificacoesErro = new ArrayList<>();
+			this.listaMensagens = new ArrayList<>();
 		}
 
 		public Builder loadLinhasProducao() {
@@ -238,7 +245,7 @@ public class ChaoDeFabrica {
 		public ChaoDeFabrica build() {
 			return new ChaoDeFabrica(hasLoadedNothing, listaLinhaProd, listaDepositos,
 					listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas,
-					listaOrdensProducao, listaNotificacoesErro);
+					listaOrdensProducao, listaNotificacoesErro, listaMensagens);
 		}
 
 	}

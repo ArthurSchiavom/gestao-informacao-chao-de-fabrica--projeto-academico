@@ -1,12 +1,7 @@
 package eapli.base.gestaoproducao.gestaolinhasproducao.domain;
 
-import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import java.io.StringWriter;
 import java.lang.reflect.Field;
 
 import static org.junit.Assert.assertTrue;

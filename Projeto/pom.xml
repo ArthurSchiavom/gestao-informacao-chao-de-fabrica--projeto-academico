@@ -87,7 +87,6 @@
 			<version>5.2.6.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
     <repositories>

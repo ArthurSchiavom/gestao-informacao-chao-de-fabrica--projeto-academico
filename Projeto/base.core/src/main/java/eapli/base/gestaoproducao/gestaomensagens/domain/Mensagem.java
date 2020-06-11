@@ -29,10 +29,7 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
     private EstadoProcessamento estadoProcessamento;
 
     private IdentificadorLinhaProducao identificadorLinhaProducao;
-
     private IdentificadorOrdemProducao identificadorOrdemDeProducao;
-
-
 
     public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina) {
         if ((tipo == null || tempoEmissao == null||codigoInternoMaquina==null)) {
