@@ -1,5 +1,7 @@
 package Mensagens.domain;
 
+import sun.security.util.Length;
+
 import java.util.Arrays;
 import java.util.Objects;
 

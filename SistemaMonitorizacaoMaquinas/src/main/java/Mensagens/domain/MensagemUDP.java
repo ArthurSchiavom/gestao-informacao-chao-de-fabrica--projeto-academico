@@ -19,7 +19,7 @@ abstract class MensagemUDP{
 		}
 		byte[] dados = new byte[6 + data.length()];
 		dados[0] = version.byteValue();
-		dados[1] = codigo.value();
+		dados[1] = codigo.byteVal();
 		dados[2] = idMaquina.leastSignificativeByte();
 		dados[3] = idMaquina.mostSignificativeByte();
 		dados[4] = data.length.leastSignificativeByte();

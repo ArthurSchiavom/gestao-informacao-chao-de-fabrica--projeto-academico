@@ -29,6 +29,8 @@ public class LinhaProducao {
 	 */
 	public Maquina adicionarMaquina(IdMaquina idMaquina, Codigos codigo, InetAddress ip) {
 		Maquina maquina;
+		System.out.println("ADICIONADA máquina " + idMaquina.value() + " na linha de produção " + idLinhaProducao +
+				" com codigo " + codigo);
 		switch (codigo) {
 			case ACK:
 				maquina = new Maquina(idMaquina, EstadoMaquina.ATIVO, ip);
@@ -50,7 +52,8 @@ public class LinhaProducao {
 	 *
 	 * @param idMaquina o id da máquina que pretendemos atualizar
 	 * @param codigo    o código que foi recebido para atualizar o estado da máquina
-	 * @param ip        o ip da máquina que foi recebido para verificar se não há máquinas com ips diferentes mas com o mesmo id
+	 * @param ip        o ip da máquina que foi recebido para verificar se não há máquinas com ips diferentes mas com
+	 *                  o mesmo id
 	 * @return uma referência para a máquina atualizada
 	 */
 	public Maquina atualizarMaquina(IdMaquina idMaquina, Codigos codigo, InetAddress ip) {
@@ -59,6 +62,8 @@ public class LinhaProducao {
 			System.out.println("Atenção, máquina " + maquina.toString() + "devia ter ip " + maquina.address()
 					+ " mas foi atualizada pelo ip " + ip);
 		}
+		System.out.println("ATUALIZADA máquina " + idMaquina.value() + " na linha produção " + idLinhaProducao +
+				" com código " + codigo);
 		switch (codigo) {
 			case ACK:
 				maquina.atualizarEstado(EstadoMaquina.ATIVO);
@@ -81,6 +86,7 @@ public class LinhaProducao {
 
 	/**
 	 * Procura na linha de produção pela existência de uma máquina
+	 *
 	 * @param idMaquina o id da máquina que pretendemos procurar
 	 * @return verdadeiro se existir
 	 */
@@ -92,6 +98,7 @@ public class LinhaProducao {
 
 	/**
 	 * Vai buscar uma referência á máquina com o id que foi passado por argumento
+	 *
 	 * @param idMaquina o id pelo qual pretendemos procurar
 	 * @return uma referência para a máquina com o id da máquina que foi procurado
 	 */
@@ -103,7 +110,8 @@ public class LinhaProducao {
 
 	/**
 	 * Verifica a inatividade das máquinas na linha de produção
-	 * @param date o momento em que pretendemos verificar
+	 *
+	 * @param date  o momento em que pretendemos verificar
 	 * @param tempo o tempo que a máquina tem que estar sem resposta para ser considerada inativa
 	 */
 	public void verificarInatividade(Date date, int tempo) {

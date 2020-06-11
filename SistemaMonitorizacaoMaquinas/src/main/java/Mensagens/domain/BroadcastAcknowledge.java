@@ -10,6 +10,7 @@ public class BroadcastAcknowledge extends MensagemUDP {
 
 	public int getIdLinhaProducao() {
 		MessageData mensagem = getMessageData();
+//		System.out.println("Message Data: " + mensagem.rawData.getTextContent().trim());
 		try {
 			return Integer.valueOf(mensagem.rawData.getTextContent().trim());
 		} catch (NumberFormatException e) {

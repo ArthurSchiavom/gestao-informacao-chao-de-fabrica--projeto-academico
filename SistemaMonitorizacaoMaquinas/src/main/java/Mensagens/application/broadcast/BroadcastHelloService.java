@@ -7,15 +7,14 @@ import Mensagens.domain.Version;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.Arrays;
 
 /**
  * Está encarrege de enviar mensagens HELLO ás máquinas e criar novas threads por cada máquina
  * que responde
  */
 public class BroadcastHelloService implements Runnable {
-	private static final int TIMEOUT = 3000; //em miligsegundos
-	private static final int SLEEP = 5; //em segundos
+	private static final int TIMEOUT = 100; //em milisegundos
+	private static final int SLEEP = 3; //em segundos
 	private boolean canKeepGoing = true;
 
 	@Override
@@ -52,8 +51,8 @@ public class BroadcastHelloService implements Runnable {
 					socket.setSoTimeout(TIMEOUT);
 					try {
 						socket.receive(helloMsg.getUdpPacket());
-						System.out.println("Received response from " + helloMsg.getUdpPacket().getAddress());
-						System.out.println(Arrays.toString(helloMsg.getUdpPacket().getData()));
+						System.out.println("Resposta recebida de " + helloMsg.getUdpPacket().getAddress());
+
 						ReceiveAcknowledgmentService acknowledgmentService = new ReceiveAcknowledgmentService(helloMsg.getUdpPacket());
 						Thread acknowledgeThread = new Thread(acknowledgmentService);
 						acknowledgeThread.start();

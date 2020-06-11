@@ -2,6 +2,8 @@ import ChaoDeFabrica.application.AtualizadorEstadoMaquinasService;
 import Mensagens.application.broadcast.BroadcastHelloService;
 import UI.MainMenu;
 
+import java.net.UnknownHostException;
+
 class Main {
 	public static void main(String[] args) {
 		BroadcastHelloService helloService = new BroadcastHelloService();

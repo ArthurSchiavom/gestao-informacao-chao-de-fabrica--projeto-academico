@@ -15,8 +15,12 @@ public enum Codigos {
 		this.codigo = (byte) codigo;
 	}
 
-	protected byte value() {
+	protected byte byteVal() {
 		return codigo;
+	}
+
+	private int value() {
+		return Byte.toUnsignedInt(codigo);
 	}
 
 	protected static Codigos searchForCodigo(int valorCodigo) {
