@@ -80,8 +80,7 @@ public class SolicitarConfiguracaoMaquinaController {
         Optional<Maquina> maq = repo.findByIdentifier(cod);
 
         if (maq.isPresent()) {
-            maq.get().hasConfig();
-            return true;
+            return maq.get().hasConfig();
         }
         return false;
     }
