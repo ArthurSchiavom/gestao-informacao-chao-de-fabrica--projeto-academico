@@ -3,7 +3,7 @@ package eapli.base.processamentoMensagens.domain;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInternoMaterial;
 import eapli.base.infrastructure.application.ConvertableToDTO;
-import eapli.base.processamentoMensagens.application.DTO.AgendamentoDeProcessamentoDTO;
+import eapli.base.processamentoMensagens.dto.AgendamentoDeProcessamentoDTO;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;

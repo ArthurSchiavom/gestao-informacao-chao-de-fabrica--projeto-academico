@@ -23,7 +23,7 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
         if (lista.isEmpty()) {
             System.out.println("Não há nenhuma linha de producao registada.\n");
             UserInteractionFlow.enterParaContinuar();
-            return false;
+            return true;
         }
         String maquinasSemFicheiroDeConfiguracaoDisplay = ConsoleTables.tabelaDeLinhasDeProducao(lista, true, 0);
         System.out.println(maquinasSemFicheiroDeConfiguracaoDisplay + "\n\n");
@@ -35,7 +35,7 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
             String dataFinal=Console.readNonEmptyLine("Insira a data final de processamento (YYYY-MM-DD)","Este campo nao pode ser vazio");
             String tempoFinal=Console.readNonEmptyLine("Insira a Hora/Min final de processamento (HH:MM)","Este campo nao pode ser vazio");
             if (!controller.validarInput(dataInicio.trim(),dataFinal.trim(),tempoInicio.trim(),tempoFinal.trim()))
-                return false;
+                return true;
             System.out.println(SimpleConsoleMessages.CLEAR_SCREEN +"Inicio de processamento!");
             controller.iniciarProcessamento();
         } catch (ParseException e) {

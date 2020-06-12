@@ -1,4 +1,4 @@
-package eapli.base.processamentoMensagens.application.TiposMensagensNotificacao;
+package eapli.base.processamentoMensagens.application.tiposMensagensNotificacao;
 
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
@@ -11,7 +11,6 @@ import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.processamentoMensagens.application.ValidacaoParametrosMensagensServico;
 
-import javax.swing.text.Element;
 import java.util.Date;
 
 public class MensagemInicioDeAtividadeNotificacao implements  CriacaoNotificacaoStrategy{

@@ -6,8 +6,8 @@ import eapli.base.gestaoproducao.conversao.application.xml.json.ConversorXMLtoJS
 import eapli.base.gestaoproducao.conversao.application.xml.txt.ConversorXMLtoTXTA;
 import eapli.base.gestaoproducao.conversao.domain.xml.ConversorXML;
 
-public class ConversorXMLFactory {
-	public ConversorXML getEstrategiaConversao(FormatoConversao formato) {
+class ConversorXMLFactory {
+	ConversorXML getEstrategiaConversao(FormatoConversao formato) {
 		switch(formato) {
 			case HTML_A:
 				return new ConversorXMLtoHTMLA();

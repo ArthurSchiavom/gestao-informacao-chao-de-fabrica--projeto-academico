@@ -4,6 +4,7 @@ import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class LinhasProducaoTransformer {
         List<LinhaProducaoDTO> linhasDTO = new ArrayList<>();
 
         for(LinhaProducao linha : linhas){
-            linhasDTO.add(new LinhaProducaoDTO(linha.identity().toString(),linha.estadoProcessamentoMensagens()));
+            linhasDTO.add(new LinhaProducaoDTO(linha.identity().toString(),linha.estadoProcessamentoMensagens(), linha.obterUltimaVezAtualizado()));
         }
 
         return linhasDTO;

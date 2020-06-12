@@ -6,9 +6,11 @@ import eapli.base.gestaoproducao.gestaolinhasproducao.domain.EstadoProcessamento
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
+import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
+import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,5 +40,14 @@ public class JpaLinhaProducaoRepository
 	@Override
 	public List<LinhaProducao> findAllList() {
 		return Lists.newArrayList(this.findAll());
+	}
+
+	@Override
+	public List<LinhaProducao> findPage(int pageSize, int pageNum) {
+		TypedQuery<LinhaProducao> tq = this.createQuery("SELECT e FROM LinhaProducao e",
+				LinhaProducao.class);
+		tq.setFirstResult(pageSize*pageNum);
+		tq.setMaxResults(pageSize);
+		return tq.getResultList();
 	}
 }

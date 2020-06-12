@@ -1,4 +1,4 @@
-package eapli.base.processamentoMensagens.application.TiposMensagensNotificacao;
+package eapli.base.processamentoMensagens.application.tiposMensagensNotificacao;
 
 import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;

@@ -1,4 +1,4 @@
-package eapli.base.processamentoMensagens.application.DTO;
+package eapli.base.processamentoMensagens.dto;
 
 
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;

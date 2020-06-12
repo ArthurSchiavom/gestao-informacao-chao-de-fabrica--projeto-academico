@@ -7,13 +7,12 @@ import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.MaquinaDTO;
 import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
-import eapli.base.processamentoMensagens.application.DTO.AgendamentoDeProcessamentoDTO;
+import eapli.base.processamentoMensagens.dto.AgendamentoDeProcessamentoDTO;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 public class ConsoleTables {
 

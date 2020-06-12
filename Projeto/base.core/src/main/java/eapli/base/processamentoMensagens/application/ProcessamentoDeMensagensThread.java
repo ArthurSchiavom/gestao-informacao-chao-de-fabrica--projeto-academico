@@ -13,7 +13,7 @@ import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorOrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.processamentoMensagens.application.TiposMensagensNotificacao.CriacaoNotificacaoStrategy;
+import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.CriacaoNotificacaoStrategy;
 import eapli.framework.domain.repositories.TransactionalContext;
 
 import java.util.ArrayList;

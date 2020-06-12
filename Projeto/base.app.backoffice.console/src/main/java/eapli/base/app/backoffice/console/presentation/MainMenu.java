@@ -33,6 +33,7 @@ import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordempro
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ConsultarOrdemProducaoByEstadoUI;
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ImportarOrdensProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.EspecificarOrdemProducaoUI;
+import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.processamentoMensagens.alterarEstado.AlterarEstadoProcessamentoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.conversao.conversaoXML.ConversaoFicheiroXMLUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.exportacao.exportacaoXML.ExportacaoFicheiroXMLChaoDeFabricaUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao.EspecificarDepositoUI;
@@ -101,6 +102,7 @@ public class MainMenu extends AbstractUI {
 	private static final int CONSULTAR_ERROS_ARQUIVADOS = 6;
 	private static final int ARQUIVAR_ERROS = 7;
 	private static final int SOLICITAR_CONFIG_MAQUINA = 8;
+	private static final int ALTERAR_ESTADO_PROCESSAMENTO = 9;
 
 	// SERVICOS
 	private static final int PROCESSAMENTO_DE_MENSAGENS_SISTEMA=1;
@@ -254,6 +256,7 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(CONSULTAR_ERROS_ARQUIVADOS, "Consultar Erros de Processamento Arquivados", new ConsultarErrosProcessamentoArquivadosUI()::show);
 		menu.addItem(ARQUIVAR_ERROS, "Arquivar Erros de Processamento", new ArquivarNotificacoesErroUI()::show);
 		menu.addItem(SOLICITAR_CONFIG_MAQUINA, "Configuração de máquina", new SolicitarConfiguracaoMaquinaUI()::show);
+		menu.addItem(ALTERAR_ESTADO_PROCESSAMENTO, "Alterar Estado Processamento" , new AlterarEstadoProcessamentoUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

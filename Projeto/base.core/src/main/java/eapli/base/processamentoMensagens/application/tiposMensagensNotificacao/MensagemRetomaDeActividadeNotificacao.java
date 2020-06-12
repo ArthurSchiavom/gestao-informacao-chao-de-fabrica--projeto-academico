@@ -1,4 +1,4 @@
-package eapli.base.processamentoMensagens.application.TiposMensagensNotificacao;
+package eapli.base.processamentoMensagens.application.tiposMensagensNotificacao;
 
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
