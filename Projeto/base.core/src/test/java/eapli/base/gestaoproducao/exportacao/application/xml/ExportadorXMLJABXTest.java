@@ -91,7 +91,6 @@ public class ExportadorXMLJABXTest {
 		}
 	}
 
-	/*
 	@Test
 	public void garantirQueExportacaoTemSucesso() {
 		List<LinhaProducao> listaLinhaProd = new ArrayList<>();
@@ -212,7 +211,11 @@ public class ExportadorXMLJABXTest {
 				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao,
 				listaNotificacoesErro, listaMensagens);
 		assertTrue(exportador.export(ficheiro, chaoDeFabrica));
-		exportador.export(new File("ola"), chaoDeFabrica);
+		try {
+			exportador.export(folder.newFile(), chaoDeFabrica);
+		} catch (IOException e) {
+			fail("export failed");
+		}
 
 		JAXBContext jaxbContext;
 		try
@@ -225,7 +228,7 @@ public class ExportadorXMLJABXTest {
 
 			//Setup schema validator
 			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema employeeSchema = sf.newSchema(new File("../../XSD/chaoDeFabrica.xsd"));
+			Schema employeeSchema = sf.newSchema(new File("../../XML_XSD_XSLT/chaoDeFabrica.xsd"));
 			jaxbUnmarshaller.setSchema(employeeSchema);
 
 			//Unmarshal xml file
@@ -240,5 +243,4 @@ public class ExportadorXMLJABXTest {
 
 
 	}
-	 */
 }

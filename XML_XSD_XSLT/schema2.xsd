@@ -25,9 +25,15 @@
       <xs:minLength value="1" />
     </xs:restriction>
   </xs:simpleType>
-
+  
   <xs:simpleType name="intPositivo">
     <xs:restriction base="xs:int">
+      <xs:minInclusive value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="longPositivo">
+    <xs:restriction base="xs:long">
       <xs:minInclusive value="1" />
     </xs:restriction>
   </xs:simpleType>
@@ -325,7 +331,7 @@
     </xs:all>
     <xs:attribute name="codigoInterno" type="codigoInternoMaquina" use="required" />
   </xs:complexType>
-
+  
   <xs:complexType name="ordemProducao">
     <xs:all>
       <xs:element name="quantidadeAProduzir" type="doublePositivo" />
@@ -343,8 +349,38 @@
       <xs:element name="estado" type="estado" />
       <xs:element name="produto" type="codigoUnicoProduto" />
       <xs:element name="produtosProduzidos" type="produtosProduzidos" minOccurs="0" /> <!-- minOccurs = 0 porque ainda não foram implementados em código -->
-      <xs:element name="dadosCalculados" type="dadosCalculadosOrdem" minOccurs="0" /> <!-- minOccurs = 0 porque ainda não foram implementados em código -->
-      <xs:element name="usosDeMaquina" type="usosDeMaquina" minOccurs="0" /> <!-- minOccurs = 0 porque ainda não foram implementados em código -->
+      
+      <xs:element name="consumosReais" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="consumoReal" type="quantidadeDeMateriaPrima" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      <xs:element name="consumosEsperados" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="consumoEsperado" type="quantidadeDeMateriaPrima" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      <xs:element name="estornos" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="estorno" type="quantidadeDeMateriaPrima" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      <xs:element name="desviosDeConsumo" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="desvioDeConsumo" type="quantidadeDeMateriaPrima" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      <xs:element name="tempoBrutoExecucao" type="longPositivo" minOccurs="0" />
+      <xs:element name="tempoEfetivoExecucao" type="longPositivo" minOccurs="0" />
+      <xs:element name="usosDeMaquina" type="usosDeMaquina" minOccurs="0" />
     </xs:all>
     <xs:attribute name="identificador" type="identificadorOrdemProducao" use="required" />
   </xs:complexType>
