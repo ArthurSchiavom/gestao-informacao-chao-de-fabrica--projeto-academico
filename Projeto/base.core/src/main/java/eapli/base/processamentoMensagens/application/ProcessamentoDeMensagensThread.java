@@ -30,7 +30,7 @@ import eapli.base.indicarUsoDeMaquina.domain.*;
 import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.processamentoMensagens.application.TiposMensagensNotificacao.CriacaoNotificacaoStrategy;
+import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.CriacaoNotificacaoStrategy;
 import eapli.framework.domain.repositories.TransactionalContext;
 
 import java.awt.*;

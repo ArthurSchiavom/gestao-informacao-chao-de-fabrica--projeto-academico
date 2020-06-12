@@ -1,16 +1,11 @@
 package eapli.base.gestaoproducao.gestaolinhasproducao.domain;
 
-import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import java.io.StringWriter;
 import java.lang.reflect.Field;
+import java.util.Date;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class LinhaProducaoTest {
 	@Test(expected = IllegalArgumentException.class)
@@ -50,5 +45,39 @@ public class LinhaProducaoTest {
 		} else {
 			fail("Verificar valor de retorno do metodo identityAttributeName");
 		}
+	}
+
+	@Test
+	public void garantirQueNaoSePodeAlterarEstadosDeProcessamentoParaOEstadoAtual() {
+		LinhaProducao lProd = new LinhaProducao("teste");
+		assertFalse(lProd.podeMudarParaEstado(EstadoProcessamentoMensagens.SUSPENSO));
+	}
+
+	@Test
+	public void garantirQueSePodeMudarOEstadoParaUmEstadoDiferente() {
+		LinhaProducao lProd = new LinhaProducao("teste");
+		assertTrue(lProd.alterarEstado(EstadoProcessamentoMensagens.ATIVO));
+	}
+
+	@Test
+	public void garantirQueNaoSePodeAlterarEstadosDeProcessamentoParaOEstadoAtualQuandoEleEstaAtivo() {
+		LinhaProducao lProd = new LinhaProducao("teste");
+		lProd.alterarEstado(EstadoProcessamentoMensagens.ATIVO);
+		assertFalse(lProd.podeMudarParaEstado(EstadoProcessamentoMensagens.ATIVO));
+	}
+
+	@Test
+	public void garantirQueAUltimaAtualizacaoDaDataFicaAlteradaQuandoOEstadoEAlterado() {
+		LinhaProducao lProd = new LinhaProducao("teste");
+		String firstData = lProd.obterUltimaVezAtualizado();
+		try {
+			Thread.sleep(1010);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			fail("sleeping for one second failed somehow");
+		}
+		lProd.alterarEstado(EstadoProcessamentoMensagens.ATIVO);
+		String secondData = lProd.obterUltimaVezAtualizado();
+		assertNotEquals(firstData, secondData);
 	}
 }

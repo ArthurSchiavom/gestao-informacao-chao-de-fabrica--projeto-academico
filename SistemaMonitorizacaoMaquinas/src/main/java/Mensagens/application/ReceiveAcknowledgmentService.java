@@ -30,6 +30,7 @@ public class ReceiveAcknowledgmentService implements Runnable {
 			LinhaProducao linhaProd = chaoDeFabrica.procurarPorLinhaProducao(idLinhaProducao);
 			if (linhaProd.maquinaExiste(mensagem.getIdMaquina())) {
 				linhaProd.atualizarMaquina(idMaquina, mensagem.getCodigo(), ipMaquina);
+			} else {
 				linhaProd.adicionarMaquina(idMaquina, mensagem.getCodigo(), ipMaquina);
 			}
 		} else { //Caso a linha de produção não exista, cria-se uma nova linha de produção

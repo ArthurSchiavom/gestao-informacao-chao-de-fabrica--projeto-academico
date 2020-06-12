@@ -90,7 +90,7 @@ public class Maquina {
 
 	@Override
 	public String toString() {
-		return "{id=" + id +
+		return "{id=" + id.value() +
 				", lastUpdated=" + lastUpdated +
 				", estado=" + estado +
 				", ip=" + ip +

@@ -1,0 +1,63 @@
+{
+    "chaoDeFabrica": 
+    {
+    	"mensagens": 
+        {
+            "numero" = "10"
+        }
+    	"movimentosStock": 
+        {
+            "numero" = "2"
+            "IDs": ["10", "12"]
+        }
+    	"agendamentosDeProcessamento": 
+        {
+            "numero" = "1"
+        }
+    	"notificacoesDeErroDeProcessamento": 
+        {
+            "numero" = "1"
+        }
+    	"linhasDeProducao": 
+        {
+            "numero" = "6"
+            "IDs": ["Linha 5", "Linha 6", "Linha de Produção 1", "Linha de Produção 2", "linha 1", "linha 2"]
+        }
+    	"depositos": 
+        {
+            "numero" = "4"
+            "IDs": ["DEP001", "DEP002", "DEP003", "deposito 1"]
+        }
+    	"categorias": 
+        {
+            "numero" = "7"
+            "IDs": ["ID-123", "ID-122", "ID-121", "123456", "1234567", "1212344", "categoria 1"]
+        }
+    	"produtos": 
+        {
+            "numero" = "5"
+            "IDs": ["1100001a", "1200001b", "1200002c", "1200003d", "produto 1"]
+        }
+    	"materiais": 
+        {
+            "numero" = "4"
+            "IDs": ["531213", "213455", "325611", "material 1"]
+        }
+    	"fichasDeProducao": 
+        {
+            "numero" = "1"
+            "IDs": ["12"]
+        }
+    	"maquinas": 
+        {
+            "numero" = "4"
+            "IDs": ["123", "1234", "1235", "maquina 1"]
+        }
+    	"ordensDeProducao": 
+        {
+            "numero" = "1"
+            "IDs": ["ordem 1"]
+        }
+    }
+}
+    

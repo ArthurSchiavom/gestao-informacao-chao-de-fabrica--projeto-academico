@@ -4,12 +4,15 @@ import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
 import eapli.base.gestaoproducao.exportacao.domain.Exportador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
+import javax.xml.XMLConstants;
+import javax.xml.bind.*;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class ExportadorXMLJABX implements Exportador {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExportadorXMLJABX.class);
@@ -50,8 +53,27 @@ public class ExportadorXMLJABX implements Exportador {
 		try {
 			marshaller.marshal(chaoDeFabrica, file);
 		} catch (JAXBException e) {
-			e.printStackTrace();
 			LOGGER.error("Erro a exportar para XML. Verificar nome de ficheiro");
+			return false;
+		}
+
+		//Valida o XSD
+		JAXBContext jaxbContext;
+		try
+		{
+			jaxbContext = JAXBContext.newInstance(ChaoDeFabrica.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema employeeSchema = sf.newSchema(new File("../XSD/chaoDeFabrica.xsd"));
+			jaxbUnmarshaller.setSchema(employeeSchema);
+			jaxbUnmarshaller.unmarshal(file);
+		}
+		catch (JAXBException | SAXException e)
+		{
+			file.delete();
+			e.printStackTrace();
+			LOGGER.error("Exportação falhou a validação de XSD");
 			return false;
 		}
 		return true;

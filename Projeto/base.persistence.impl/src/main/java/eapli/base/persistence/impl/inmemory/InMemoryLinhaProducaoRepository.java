@@ -24,4 +24,9 @@ public class InMemoryLinhaProducaoRepository
 	public List<LinhaProducao> findAllList() {
 		return Lists.newArrayList(this.findAll());
 	}
+
+	@Override
+	public List<LinhaProducao> findPage(int pageSize, int pageNum) {
+		throw new UnsupportedOperationException("Não encontrei uma forma de implementar isto no inMemory");
+	}
 }

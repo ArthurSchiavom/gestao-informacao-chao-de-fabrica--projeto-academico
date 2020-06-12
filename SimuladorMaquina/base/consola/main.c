@@ -20,7 +20,9 @@ int main(int argc, char **argv) {
     if (argc-1 < N_ARGS) {
         printf("Algumentos necessários em falta. Os argumentos necessários (por ordem) são: ID da máquina, intervalo de cadência em segundos, "
                "caminho para o ficheiro de mensagens, endereço do sistema central, "
-               "endereço do SMM e nome da máquina (usado para encontrar os ficheiros key e pem).\n\n");
+               "endereço do SMM, "
+               "nome da máquina (usado para encontrar os ficheiros key e pem) e "
+               "identificador da linha de prudução\n\n");
         return 1;
     }
 

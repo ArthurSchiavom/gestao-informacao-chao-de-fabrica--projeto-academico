@@ -5,8 +5,8 @@ import ChaoDeFabrica.domain.ChaoDeFabrica;
 import java.util.Date;
 
 public class AtualizadorEstadoMaquinasService implements Runnable {
-	private static final int TEMPO_VERIFICACAO = 45; //tempo para verificar, em segundos
-	private static final int TEMPO_INATIVIDADE = 60; //tempo para ser considerado inativo, em segundos
+	private static final int TEMPO_VERIFICACAO = 4; //tempo para verificar, em segundos
+	private static final int TEMPO_INATIVIDADE = 6; //tempo para ser considerado inativo, em segundos
 	private boolean canKeepGoing = true;
 
 	@Override

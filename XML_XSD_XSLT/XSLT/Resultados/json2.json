@@ -1,0 +1,19 @@
+{
+    "chaoDeFabrica":
+    {
+        "mensagens": "10"
+        "movimentosStock": "2"
+        "agendamentosDeProcessamento": "1"
+        "notificacoesDeErroDeProcessamento": "1"
+        "linhasDeProducao": "6"
+        "depositos": "4"
+        "categorias": "7"
+        "produtos": "5"
+        "materiais": "4"
+        "fichasDeProducao": "1"
+        "maquinas": "4"
+        "ordensDeProducao": "1"
+        
+    }
+}
+    

@@ -33,6 +33,8 @@ import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordempro
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ConsultarOrdemProducaoByEstadoUI;
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.ImportarOrdensProducaoUI;
 import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.ordemproducao.EspecificarOrdemProducaoUI;
+import eapli.base.app.backoffice.console.presentation.gestaochaofabrica.processamentoMensagens.alterarEstado.AlterarEstadoProcessamentoUI;
+import eapli.base.app.backoffice.console.presentation.gestaoproducao.conversao.conversaoXML.ConversaoFicheiroXMLUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.exportacao.exportacaoXML.ExportacaoFicheiroXMLChaoDeFabricaUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaodepositos.especificacao.EspecificarDepositoUI;
 import eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaoerrosnotificacao.arquivar.ArquivarNotificacoesErroUI;
@@ -87,6 +89,8 @@ public class MainMenu extends AbstractUI {
 	private static final int IMPORTAR_ORDENS_PRODUCAO = 8;
 	private static final int CONSULTAR_ORDEM_PRODUCAO_ENCOMENDA = 9;
 	private static final int CONSULTAR_ORDEM_PRODUCAO_ESTADO = 10;
+	private static final int EXPORTAR_XML = 11;
+	private static final int CONVERTER_XML = 12;
 
 
 	// GESTOR CHAO DE FÁBRICA
@@ -94,11 +98,11 @@ public class MainMenu extends AbstractUI {
 	private static final int ASSOCIAR_FICHEIRO_CONFIGURACAO=2;
 	private static final int REGISTAR_DEPOSITO = 3;
 	private static final int REGISTAR_LINHAPRODUCAO = 4;
-	private static final int EXPORTAR_XML = 5;
-	private static final int CONSULTAR_ERROS_ATIVOS = 6;
-	private static final int CONSULTAR_ERROS_ARQUIVADOS = 7;
-	private static final int ARQUIVAR_ERROS = 8;
-	private static final int SOLICITAR_CONFIG_MAQUINA = 9;
+	private static final int CONSULTAR_ERROS_ATIVOS = 5;
+	private static final int CONSULTAR_ERROS_ARQUIVADOS = 6;
+	private static final int ARQUIVAR_ERROS = 7;
+	private static final int SOLICITAR_CONFIG_MAQUINA = 8;
+	private static final int ALTERAR_ESTADO_PROCESSAMENTO = 9;
 
 	// SERVICOS
 	private static final int PROCESSAMENTO_DE_MENSAGENS_SISTEMA=1;
@@ -229,6 +233,8 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(IMPORTAR_ORDENS_PRODUCAO,"Importar Ordens de Produção", new ImportarOrdensProducaoUI()::show);
 		menu.addItem(CONSULTAR_ORDEM_PRODUCAO_ENCOMENDA,"Consultar Ordens de Produção pelo Identificador da Encomenda", new ConsultarOrdemProducaoByEncomendaUI()::show);
 		menu.addItem(CONSULTAR_ORDEM_PRODUCAO_ESTADO,"Consultar Ordens de Produção pelo Estado", new ConsultarOrdemProducaoByEstadoUI()::show);
+		menu.addItem(EXPORTAR_XML, "Exportar XML do Chão de Fábrica", new ExportacaoFicheiroXMLChaoDeFabricaUI()::show);
+		menu.addItem(CONVERTER_XML, "Converter ficheiro XML para outros formatos", new ConversaoFicheiroXMLUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
@@ -246,11 +252,11 @@ public class MainMenu extends AbstractUI {
 		menu.addItem(ASSOCIAR_FICHEIRO_CONFIGURACAO,"Associar Ficheiro de Configuração",new EspecificarFicheiroConfiguracaoAction());
 		menu.addItem(REGISTAR_DEPOSITO, "Registar Depósito", new EspecificarDepositoUI()::show);
 		menu.addItem(REGISTAR_LINHAPRODUCAO, "Registar Linha de Produção", new EspecificarLinhaProducaoUI()::show);
-		menu.addItem(EXPORTAR_XML, "Exportar XML do Chão de Fábrica", new ExportacaoFicheiroXMLChaoDeFabricaUI()::show);
 		menu.addItem(CONSULTAR_ERROS_ATIVOS, "Consultar Erros de Processamento por Tratar", new ConsultarErrosProcessamentoAtivosUI()::show);
 		menu.addItem(CONSULTAR_ERROS_ARQUIVADOS, "Consultar Erros de Processamento Arquivados", new ConsultarErrosProcessamentoArquivadosUI()::show);
 		menu.addItem(ARQUIVAR_ERROS, "Arquivar Erros de Processamento", new ArquivarNotificacoesErroUI()::show);
 		menu.addItem(SOLICITAR_CONFIG_MAQUINA, "Configuração de máquina", new SolicitarConfiguracaoMaquinaUI()::show);
+		menu.addItem(ALTERAR_ESTADO_PROCESSAMENTO, "Alterar Estado Processamento" , new AlterarEstadoProcessamentoUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

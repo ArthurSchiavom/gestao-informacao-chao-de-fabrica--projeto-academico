@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.exportacao.application.xml;
 import eapli.base.comum.domain.medicao.QuantidadePositiva;
 import eapli.base.comum.domain.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
+import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
@@ -14,9 +15,7 @@ import eapli.base.gestaoproducao.gestaomaterial.domain.*;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.MateriaPrima;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.QuantidadeDeMateriaPrima;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.TipoDeMateriaPrima;
-import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
-import eapli.base.gestaoproducao.gestaomensagens.domain.TimestampEmissao;
-import eapli.base.gestaoproducao.gestaomensagens.domain.TipoDeMensagem;
+import eapli.base.gestaoproducao.gestaomensagens.domain.*;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.application.ProdutoBuilder;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
@@ -155,7 +154,8 @@ public class ExportadorXMLJABXTest {
 			e.printStackTrace();
 		}
 		List<Maquina> listaMaquinas = new ArrayList<>();
-		listaMaquinas.add(new Maquina(new NumeroSerie("123"), new CodigoInternoMaquina("CODINT_1"),
+		CodigoInternoMaquina codIntMaq = new CodigoInternoMaquina("CODINT_1");
+		listaMaquinas.add(new Maquina(new NumeroSerie("123"), codIntMaq,
 				new OrdemLinhaProducao(1), new IdentificadorProtocoloComunicacao(1),
 				"Maquina teste", "Rage Against The Computer", "XPTO", linhaProd));
 
@@ -199,8 +199,17 @@ public class ExportadorXMLJABXTest {
 				TipoErroNotificacao.DADOS_INVALIDOS, mid, lProdRepo, msgRepo);
 		listaNotificacoesErro.add(notifErro);
 
+		List<Mensagem> listaMensagens = new ArrayList<>();
+		try {
+			MensagemConsumo msgConsumo = new MensagemConsumo(new CodigoDeposito("COD1"), codIntMaq, new Date(),
+					10, CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent));
+		} catch (IllegalDomainValueException e) {
+			e.printStackTrace();
+		}
+
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,
-				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao, listaNotificacoesErro);
+				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao,
+				listaNotificacoesErro, listaMensagens);
 		assertTrue(exportador.export(ficheiro, chaoDeFabrica));
 		exportador.export(new File("ola"), chaoDeFabrica);
 

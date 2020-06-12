@@ -27,13 +27,20 @@ public class SendResetRequestService implements Runnable {
 		DatagramSocket socket = null;
 
 		try {
-			socket = new DatagramSocket(Port.getSMMPort());
-			System.out.println("A enviar pedido de reset á máquina " + maquina.toString());
+			socket = new DatagramSocket();
+		} catch (IOException e) {
+			System.out.println("Falha a criar o socket do datagram");
+		}
+		assert socket != null;
+
+		System.out.println("A enviar pedido de reset á máquina " + maquina.toString() + " na linha de produção " +
+				idLinhaProducao);
+
+		try {
 			socket.send(resetRequest.getUdpPacket());
 		} catch (IOException e) {
 			System.out.println("Falha a enviar o pedido de reinicialização");
 		}
-		assert socket != null;
 
 		try {
 			socket.setSoTimeout(TIMEOUT);
@@ -41,9 +48,10 @@ public class SendResetRequestService implements Runnable {
 			//Começa o serviço que está encarregue de receber respostas da máquina
 			new ReceiveAcknowledgmentService(resetRequest.getUdpPacket()).run();
 		} catch (SocketException e) {
-			System.out.println("Timeout á espera da resposta da máquina" + maquina.identity().toString() + "para o pedido de reinicialização");
+			System.out.println("Timeout á espera da resposta da máquina" + maquina.identity().toString() +
+					"para o pedido de reinicialização");
 		} catch (IOException e) {
-			System.out.println("Erro de I/O a receber a resposta da máquina");
+//			System.out.println("Erro de I/O a receber a resposta da máquina");
 		}
 	}
 }

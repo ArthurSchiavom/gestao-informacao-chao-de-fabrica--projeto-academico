@@ -1,0 +1,318 @@
+Chão de Fábrica
+	Mensagens
+		MensagemInicioDeAtividade
+			TimestampEmissaoEpochMilli: 1590795870
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+		MensagemInicioDeAtividade
+			TimestampEmissaoEpochMilli: 1590795871
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+		MensagemInicioDeAtividade
+			TimestampEmissaoEpochMilli: 1590795872
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+		MensagemFimDeAtividade
+			TimestampEmissaoEpochMilli: 159079587
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+		MensagemParagemForcada
+			TimestampEmissaoEpochMilli: 1590795870
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+			CodigoCausaDeParagem: DESCONHECIDO
+		MensagemRetomaDeAtividade
+			TimestampEmissaoEpochMilli: 15907958
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+		MensagemDeConsumo
+			TimestampEmissaoEpochMilli: 1590795
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+			QuantidadeDeMateriaPrima - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: MATERIAL
+			IdMateria: material 1
+			]
+			]
+			Deposito: deposito 1
+		MensagemDeProducao
+			TimestampEmissaoEpochMilli: 159079
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+			Produto: produto 1
+			Quantidade: 123
+			Lote: sunny
+		MensagemDeEntregaDeProducao
+			TimestampEmissaoEpochMilli: 15907
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+			Quantidade: 123
+			Produto: produto 1
+			Deposito: deposito 1
+			Lote: sunny
+		MensagemDeEstorno
+			TimestampEmissaoEpochMilli: 1590
+			OrdemDeProducao: ordem 1
+			Maquina: maquina 1
+			QuantidadeDeMateriaPrima - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: MATERIAL
+			IdMateria: material 1
+			]
+			]
+			Deposito: deposito 1
+	MovimentosStock
+		10
+			QuantidadeDeMateriaPrima - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: MATERIAL
+			IdMateria: material 1
+			]
+			]
+			Deposito: deposito 1
+		12
+			QuantidadeDeMateriaPrima - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: MATERIAL
+			IdMateria: material 1
+			]
+			]
+			Deposito: deposito 1
+	AgendamentosDeProcessamento
+		AgendamentoDeProcessamento
+			LinhaDeProducao: linha 2
+			FimTimestampEpochMili: 1700000000
+			InicioTimestampEpochMili: 1600000000
+	NotificacoesDeErroDeProcessamento
+		NotificacaoDeErroDeProcessamento
+			LinhaDeProducao: linha 2
+			Tipo: ELEMENTOS_INEXISTENTES
+			Estado: ARQUIVADO
+	LinhasDeProducao
+		Linha 5
+			Estado: INATIVO
+		Linha 6
+			Estado: INATIVO
+		Linha de Produção 1
+			Estado: INATIVO
+		Linha de Produção 2
+			Estado: INATIVO
+		linha 1
+			Estado: ATIVO
+		linha 2
+			Estado: ATIVO
+	Depositos
+		DEP001
+			Descricao: Deposito de Madeira
+		DEP002
+			Descricao: Deposito de Ferro
+		DEP003
+			Descricao: Deposito de Aço
+		deposito 1
+			Descricao: sunny
+	Categorias
+		ID-123
+			Descricao: Metal
+		ID-122
+			Descricao: Madeira
+		ID-121
+			Descricao: Plástico
+		123456
+			Descricao: metais
+		1234567
+			Descricao: metais
+		1212344
+			Descricao: metais
+		categoria 1
+			Descricao: sunny
+	Produtos
+		1100001a
+			CodigoComercial: 320030000002a
+			CategoriaDeProduto: ME-AP
+			DescricaoBreve: Aparas
+			DescricaoCompleta: Aparas
+			UnidadeDeMedida: UNIDADES
+		1200001b
+			CodigoComercial: 320030000003b
+			CategoriaDeProduto: ME-BR
+			DescricaoBreve: Amostras
+			DescricaoCompleta: Amostras
+			UnidadeDeMedida: UNIDADES
+		1200002c
+			CodigoComercial: 320030000004c
+			CategoriaDeProduto: ME-BR
+			DescricaoBreve: Blocos
+			DescricaoCompleta: Blocos
+			UnidadeDeMedida: UNIDADES
+		1200003d
+			CodigoComercial: 320030000005d
+			CategoriaDeProduto: ME-BR
+			DescricaoBreve: Blocos Borracha
+			DescricaoCompleta: Blocos Borracha
+			UnidadeDeMedida: UNIDADES
+		produto 1
+			CodigoComercial: sunny
+			FichaDeProducao - [
+			QuantidadesDeMateriaPrima - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: MATERIAL
+			IdMateria: material 1
+			]
+			]
+			]
+			CategoriaDeProduto: sunny
+			DescricaoBreve: sunny
+			DescricaoCompleta: sunny
+			UnidadeDeMedida: CENTIMETRO
+	Materiais
+		531213
+			UnidadeDeMedida: KILOGRAMA
+			Descricao:  É um elemento químico, símbolo Fe, de número atômico 26
+			FichaTecnicaPDF - [
+			Nome: Ferro
+			]
+			Categoria: 123456
+		213455
+			UnidadeDeMedida: KILOGRAMA
+			Descricao:  O aço é uma liga metálica formada essencialmente por ferro e carbono, com percentagens deste último variando entre 0,008 e 2,11%
+			FichaTecnicaPDF - [
+			Nome: Aco
+			]
+			Categoria: 1234567
+		325611
+			UnidadeDeMedida: KILOGRAMA
+			Descricao:  O cobre é um elemento químico de símbolo Cu (do latim cuprum), número atômico 29 (29 prótons e 29 elétrons) e de massa atómica 63,54 u.
+			FichaTecnicaPDF - [
+			Nome: Cobre
+			]
+			Categoria: 1212344
+		material 1
+			UnidadeDeMedida: KILOGRAMA
+			Descricao: sunny
+			FichaTecnicaPDF - [
+			Path: sunny
+			Nome: sunny
+			]
+			Categoria: sunny
+	FichasDeProducao
+		12
+			QuantidadesDeMateriaPrima - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: MATERIAL
+			IdMateria: material 1
+			]
+			]
+	Maquinas
+		123
+			NumeroSerie: Num 1234
+			OrdemLinhaProducao: 1
+			IdentificadorProtocoloComunicacao: 1
+			DataInstalacao: 26-05-2020
+			Marca: sony
+			Modelo: HC-A
+			DescricaoMaquina: DP-420
+			LinhaProducao: Linha 5
+		1234
+			NumeroSerie: Num 1235
+			OrdemLinhaProducao: 2
+			IdentificadorProtocoloComunicacao: 64931
+			DataInstalacao: 26-05-2020
+			Marca: apple
+			Modelo: HC-B
+			DescricaoMaquina: BJ-420
+			LinhaProducao: Linha 5
+		1235
+			NumeroSerie: Num 1000
+			OrdemLinhaProducao: 2
+			IdentificadorProtocoloComunicacao: 234
+			DataInstalacao: 26-05-2020
+			Marca: samsung
+			Modelo: HC-S
+			DescricaoMaquina: K-9
+			LinhaProducao: Linha 6
+		maquina 1
+			NumeroSerie: sunny
+			OrdemLinhaProducao: 1
+			FicheiroConfiguracao: sunny
+			IdentificadorProtocoloComunicacao: 0
+			DataInstalacao: 01-06-2020
+			Marca: sunny
+			Modelo: sunny
+			DescricaoMaquina: sunny
+			LinhaProducao: linha 1
+	OrdensDeProducao
+		ordem 1
+			QuantidadeAProduzir: 1
+			Encomendas - [
+			IdEncomenda: sunny
+			]
+			DataEmissao: 01-06-2020
+			DataPrevistaExecucao: 01-06-2020
+			FimExecucao: 01-06-2020
+			InicioExecucao: 01-06-2020
+			Estado: CONCLUIDA
+			Produto: produto 1
+			ProdutosProduzidos - [
+			ProdutoProduzido - [
+			IdentificadorLote: sunny
+			QuantidadeProduto: sunny
+			CodigoUnicoProduto: sunny
+			]
+			]
+			DadosCalculados - [
+			ConsumosReais - [
+			ConsumoReal - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: PRODUTO
+			IdMateria: produto 1
+			]
+			]
+			]
+			ConsumosEsperados - [
+			ConsumoEsperado - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: PRODUTO
+			IdMateria: produto 1
+			]
+			]
+			]
+			Estornos - [
+			Estorno - [
+			Quantidade: 123
+			MateriaPrima - [
+			TipoDeMateriaPrima: MATERIAL
+			IdMateria: material 1
+			]
+			]
+			]
+			DesviosDeConsumo - [
+			DesvioDeConsumo - [
+			Quantidade: 12
+			MateriaPrima - [
+			TipoDeMateriaPrima: MATERIAL
+			IdMateria: material 1
+			]
+			]
+			]
+			TempoBrutoExecucao: 0
+			TempoEfetivoExecucao: 0
+			]
+			UsosDeMaquina - [
+			UsoDeMaquina - [
+			InicioExecucao: 0
+			FimExecucao: 0
+			PausaExecucao: 0
+			RetomaExecucao: 0
+			MovimentoStock: 0
+			Maquina: maquina 1
+			]
+			]
