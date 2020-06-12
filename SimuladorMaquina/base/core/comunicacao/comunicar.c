@@ -34,7 +34,6 @@ Built_Payload build_payload(Payload payload, short inverterBytesDeNumeros) {
         strcpy(resultado.content + PAYLOAD_STATIC_DATA_SIZE, payload.data);
     }
 
-
     return resultado;
 }
 
