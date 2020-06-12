@@ -1,6 +1,7 @@
 package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao;
 
 import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.MaquinaDTO;
+import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomaquina.domain.FicheiroConfiguracao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
@@ -46,14 +47,11 @@ public class EspecificarFicheiroConfiguracaoController {
      * Retorna uma lista de maquinas sem ficheiro de configuracao
      * @return Lista do tipo MaquinaDTO
      */
-    public List<MaquinaDTO> maquinasSemFicheiroDeConfiguracao() {
-        return maquinasSemFicheiroDeConfiguracaoDTO;
-    }
 
     /**
      * Seleciona uma maquina apartir de o codigo unico fornecido
      * @param codigoUnico Codigo unico da maquina
-     * @return verdadeiro ou falsp
+     * @return verdadeiro ou falso
      */
      public boolean selecionarMaquina(String codigoUnico) {
          maquinaAlvo = codigoInterno_Maquina.get(codigoUnico);
@@ -67,12 +65,10 @@ public class EspecificarFicheiroConfiguracaoController {
      * @throws IOException Exceção
      */
     public void registar(String descricao,String pathFicheiro) throws IOException ,IllegalArgumentException{
-        transactionalContext.beginTransaction();
         FicheiroConfiguracao ficheiroConfiguracao = new FicheiroConfiguracao(descricao,pathFicheiro);
         ficheiroConfiguracao.carregarFicheiro(pathFicheiro);
         maquinaAlvo.ficheiroConfiguracao.add(ficheiroConfiguracao);
         maquinaAlvo = maquinaRepository.save(maquinaAlvo);
-        transactionalContext.commit();
     }
 }
 

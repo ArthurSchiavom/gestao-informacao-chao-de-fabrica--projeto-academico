@@ -142,6 +142,15 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, Convertable
         this.ordemLinhaProducao = ordemLinhaProducao;
     }
 
+    public boolean hasConfig(){
+        return ficheiroConfiguracao.size() > 0;
+    }
+
+    @XmlTransient
+    public List<FicheiroConfiguracao> getFicheiroConfiguracao(){
+        return this.ficheiroConfiguracao;
+    }
+
     @XmlTransient
     public InetAddress getIp() {
         return ip;

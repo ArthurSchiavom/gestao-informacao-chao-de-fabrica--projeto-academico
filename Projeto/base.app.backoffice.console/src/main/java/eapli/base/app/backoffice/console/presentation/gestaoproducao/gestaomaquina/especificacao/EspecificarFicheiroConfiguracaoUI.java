@@ -15,7 +15,7 @@ public class EspecificarFicheiroConfiguracaoUI extends AbstractUI {
         EspecificarFicheiroConfiguracaoController controller = new EspecificarFicheiroConfiguracaoController();
         List<MaquinaDTO> listaDeMaquinasDTO = controller.maquinas();
         if (listaDeMaquinasDTO.isEmpty()) {
-            System.out.println("Não há nenhuma maquina sem ficheiro de configuracao.\n");
+            System.out.println("Não há nenhuma maquina");
             UserInteractionFlow.enterParaContinuar();
             return false;
         }
