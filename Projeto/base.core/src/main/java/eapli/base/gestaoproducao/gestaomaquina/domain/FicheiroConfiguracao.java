@@ -40,7 +40,7 @@ public class FicheiroConfiguracao implements ValueObject, Comparable<FicheiroCon
         this.descricao = descricao;
     }
 
-    public File criarFicheiro(String pathFicheiro) throws FileNotFoundException {
+    public File carregarFicheiro(String pathFicheiro) throws FileNotFoundException {
         File file=new File(pathFicheiro);
         if (file.exists()) {
            this.file=file;
