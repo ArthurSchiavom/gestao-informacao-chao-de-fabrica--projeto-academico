@@ -40,10 +40,10 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
     private List<IdentificadorEncomenda> identificadorEncomendaList;
 
     @OneToMany
-    private List<UsoDeMaquina> usoDeMaquinaList;
+    public final List<UsoDeMaquina> usoDeMaquinaList;
 
-    @OneToMany
-    private List<ProdutoProduzido> produtosProduzidosList;
+    @OneToMany(cascade = CascadeType.ALL)
+    public final List<ProdutoProduzido> produtosProduzidosList;
 
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
@@ -71,6 +71,9 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
     @XmlElement
     private CodigoUnico produto;
 
+    public final TempoBrutoExecucao tempoBrutoExecucao;
+
+    public final TempoEfetivoExecucao tempoEfetivoExecucao;
     /**
      * Do moodle:
      * "A data prevista de execução deve ser igual ou posterior à data de emissão da ordem de produção.
@@ -103,14 +106,20 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
         this.dataPrevistaExecucao = dataPrevistaExecucao;
         this.estado = estado;
         this.produto = produto;
-
+        this.tempoBrutoExecucao=new TempoBrutoExecucao();
+        this.tempoEfetivoExecucao=new TempoEfetivoExecucao();
+        this.produtosProduzidosList=new ArrayList<>();
+        this.usoDeMaquinaList=new ArrayList<>();
     }
 
     public OrdemProducao() {
-
+        tempoEfetivoExecucao=null;
+        tempoBrutoExecucao=null;
         identificador = null;
         dataEmissao = null;
         dataPrevistaExecucao = null;
+        produtosProduzidosList=null;
+        usoDeMaquinaList=null;
     }
 
     public static String identityAttributeName() {

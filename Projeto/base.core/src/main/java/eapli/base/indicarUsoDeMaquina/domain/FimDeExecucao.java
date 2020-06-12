@@ -4,8 +4,6 @@ import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Embeddable
@@ -19,10 +17,8 @@ public class FimDeExecucao implements ValueObject, Comparable<FimDeExecucao> {
         dataTempoFinal =null;
     }
 
-    public FimDeExecucao(String data,String tempo) throws ParseException {
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String dataTempo=data+" "+tempo;
-        this.dataTempoFinal =format.parse(dataTempo);
+    public FimDeExecucao(Date date)  {
+        this.dataTempoFinal=date;
     }
 
     @Override

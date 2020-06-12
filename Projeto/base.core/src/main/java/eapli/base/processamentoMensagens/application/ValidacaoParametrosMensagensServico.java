@@ -26,7 +26,7 @@ public class ValidacaoParametrosMensagensServico {
         return true;
     }
 
-    public boolean validarQuantidade(int quantidade){
+    public boolean validarQuantidade(double quantidade){
         return quantidade>0;
     }
 
@@ -45,6 +45,7 @@ public class ValidacaoParametrosMensagensServico {
             return null;
         return ordemProducao.get();
     }
+
 
 
 }

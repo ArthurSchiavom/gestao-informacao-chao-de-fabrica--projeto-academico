@@ -1,7 +1,5 @@
 package eapli.base.gestaoproducao.gestaoProdutoProduzido.domain;
 
-import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInternoMaterial;
-import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
@@ -30,6 +28,10 @@ public class ProdutoProduzido implements AggregateRoot<Long> {
     public ProdutoProduzido(Produto produto,IdentificadorDeLote identificadorDeLote, QuantidadeDeProduto quantidadeDeProduto){
         this.produto=produto;
         this.identificadorDeLote=identificadorDeLote;
+        this.quantidadeDeProduto=quantidadeDeProduto;
+    }
+    public ProdutoProduzido(Produto produto, QuantidadeDeProduto quantidadeDeProduto){
+        this.produto=produto;
         this.quantidadeDeProduto=quantidadeDeProduto;
     }
 

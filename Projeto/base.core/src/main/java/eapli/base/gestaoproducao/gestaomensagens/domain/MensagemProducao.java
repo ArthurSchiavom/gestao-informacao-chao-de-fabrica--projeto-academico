@@ -24,7 +24,7 @@ public class MensagemProducao extends Mensagem implements AggregateRoot<Mensagem
 
     public MensagemProducao(CodigoInternoMaquina codigoInternoMaquina, Date dataHora, CodigoUnico codigoUnico, int quantidade, IdentificadorDeLote identificadorDeLote) {
         super(TipoDeMensagem.PRODUCAO,new TimestampEmissao(dataHora),codigoInternoMaquina);
-        if (codigoUnico==null && dataHora==null && quantidade<=0)
+        if (codigoUnico==null || dataHora==null || quantidade<=0)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
         this.codigoUnico = codigoUnico;
         this.quantidade = quantidade;

@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.movimentos.domain;
 
+import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.QuantidadeDeMateriaPrima;
 import eapli.base.utilities.Reflection;
@@ -18,17 +19,16 @@ public class MovimentoStock implements AggregateRoot<Long> {
     @GeneratedValue
     private long id;
 
-    @ManyToOne
-    private Deposito deposito;
+    private CodigoDeposito codigoDeposito;
     private QuantidadeDeMateriaPrima quantidadeDeMateriaPrima;
 
     protected MovimentoStock() {
-        this.deposito=null;
+        this.codigoDeposito=null;
         this.quantidadeDeMateriaPrima=null;
     }
 
-    public MovimentoStock(Deposito deposito, QuantidadeDeMateriaPrima quantidadeDeMateriaPrima) {
-        this.deposito=deposito;
+    public MovimentoStock(CodigoDeposito codigoDeposito, QuantidadeDeMateriaPrima quantidadeDeMateriaPrima) {
+        this.codigoDeposito=codigoDeposito;
         this.quantidadeDeMateriaPrima=quantidadeDeMateriaPrima;
     }
 

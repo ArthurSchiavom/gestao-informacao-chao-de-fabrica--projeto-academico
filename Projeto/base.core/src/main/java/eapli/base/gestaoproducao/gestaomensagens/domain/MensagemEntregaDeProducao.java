@@ -14,23 +14,24 @@ import java.util.Date;
 public class MensagemEntregaDeProducao extends Mensagem implements AggregateRoot<MensagemID> {
     public final CodigoDeposito codigo;
     private final IdentificadorDeLote identificadorDeLote;
-    private int quantidadeProduzir;
+    private double quantidadeATransferir;
 
     protected MensagemEntregaDeProducao() {
         this.codigo = null;
         this.identificadorDeLote=null;
     }
 
-    public MensagemEntregaDeProducao(CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir, IdentificadorDeLote identificadorDeLote) {
+    public MensagemEntregaDeProducao(CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, double  quantidadeATransferir, IdentificadorDeLote identificadorDeLote) {
         super(TipoDeMensagem.ENTREGA_DE_PRODUCAO, new TimestampEmissao(dataHora),codigoInternoMaquina);
-        if (codigo == null  && quantidadeProduzir<=0 )
+        if (codigo == null  || quantidadeATransferir<=0 )
             throw new IllegalArgumentException("Parametros dados incorrectos!");
         this.identificadorDeLote=identificadorDeLote;
         this.codigo = codigo;
-        this.quantidadeProduzir = quantidadeProduzir;
+        this.quantidadeATransferir = quantidadeATransferir;
     }
 
-    public int getQuantidadeProduzir() {
-        return quantidadeProduzir;
+    public double getQuantidadeATransferir() {
+        return quantidadeATransferir;
     }
+
 }

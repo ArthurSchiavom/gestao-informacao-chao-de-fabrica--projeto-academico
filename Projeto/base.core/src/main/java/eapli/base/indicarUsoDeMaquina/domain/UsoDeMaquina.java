@@ -6,9 +6,9 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class UsoDeMaquina implements AggregateRoot<UsoDeMaquinaID> {
@@ -16,24 +16,22 @@ public class UsoDeMaquina implements AggregateRoot<UsoDeMaquinaID> {
     @EmbeddedId
     private UsoDeMaquinaID usoDeMaquinaID;
 
-    @ManyToOne
-    private MovimentoStock movimentoStock;
+    @OneToMany
+    public final List<MovimentoStock> movimentoStockList;
 
-
-    private PausaDeExecucao pausaDeExecucao;
-    private RetomaDeExecucao retomaDeExecucao;
+    @ElementCollection
+    public final List<SuspensaoDeExecucao> suspensaoDeExecucaoList;
 
     protected UsoDeMaquina() {
         usoDeMaquinaID =null;
-        pausaDeExecucao=null;
-        retomaDeExecucao=null;
+        suspensaoDeExecucaoList=null;
+        movimentoStockList=null;
     }
 
-    public UsoDeMaquina(InicioDeExecucao inicioDeExecucao, FimDeExecucao fimDeExecucao, PausaDeExecucao pausaDeExecucao, RetomaDeExecucao retomaDeExecucao, MovimentoStock movimentoStock, CodigoInternoMaquina codigoInternoMaquina) {
-        this.pausaDeExecucao=pausaDeExecucao;
+    public UsoDeMaquina(InicioDeExecucao inicioDeExecucao, FimDeExecucao fimDeExecucao, CodigoInternoMaquina codigoInternoMaquina) {
         this.usoDeMaquinaID =new UsoDeMaquinaID(inicioDeExecucao,fimDeExecucao,codigoInternoMaquina);
-        this.retomaDeExecucao=retomaDeExecucao;
-        this.movimentoStock=movimentoStock;
+        this.suspensaoDeExecucaoList=new ArrayList<>();
+        this.movimentoStockList=new ArrayList<>();
     }
 
     public static String identityAttributeName() {

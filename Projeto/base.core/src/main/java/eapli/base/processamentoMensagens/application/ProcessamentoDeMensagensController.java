@@ -16,6 +16,7 @@ import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
 import eapli.base.processamentoMensagens.domain.FinalDeProcessamento;
 import eapli.base.processamentoMensagens.domain.InicioDeProcessamento;
 import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
+
 import java.time.temporal.ChronoUnit;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -124,6 +125,7 @@ public class ProcessamentoDeMensagensController {
         if (listaMensagensDentroDosLimites.size() == 0) {
             throw new IllegalArgumentException("Não há mensagens para processar para o periodo proposto!");
         }
+
         for (Mensagem mensagem : listaMensagensDentroDosLimites) {
             Maquina maquina = getMaquinaPorIdentificador(mensagem.mensagemID.codigoInternoMaquina);
             if (maquina != null) {
@@ -132,23 +134,44 @@ public class ProcessamentoDeMensagensController {
                     listaDeMensagensDeCadaLinhaDeProducao.get(maquina.getLinhaProducao()).add(mensagem);
             }
         }
-        //Criacao das THREADS
-        i=0;
+
+        Map<CodigoInternoMaquina,List<Mensagem>> blocoDeMensagensPorCodigoInterno=new HashMap<>();
+        Map<LinhaProducao,Set<CodigoInternoMaquina>> listaDeMaquinasPorLinhaDeProducao=new HashMap<>();
         for (LinhaProducao linhaProducao:linhaProducaoAlvo) {
             List<Mensagem> lista = listaDeMensagensDeCadaLinhaDeProducao.get(linhaProducao.identifier);
-            if (!lista.isEmpty()) {
-                ProcessamentoDeMensagensThread processamentoDeMensagensThread = new ProcessamentoDeMensagensThread(lista, linhaProducao);
-                threads.add( new Thread(processamentoDeMensagensThread));
-                threads.get(i).start();
-                i++;
+            listaDeMaquinasPorLinhaDeProducao.put(linhaProducao,new HashSet<>());
+            for (Mensagem mensagem:lista){
+                listaDeMaquinasPorLinhaDeProducao.get(linhaProducao).add(mensagem.mensagemID.codigoInternoMaquina);
+               if (!blocoDeMensagensPorCodigoInterno.containsKey(mensagem.mensagemID.codigoInternoMaquina)) {
+                   blocoDeMensagensPorCodigoInterno.put(mensagem.mensagemID.codigoInternoMaquina, new ArrayList<>());
+               }
+               blocoDeMensagensPorCodigoInterno.get(mensagem.mensagemID.codigoInternoMaquina).add(mensagem);
             }
         }
+
+        //Criacao das THREADS. Processa Por cada bloco de maquina existente na linha de producao (ou seja 1 thread para cada maquina de cada linha de producao)
+        i=0;
+        for (LinhaProducao linhaProducao:linhaProducaoAlvo) {
+           if (!listaDeMaquinasPorLinhaDeProducao.get(linhaProducao).isEmpty()) {
+               for (CodigoInternoMaquina codigoInternoMaquina : listaDeMaquinasPorLinhaDeProducao.get(linhaProducao)) {
+                   List<Mensagem> blocoAProcessar = blocoDeMensagensPorCodigoInterno.get(codigoInternoMaquina);
+                   if (!blocoAProcessar.isEmpty()) {
+                       ProcessamentoDeMensagensThread processamentoDeMensagensThread = new ProcessamentoDeMensagensThread(blocoAProcessar, linhaProducao);
+                       threads.add(new Thread(processamentoDeMensagensThread));
+                       threads.get(i).start();
+                       i++;
+                   }
+               }
+           }
+        }
+
         //Esperar que terminem
         for (Thread thread:threads){
             thread.join();
         }
 
     }
+
 
     /**
      * Verifica se a data inicio é antes da data final

@@ -40,16 +40,17 @@ public class ImportarFicheirosMaquinasThread implements Runnable {
         for (String[] vec : fileScanner.listaDeMensagens) {
             try {
                 Mensagem mensagem = messageFactory.getMessageType(vec);
-                if (mensagem != null)
+                if (mensagem != null) {
                     mensagemRepository.save(mensagem);
+                }
             } catch (Exception e) {
             }
-            Path from = Paths.get("test_material\\Mensagens\\" + file.getName());
-            Path to = Paths.get("test_material\\MensagensProcessadas\\" + file.getName());
-            try {
-                Path temp = Files.move(from, to);
-            } catch (IOException e) {
-            }
+        }
+        Path from = Paths.get("test_material\\Mensagens\\" + file.getName());
+        Path to = Paths.get("test_material\\MensagensProcessadas\\" + file.getName());
+        try {
+            Path temp = Files.move(from, to);
+        } catch (IOException e) {
         }
     }
 }

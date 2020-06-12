@@ -5,6 +5,8 @@ import eapli.base.servicoComunicacaoComMaquinas.ImportarFicheirosMaquinasControl
 import eapli.framework.presentation.console.AbstractUI;
 
 import java.io.FileNotFoundException;
+import java.time.DateTimeException;
+import java.util.Date;
 import java.util.NoSuchElementException;
 
 
@@ -16,7 +18,7 @@ public class ImportarFicheirosMaquinasUI extends AbstractUI {
             System.out.println("Inicio da importacao");
             controller.iniciarAImportacao();
             System.out.println("Fim da importacao");
-        } catch (IllegalArgumentException | NoSuchElementException e){
+        } catch (IllegalArgumentException | NoSuchElementException | DateTimeException e){
             System.out.println("Erro: "+e.getMessage());
         }
         return false;
