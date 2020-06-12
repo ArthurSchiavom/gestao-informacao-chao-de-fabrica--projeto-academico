@@ -33,29 +33,20 @@ public class FicheiroConfiguracao implements ValueObject, Comparable<FicheiroCon
         this.file=null;
     }
 
-    public FicheiroConfiguracao(String descricao, String nomeFicheiro) throws IOException {
-        if ((descricao.trim().length()==0 || nomeFicheiro.trim().length()==0)){
+    public FicheiroConfiguracao(String descricao, String pathFicheiro) throws IOException {
+        if ((descricao.trim().length()==0 || pathFicheiro.trim().length()==0)){
             throw new IllegalArgumentException("Campo nao pode ser vazio!");
         }
         this.descricao = descricao;
-        if (!criarFicheiro(nomeFicheiro,descricao)) throw new FileNotFoundException("Caminho nao encontrado!");
     }
 
-    private boolean criarFicheiro(String nomeFicheiro,String descricao) throws IOException {
-        String path="test_material\\ficheirosConfiguracao\\"+nomeFicheiro+".txt";
-        FileWriter myWriter;
-        File file=new File(path);
-        if (!file.exists()) {
-            if (file.createNewFile()) {
-                myWriter = new FileWriter(path);
-                myWriter.write(descricao);
-                myWriter.close();
-                return true;
-            } else {
-                return false;
-            }
+    public File criarFicheiro(String pathFicheiro) throws FileNotFoundException {
+        File file=new File(pathFicheiro);
+        if (file.exists()) {
+           this.file=file;
+           return file;
         }else{
-            throw new IOException("Ficheiro ja existente!");
+            throw new FileNotFoundException("Ficheiro nao encontrado!");
         }
     }
 
