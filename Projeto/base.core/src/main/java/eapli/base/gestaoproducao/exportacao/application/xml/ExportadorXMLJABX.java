@@ -65,7 +65,7 @@ public class ExportadorXMLJABX implements Exportador {
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
 			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema employeeSchema = sf.newSchema(new File("../XSD/chaoDeFabrica.xsd"));
+			Schema employeeSchema = sf.newSchema(new File("../XML_XSD_XSLT/chaoDeFabrica.xsd"));
 			jaxbUnmarshaller.setSchema(employeeSchema);
 			jaxbUnmarshaller.unmarshal(file);
 		}
