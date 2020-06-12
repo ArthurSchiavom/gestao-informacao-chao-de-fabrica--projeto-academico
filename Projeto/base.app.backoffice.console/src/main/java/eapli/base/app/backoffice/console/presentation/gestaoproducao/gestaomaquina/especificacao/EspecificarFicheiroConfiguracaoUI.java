@@ -13,20 +13,20 @@ public class EspecificarFicheiroConfiguracaoUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         EspecificarFicheiroConfiguracaoController controller = new EspecificarFicheiroConfiguracaoController();
-        List<MaquinaDTO> maquinasSemFicheiroDeConfiguracao = controller.maquinasSemFicheiroDeConfiguracao();
-        if (maquinasSemFicheiroDeConfiguracao.isEmpty()) {
+        List<MaquinaDTO> listaDeMaquinasDTO = controller.maquinas();
+        if (listaDeMaquinasDTO.isEmpty()) {
             System.out.println("Não há nenhuma maquina sem ficheiro de configuracao.\n");
             UserInteractionFlow.enterParaContinuar();
             return false;
         }
 
-        String maquinasSemFicheiroDeConfiguracaoDisplay = ConsoleTables.tabelaDeMaquinas(maquinasSemFicheiroDeConfiguracao);
+        String maquinasSemFicheiroDeConfiguracaoDisplay = ConsoleTables.tabelaDeMaquinas(listaDeMaquinasDTO);
         System.out.println(maquinasSemFicheiroDeConfiguracaoDisplay + "\n\n");
 
         String idMaquina ;
         boolean continuar = true;
         while (continuar) {
-            idMaquina = Console.readNonEmptyLine("Indique o código interno da maquina cuja ficheiro de configuracao deseja alterar.", "Indique um código interno valido.");
+            idMaquina = Console.readNonEmptyLine("Indique o código interno da maquina onde pretende adicionar um ficheiro de configuracao.", "Indique um código interno valido.");
             continuar = !controller.selecionarMaquina(idMaquina);
             if (continuar) {
                 System.out.println("O código indicado não se encontra registado a uma maquina sem ficheiro de configuracao.\n");

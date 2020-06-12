@@ -18,7 +18,7 @@ public class MensagemEstornoNotificacao implements  CriacaoNotificacaoStrategy {
     @Override
     public NotificacaoErro validarMensagem(LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemEstorno mensagemEstorno=(eapli.base.gestaoproducao.gestaomensagens.domain.MensagemEstorno) mensagem;
-        int quantidadeAProduzir=mensagemEstorno.getQuantidadeProduzir();
+        double quantidadeAProduzir=mensagemEstorno.getQuantidadeProduzir();
         Produto produto=validacao.getProdutoPorCodigoUnico(mensagemEstorno.codigoUnico);
         CodigoDeposito codigoDeposito=mensagemEstorno.codigo;
         Date dataEmissao=mensagemEstorno.mensagemID.tempoEmissao.timestamp;

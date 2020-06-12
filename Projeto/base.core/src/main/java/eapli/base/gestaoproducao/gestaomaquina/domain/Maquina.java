@@ -7,6 +7,8 @@ import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.MaquinaDTO;
 import eapli.base.infrastructure.application.ConvertableToDTO;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Version;
@@ -15,8 +17,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * "O código interno é aquele que é comumente usado para identificar uma máquina."
@@ -44,8 +48,8 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, Convertable
     private CodigoInternoMaquina codigoInternoMaquina;
     @XmlElement
     private OrdemLinhaProducao ordemLinhaProducao;
-    @XmlElement
-    private FicheiroConfiguracao ficheiroConfiguracao;
+    @ElementCollection
+    public final List<FicheiroConfiguracao> ficheiroConfiguracao;
     @XmlElement
     public final IdentificadorProtocoloComunicacao identificadorProtocoloComunicacao;
     @XmlElement
@@ -81,6 +85,7 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, Convertable
             this.modelo = modelo;
             this.linhaProducao = linha.identifier;
             this.dataInstalacao = Calendar.getInstance().getTime(); // get current time
+            this.ficheiroConfiguracao=new ArrayList<>();
         } catch (IllegalArgumentException ex) {
             throw new IllegalArgumentException("Argumentos incorretos");
         }
@@ -135,15 +140,6 @@ public class Maquina implements AggregateRoot<CodigoInternoMaquina>, Convertable
 
     public void setOrdemLinhaProducao(OrdemLinhaProducao ordemLinhaProducao) {
         this.ordemLinhaProducao = ordemLinhaProducao;
-    }
-
-    public void setFicheiroConfiguracao(FicheiroConfiguracao ficheiroConfiguracao) {
-        this.ficheiroConfiguracao = ficheiroConfiguracao;
-    }
-
-    @XmlTransient
-    public FicheiroConfiguracao getFicheiroConfiguracao() {
-        return ficheiroConfiguracao;
     }
 
     @XmlTransient

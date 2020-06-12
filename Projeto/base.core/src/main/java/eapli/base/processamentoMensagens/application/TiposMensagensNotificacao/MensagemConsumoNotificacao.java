@@ -18,7 +18,7 @@ public class MensagemConsumoNotificacao implements  CriacaoNotificacaoStrategy {
     @Override
     public NotificacaoErro validarMensagem(LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemConsumo mensagemConsumo=(MensagemConsumo)mensagem;
-        int quantidadeAProduzir=mensagemConsumo.getQuantidadeProduzir();
+        double quantidadeAProduzir=mensagemConsumo.getQuantidadeProduzir();
         CodigoDeposito codigoDeposito=mensagemConsumo.codigo;
         Date dataEmissao=mensagemConsumo.mensagemID.tempoEmissao.timestamp;
         Produto produto =validacao.getProdutoPorCodigoUnico(mensagemConsumo.codigoUnico);

@@ -17,7 +17,7 @@ public class MensagemEntregaProducaoNotificacao implements CriacaoNotificacaoStr
     @Override
     public NotificacaoErro validarMensagem(LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemEntregaDeProducao mensagemEntregaDeProducao=(MensagemEntregaDeProducao)mensagem;
-        int quantidadeAProduzir=mensagemEntregaDeProducao.getQuantidadeProduzir();
+        double quantidadeAProduzir=mensagemEntregaDeProducao.getQuantidadeATransferir();
         Date dataEmissao=mensagemEntregaDeProducao.mensagemID.tempoEmissao.timestamp;
         CodigoDeposito codigoDeposito=mensagemEntregaDeProducao.codigo;
 

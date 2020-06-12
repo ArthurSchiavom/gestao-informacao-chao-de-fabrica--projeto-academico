@@ -19,7 +19,7 @@ public class EspecificarFicheiroConfiguracaoController {
     private final MaquinaRepository maquinaRepository;
     private final List<MaquinaDTO> maquinasDTO;
     private final List<MaquinaDTO> maquinasSemFicheiroDeConfiguracaoDTO;
-    private final Map<String, Maquina> codigoInterno_MaquinaSemFicheiroDeConfiguracao;
+    private final Map<String, Maquina> codigoInterno_Maquina;
 
     private  Maquina maquinaAlvo;
 
@@ -27,10 +27,10 @@ public class EspecificarFicheiroConfiguracaoController {
         transactionalContext = PersistenceContext.repositories().newTransactionalContext();
         maquinaRepository = PersistenceContext.repositories().maquinas();
         List<Maquina> maquinas = maquinaRepository.findAllList();
-        List<Maquina> maquinasSemFichaDeConfiguracao = maquinaRepository.maquinasSemFicheiroDeConfiguracao();
+        List<Maquina> listaDeMaquinas = maquinaRepository.findAllList();
         maquinasDTO = Collections.unmodifiableList(DTOUtils.toDTOList(maquinas));
-        maquinasSemFicheiroDeConfiguracaoDTO = Collections.unmodifiableList(DTOUtils.toDTOList(maquinasSemFichaDeConfiguracao));
-        codigoInterno_MaquinaSemFicheiroDeConfiguracao = Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(maquinasSemFichaDeConfiguracao));
+        maquinasSemFicheiroDeConfiguracaoDTO = Collections.unmodifiableList(DTOUtils.toDTOList(listaDeMaquinas));
+        codigoInterno_Maquina = Collections.unmodifiableMap(EntityUtils.mapIdStringToEntity(listaDeMaquinas));
         maquinaAlvo=null;
     }
 
@@ -56,7 +56,7 @@ public class EspecificarFicheiroConfiguracaoController {
      * @return verdadeiro ou falsp
      */
      public boolean selecionarMaquina(String codigoUnico) {
-         maquinaAlvo = codigoInterno_MaquinaSemFicheiroDeConfiguracao.get(codigoUnico);
+         maquinaAlvo = codigoInterno_Maquina.get(codigoUnico);
          return maquinaAlvo != null;
      }
 
@@ -69,7 +69,7 @@ public class EspecificarFicheiroConfiguracaoController {
     public void registar(String descricao,String nomeFicheiro) throws IOException ,IllegalArgumentException{
         transactionalContext.beginTransaction();
         FicheiroConfiguracao novoFicheiroConfiguracao = new FicheiroConfiguracao(descricao,nomeFicheiro);
-        maquinaAlvo.setFicheiroConfiguracao(novoFicheiroConfiguracao);
+        maquinaAlvo.ficheiroConfiguracao.add(novoFicheiroConfiguracao);
         maquinaAlvo = maquinaRepository.save(maquinaAlvo);
         transactionalContext.commit();
     }
