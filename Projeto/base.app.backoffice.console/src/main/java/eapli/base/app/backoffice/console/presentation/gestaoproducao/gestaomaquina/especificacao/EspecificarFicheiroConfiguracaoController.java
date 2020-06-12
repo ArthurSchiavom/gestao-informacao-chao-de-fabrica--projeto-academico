@@ -63,12 +63,12 @@ public class EspecificarFicheiroConfiguracaoController {
     /**
      * Associar o ficheiro de configuracao a maquina selecionada
      * @param descricao Conteudo do ficheiro
-     * @param nomeFicheiro Nome do ficheiro
+     * @param pathFicheiro Nome do ficheiro
      * @throws IOException Exceção
      */
-    public void registar(String descricao,String nomeFicheiro) throws IOException ,IllegalArgumentException{
+    public void registar(String descricao,String pathFicheiro) throws IOException ,IllegalArgumentException{
         transactionalContext.beginTransaction();
-        FicheiroConfiguracao novoFicheiroConfiguracao = new FicheiroConfiguracao(descricao,nomeFicheiro);
+        FicheiroConfiguracao novoFicheiroConfiguracao = new FicheiroConfiguracao(descricao,pathFicheiro);
         maquinaAlvo.ficheiroConfiguracao.add(novoFicheiroConfiguracao);
         maquinaAlvo = maquinaRepository.save(maquinaAlvo);
         transactionalContext.commit();
