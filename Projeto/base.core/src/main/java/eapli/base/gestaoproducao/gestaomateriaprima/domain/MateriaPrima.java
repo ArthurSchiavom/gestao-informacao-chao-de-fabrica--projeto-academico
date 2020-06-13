@@ -7,6 +7,8 @@ import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
@@ -45,6 +47,17 @@ public class MateriaPrima implements ValueObject, Serializable, ConvertableToDTO
 
         this.tipoDeMateriaPrima = tipoDeMateriaPrima;
         this.idMateria = idMateria;
+    }
+
+    /* O hibernate falha se não tiver getters e setters públicos */
+    @XmlTransient
+    public TipoDeMateriaPrima getTipoDeMateriaPrima() {
+        return tipoDeMateriaPrima;
+    }
+
+    /* O hibernate falha se não tiver getters e setters públicos */
+    public void setTipoDeMateriaPrima(TipoDeMateriaPrima tipoDeMateriaPrima) {
+        this.tipoDeMateriaPrima = tipoDeMateriaPrima;
     }
 
     /* O hibernate falha se não tiver getters e setters públicos */
