@@ -6,5 +6,5 @@ import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.ValidadorMensagem;
 
 public interface ProcessadorMensagem {
-        NotificacaoErro processarMensagem(Mensagem mensagem, OrdemProducao ordemProducao, ValidadorMensagem validadorMensagem);
+        NotificacaoErro processarMensagem(Mensagem mensagem, OrdemProducao ordemProducao);
 }

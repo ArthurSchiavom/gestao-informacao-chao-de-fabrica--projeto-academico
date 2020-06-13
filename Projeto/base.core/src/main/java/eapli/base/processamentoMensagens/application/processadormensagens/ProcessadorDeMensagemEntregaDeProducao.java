@@ -18,6 +18,7 @@ import eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquina;
 import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.processamentoMensagens.application.GerarNotificacoesDeErrosFactory;
 import eapli.base.processamentoMensagens.application.OperacoesUsoDeMaquina;
 import eapli.base.processamentoMensagens.application.ValidacaoParametrosMensagensServico;
 import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.ValidadorMensagem;
@@ -41,7 +42,8 @@ public class ProcessadorDeMensagemEntregaDeProducao implements ProcessadorMensag
     }
 
     @Override
-    public NotificacaoErro processarMensagem(Mensagem mensagem, OrdemProducao ordemProducao, ValidadorMensagem validadorMensagem) {
+    public NotificacaoErro processarMensagem(Mensagem mensagem, OrdemProducao ordemProducao) {
+        ValidadorMensagem validadorMensagem= new GerarNotificacoesDeErrosFactory().getNotificacaoDeErro(mensagem);
         MensagemEntregaDeProducao mensagemEntregaDeProducao=(MensagemEntregaDeProducao)mensagem;
         CodigoInternoMaquina codigoInternoMaquina=mensagemEntregaDeProducao.mensagemID.codigoInternoMaquina;
         CodigoUnico codigoUnico=mensagemEntregaDeProducao.codigoUnico;
