@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.gestaoproduto.domain;
 
+import eapli.base.gestaoproducao.gestaomateriaprima.domain.MateriaPrima;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.QuantidadeDeMateriaPrima;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.FichaDeProducaoDTO;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMateriaPrimaDTO;
@@ -56,6 +57,22 @@ public class FichaDeProducao implements AggregateRoot<Integer>, ConvertableToDTO
     public static FichaDeProducao valueOf(List<QuantidadeDeMateriaPrima> quantidadesDeMateriaPrima) throws IllegalDomainValueException {
         return new FichaDeProducao(quantidadesDeMateriaPrima);
     }
+
+    /**
+     * Obtem uma materia prima por id
+     * @param idMateriaPrima Id da materia prima
+     * @return Retorna a materia prima caso o idMateriaPrima esteja associada com alguma da lista registada e null caso nao associe a nenhuma
+     */
+    public MateriaPrima obterMateriaPrimaPorID(String idMateriaPrima){
+        for (QuantidadeDeMateriaPrima quantidadeDeMateriaPrima:quantidadesDeMateriaPrima){
+            String idMateria=quantidadeDeMateriaPrima.materiaPrima.idMateria;
+            if (idMateriaPrima.equals(idMateria)){
+                return quantidadeDeMateriaPrima.materiaPrima;
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public boolean equals(final Object o) {

@@ -14,24 +14,30 @@ import java.util.List;
 public class UsoDeMaquina implements AggregateRoot<UsoDeMaquinaID> {
 
     @EmbeddedId
-    private UsoDeMaquinaID usoDeMaquinaID;
+    public final UsoDeMaquinaID usoDeMaquinaID;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public final List<MovimentoStock> movimentoStockList;
 
     @ElementCollection
-    public final List<SuspensaoDeExecucao> suspensaoDeExecucaoList;
+    public final List<PausaDeExecucao> pausaDeExecucaoList;
+
+    @ElementCollection
+    public final List<RetomaExecucao> retomaExecucaoList;
+
 
     protected UsoDeMaquina() {
         usoDeMaquinaID =null;
-        suspensaoDeExecucaoList=null;
+        pausaDeExecucaoList=null;
         movimentoStockList=null;
+        retomaExecucaoList=null;
     }
 
     public UsoDeMaquina(InicioDeExecucao inicioDeExecucao, FimDeExecucao fimDeExecucao, CodigoInternoMaquina codigoInternoMaquina) {
         this.usoDeMaquinaID =new UsoDeMaquinaID(inicioDeExecucao,fimDeExecucao,codigoInternoMaquina);
-        this.suspensaoDeExecucaoList=new ArrayList<>();
+        this.retomaExecucaoList=new ArrayList<>();
         this.movimentoStockList=new ArrayList<>();
+        this.pausaDeExecucaoList=new ArrayList<>();
     }
 
     public static String identityAttributeName() {

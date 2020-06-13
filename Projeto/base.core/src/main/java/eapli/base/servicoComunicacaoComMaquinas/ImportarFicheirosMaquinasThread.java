@@ -22,13 +22,10 @@ public class ImportarFicheirosMaquinasThread implements Runnable {
     private File file;
     private MensagemRepository mensagemRepository;
     private MessageFactory messageFactory;
-    private int idBloco;
-    public static final int MYSQL_DUPLICATE_PK = 1062;
 
     public ImportarFicheirosMaquinasThread(FileScanner fileScanner, File file) {
         this.fileScanner = fileScanner;
         this.file=file;
-        this.idBloco=idBloco;
         this.mensagemRepository=PersistenceContext.repositories().mensagem();
         this.messageFactory=new MessageFactory();
     }
@@ -36,10 +33,11 @@ public class ImportarFicheirosMaquinasThread implements Runnable {
     @Override
     public void run() {
         int i;
+        Mensagem mensagem;
         fileScanner.validarCampos();
         for (String[] vec : fileScanner.listaDeMensagens) {
             try {
-                Mensagem mensagem = messageFactory.getMessageType(vec);
+                mensagem = messageFactory.getMessageType(vec);
                 if (mensagem != null) {
                     mensagemRepository.save(mensagem);
                 }

@@ -5,7 +5,7 @@ import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.*
 
 public class GerarNotificacoesDeErrosFactory {
 
-    public CriacaoNotificacaoStrategy getNotificacaoDeErro(Mensagem mensagem){
+    public ValidadorMensagem getNotificacaoDeErro(Mensagem mensagem){
 
         switch (mensagem.mensagemID.tipoDeMensagem) {
             case CONSUMO:

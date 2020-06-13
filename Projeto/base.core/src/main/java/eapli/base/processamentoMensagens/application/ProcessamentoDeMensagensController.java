@@ -8,6 +8,7 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
+import eapli.base.gestaoproducao.gestaomensagens.domain.TipoDeMensagem;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.infrastructure.application.DTOUtils;
 import eapli.base.infrastructure.application.EntityUtils;
@@ -97,12 +98,19 @@ public class ProcessamentoDeMensagensController {
      * Regista um novo agendamento de processamento na base de dados
      */
     public void registar(){
-        for (AgendamentoDeProcessamento agendamentoDeProcessamento:listaDeNovosAgendamentos){
-            agendamentoDeProcessamentoRepository.save(agendamentoDeProcessamento);
-        }
+       try {
+           for (AgendamentoDeProcessamento agendamentoDeProcessamento : listaDeNovosAgendamentos) {
+               agendamentoDeProcessamentoRepository.save(agendamentoDeProcessamento);
+           }
+       }catch (Exception e){
+           System.out.println("Erro:" + e.getMessage());
+       }
     }
 
-
+    /**
+     * Inicia o processamento de acorodo com as linhas de producao selecionadas
+     * @throws InterruptedException
+     */
     public  void iniciarProcessamento() throws InterruptedException {
         int i;
         Map<IdentificadorLinhaProducao, List<Mensagem>> listaDeMensagensDeCadaLinhaDeProducao = new HashMap<>();
@@ -155,13 +163,19 @@ public class ProcessamentoDeMensagensController {
            if (!listaDeMaquinasPorLinhaDeProducao.get(linhaProducao).isEmpty()) {
                for (CodigoInternoMaquina codigoInternoMaquina : listaDeMaquinasPorLinhaDeProducao.get(linhaProducao)) {
                    List<Mensagem> blocoAProcessar = blocoDeMensagensPorCodigoInterno.get(codigoInternoMaquina);
-                   if (!blocoAProcessar.isEmpty()) {
-                       ProcessamentoDeMensagensThread processamentoDeMensagensThread = new ProcessamentoDeMensagensThread(blocoAProcessar, linhaProducao);
-                       threads.add(new Thread(processamentoDeMensagensThread));
-                       threads.get(i).start();
-                       i++;
-                   }
+                   if (validarBloco(blocoAProcessar)) {
+                       if (!blocoAProcessar.isEmpty()) {
+                           ProcessamentoDeMensagensThread processamentoDeMensagensThread = new ProcessamentoDeMensagensThread(blocoAProcessar, linhaProducao);
+                           threads.add(new Thread(processamentoDeMensagensThread));
+                           threads.get(i).start();
+                           i++;
+                       }
+                   }else
+                       throw new IllegalArgumentException("A primeira mensagem tem que ser do tipo Inicio_Actividade e a ultima do tipo Fim_Atividade");
+
                }
+               calcularTempoBrutoDeExecucao();
+
            }
         }
 
@@ -172,6 +186,12 @@ public class ProcessamentoDeMensagensController {
 
     }
 
+    /**
+     * Calcula o tempo bruto de execucao da ordem de producao
+     */
+    private void calcularTempoBrutoDeExecucao(){
+
+    }
 
     /**
      * Verifica se a data inicio é antes da data final
@@ -213,6 +233,20 @@ public class ProcessamentoDeMensagensController {
         }
     }
 
+    /**
+     * Verifica se o bloco inicia com uma mensagem de inicio e termina com uma mensagem de fim
+     * @param blocoAProcessar
+     * @return
+     */
+    public boolean validarBloco(List<Mensagem> blocoAProcessar){
+        return blocoAProcessar.get(0).mensagemID.tipoDeMensagem.equals(TipoDeMensagem.INICIO_DE_ATIVIDADE) && blocoAProcessar.get(blocoAProcessar.size()-1).mensagemID.tipoDeMensagem.equals(TipoDeMensagem.FIM_DE_ATIVIDADE);
+    }
+
+    /**
+     * Retorna uma maquina registada obtendo a por codigoInterno
+     * @param codigoInternoMaquina
+     * @return
+     */
     private Maquina getMaquinaPorIdentificador(CodigoInternoMaquina codigoInternoMaquina){
         Optional<Maquina> maquina;
         maquina=maquinaRepository.findByIdentifier(codigoInternoMaquina);

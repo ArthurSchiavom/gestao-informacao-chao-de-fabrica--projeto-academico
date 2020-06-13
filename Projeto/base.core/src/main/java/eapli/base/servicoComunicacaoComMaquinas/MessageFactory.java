@@ -17,13 +17,14 @@ public class MessageFactory {
 
 
     public Mensagem getMessageType(String vec[]) throws IllegalDomainValueException, ParseException {
-        if ((vec.length<3 || vec.length>6 ||vec==null))
+        if ((vec.length<3 || vec.length>6 ))
             return null;
         Date date=verificarDataImportada(vec[2].trim());
         CodigoInternoMaquina codigoInternoMaquina= new CodigoInternoMaquina(vec[0]);
         CodigoDeposito codigoDeposito=null;
         IdentificadorDeLote identificadorDeLote=null;
         CodigoUnico codigoUnico;
+        String idMateriaPrima;
         OrdemProducao ordemPrd=null;
         IdentificadorOrdemProducao ordemID=null;
         String erro;
@@ -33,18 +34,19 @@ public class MessageFactory {
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
                 //CodigoDeposito opcional
                 quantidade = Integer.parseInt(vec[4]);
-                codigoUnico=CodigoUnico.valueOf(vec[3],null);
+                idMateriaPrima=vec[3].trim();
                 if (vec.length==6) //Caso seja empty fica null como foi inicializado
                      codigoDeposito= new CodigoDeposito(vec[5].trim());
-                return new MensagemConsumo(codigoDeposito, codigoInternoMaquina, date, quantidade,codigoUnico);
+                return new MensagemConsumo(codigoDeposito, codigoInternoMaquina, date, quantidade,idMateriaPrima);
             case "C9":
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito;Lote
                 //Lote é opcional
+                codigoUnico= CodigoUnico.valueOf(vec[3],null);
                 codigoDeposito=new CodigoDeposito(vec[5]);
                 quantidade=Integer.parseInt(vec[4]);
                 if (vec.length==7)
                     identificadorDeLote=new IdentificadorDeLote(vec[6]);
-                return new MensagemEntregaDeProducao(codigoDeposito,codigoInternoMaquina,date,quantidade,identificadorDeLote);
+                return new MensagemEntregaDeProducao(codigoDeposito,codigoInternoMaquina,date,quantidade,identificadorDeLote,codigoUnico);
             case "P1":
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
                 //Lote opc
@@ -56,15 +58,14 @@ public class MessageFactory {
             case "P2":
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
                 //Deposito opc
-                codigoUnico=CodigoUnico.valueOf(vec[3],null);
+                idMateriaPrima=vec[3].trim();
                 quantidade=Integer.parseInt(vec[4]);
                 if (!vec[5].isEmpty()) //Caso seja empty fica null como foi inicializado
                     codigoDeposito= new CodigoDeposito(vec[5].trim());
-                return  new MensagemEstorno(codigoUnico,codigoDeposito,codigoInternoMaquina,date,quantidade);
+                return  new MensagemEstorno(codigoDeposito,idMateriaPrima,codigoInternoMaquina,date,quantidade);
             case "S0":
                 //Máquina;TipoMsg;DataHora;OrdemProducao
                 //Ordem opc
-//                System.out.println("S0");
                 if (vec.length==4) {
                     ordemID = new IdentificadorOrdemProducao(vec[3].trim());
                 }

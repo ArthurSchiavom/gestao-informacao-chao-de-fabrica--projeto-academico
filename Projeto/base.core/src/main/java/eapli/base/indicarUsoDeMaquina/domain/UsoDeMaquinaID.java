@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 @Embeddable
 public class UsoDeMaquinaID implements ValueObject, Serializable, Comparable<UsoDeMaquinaID> {
-    private InicioDeExecucao inicioDeExecucao;
-    private FimDeExecucao fimDeExecucao;
-    private CodigoInternoMaquina codigoInternoMaquina;
+    public final InicioDeExecucao inicioDeExecucao;
+    public final FimDeExecucao fimDeExecucao;
+    public final CodigoInternoMaquina codigoInternoMaquina;
 
     protected UsoDeMaquinaID(){
         this.inicioDeExecucao=null;

@@ -12,7 +12,7 @@ import eapli.base.processamentoMensagens.application.ValidacaoParametrosMensagen
 
 import java.util.Date;
 
-public class MensagemEntregaProducaoNotificacao implements CriacaoNotificacaoStrategy {
+public class MensagemEntregaProducaoNotificacao implements ValidadorMensagem {
     @Override
     public NotificacaoErro validarMensagem(LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemEntregaDeProducao mensagemEntregaDeProducao=(MensagemEntregaDeProducao)mensagem;

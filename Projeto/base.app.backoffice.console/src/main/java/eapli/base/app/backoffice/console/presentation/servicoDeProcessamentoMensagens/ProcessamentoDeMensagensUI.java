@@ -19,7 +19,6 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         List<LinhaProducaoDTO> lista= controller.listaDeLinhasDeProducao();
-        System.out.println(lista.size());
         if (lista.isEmpty()) {
             System.out.println("Não há nenhuma linha de producao registada.\n");
             UserInteractionFlow.enterParaContinuar();
@@ -38,20 +37,17 @@ public class ProcessamentoDeMensagensUI extends AbstractUI {
                 return true;
             System.out.println(SimpleConsoleMessages.CLEAR_SCREEN +"Inicio de processamento!");
             controller.iniciarProcessamento();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException|InterruptedException|ParseException e){
             System.out.println("Erro: "+ e.getMessage());
-        } catch (InterruptedException e) {
         }
         return continuar;
     }
 
     private void listaDeEscolhas(List<LinhaProducaoDTO> lista){
-        int quantidade,contador=0,idLinhaProducao=-1;
+        int quantidade,contador=0,idLinhaProducao;
         List<String> ids=new ArrayList<>();
         quantidade=Console.readInteger("Pretende efetuar o processamento para quantas linhas de producao?");
-        if (quantidade>lista.size())
+        if (quantidade<=0 || quantidade>lista.size())
             throw new IllegalArgumentException("Quantidade nao pode ser maior que o numero de linhas de producao disponiveis!");
         while (contador<quantidade) {
             idLinhaProducao = Console.readInteger("Insira o numero associado a linha de producao que pretende processar as mensagens: ");

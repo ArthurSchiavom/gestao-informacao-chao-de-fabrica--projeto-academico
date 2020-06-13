@@ -4,6 +4,8 @@ import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
 import eapli.base.gestaoproducao.gestaoProdutoProduzido.domain.ProdutoProduzido;
 import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
+import eapli.base.indicarUsoDeMaquina.domain.PausaDeExecucao;
+import eapli.base.indicarUsoDeMaquina.domain.RetomaExecucao;
 import eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquina;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
@@ -38,7 +40,7 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
 	@ElementCollection // to store a List which is a Collection
 	private List<IdentificadorEncomenda> identificadorEncomendaList;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	public final List<UsoDeMaquina> usoDeMaquinaList;
 
 	@OneToMany(cascade = CascadeType.ALL)
@@ -68,7 +70,7 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
 	private Estado estado;
 
 	@XmlElement
-	private CodigoUnico produto;
+	public final CodigoUnico produto;
 
 	@XmlElement
 	@AttributeOverrides({
@@ -128,6 +130,7 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
 		dataPrevistaExecucao = null;
 		produtosProduzidosList = null;
 		usoDeMaquinaList = null;
+		produto=null;
 	}
 
 	public static String identityAttributeName() {
@@ -166,6 +169,37 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
 
 	public static OrdemProducaoDTO gerarOrdensProducaoDTO(OrdemProducao ordemProducao) {
 		return new OrdemProducaoDTO(ordemProducao);
+	}
+
+	//public double calcularDesvios(){
+
+	//}
+
+	public long calcularTempoDesvioPadrao(){
+		long tempoBrutoExecucao=fimExecucao.getTime()-inicioExecucao.getTime();
+		long tempoADescontar=0;
+		int i;
+		if (!usoDeMaquinaList.isEmpty()){
+			for(UsoDeMaquina usoDeMaquina:usoDeMaquinaList){
+				List<PausaDeExecucao> pausaDeExecucaos=usoDeMaquina.pausaDeExecucaoList;
+				List<RetomaExecucao> retomaExecucaos=usoDeMaquina.retomaExecucaoList;
+				if (pausaDeExecucaos.size()>retomaExecucaos.size()){
+					retomaExecucaos.add(new RetomaExecucao(fimExecucao));
+					if (pausaDeExecucaos.size()!=retomaExecucaos.size())
+						return -1;
+				}
+				for (i=0;i<pausaDeExecucaos.size();i++){
+					tempoADescontar=tempoADescontar+(retomaExecucaos.get(i).dataRetomaExecucao.getTime()-pausaDeExecucaos.get(i).dataPausaDeExecucao.getTime());
+				}
+
+			}
+			return tempoADescontar;
+		}
+		return -1;
+	}
+
+	public long calcularTempoBrutoDeExecucao(){
+		return this.fimExecucao.getTime()-this.inicioExecucao.getTime();
 	}
 
 	@Override

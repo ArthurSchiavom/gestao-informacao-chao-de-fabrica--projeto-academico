@@ -2,7 +2,6 @@ package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
-import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.framework.domain.model.AggregateRoot;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -11,24 +10,24 @@ import java.util.Date;
 @Entity
 @DiscriminatorValue(value=TipoDeMensagem.Values.CONSUMO)
 public class MensagemConsumo extends Mensagem implements AggregateRoot<MensagemID> {
-    public final CodigoDeposito codigo;
-    public final CodigoUnico codigoUnico;
+    public final CodigoDeposito codigoDeposito;
+    public final String idMateriaPrima;
     private int quantidadeProduzir;
 
     //C0 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
 
     protected MensagemConsumo(){
-        this.codigo=null;
-        this.codigoUnico=null;
+        this.codigoDeposito =null;
+        this.idMateriaPrima=null;
     }
 
-    public MensagemConsumo(CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir,CodigoUnico codigoUnico) {
+    public MensagemConsumo(CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir,String idMateriaPrima) {
         super(TipoDeMensagem.CONSUMO,new TimestampEmissao(dataHora),codigoInternoMaquina);
-        if ( codigoInternoMaquina ==null || dataHora==null || codigoUnico==null)
+        if (idMateriaPrima.isEmpty() || dataHora == null)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
-        this.codigo = codigo;
+        this.codigoDeposito = codigo;
         this.quantidadeProduzir = quantidadeProduzir;
-        this.codigoUnico=codigoUnico;
+        this.idMateriaPrima=idMateriaPrima;
     }
 
     public int getQuantidadeProduzir() {

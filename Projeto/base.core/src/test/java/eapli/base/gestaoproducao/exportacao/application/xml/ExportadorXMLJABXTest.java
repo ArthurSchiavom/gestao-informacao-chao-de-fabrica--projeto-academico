@@ -200,12 +200,12 @@ public class ExportadorXMLJABXTest {
 		listaNotificacoesErro.add(notifErro);
 
 		List<Mensagem> listaMensagens = new ArrayList<>();
-		try {
-			MensagemConsumo msgConsumo = new MensagemConsumo(new CodigoDeposito("COD1"), codIntMaq, new Date(),
-					10, CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent));
-		} catch (IllegalDomainValueException e) {
-			e.printStackTrace();
-		}
+		//try {
+			//MensagemConsumo msgConsumo = new MensagemConsumo(new CodigoDeposito("COD1"), codIntMaq, new Date(),
+				//	10, CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent));
+		//} catch (IllegalDomainValueException e) {
+		//	e.printStackTrace();
+		//}
 
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,
 				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao,
