@@ -254,7 +254,7 @@
 
   <xs:complexType name="agendamentoDeProcessamento">
     <xs:all>
-      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" />
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
       <xs:element name="fimTimestampEpochMili" type="timestampEpochMili" />
       <xs:element name="inicioTimestampEpochMili" type="timestampEpochMili" />
     </xs:all>
@@ -400,7 +400,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-      <xs:element name="tempoBrutoExecucao" type="longPositivo" minOccurs="0" />
+      <xs:element name="tempoBrutoExecucao" type="longPositivo" minOccurs="0" /> <!-- pode não ser exportado -->
       <xs:element name="tempoEfetivoExecucao" type="longPositivo" minOccurs="0" />
       <xs:element name="usosDeMaquina" type="usosDeMaquina" minOccurs="0" />
     </xs:all>

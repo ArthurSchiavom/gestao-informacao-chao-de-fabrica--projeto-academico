@@ -1,5 +1,6 @@
 package eapli.base.processamentoMensagens.domain;
 
+import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInternoMaterial;
 import eapli.base.infrastructure.application.ConvertableToDTO;
@@ -11,6 +12,7 @@ import eapli.framework.domain.model.DomainEntities;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class AgendamentoDeProcessamento implements AggregateRoot<Long>, ConvertableToDTO<AgendamentoDeProcessamentoDTO> {
@@ -23,12 +25,12 @@ public class AgendamentoDeProcessamento implements AggregateRoot<Long>, Converta
     private Long identifier;
 
     @ManyToOne
-    @XmlElement
+    @XmlTransient
     private LinhaProducao linhasProducao;
 
-    @XmlElement
+    @XmlElement(name = "inicioTimestampEpochMili")
     public final InicioDeProcessamento inicioDeProcessamento;
-    @XmlElement
+    @XmlElement(name = "fimTimestampEpochMili")
     public final FinalDeProcessamento finalDeProcessamento;
 
     protected AgendamentoDeProcessamento(){
@@ -41,7 +43,13 @@ public class AgendamentoDeProcessamento implements AggregateRoot<Long>, Converta
         this.finalDeProcessamento=finalDeProcessamento;
     }
 
-
+    @XmlElement(name = "linhaDeProducao")
+    private IdentificadorLinhaProducao getIdentificadorLinhaProducao() {
+        if(linhasProducao == null) {
+            return null;
+        }
+        return linhasProducao.identity();
+    }
 
     public static String identityAttributeName() {
         return Reflection.retrieveAttributeName(AgendamentoDeProcessamento.class, CodigoInternoMaterial.class);

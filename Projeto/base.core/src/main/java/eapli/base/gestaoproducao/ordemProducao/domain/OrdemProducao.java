@@ -77,13 +77,13 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
 			//Apesar de ele dizer que há erro no tempoExecucao, isto corre, é um problema do intellij
 			@AttributeOverride(name = "tempoExecucao", column = @Column(name = "tempoBrutoExecucao")),
 	})
-	private final TempoProducao tempoBrutoExecucao;
+	private TempoProducao tempoBrutoExecucao;
 
 	@XmlElement
 	@AttributeOverrides({
 			@AttributeOverride(name = "tempoExecucao", column = @Column(name = "tempoEfetivoExecucao")),
 	})
-	private final TempoProducao tempoEfetivoExecucao;
+	private TempoProducao tempoEfetivoExecucao;
 
 	/**
 	 * Do moodle:
@@ -132,6 +132,17 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
 		produtosProduzidosList = null;
 		usoDeMaquinaList = null;
 		produto=null;
+	}
+
+	/**
+	 * Função serve para o exportador carregar ou descarregar o tempoProducao conforme necessário
+	 * @param carregarTempoProducao se é para carregar o tempo de produção
+	 */
+	public void carregarTemposProducao(boolean carregarTempoProducao) {
+		if(!carregarTempoProducao) {
+			tempoBrutoExecucao = null;
+			tempoEfetivoExecucao = null;
+		}
 	}
 
 	public static String identityAttributeName() {

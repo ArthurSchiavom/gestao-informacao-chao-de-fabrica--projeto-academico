@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
 public class MovimentoStock implements AggregateRoot<Long> {
@@ -17,9 +19,13 @@ public class MovimentoStock implements AggregateRoot<Long> {
 
     @Id
     @GeneratedValue
+    @XmlAttribute(name = "id")
     private long id;
 
+    @XmlElement(name = "deposito")
     private CodigoDeposito codigoDeposito;
+
+    @XmlElement(name = "quantidadeDeMateriaPrima")
     private QuantidadeDeMateriaPrima quantidadeDeMateriaPrima;
 
     protected MovimentoStock() {

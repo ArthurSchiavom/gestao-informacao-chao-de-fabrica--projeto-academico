@@ -10,6 +10,7 @@ import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 public class JpaAgendamentoDeProcessamentoRepository extends JpaAutoTxRepository<AgendamentoDeProcessamento,Long,Long> implements AgendamentoDeProcessamentoRepository {
@@ -32,6 +33,14 @@ public class JpaAgendamentoDeProcessamentoRepository extends JpaAutoTxRepository
     public List<AgendamentoDeProcessamento> obterAgendamentosPorLinhaDeProducao(LinhaProducao idlinhaProducao) {
         TypedQuery<AgendamentoDeProcessamento> tq = this.createQuery("SELECT distinct e FROM AgendamentoDeProcessamento e where e.linhasProducao = ?0", AgendamentoDeProcessamento.class);
         tq.setParameter(0, idlinhaProducao);
+        return tq.getResultList();
+    }
+
+    @Override
+    public List<AgendamentoDeProcessamento> findAllWithDateAfter(Date dataAFiltrar) {
+        TypedQuery<AgendamentoDeProcessamento> tq = this.createQuery(
+                "SELECT e FROM AgendamentoDeProcessamento e WHERE e.inicioDeProcessamento.dataTempoInicio >= ?0", AgendamentoDeProcessamento.class);
+        tq.setParameter(0, dataAFiltrar);
         return tq.getResultList();
     }
 

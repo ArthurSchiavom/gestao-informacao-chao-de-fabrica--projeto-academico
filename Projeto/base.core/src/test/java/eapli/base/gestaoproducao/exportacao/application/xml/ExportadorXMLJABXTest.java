@@ -23,9 +23,13 @@ import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.movimentos.domain.MovimentoStock;
 import eapli.base.gestaoproducao.ordemProducao.domain.*;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
+import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
+import eapli.base.processamentoMensagens.domain.FinalDeProcessamento;
+import eapli.base.processamentoMensagens.domain.InicioDeProcessamento;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -136,8 +140,9 @@ public class ExportadorXMLJABXTest {
 		}
 
 		List<QuantidadeDeMateriaPrima> listaQuantidadeMateriaPrima = new ArrayList<>();
+		QuantidadeDeMateriaPrima quantidadeMateriaPrima = null;
 		try {
-			QuantidadeDeMateriaPrima quantidadeMateriaPrima = QuantidadeDeMateriaPrima.valueOf(QuantidadePositiva.valueOf(2), MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, "2"));
+			quantidadeMateriaPrima = QuantidadeDeMateriaPrima.valueOf(QuantidadePositiva.valueOf(2), MateriaPrima.valueOf(TipoDeMateriaPrima.MATERIAL, "2"));
 			listaQuantidadeMateriaPrima.add(quantidadeMateriaPrima);
 		} catch (IllegalDomainValueException e) {
 			e.printStackTrace();
@@ -148,6 +153,7 @@ public class ExportadorXMLJABXTest {
 		} catch (IllegalDomainValueException e) {
 			e.printStackTrace();
 		}
+		assert quantidadeMateriaPrima != null;
 
 		try {
 			NumeroSerie.definirRegrasNumeroSerie("10", "1");
@@ -232,9 +238,23 @@ public class ExportadorXMLJABXTest {
 			e.printStackTrace();
 		}
 
+		List<MovimentoStock> listaMovimentosStock = new ArrayList<>();
+		MovimentoStock movStock = new MovimentoStock(new CodigoDeposito("COD1"), quantidadeMateriaPrima);
+		listaMovimentosStock.add(movStock);
+
+		List<AgendamentoDeProcessamento> listaAgendamentosDeProcessamento = new ArrayList<>();
+		try {
+			AgendamentoDeProcessamento agendProc = new AgendamentoDeProcessamento(
+					new InicioDeProcessamento("2020-06-03", "11:00"),
+					new FinalDeProcessamento("2020-06-03", "11:30"));
+			listaAgendamentosDeProcessamento.add(agendProc);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,
 				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao,
-				listaNotificacoesErro, listaMensagens);
+				listaNotificacoesErro, listaMensagens, listaMovimentosStock, listaAgendamentosDeProcessamento);
 		assertTrue(exportador.export(ficheiro, chaoDeFabrica));
 //		exportador.export(new File("ola.xml"), chaoDeFabrica);
 

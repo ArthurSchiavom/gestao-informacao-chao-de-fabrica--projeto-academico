@@ -3,6 +3,7 @@ package eapli.base.processamentoMensagens.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ import java.util.Date;
 public class FinalDeProcessamento implements ValueObject,Comparable<FinalDeProcessamento> {
     private static final long serialVersionUID = 1L;
 
-    @XmlValue
+    @XmlTransient
     public final Date dataTempoFinal;
 
     protected FinalDeProcessamento(){
@@ -23,6 +24,11 @@ public class FinalDeProcessamento implements ValueObject,Comparable<FinalDeProce
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String dataTempo=data+" "+tempo;
         this.dataTempoFinal=format.parse(dataTempo);
+    }
+
+    @XmlValue
+    private long getTempoEmEpoch() {
+        return dataTempoFinal.getTime();
     }
 
     @Override

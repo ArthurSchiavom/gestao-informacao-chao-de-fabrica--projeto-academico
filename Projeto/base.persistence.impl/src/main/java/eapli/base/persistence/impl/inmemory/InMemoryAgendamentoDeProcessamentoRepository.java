@@ -5,6 +5,7 @@ import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
 import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public class InMemoryAgendamentoDeProcessamentoRepository extends InMemoryDomainRepository<Long, AgendamentoDeProcessamento> implements AgendamentoDeProcessamentoRepository {
@@ -18,5 +19,10 @@ public class InMemoryAgendamentoDeProcessamentoRepository extends InMemoryDomain
     @Override
     public List<AgendamentoDeProcessamento> obterAgendamentosPorLinhaDeProducao(LinhaProducao idlinhaProducao) {
         return null;
+    }
+
+    @Override
+    public List<AgendamentoDeProcessamento> findAllWithDateAfter(Date dataAFiltrar) {
+        throw new UnsupportedOperationException("não utilizado");
     }
 }

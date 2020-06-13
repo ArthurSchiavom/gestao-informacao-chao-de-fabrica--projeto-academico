@@ -19,9 +19,13 @@ import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
+import eapli.base.gestaoproducao.movimentos.domain.MovimentoStock;
+import eapli.base.gestaoproducao.movimentos.repositoy.MovimentoStockRepository;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
+import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
+import eapli.base.processamentoMensagens.repositories.AgendamentoDeProcessamentoRepository;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -75,6 +79,14 @@ public class ChaoDeFabrica {
 	@XmlElement(name = "notificacaoDeErroDeProcessamento")
 	private List<NotificacaoErro> listaNotificacoesErro;
 
+	@XmlElementWrapper(name = "movimentosStock")
+	@XmlElement(name = "movimentoStock")
+	private List<MovimentoStock> listaMovimentosStock;
+
+	@XmlElementWrapper(name = "agendamentosDeProcessamento")
+	@XmlElement(name = "agendamentoDeProcessamento")
+	private List<AgendamentoDeProcessamento> listaAgendamentosDeProcessamento;
+
 	@XmlElementWrapper(name = "mensagens")
 	@XmlElements({
 			@XmlElement(name = "mensagemInicioDeAtividade", type= MensagemInicioDeAtividade.class),
@@ -94,7 +106,8 @@ public class ChaoDeFabrica {
 	                     List<Categoria> listaCategoria, List<Produto> listaProdutos,
 	                     List<Material> listaMateriais, List<FichaDeProducao> listaFichasProducao,
 	                     List<Maquina> listaMaquinas, List<OrdemProducao> listaOrdensProducao,
-	                     List<NotificacaoErro> listaNotificacoesErro, List<Mensagem> listaMensagens) {
+	                     List<NotificacaoErro> listaNotificacoesErro, List<Mensagem> listaMensagens,
+	                     List<MovimentoStock> listaMovimentosStock, List<AgendamentoDeProcessamento> listaAgendamentosDeProcessamento) {
 		this.nothingWasLoaded = nothingWasLoaded;
 		this.listaLinhaProd = listaLinhaProd;
 		this.listaDepositos = listaDepositos;
@@ -106,6 +119,8 @@ public class ChaoDeFabrica {
 		this.listaOrdensProducao = listaOrdensProducao;
 		this.listaNotificacoesErro = listaNotificacoesErro;
 		this.listaMensagens = listaMensagens;
+		this.listaMovimentosStock = listaMovimentosStock;
+		this.listaAgendamentosDeProcessamento = listaAgendamentosDeProcessamento;
 	}
 
 	public ChaoDeFabrica() {
@@ -134,6 +149,8 @@ public class ChaoDeFabrica {
 		private List<OrdemProducao> listaOrdensProducao;
 		private List<NotificacaoErro> listaNotificacoesErro;
 		private List<Mensagem> listaMensagens;
+		private List<MovimentoStock> listaMovimentosStock;
+		private List<AgendamentoDeProcessamento> listaAgendamentosDeProcessamento;
 
 		public Builder(RepositoryFactory repoFact) {
 			this.hasLoadedNothing = true;
@@ -148,89 +165,97 @@ public class ChaoDeFabrica {
 			this.listaOrdensProducao = new ArrayList<>();
 			this.listaNotificacoesErro = new ArrayList<>();
 			this.listaMensagens = new ArrayList<>();
+			this.listaMovimentosStock = new ArrayList<>();
+			this.listaAgendamentosDeProcessamento = new ArrayList<>();
 		}
 
-		public Builder loadLinhasProducao() {
+		Builder loadLinhasProducao() {
 			LinhaProducaoRepository lProdRepo = repoFact.linhasProducao();
 			this.listaLinhaProd = loadList(lProdRepo.findAll());
 			verifyListIsNotEmpty(listaLinhaProd);
 			return this;
 		}
 
-		public Builder loadDepositos() {
+		Builder loadDepositos() {
 			DepositoRepository depoRepo = repoFact.depositos();
 			this.listaDepositos = loadList(depoRepo.findAll());
 			verifyListIsNotEmpty(listaDepositos);
 			return this;
 		}
 
-		public Builder loadCategorias() {
+		Builder loadCategorias() {
 			CategoriaRepository catRepo = repoFact.categoria();
 			this.listaCategoria = loadList(catRepo.findAll());
 			verifyListIsNotEmpty(listaCategoria);
 			return this;
 		}
 
-		public Builder loadProdutos() {
+		Builder loadProdutos() {
 			ProdutoRepository prodRepo = repoFact.produto();
 			this.listaProdutos = loadList(prodRepo.findAll());
 			verifyListIsNotEmpty(listaProdutos);
 			return this;
 		}
 
-		public Builder loadMateriais() {
+		Builder loadMateriais() {
 			MaterialRepository matRepo = repoFact.material();
 			this.listaMateriais = loadList(matRepo.findAll());
 			verifyListIsNotEmpty(listaMateriais);
 			return this;
 		}
 
-		public Builder loadFichasProducao() {
+		Builder loadFichasProducao() {
 			FichaDeProducaoRepository fichaProdRepo = repoFact.fichaDeProducao();
 			this.listaFichasProducao = loadList(fichaProdRepo.findAll());
 			verifyListIsNotEmpty(listaFichasProducao);
 			return this;
 		}
 
-		public Builder loadMaquinas() {
+		Builder loadMaquinas() {
 			MaquinaRepository maqRepo = repoFact.maquinas();
 			this.listaMaquinas = loadList(maqRepo.findAll());
 			verifyListIsNotEmpty(listaMaquinas);
 			return this;
 		}
 
-		public Builder loadOrdensProducao(Date dataAFiltrar) {
+		Builder loadOrdensProducao(Date dataAFiltrar, boolean carregarTemposProducao) {
 			OrdemProducaoRepository ordProdRepo = repoFact.ordemProducao();
 			this.listaOrdensProducao = ordProdRepo.findAllWithDateAfter(dataAFiltrar);
 			verifyListIsNotEmpty(listaOrdensProducao);
+			for(OrdemProducao ordemProducao : listaOrdensProducao) {
+				ordemProducao.carregarTemposProducao(carregarTemposProducao);
+			}
 			return this;
 		}
 
-		public Builder loadTemposDeProducao(Date dataAFiltrar) {
-			OrdemProducaoRepository ordProdRepo = repoFact.ordemProducao();
-			this.listaOrdensProducao = ordProdRepo.findAllWithDateAfter(dataAFiltrar);
-			verifyListIsNotEmpty(listaOrdensProducao);
+		Builder loadMovimentosStock() {
+			MovimentoStockRepository movStockRepo = repoFact.movimentoStock();
+			this.listaMovimentosStock = loadList(movStockRepo.findAll());
+			verifyListIsNotEmpty(listaMovimentosStock);
 			return this;
 		}
 
-		public Builder loadDesvios(Date dataAFiltrar) {
+		Builder loadDesvios(Date dataAFiltrar) {
 			throw new UnsupportedOperationException("Desvios não foram implementados");
 		}
 
-		public Builder loadConsumosReais(Date dataAFiltrar) {
-			throw new UnsupportedOperationException("Desvios não foram implementados");
-		}
-
-		public Builder loadNotificacaoesErros() {
+		Builder loadNotificacaoesErros() {
 			NotificacaoErroRepository notifErroRepo = repoFact.notificacoesErros();
 			this.listaNotificacoesErro = loadList(notifErroRepo.findAll());
 			verifyListIsNotEmpty(listaNotificacoesErro);
 			return this;
 		}
 
-		public Builder loadMensagens(Date dataAFiltrar) {
+		Builder loadMensagens(Date dataAFiltrar) {
 			MensagemRepository msgRepo = repoFact.mensagem();
 			this.listaMensagens = msgRepo.findAllWithDateAfter(dataAFiltrar);
+			verifyListIsNotEmpty(listaMensagens);
+			return this;
+		}
+
+		Builder loadAgendamentosProcessamento(Date dataAFiltrar) {
+			AgendamentoDeProcessamentoRepository agenRepo = repoFact.agendamentoDeProcessamento();
+			this.listaAgendamentosDeProcessamento = agenRepo.findAllWithDateAfter(dataAFiltrar);
 			verifyListIsNotEmpty(listaMensagens);
 			return this;
 		}
@@ -267,7 +292,8 @@ public class ChaoDeFabrica {
 		public ChaoDeFabrica build() {
 			return new ChaoDeFabrica(hasLoadedNothing, listaLinhaProd, listaDepositos,
 					listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas,
-					listaOrdensProducao, listaNotificacoesErro, listaMensagens);
+					listaOrdensProducao, listaNotificacoesErro, listaMensagens, listaMovimentosStock,
+					listaAgendamentosDeProcessamento);
 		}
 
 	}
