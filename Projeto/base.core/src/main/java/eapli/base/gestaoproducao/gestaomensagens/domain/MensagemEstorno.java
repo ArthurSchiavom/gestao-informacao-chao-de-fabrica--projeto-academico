@@ -16,6 +16,7 @@ import java.util.Date;
 public class MensagemEstorno extends Mensagem implements AggregateRoot<MensagemID> {
     @XmlElement(name = "materiaPrima")
     public final String idMateriaPrima;
+
     @XmlElement(name = "deposito")
     public final CodigoDeposito codigoDeposito;
 

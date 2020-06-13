@@ -202,16 +202,17 @@ public class ExportadorXMLJABXTest {
 		listaNotificacoesErro.add(notifErro);
 
 		List<Mensagem> listaMensagens = new ArrayList<>();
-		/*
+
 		try {
 			MensagemConsumo msgConsumo = new MensagemConsumo(new CodigoDeposito("COD1"), codIntMaq, new Date(),
-					10, CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent));
+					10, "2");
 			listaMensagens.add(msgConsumo);
 			MensagemEntregaDeProducao msgEntregaProd = new MensagemEntregaDeProducao(new CodigoDeposito("COD1"),
-					codIntMaq, new Date(), 10, new IdentificadorDeLote("Lote1"));
+					codIntMaq, new Date(), 10, new IdentificadorDeLote("Lote1"),
+					CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent));
 			listaMensagens.add(msgEntregaProd);
-			MensagemEstorno msgEstorno = new MensagemEstorno(CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent),
-					new CodigoDeposito("COD1"), codIntMaq, new Date(), 10);
+			MensagemEstorno msgEstorno = new MensagemEstorno(new CodigoDeposito("COD1"), "2",
+					codIntMaq, new Date(), 10);
 			listaMensagens.add(msgEstorno);
 			MensagemFimDeAtividade msgFimAtividade = new MensagemFimDeAtividade(codIntMaq, new Date(),
 					idOrdemProd);
@@ -231,8 +232,6 @@ public class ExportadorXMLJABXTest {
 		} catch (IllegalDomainValueException e) {
 			e.printStackTrace();
 		}
-
-		 */
 
 		ChaoDeFabrica chaoDeFabrica = new ChaoDeFabrica(false, listaLinhaProd, listaDepositos,
 				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao,
