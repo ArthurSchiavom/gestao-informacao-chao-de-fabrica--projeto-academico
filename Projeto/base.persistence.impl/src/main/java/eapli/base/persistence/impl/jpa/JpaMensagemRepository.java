@@ -7,11 +7,13 @@ import eapli.base.gestaoproducao.gestaomensagens.domain.EstadoProcessamento;
 import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
+import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,6 +32,14 @@ public class JpaMensagemRepository extends JpaAutoTxRepository<Mensagem, Mensage
     @Override
     public List<Mensagem> findAllList() {
         return Lists.newArrayList(this.findAll());
+    }
+
+    @Override
+    public List<Mensagem> findAllWithDateAfter(Date dataAFiltrar) {
+        TypedQuery<Mensagem> tq = this.createQuery(
+                "SELECT e FROM Mensagem e WHERE e.mensagemID.tempoEmissao.timestamp >= ?0", Mensagem.class);
+        tq.setParameter(0, dataAFiltrar);
+        return tq.getResultList();
     }
 
     @Override

@@ -13,7 +13,8 @@ import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomaterial.repository.CategoriaRepository;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
-import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
+import eapli.base.gestaoproducao.gestaomensagens.domain.*;
+import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
@@ -24,6 +25,7 @@ import eapli.base.infrastructure.persistence.RepositoryFactory;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,7 +76,16 @@ public class ChaoDeFabrica {
 	private List<NotificacaoErro> listaNotificacoesErro;
 
 	@XmlElementWrapper(name = "mensagens")
-	@XmlElement(name = "mensagem")
+	@XmlElements({
+			@XmlElement(name = "mensagemInicioDeAtividade", type= MensagemInicioDeAtividade.class),
+			@XmlElement(name = "mensagemFimDeAtividade", type = MensagemFimDeAtividade.class),
+			@XmlElement(name = "mensagemParagemForcada", type = MensagemParagemForcada.class),
+			@XmlElement(name = "mensagemRetomaDeAtividade", type = MensagemRetomoDeActividade.class),
+			@XmlElement(name = "mensagemDeConsumo", type = MensagemConsumo.class),
+			@XmlElement(name = "mensagemDeProducao", type = MensagemProducao.class),
+			@XmlElement(name = "mensagemDeEntregaDeProducao", type = MensagemEntregaDeProducao.class),
+			@XmlElement(name = "mensagemDeEstorno", type = MensagemEstorno.class)
+	})
 	private List<Mensagem> listaMensagens;
 
 	private boolean nothingWasLoaded;
@@ -214,6 +225,13 @@ public class ChaoDeFabrica {
 			return this;
 		}
 
+		public Builder loadMensagens(Date dataAFiltrar) {
+			MensagemRepository msgRepo = repoFact.mensagem();
+			this.listaMensagens = msgRepo.findAllWithDateAfter(dataAFiltrar);
+			verifyListIsNotEmpty(listaMensagens);
+			return this;
+		}
+
 		/**
 		 * Verifica se uma lista está vazia, e se estiver
 		 * faz prepara tudo
@@ -234,8 +252,9 @@ public class ChaoDeFabrica {
 
 		/**
 		 * Converte de um iterable(retornado pelo repositório) numa lista
+		 *
 		 * @param iterable o iteravel retornado do repositório
-		 * @param <E> o elemento da lista
+		 * @param <E>      o elemento da lista
 		 * @return uma lista de elementos
 		 */
 		private <E> List<E> loadList(Iterable<E> iterable) {

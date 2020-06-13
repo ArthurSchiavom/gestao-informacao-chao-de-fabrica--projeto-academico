@@ -8,6 +8,8 @@ import eapli.framework.domain.model.DomainEntities;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Objects;
 
 /**
@@ -16,11 +18,15 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+@XmlSeeAlso({MensagemConsumo.class, MensagemEntregaDeProducao.class, MensagemEstorno.class,
+            MensagemFimDeAtividade.class, MensagemInicioDeAtividade.class, MensagemParagemForcada.class,
+            MensagemProducao.class, MensagemRetomoDeActividade.class})
 public abstract class Mensagem implements AggregateRoot<MensagemID> {
 
     @Version
     private Long version;
 
+    @XmlElement
     @EmbeddedId
     public final MensagemID mensagemID;
 
@@ -28,7 +34,9 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
     @Enumerated(EnumType.STRING)
     private EstadoProcessamento estadoProcessamento;
 
+    @XmlElement(name = "linhaDeProducao")
     private IdentificadorLinhaProducao identificadorLinhaProducao;
+    @XmlElement(name = "ordemDeProducao")
     private IdentificadorOrdemProducao identificadorOrdemDeProducao;
 
     public Mensagem(TipoDeMensagem tipo, TimestampEmissao tempoEmissao, CodigoInternoMaquina codigoInternoMaquina) {
@@ -74,6 +82,7 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         this.estadoProcessamento = estadoProcessamento;
     }
 
+    @XmlTransient
     public IdentificadorOrdemProducao getIdentificadorOrdemDeProducao() {
         return identificadorOrdemDeProducao;
     }

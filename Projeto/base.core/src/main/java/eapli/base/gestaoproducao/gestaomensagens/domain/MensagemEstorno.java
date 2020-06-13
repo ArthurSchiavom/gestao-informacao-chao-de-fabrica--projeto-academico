@@ -7,21 +7,28 @@ import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 
 @Entity
 @DiscriminatorValue(value=TipoDeMensagem.Values.ESTORNO)
 public class MensagemEstorno extends Mensagem implements AggregateRoot<MensagemID> {
+    @XmlElement(name = "deposito")
     public final CodigoDeposito codigo;
+
+    @XmlElement(name = "produto")
     public final CodigoUnico codigoUnico;
-    private int quantidadeProduzir;
+
+    @XmlElement(name = "quantidadeDeMateriaPrima")
+    private double quantidadeProduzir;
 
     protected MensagemEstorno() {
         this.codigo = null;
         this.codigoUnico = null;
     }
 
-    public MensagemEstorno(CodigoUnico codigoUnico, CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir) {
+    public MensagemEstorno(CodigoUnico codigoUnico, CodigoDeposito codigo, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, double quantidadeProduzir) {
         super(TipoDeMensagem.ESTORNO, new TimestampEmissao(dataHora), codigoInternoMaquina);
         if (codigoUnico == null || dataHora == null)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
@@ -30,7 +37,8 @@ public class MensagemEstorno extends Mensagem implements AggregateRoot<MensagemI
         this.quantidadeProduzir = quantidadeProduzir;
     }
 
-    public int getQuantidadeProduzir() {
+    @XmlTransient
+    public double getQuantidadeProduzir() {
         return quantidadeProduzir;
     }
 }

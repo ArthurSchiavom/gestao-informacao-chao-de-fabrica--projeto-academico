@@ -71,102 +71,17 @@
       <xs:field xpath="linhaDeProducao"/>
     </xs:keyref>
 
-    <xs:keyref name="depositosKeyRef1" refer="cdfab:depositosKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeConsumo"/>
-      <xs:field xpath="deposito"/>
-    </xs:keyref>
-    <xs:keyref name="depositosKeyRef2" refer="cdfab:depositosKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeEntregaDeProducao"/>
-      <xs:field xpath="deposito"/>
-    </xs:keyref>
-    <xs:keyref name="depositosKeyRef3" refer="cdfab:depositosKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeEstorno"/>
-      <xs:field xpath="deposito"/>
-    </xs:keyref>
     <xs:keyref name="depositosKeyRef4" refer="cdfab:depositosKey">
       <xs:selector xpath="cdfab:movimentosStock/cdfab:movimentoStock"/>
       <xs:field xpath="deposito"/>
     </xs:keyref>
 
-    <xs:keyref name="ordensDeProducaoKeyRef1" refer="cdfab:ordensDeProducaoKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemInicioDeAtividade"/>
-      <xs:field xpath="ordemDeProducao"/>
-    </xs:keyref>
-    <xs:keyref name="ordensDeProducaoKeyRef2" refer="cdfab:ordensDeProducaoKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemFimDeAtividade"/>
-      <xs:field xpath="ordemDeProducao"/>
-    </xs:keyref>
-    <xs:keyref name="ordensDeProducaoKeyRef3" refer="cdfab:ordensDeProducaoKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemParagemForcada"/>
-      <xs:field xpath="ordemDeProducao"/>
-    </xs:keyref>
-    <xs:keyref name="ordensDeProducaoKeyRef4" refer="cdfab:ordensDeProducaoKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemRetomaDeAtividade"/>
-      <xs:field xpath="ordemDeProducao"/>
-    </xs:keyref>
-    <xs:keyref name="ordensDeProducaoKeyRef5" refer="cdfab:ordensDeProducaoKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeConsumo"/>
-      <xs:field xpath="ordemDeProducao"/>
-    </xs:keyref>
-    <xs:keyref name="ordensDeProducaoKeyRef6" refer="cdfab:ordensDeProducaoKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeProducao"/>
-      <xs:field xpath="ordemDeProducao"/>
-    </xs:keyref>
-    <xs:keyref name="ordensDeProducaoKeyRef7" refer="cdfab:ordensDeProducaoKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeEntregaDeProducao"/>
-      <xs:field xpath="ordemDeProducao"/>
-    </xs:keyref>
-    <xs:keyref name="ordensDeProducaoKeyRef8" refer="cdfab:ordensDeProducaoKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeEstorno"/>
-      <xs:field xpath="ordemDeProducao"/>
-    </xs:keyref>
-
-    <xs:keyref name="maquinasKeyRef1" refer="cdfab:maquinasKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemInicioDeAtividade"/>
-      <xs:field xpath="maquina"/>
-    </xs:keyref>
-    <xs:keyref name="maquinasKeyRef2" refer="cdfab:maquinasKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemFimDeAtividade"/>
-      <xs:field xpath="maquina"/>
-    </xs:keyref>
-    <xs:keyref name="maquinasKeyRef3" refer="cdfab:maquinasKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemParagemForcada"/>
-      <xs:field xpath="@maquina"/>
-    </xs:keyref>
-    <xs:keyref name="maquinasKeyRef4" refer="cdfab:maquinasKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemRetomaDeAtividade"/>
-      <xs:field xpath="maquina"/>
-    </xs:keyref>
-    <xs:keyref name="maquinasKeyRef5" refer="cdfab:maquinasKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeConsumo"/>
-      <xs:field xpath="maquina"/>
-    </xs:keyref>
-    <xs:keyref name="maquinasKeyRef6" refer="cdfab:maquinasKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeProducao"/>
-      <xs:field xpath="maquina"/>
-    </xs:keyref>
-    <xs:keyref name="maquinasKeyRef7" refer="cdfab:maquinasKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeEntregaDeProducao"/>
-      <xs:field xpath="maquina"/>
-    </xs:keyref>
-    <xs:keyref name="maquinasKeyRef8" refer="cdfab:maquinasKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeEstorno"/>
-      <xs:field xpath="maquina"/>
-    </xs:keyref>
     <xs:keyref name="maquinasKeyRef9" refer="cdfab:maquinasKey">
       <xs:selector
         xpath="cdfab:ordensDeProducao/cdfab:ordemProducao/cdfab:usosDeMaquina/cdfab:usoDeMaquina"/>
       <xs:field xpath="maquina"/>
     </xs:keyref>
 
-    <xs:keyref name="produtosKeyRef1" refer="cdfab:produtosKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeProducao"/>
-      <xs:field xpath="produto"/>
-    </xs:keyref>
-    <xs:keyref name="produtosKeyRef2" refer="cdfab:produtosKey">
-      <xs:selector xpath="cdfab:mensagens/cdfab:mensagemDeEntregaDeProducao"/>
-      <xs:field xpath="produto"/>
-    </xs:keyref>
     <xs:keyref name="produtosKeyRef3" refer="cdfab:produtosKey">
       <xs:selector xpath="cdfab:ordensDeProducao/cdfab:ordemProducao"/>
       <xs:field xpath="produto"/>
@@ -190,7 +105,7 @@
       <xs:element name="mensagens" minOccurs="0">
         <!-- TODO - tirar o minOccurs="0", ainda não implementado em código -->
         <xs:complexType>
-          <xs:sequence>
+          <xs:choice maxOccurs="unbounded">
             <xs:element name="mensagemInicioDeAtividade" type="mensagemInicioDeAtividade"
               minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="mensagemFimDeAtividade" type="mensagemFimDeAtividade" minOccurs="0"
@@ -207,7 +122,7 @@
               minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="mensagemDeEstorno" type="mensagemDeEstorno" minOccurs="0"
               maxOccurs="unbounded"/>
-          </xs:sequence>
+          </xs:choice>
         </xs:complexType>
       </xs:element>
       <xs:element name="movimentosStock" minOccurs="0">

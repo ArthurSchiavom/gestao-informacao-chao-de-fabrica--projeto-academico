@@ -51,7 +51,8 @@ public class ServicoExportacao {
 				.loadMateriais()
 				.loadProdutos()
 				.loadNotificacaoesErros()
-				.loadOrdensProducao(dataAFiltrar);
+				.loadOrdensProducao(dataAFiltrar)
+				.loadMensagens(dataAFiltrar);
 		if (exportarTempoProd) {
 			builder.loadTemposDeProducao(dataAFiltrar);
 		}

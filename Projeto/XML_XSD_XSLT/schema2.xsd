@@ -16,7 +16,7 @@
   <xs:simpleType name="timestampEpochMili">
     <xs:restriction base="xs:integer">
       <xs:minInclusive value="0" />
-      <xs:maxExclusive value="10000000000" />
+      <xs:maxExclusive value="9223372036854775807" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -151,51 +151,70 @@
   </xs:simpleType>
 
 
-  
+  <xs:complexType name="mensagemID">
+    <xs:all>
+      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:simpleType name="estadoProcessamento">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PROCESSADO" />
+      <xs:enumeration value="NAO_PROCESSADO" />
+    </xs:restriction>
+  </xs:simpleType>
 
   <xs:complexType name="mensagemInicioDeAtividade">
     <xs:all>
-      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
-      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0" />
-      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="mensagemID" type="mensagemID"/>
+      <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/> <!-- minOccurs de 0 porque as mensagens podem não ser processadas -->
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="mensagemFimDeAtividade">
     <xs:all>
-      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
-      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0" />
-      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="mensagemID" type="mensagemID"/>
+      <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="mensagemParagemForcada">
     <xs:all>
-      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
-      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
-      <xs:element name="maquina" type="codigoInternoMaquina" />
-      <xs:element name="codigoCausaDeParagem" type="codigoCausaDeParagem" />
+      <xs:element name="mensagemID" type="mensagemID"/>
+      <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="mensagemRetomaDeAtividade">
     <xs:all>
-      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
-      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
-      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="mensagemID" type="mensagemID"/>
+      <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
+      <xs:element name="erro" type="stringNaoVazia"/>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="mensagemDeConsumo">
     <xs:all>
-      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
-      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
-      <xs:element name="maquina" type="codigoInternoMaquina" />
-      <xs:element name="quantidadeDeMateriaPrima" type="quantidadeDeMateriaPrima" />
+      <xs:element name="mensagemID" type="mensagemID"/>
+      <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
       <xs:element name="deposito" type="codigoDeposito" minOccurs="0" />
+      <xs:element name="produto" type="codigoUnicoProduto" />
+      <xs:element name="quantidadeDeMateriaPrima" type="doublePositivo" />
     </xs:all>
   </xs:complexType>
   <xs:complexType name="mensagemDeProducao">
     <xs:all>
-      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
-      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
-      <xs:element name="maquina" type="codigoInternoMaquina" />
+      <xs:element name="mensagemID" type="mensagemID"/>
+      <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
       <xs:element name="produto" type="codigoUnicoProduto" />
       <xs:element name="quantidade" type="doublePositivo" />
       <xs:element name="lote" type="identificadorLote" minOccurs="0" />
@@ -203,22 +222,24 @@
   </xs:complexType>
   <xs:complexType name="mensagemDeEntregaDeProducao">
     <xs:all>
-      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
-      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
-      <xs:element name="maquina" type="codigoInternoMaquina" />
-      <xs:element name="quantidade" type="doublePositivo" />
-      <xs:element name="produto" type="codigoUnicoProduto" />
+      <xs:element name="mensagemID" type="mensagemID"/>
+      <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
       <xs:element name="deposito" type="codigoDeposito" />
       <xs:element name="lote" type="identificadorLote" />
+      <xs:element name="quantidade" type="doublePositivo" />
     </xs:all>
   </xs:complexType>
   <xs:complexType name="mensagemDeEstorno">
     <xs:all>
-      <xs:element name="timestampEmissaoEpochMilli" type="timestampEpochMili" />
-      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" />
-      <xs:element name="maquina" type="codigoInternoMaquina" />
-      <xs:element name="quantidadeDeMateriaPrima" type="quantidadeDeMateriaPrima" />
+      <xs:element name="mensagemID" type="mensagemID"/>
+      <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
+      <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
+      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
       <xs:element name="deposito" type="codigoDeposito" />
+      <xs:element name="produto" type="codigoUnicoProduto" />
+      <xs:element name="quantidadeDeMateriaPrima" type="doublePositivo" />
     </xs:all>
   </xs:complexType>
 

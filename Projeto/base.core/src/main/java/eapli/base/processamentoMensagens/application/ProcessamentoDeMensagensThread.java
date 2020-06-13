@@ -222,7 +222,7 @@ public class ProcessamentoDeMensagensThread implements Runnable {
      * @param quantidade Quantidade produzida
      * @param produtoProduzidoList Lista de produtos produzidos
      */
-    private void guardarProdutosProduzidos(IdentificadorDeLote identificadorDeLote, CodigoUnico codigoUnico,int quantidade,List<ProdutoProduzido> produtoProduzidoList){
+    private void guardarProdutosProduzidos(IdentificadorDeLote identificadorDeLote, CodigoUnico codigoUnico,double quantidade,List<ProdutoProduzido> produtoProduzidoList){
         ProdutoProduzido produtoProduzido;
         Produto produto;
         Optional<Produto> prdt= produtoRepository.produtoDeCodigoUnico(codigoUnico.codigoUnicoValor);

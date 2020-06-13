@@ -27,12 +27,12 @@ public class MessageFactory {
         OrdemProducao ordemPrd=null;
         IdentificadorOrdemProducao ordemID=null;
         String erro;
-        int quantidade;
+        double quantidade;
         switch (vec[1]) {
             case "C0":
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
                 //CodigoDeposito opcional
-                quantidade = Integer.parseInt(vec[4]);
+                quantidade = Double.parseDouble(vec[4]);
                 codigoUnico=CodigoUnico.valueOf(vec[3],null);
                 if (vec.length==6) //Caso seja empty fica null como foi inicializado
                      codigoDeposito= new CodigoDeposito(vec[5].trim());
@@ -41,7 +41,7 @@ public class MessageFactory {
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito;Lote
                 //Lote é opcional
                 codigoDeposito=new CodigoDeposito(vec[5]);
-                quantidade=Integer.parseInt(vec[4]);
+                quantidade=Double.parseDouble((vec[4]));
                 if (vec.length==7)
                     identificadorDeLote=new IdentificadorDeLote(vec[6]);
                 return new MensagemEntregaDeProducao(codigoDeposito,codigoInternoMaquina,date,quantidade,identificadorDeLote);
@@ -49,7 +49,7 @@ public class MessageFactory {
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
                 //Lote opc
                 codigoUnico=CodigoUnico.valueOf(vec[3],null);
-                quantidade=Integer.parseInt(vec[4]);
+                quantidade=Double.parseDouble((vec[4]));
                 if (vec.length==6)
                     identificadorDeLote=new IdentificadorDeLote(vec[5]);
                 return new MensagemProducao(codigoInternoMaquina,date,codigoUnico,quantidade,identificadorDeLote);
@@ -57,7 +57,7 @@ public class MessageFactory {
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
                 //Deposito opc
                 codigoUnico=CodigoUnico.valueOf(vec[3],null);
-                quantidade=Integer.parseInt(vec[4]);
+                quantidade=Double.parseDouble((vec[4]));
                 if (!vec[5].isEmpty()) //Caso seja empty fica null como foi inicializado
                     codigoDeposito= new CodigoDeposito(vec[5].trim());
                 return  new MensagemEstorno(codigoUnico,codigoDeposito,codigoInternoMaquina,date,quantidade);

@@ -3,6 +3,7 @@ package eapli.base.gestaoproducao.exportacao.application.xml;
 import eapli.base.comum.domain.medicao.QuantidadePositiva;
 import eapli.base.comum.domain.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.exportacao.domain.ChaoDeFabrica;
+import eapli.base.gestaoproducao.gestaoProdutoProduzido.domain.IdentificadorDeLote;
 import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
 import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
@@ -174,8 +175,9 @@ public class ExportadorXMLJABXTest {
 		listaIdentificadoresEncomenda.add(new IdentificadorEncomenda("ENCOMENDA1"));
 
 		List<OrdemProducao> listaOrdensProducao = new ArrayList<>();
+		IdentificadorOrdemProducao idOrdemProd = new IdentificadorOrdemProducao("ORDEM1");
 		try {
-			listaOrdensProducao.add(new OrdemProducao(new IdentificadorOrdemProducao("ORDEM1"), new QuantidadeAProduzir(1550),
+			listaOrdensProducao.add(new OrdemProducao(idOrdemProd, new QuantidadeAProduzir(1550),
 					listaIdentificadoresEncomenda, dateEmissao, datePrevEx, Estado.CONCLUIDA, CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent)));
 		} catch (IllegalDomainValueException e) {
 			e.printStackTrace();
@@ -203,6 +205,28 @@ public class ExportadorXMLJABXTest {
 		try {
 			MensagemConsumo msgConsumo = new MensagemConsumo(new CodigoDeposito("COD1"), codIntMaq, new Date(),
 					10, CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent));
+			listaMensagens.add(msgConsumo);
+			MensagemEntregaDeProducao msgEntregaProd = new MensagemEntregaDeProducao(new CodigoDeposito("COD1"),
+					codIntMaq, new Date(), 10, new IdentificadorDeLote("Lote1"));
+			listaMensagens.add(msgEntregaProd);
+			MensagemEstorno msgEstorno = new MensagemEstorno(CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent),
+					new CodigoDeposito("COD1"), codIntMaq, new Date(), 10);
+			listaMensagens.add(msgEstorno);
+			MensagemFimDeAtividade msgFimAtividade = new MensagemFimDeAtividade(codIntMaq, new Date(),
+					idOrdemProd);
+			listaMensagens.add(msgFimAtividade);
+			MensagemInicioDeAtividade msgInicioAtividade = new MensagemInicioDeAtividade(new Date(), codIntMaq,
+					idOrdemProd);
+			listaMensagens.add(msgInicioAtividade);
+			MensagemParagemForcada msgParagForcada = new MensagemParagemForcada(codIntMaq, new Date());
+			listaMensagens.add(msgParagForcada);
+			MensagemProducao msgProducao = new MensagemProducao(codIntMaq, new Date(),
+					CodigoUnico.valueOf("COD1", produtoRepositoryIsNotPresent), 10,
+					new IdentificadorDeLote("Lote1"));
+			listaMensagens.add(msgProducao);
+			MensagemRetomoDeActividade msgRetoAtiv = new MensagemRetomoDeActividade(codIntMaq, new Date(),
+					"erro");
+			listaMensagens.add(msgRetoAtiv);
 		} catch (IllegalDomainValueException e) {
 			e.printStackTrace();
 		}
@@ -211,11 +235,7 @@ public class ExportadorXMLJABXTest {
 				listaCategoria, listaProdutos, listaMateriais, listaFichasProducao, listaMaquinas, listaOrdensProducao,
 				listaNotificacoesErro, listaMensagens);
 		assertTrue(exportador.export(ficheiro, chaoDeFabrica));
-		try {
-			exportador.export(folder.newFile(), chaoDeFabrica);
-		} catch (IOException e) {
-			fail("export failed");
-		}
+//		exportador.export(new File("ola.xml"), chaoDeFabrica);
 
 		JAXBContext jaxbContext;
 		try
@@ -228,7 +248,7 @@ public class ExportadorXMLJABXTest {
 
 			//Setup schema validator
 			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema employeeSchema = sf.newSchema(new File("../../XML_XSD_XSLT/chaoDeFabrica.xsd"));
+			Schema employeeSchema = sf.newSchema(new File("../XML_XSD_XSLT/chaoDeFabrica.xsd"));
 			jaxbUnmarshaller.setSchema(employeeSchema);
 
 			//Unmarshal xml file

@@ -1,9 +1,16 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 
+import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
 import eapli.framework.domain.model.ValueObject;
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,6 +18,8 @@ import java.util.Objects;
 public class TimestampEmissao implements ValueObject, Comparable<TimestampEmissao> {
 	private static final long serialVersionUID = 1L;
 
+	@XmlTransient
+	@Temporal(TemporalType.TIMESTAMP)
 	public final Date timestamp;
 
 	public TimestampEmissao(Date timestamp) {
@@ -23,6 +32,11 @@ public class TimestampEmissao implements ValueObject, Comparable<TimestampEmissa
 	public TimestampEmissao() {
 		//FOR ORM
 		this.timestamp = null;
+	}
+
+	@XmlValue
+	private long getTimestampEpochMilli() {
+		return timestamp.getTime();
 	}
 
 	@Override

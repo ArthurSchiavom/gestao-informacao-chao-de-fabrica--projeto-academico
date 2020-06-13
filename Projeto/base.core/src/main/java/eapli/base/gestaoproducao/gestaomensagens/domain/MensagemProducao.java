@@ -6,6 +6,8 @@ import eapli.base.gestaoproducao.gestaoproduto.domain.CodigoUnico;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 
 @Entity
@@ -13,8 +15,13 @@ import java.util.Date;
 public class MensagemProducao extends Mensagem implements AggregateRoot<MensagemID> {
     //P1 -> Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
     //Produto e quantidade são parametros obrigatorios ,lote opcional
+    @XmlElement(name = "produto")
     public  final CodigoUnico codigoUnico;
-    private int quantidade;
+
+    @XmlElement(name = "quantidade")
+    private double quantidade;
+
+    @XmlElement(name = "lote")
     public final IdentificadorDeLote identificadorDeLote;
 
     protected MensagemProducao(){
@@ -22,7 +29,7 @@ public class MensagemProducao extends Mensagem implements AggregateRoot<Mensagem
         identificadorDeLote=null;
     }
 
-    public MensagemProducao(CodigoInternoMaquina codigoInternoMaquina, Date dataHora, CodigoUnico codigoUnico, int quantidade, IdentificadorDeLote identificadorDeLote) {
+    public MensagemProducao(CodigoInternoMaquina codigoInternoMaquina, Date dataHora, CodigoUnico codigoUnico, double quantidade, IdentificadorDeLote identificadorDeLote) {
         super(TipoDeMensagem.PRODUCAO,new TimestampEmissao(dataHora),codigoInternoMaquina);
         if (codigoUnico==null || dataHora==null || quantidade<=0)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
@@ -31,7 +38,8 @@ public class MensagemProducao extends Mensagem implements AggregateRoot<Mensagem
         this.identificadorDeLote = identificadorDeLote;
     }
 
-    public int getQuantidade() {
+    @XmlTransient
+    public double getQuantidade() {
         return quantidade;
     }
 }

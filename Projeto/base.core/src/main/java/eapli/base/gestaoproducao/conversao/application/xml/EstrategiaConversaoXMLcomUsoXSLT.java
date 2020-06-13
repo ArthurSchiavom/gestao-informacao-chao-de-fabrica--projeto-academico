@@ -13,17 +13,25 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.*;
+import java.io.File;
+import java.io.InputStream;
 
-public abstract class ConversorXMLAbstrato implements ConversorXML {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConversorXMLAbstrato.class);
+public class EstrategiaConversaoXMLcomUsoXSLT implements ConversorXML {
+	private static final Logger LOGGER = LoggerFactory.getLogger(EstrategiaConversaoXMLcomUsoXSLT.class);
+	private final String extensao;
+	private final InputStream xslt;
+
+	protected EstrategiaConversaoXMLcomUsoXSLT(String extensao, String xslt) {
+		this.extensao = extensao;
+		this.xslt = EstrategiaConversaoXMLcomUsoXSLT.class.getResourceAsStream(xslt);
+	}
 
 	@Override
 	public boolean converter(File file) {
 		//Carrega o template XSLT
 		Templates templates = null;
 		try {
-			templates = new BasicTransformerFactory().newTemplates(new StreamSource(carregarXSLT()));
+			templates = new BasicTransformerFactory().newTemplates(new StreamSource(xslt));
 		} catch (TransformerConfigurationException e) {
 			LOGGER.error(e.getMessage());
 			e.printStackTrace();
@@ -44,24 +52,11 @@ public abstract class ConversorXMLAbstrato implements ConversorXML {
 		Source text = new StreamSource(file);
 		try {
 			transformer.transform(text, new StreamResult(new File(
-					FilenameUtils.removeExtension(file.getAbsolutePath())+
-							extensao())));
+					FilenameUtils.removeExtension(file.getAbsolutePath())+extensao)));
 		} catch (TransformerException e) {
 			LOGGER.error(e.getMessage());
 			return false;
 		}
 		return true;
 	}
-
-	/**
-	 * Vai carregar o ficheiro necessário á memória
-	 * @return o ficheiro para a variante que pretendemos exportar
-	 */
-	protected abstract InputStream carregarXSLT();
-
-	/**
-	 * Vai buscar a extensao que deve ser exportada
-	 * @return a extensao que pretendemos exportar
-	 */
-	abstract String extensao();
 }

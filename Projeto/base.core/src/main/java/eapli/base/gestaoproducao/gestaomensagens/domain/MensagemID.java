@@ -4,16 +4,23 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
 public class MensagemID implements ValueObject, Serializable, Comparable<MensagemID>{
 
+    @XmlElement(name="maquina")
     public final CodigoInternoMaquina codigoInternoMaquina;
+
+    @XmlTransient
     @Enumerated(EnumType.STRING)
     @Column(insertable=false, updatable=false)
     public final TipoDeMensagem tipoDeMensagem;
+
+    @XmlElement(name = "timestampEmissaoEpochMilli")
     @Column(insertable=false, updatable=false)
     public final TimestampEmissao tempoEmissao;
 
