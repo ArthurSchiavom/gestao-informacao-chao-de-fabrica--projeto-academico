@@ -201,13 +201,16 @@ public class ChaoDeFabrica {
 
 		public Builder loadOrdensProducao(Date dataAFiltrar) {
 			OrdemProducaoRepository ordProdRepo = repoFact.ordemProducao();
-			this.listaOrdensProducao = ordProdRepo.findAllwithDateAfter(dataAFiltrar);
+			this.listaOrdensProducao = ordProdRepo.findAllWithDateAfter(dataAFiltrar);
 			verifyListIsNotEmpty(listaOrdensProducao);
 			return this;
 		}
 
 		public Builder loadTemposDeProducao(Date dataAFiltrar) {
-			throw new UnsupportedOperationException("Tempos de Produção ainda não foram implementados");
+			OrdemProducaoRepository ordProdRepo = repoFact.ordemProducao();
+			this.listaOrdensProducao = ordProdRepo.findAllWithDateAfter(dataAFiltrar);
+			verifyListIsNotEmpty(listaOrdensProducao);
+			return this;
 		}
 
 		public Builder loadDesvios(Date dataAFiltrar) {

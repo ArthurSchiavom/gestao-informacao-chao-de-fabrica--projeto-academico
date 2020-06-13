@@ -49,7 +49,7 @@ public class ProcessadorDeMensagemDeProducao implements ProcessadorMensagem {
         CodigoInternoMaquina codigoInternoMaquina=mensagemProducao.mensagemID.codigoInternoMaquina;
         Maquina maquina=validacaoParametrosMensagensServico.getMaquinaPorIdentificador(codigoInternoMaquina);
         LinhaProducao linhaProducao=validacaoParametrosMensagensServico.getLinhaDeProducaoPorIdentificador(maquina.getLinhaProducao());
-        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemProducao,validacaoParametrosMensagensServico);
+        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(mensagemRepository,mensagemProducao,validacaoParametrosMensagensServico);
         if (notificacaoErro!=null){return notificacaoErro;}
         guardarProdutosProduzidos(mensagemProducao.identificadorDeLote,mensagemProducao.codigoUnico,mensagemProducao.getQuantidade(),ordemProducao);
         return null;

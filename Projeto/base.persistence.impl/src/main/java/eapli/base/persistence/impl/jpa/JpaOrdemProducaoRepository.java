@@ -89,7 +89,7 @@ public class JpaOrdemProducaoRepository extends JpaAutoTxRepository<OrdemProduca
 	}
 
 	@Override
-	public List<OrdemProducao> findAllwithDateAfter(Date dataFiltrar) {
+	public List<OrdemProducao> findAllWithDateAfter(Date dataFiltrar) {
 		TypedQuery<OrdemProducao> tq = this.createQuery(
 				"SELECT e FROM OrdemProducao e WHERE e.dataEmissao >= ?0", OrdemProducao.class);
 		tq.setParameter(0, dataFiltrar);

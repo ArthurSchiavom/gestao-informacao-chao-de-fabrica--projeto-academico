@@ -44,8 +44,7 @@ public class ServicoArquivacaoNotificacoesErroTest {
 		MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()),new CodigoInternoMaquina(""));
 		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);
-		NotificacaoErro notifErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid,
-				lProdRepo, msgRepo);
+		NotificacaoErro notifErro = new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, msgRepo);
 		notifErro.arquivar();
 		Mockito.when(repo.ofIdentity(2L)).thenReturn(Optional.of(notifErro));
 		servico.arquivar(2L);
@@ -57,8 +56,7 @@ public class ServicoArquivacaoNotificacoesErroTest {
 
 		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);
-		NotificacaoErro notifErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid,
-				lProdRepo, msgRepo);
+		NotificacaoErro notifErro = new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, msgRepo);
 		Mockito.when(repo.ofIdentity(2L)).thenReturn(Optional.of(notifErro));
 		Mockito.when(repo.save(notifErro)).thenReturn(notifErro);
 		NotificacaoErro arquivada = servico.arquivar(2L);

@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class MensagemRetomaDeActividadeNotificacao implements ValidadorMensagem {
     @Override
-    public NotificacaoErro validarMensagem( LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
+    public NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemRetomoDeActividade mensagemRetomoDeActividade=(MensagemRetomoDeActividade) mensagem;
         Date dataEmissao=mensagemRetomoDeActividade.mensagemID.tempoEmissao.timestamp;
 
@@ -22,7 +22,7 @@ public class MensagemRetomaDeActividadeNotificacao implements ValidadorMensagem 
 
         //DATA
         if (!validacao.validarData(dataEmissao))
-            NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagem);
+            NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,mensagemRepository,mensagem);
         return null;
     }
 }

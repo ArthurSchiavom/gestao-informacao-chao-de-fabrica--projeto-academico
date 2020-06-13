@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class MensagemEntregaProducaoNotificacao implements ValidadorMensagem {
     @Override
-    public NotificacaoErro validarMensagem(LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
+    public NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemEntregaDeProducao mensagemEntregaDeProducao=(MensagemEntregaDeProducao)mensagem;
         double quantidadeAProduzir=mensagemEntregaDeProducao.getQuantidadeATransferir();
         Date dataEmissao=mensagemEntregaDeProducao.mensagemID.tempoEmissao.timestamp;
@@ -26,11 +26,11 @@ public class MensagemEntregaProducaoNotificacao implements ValidadorMensagem {
 
         //DATA ou QUANTIDADE A PRODUZIR
         if (!validacao.validarData(dataEmissao)|| !validacao.validarQuantidade(quantidadeAProduzir))
-            return NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemEntregaDeProducao);
+            return NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,mensagemRepository,mensagemEntregaDeProducao);
         //CODIGO DEPOSITO
         if (codigoDeposito!=null){
             if(!codigoDeposito.validarDadosCodigoDeDeposito(mensagemEntregaDeProducao.codigo.codigo))
-                return NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemEntregaDeProducao);
+                return NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,mensagemRepository,mensagemEntregaDeProducao);
         }
         return null;
     }

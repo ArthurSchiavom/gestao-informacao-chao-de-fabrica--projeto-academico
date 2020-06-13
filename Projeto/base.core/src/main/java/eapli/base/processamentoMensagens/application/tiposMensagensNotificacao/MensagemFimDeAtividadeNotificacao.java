@@ -14,25 +14,25 @@ import eapli.base.processamentoMensagens.application.ValidacaoParametrosMensagen
 import java.util.Date;
 
 public class MensagemFimDeAtividadeNotificacao implements ValidadorMensagem {
-    @Override
-    public NotificacaoErro validarMensagem( LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
-        MensagemFimDeAtividade mensagemFimDeAtividade=(MensagemFimDeAtividade) mensagem;
-        Date dataEmissao=mensagemFimDeAtividade.mensagemID.tempoEmissao.timestamp;
-        IdentificadorOrdemProducao idOrdemProducao=mensagemFimDeAtividade.getIdentificadorOrdemDeProducao();
-        OrdemProducao ordemProducao;
+	@Override
+	public NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
+		MensagemFimDeAtividade mensagemFimDeAtividade = (MensagemFimDeAtividade) mensagem;
+		Date dataEmissao = mensagemFimDeAtividade.mensagemID.tempoEmissao.timestamp;
+		IdentificadorOrdemProducao idOrdemProducao = mensagemFimDeAtividade.getIdentificadorOrdemDeProducao();
+		OrdemProducao ordemProducao;
 
-        TipoErroNotificacao DADOS_INVALIDOS=TipoErroNotificacao.DADOS_INVALIDOS;
-        TipoErroNotificacao ELEMENTOS_INEXISTENTES=TipoErroNotificacao.ELEMENTOS_INEXISTENTES;
+		TipoErroNotificacao DADOS_INVALIDOS = TipoErroNotificacao.DADOS_INVALIDOS;
+		TipoErroNotificacao ELEMENTOS_INEXISTENTES = TipoErroNotificacao.ELEMENTOS_INEXISTENTES;
 
-        //DATA
-        if (!validacao.validarData(dataEmissao))
-            return NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagem);
-        //IDENTIFICADOR DE ORDEM DE PRODUCAO
-        if (idOrdemProducao!=null) {
-            ordemProducao = validacao.getOrdemDeProducaoPorIdentificador(idOrdemProducao);
-            if (ordemProducao == null)
-                return NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagem);
-        }
-        return null;
-    }
+		//DATA
+		if (!validacao.validarData(dataEmissao))
+			return NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS, mensagemRepository, mensagem);
+		//IDENTIFICADOR DE ORDEM DE PRODUCAO
+		if (idOrdemProducao != null) {
+			ordemProducao = validacao.getOrdemDeProducaoPorIdentificador(idOrdemProducao);
+			if (ordemProducao == null)
+				return NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES, mensagemRepository, mensagem);
+		}
+		return null;
+	}
 }

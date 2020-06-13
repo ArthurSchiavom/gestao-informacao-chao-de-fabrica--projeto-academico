@@ -24,5 +24,5 @@ public interface OrdemProducaoRepository  extends DomainRepository<Identificador
 
     boolean saveRewrite(OrdemProducao op);
 
-    List<OrdemProducao> findAllwithDateAfter(Date dataFiltrar);
+    List<OrdemProducao> findAllWithDateAfter(Date dataFiltrar);
 }

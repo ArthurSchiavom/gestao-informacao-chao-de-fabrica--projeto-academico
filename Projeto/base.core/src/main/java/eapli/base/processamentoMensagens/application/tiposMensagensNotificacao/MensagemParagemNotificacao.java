@@ -14,7 +14,7 @@ import java.util.Date;
 public class MensagemParagemNotificacao implements ValidadorMensagem {
 
     @Override
-    public NotificacaoErro validarMensagem( LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
+    public NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemParagemForcada mensagemParagemForcada=(MensagemParagemForcada) mensagem;
         Date dataEmissao=mensagemParagemForcada.mensagemID.tempoEmissao.timestamp;
 
@@ -23,7 +23,7 @@ public class MensagemParagemNotificacao implements ValidadorMensagem {
 
         //DATA
         if (!validacao.validarData(dataEmissao))
-            return  NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagem);
+            return  NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,mensagemRepository,mensagem);
         return null;
     }
 }

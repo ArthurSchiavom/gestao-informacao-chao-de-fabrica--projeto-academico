@@ -51,7 +51,7 @@ public class ProcessadorDeMensagemDeConsumo implements ProcessadorMensagem{
         Maquina maquina=validacaoParametrosMensagensServico.getMaquinaPorIdentificador(codigoInternoMaquina);
         LinhaProducao linhaProducao=validacaoParametrosMensagensServico.getLinhaDeProducaoPorIdentificador(maquina.getLinhaProducao());
         String idMateriaPrima=mensagemConsumo.idMateriaPrima;
-        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemConsumo,validacaoParametrosMensagensServico);
+        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(mensagemRepository,mensagemConsumo,validacaoParametrosMensagensServico);
         if (notificacaoErro!=null){return notificacaoErro;}
         MateriaPrima materiaPrima=operacoesUsoDeMaquina.obterMateriaPrima(idMateriaPrima,ordemProducao);
         if (codigoDeposito!=null && materiaPrima != null) {

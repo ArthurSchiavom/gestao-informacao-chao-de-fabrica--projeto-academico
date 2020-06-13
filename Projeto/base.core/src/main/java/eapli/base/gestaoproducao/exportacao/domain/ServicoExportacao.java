@@ -51,10 +51,11 @@ public class ServicoExportacao {
 				.loadMateriais()
 				.loadProdutos()
 				.loadNotificacaoesErros()
-				.loadOrdensProducao(dataAFiltrar)
 				.loadMensagens(dataAFiltrar);
 		if (exportarTempoProd) {
 			builder.loadTemposDeProducao(dataAFiltrar);
+		} else {
+			builder.loadOrdensProducao(dataAFiltrar);
 		}
 		if (exportarDesvios) {
 			builder.loadDesvios(dataAFiltrar);

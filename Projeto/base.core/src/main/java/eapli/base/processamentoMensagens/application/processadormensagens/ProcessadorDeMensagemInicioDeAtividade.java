@@ -48,7 +48,7 @@ public class ProcessadorDeMensagemInicioDeAtividade implements  ProcessadorMensa
         //Validar se é null  <-
         List<UsoDeMaquina> usoDeMaquinaList=ordemProducao.usoDeMaquinaList;
         UsoDeMaquina usoDeMaquina=verificacaoUsoDeMaquina(usoDeMaquinaList,codigoInternoMaquina,ordemProducao);
-        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemInicioDeAtividade,validacaoParametrosMensagensServico);
+        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(mensagemRepository,mensagemInicioDeAtividade,validacaoParametrosMensagensServico);
         if (notificacaoErro!=null)
             return notificacaoErro;
         usoDeMaquinaRepository.save(usoDeMaquina); //So guarda se nao tiver notificacao de erro

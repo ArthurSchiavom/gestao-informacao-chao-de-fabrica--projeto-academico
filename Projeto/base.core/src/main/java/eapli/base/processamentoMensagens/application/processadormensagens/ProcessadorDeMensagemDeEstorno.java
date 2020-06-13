@@ -49,7 +49,7 @@ public class ProcessadorDeMensagemDeEstorno implements ProcessadorMensagem {
         Maquina maquina=validacaoParametrosMensagensServico.getMaquinaPorIdentificador(codigoInternoMaquina);
         LinhaProducao linhaProducao=validacaoParametrosMensagensServico.getLinhaDeProducaoPorIdentificador(maquina.getLinhaProducao());
         String idMateriaPrima=mensagemEstorno.idMateriaPrima;
-        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemEstorno,validacaoParametrosMensagensServico);
+        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(mensagemRepository,mensagemEstorno,validacaoParametrosMensagensServico);
         if (notificacaoErro!=null){return notificacaoErro;}
         MateriaPrima materiaPrima=operacoesUsoDeMaquina.obterMateriaPrima(idMateriaPrima,ordemProducao);
         try {

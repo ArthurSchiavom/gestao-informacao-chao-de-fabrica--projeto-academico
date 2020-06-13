@@ -16,7 +16,7 @@ import java.util.Date;
 public class MensagemInicioDeAtividadeNotificacao implements ValidadorMensagem {
 
     @Override
-    public NotificacaoErro validarMensagem( LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
+    public NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemInicioDeAtividade mensagemInicioDeAtividade=(eapli.base.gestaoproducao.gestaomensagens.domain.MensagemInicioDeAtividade) mensagem;
         Date dataEmissao=mensagemInicioDeAtividade.mensagemID.tempoEmissao.timestamp;
         IdentificadorOrdemProducao idOrdemProducao=mensagemInicioDeAtividade.getIdentificadorOrdemDeProducao();
@@ -26,13 +26,13 @@ public class MensagemInicioDeAtividadeNotificacao implements ValidadorMensagem {
         TipoErroNotificacao ELEMENTOS_INEXISTENTES=TipoErroNotificacao.ELEMENTOS_INEXISTENTES;
         //DATA
         if (!validacao.validarData(dataEmissao))
-            return NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemInicioDeAtividade);
+            return NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,mensagemRepository,mensagemInicioDeAtividade);
         //IDENTIFICADOR DE ORDEM DE PRODUCAO
 
         if (idOrdemProducao!=null) {
             ordemProducao = validacao.getOrdemDeProducaoPorIdentificador(idOrdemProducao);
             if (ordemProducao == null)
-                return NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagem);
+                return NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,mensagemRepository,mensagem);
         }
         return null;
     }

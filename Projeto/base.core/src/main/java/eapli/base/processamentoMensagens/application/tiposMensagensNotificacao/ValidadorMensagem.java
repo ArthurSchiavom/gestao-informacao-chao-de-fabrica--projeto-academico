@@ -9,5 +9,5 @@ import eapli.base.processamentoMensagens.application.ValidacaoParametrosMensagen
 
 public interface ValidadorMensagem {
 
-    NotificacaoErro validarMensagem(LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao);
+    NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao);
 }

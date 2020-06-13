@@ -262,7 +262,7 @@
 
   <xs:complexType name="notificacaoDeErroDeProcessamento">
     <xs:all>
-      <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" />
+      <xs:element name="mensagem" type="mensagemID"/>
       <xs:element name="tipo" type="tipoDeErroDeProcessamento" />
       <xs:element name="estado" type="estadoDeErroDeProcessamento" />
     </xs:all>

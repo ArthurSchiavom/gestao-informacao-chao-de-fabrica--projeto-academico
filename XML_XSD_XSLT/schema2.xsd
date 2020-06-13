@@ -204,9 +204,9 @@
       <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
       <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
       <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
+      <xs:element name="materiaPrima" type="stringNaoVazia"/>
       <xs:element name="deposito" type="codigoDeposito" minOccurs="0" />
       <xs:element name="produto" type="codigoUnicoProduto" />
-      <xs:element name="quantidadeDeMateriaPrima" type="doublePositivo" />
     </xs:all>
   </xs:complexType>
   <xs:complexType name="mensagemDeProducao">
@@ -228,6 +228,7 @@
       <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
       <xs:element name="deposito" type="codigoDeposito" />
       <xs:element name="lote" type="identificadorLote" />
+      <xs:element name="produto" type="codigoUnicoProduto" />
       <xs:element name="quantidade" type="doublePositivo" />
     </xs:all>
   </xs:complexType>
@@ -237,8 +238,8 @@
       <xs:element name="estadoProcessamento" type="estadoProcessamento"/>
       <xs:element name="ordemDeProducao" type="identificadorOrdemProducao" minOccurs="0"/>
       <xs:element name="linhaDeProducao" type="identificadorLinhaDeProducao" minOccurs="0"/>
+      <xs:element name="materiaPrima" type="stringNaoVazia"/>
       <xs:element name="deposito" type="codigoDeposito" />
-      <xs:element name="produto" type="codigoUnicoProduto" />
       <xs:element name="quantidadeDeMateriaPrima" type="doublePositivo" />
     </xs:all>
   </xs:complexType>
