@@ -6,22 +6,24 @@ import eapli.framework.domain.model.AggregateRoot;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlElement;
 import java.util.Date;
 
 @Entity
-@DiscriminatorValue(value=TipoDeMensagem.Values.RETOMA_ATIVIDADE)
+@DiscriminatorValue(value = TipoDeMensagem.Values.RETOMA_ATIVIDADE)
 public class MensagemRetomoDeActividade extends Mensagem implements AggregateRoot<MensagemID> {
-    //S1 -> Máquina;TipoMsg;DataHora;Erro
-    public final String erro;
+	//S1 -> Máquina;TipoMsg;DataHora;Erro
+	@XmlElement(name = "erro")
+	public final String erro;
 
-    protected MensagemRetomoDeActividade() {
-        this.erro = null;
-    }
+	protected MensagemRetomoDeActividade() {
+		this.erro = null;
+	}
 
-    public MensagemRetomoDeActividade(CodigoInternoMaquina codigoInternoMaquina, Date dataHora, String erro) {
-        super(TipoDeMensagem.RETOMA_ATIVIDADE,new TimestampEmissao(dataHora),codigoInternoMaquina);
-        if ( erro==null)
-            throw new IllegalArgumentException("Parametros dados incorrectos!");
-        this.erro = erro;
-    }
+	public MensagemRetomoDeActividade(CodigoInternoMaquina codigoInternoMaquina, Date dataHora, String erro) {
+		super(TipoDeMensagem.RETOMA_ATIVIDADE, new TimestampEmissao(dataHora), codigoInternoMaquina);
+		if (erro == null)
+			throw new IllegalArgumentException("Parametros dados incorrectos!");
+		this.erro = erro;
+	}
 }

@@ -8,14 +8,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class QuantidadeDeProduto implements ValueObject {
 
-    private int quantidadeProduzida;
+    private double quantidadeProduzida;
     private UnidadeDeMedida unidadeDeMedida;
 
     protected QuantidadeDeProduto(){
         this.unidadeDeMedida=null;
     }
 
-    public QuantidadeDeProduto(int quantidadeProduzida,UnidadeDeMedida unidadeDeMedida) {
+    public QuantidadeDeProduto(double quantidadeProduzida,UnidadeDeMedida unidadeDeMedida) {
         this.quantidadeProduzida=quantidadeProduzida;
         this.unidadeDeMedida=unidadeDeMedida;
     }

@@ -16,11 +16,18 @@ public class ConversaoFicheiroXMLUI extends AbstractUI {
 		String workingDir = controller.fetchCurrentWorkingDirectory();
 		String pathParaFicheiro;
 		do {
-			pathParaFicheiro = Console.readNonEmptyLine("Insira o caminho para o ficheiro: " + workingDir,
+			pathParaFicheiro = Console.readNonEmptyLine("Insira o caminho para o ficheiro, para cancelar escreva" +
+							" CANCELAR : " + workingDir,
 					"Têm que ser escolhido um ficheiro para transformar");
+			if(pathParaFicheiro.equals("CANCELAR")) {
+				return false;
+			}
 		}while(!controller.ficheiroIsValido(pathParaFicheiro));
 		List<FormatoConversao> formatos = controller.formatosConversao();
 		int opcaoformato = UIUtils.displayTableAndSelectIndex(formatos, "Escolha um formato para exportar");
+		if(opcaoformato == -1) {
+			return false;
+		}
 		controller.escolherFormatoConversao(opcaoformato);
 		if(controller.converter()) {
 			System.out.println("A conversão correu com sucesso");

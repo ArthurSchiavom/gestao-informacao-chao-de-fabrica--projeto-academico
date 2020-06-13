@@ -5,81 +5,78 @@
 	xsi:schemaLocation="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica chaoDeFabrica.xsd">
 	
 	<cdfab:mensagens>
-		<cdfab:mensagemInicioDeAtividade>
-			<timestampEmissaoEpochMilli>1590795870</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-		</cdfab:mensagemInicioDeAtividade>
-		<cdfab:mensagemInicioDeAtividade>
-			<timestampEmissaoEpochMilli>1590795871</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-		</cdfab:mensagemInicioDeAtividade>
-		<cdfab:mensagemInicioDeAtividade>
-			<timestampEmissaoEpochMilli>1590795872</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-		</cdfab:mensagemInicioDeAtividade>
-		<cdfab:mensagemFimDeAtividade>
-			<timestampEmissaoEpochMilli>159079587</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-		</cdfab:mensagemFimDeAtividade>
-		<cdfab:mensagemParagemForcada>
-			<timestampEmissaoEpochMilli>1590795870</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-			<codigoCausaDeParagem>DESCONHECIDO</codigoCausaDeParagem>
-		</cdfab:mensagemParagemForcada>
-		<cdfab:mensagemRetomaDeAtividade>
-			<timestampEmissaoEpochMilli>15907958</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-		</cdfab:mensagemRetomaDeAtividade>
-		<cdfab:mensagemDeConsumo>
-			<timestampEmissaoEpochMilli>1590795</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-			<quantidadeDeMateriaPrima>
-				<quantidade>123</quantidade>
-				<materiaPrima>
-					<tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
-					<idMateria>material 1</idMateria>
-				</materiaPrima>
-			</quantidadeDeMateriaPrima>
-			<deposito>deposito 1</deposito>
-		</cdfab:mensagemDeConsumo>
-		<cdfab:mensagemDeProducao>
-			<timestampEmissaoEpochMilli>159079</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-			<produto>produto 1</produto>
-			<quantidade>123</quantidade>
-			<lote>sunny</lote>
-		</cdfab:mensagemDeProducao>
-		<cdfab:mensagemDeEntregaDeProducao>
-			<timestampEmissaoEpochMilli>15907</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-			<quantidade>123</quantidade>
-			<produto>produto 1</produto>
-			<deposito>deposito 1</deposito>
-			<lote>sunny</lote>
-		</cdfab:mensagemDeEntregaDeProducao>
-		<cdfab:mensagemDeEstorno>
-			<timestampEmissaoEpochMilli>1590</timestampEmissaoEpochMilli>
-			<ordemDeProducao>ordem 1</ordemDeProducao>
-			<maquina>maquina 1</maquina>
-			<quantidadeDeMateriaPrima>
-				<quantidade>123</quantidade>
-				<materiaPrima>
-					<tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
-					<idMateria>material 1</idMateria>
-				</materiaPrima>
-			</quantidadeDeMateriaPrima>
-			<deposito>deposito 1</deposito>
-		</cdfab:mensagemDeEstorno>
-	</cdfab:mensagens>
+        <cdfab:mensagemDeConsumo>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755584</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <deposito>deposito 1</deposito>
+            <produto>1100001a</produto>
+            <quantidadeDeMateriaPrima>10.0</quantidadeDeMateriaPrima>
+        </cdfab:mensagemDeConsumo>
+        <cdfab:mensagemDeEntregaDeProducao>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755586</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <deposito>deposito 1</deposito>
+            <lote>Lote1</lote>
+            <quantidade>10.0</quantidade>
+        </cdfab:mensagemDeEntregaDeProducao>
+        <cdfab:mensagemDeEstorno>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755588</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <deposito>deposito 1</deposito>
+            <produto>1100001a</produto>
+            <quantidadeDeMateriaPrima>10.0</quantidadeDeMateriaPrima>
+        </cdfab:mensagemDeEstorno>
+        <cdfab:mensagemFimDeAtividade>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755590</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <ordemDeProducao>ordem 1</ordemDeProducao>
+        </cdfab:mensagemFimDeAtividade>
+        <cdfab:mensagemInicioDeAtividade>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755591</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <ordemDeProducao>ordem 1</ordemDeProducao>
+        </cdfab:mensagemInicioDeAtividade>
+        <cdfab:mensagemParagemForcada>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755592</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+        </cdfab:mensagemParagemForcada>
+        <cdfab:mensagemDeProducao>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755593</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <produto>1100001a</produto>
+            <quantidade>10.0</quantidade>
+            <lote>Lote1</lote>
+        </cdfab:mensagemDeProducao>
+        <cdfab:mensagemRetomaDeAtividade>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755594</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <erro>erro</erro>
+        </cdfab:mensagemRetomaDeAtividade>
+    </cdfab:mensagens>
 	<cdfab:movimentosStock>
 		<cdfab:movimentoStock id="10">
 			<quantidadeDeMateriaPrima>
@@ -118,16 +115,16 @@
 	</cdfab:notificacoesDeErroDeProcessamento>
 	<cdfab:linhasDeProducao>
 		<cdfab:linhaDeProducao identificador="Linha 5">
-			<estado>INATIVO</estado>
+			<estado>SUSPENSO</estado>
 		</cdfab:linhaDeProducao>
 		<cdfab:linhaDeProducao identificador="Linha 6">
-			<estado>INATIVO</estado>
+			<estado>SUSPENSO</estado>
 		</cdfab:linhaDeProducao>
 		<cdfab:linhaDeProducao identificador="Linha de Produção 1">
-			<estado>INATIVO</estado>
+			<estado>SUSPENSO</estado>
 		</cdfab:linhaDeProducao>
 		<cdfab:linhaDeProducao identificador="Linha de Produção 2">
-			<estado>INATIVO</estado>
+			<estado>SUSPENSO</estado>
 		</cdfab:linhaDeProducao>
 		<cdfab:linhaDeProducao identificador="linha 1">
 			<estado>ATIVO</estado>

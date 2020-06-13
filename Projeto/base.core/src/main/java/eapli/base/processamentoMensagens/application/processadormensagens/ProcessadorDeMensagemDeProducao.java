@@ -61,7 +61,7 @@ public class ProcessadorDeMensagemDeProducao implements ProcessadorMensagem {
      * @param codigoUnico   Codigo unico
      * @param quantidade Quantidade produzida
      */
-    private void guardarProdutosProduzidos(IdentificadorDeLote identificadorDeLote, CodigoUnico codigoUnico, int quantidade,OrdemProducao ordemProducao){
+    private void guardarProdutosProduzidos(IdentificadorDeLote identificadorDeLote, CodigoUnico codigoUnico, double quantidade,OrdemProducao ordemProducao){
         ProdutoProduzido produtoProduzido;
         Produto produto=validacaoParametrosMensagensServico.getProdutoPorCodigoUnico(codigoUnico);
         if (identificadorDeLote==null)

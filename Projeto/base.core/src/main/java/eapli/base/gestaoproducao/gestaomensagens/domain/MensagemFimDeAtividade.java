@@ -13,18 +13,18 @@ import java.util.Date;
 @DiscriminatorValue(value = TipoDeMensagem.Values.FIM_DE_ATIVIDADE)
 public class MensagemFimDeAtividade extends Mensagem implements AggregateRoot<MensagemID> {
 
-    //Máquina;TipoMsg;DataHora;OrdemProducao
+	//Máquina;TipoMsg;DataHora;OrdemProducao
 
-    protected MensagemFimDeAtividade() {
-        super();
-    }
+	protected MensagemFimDeAtividade() {
+		super();
+	}
 
-    public MensagemFimDeAtividade(CodigoInternoMaquina maquinaID, Date dataHora, IdentificadorOrdemProducao ordem) {
-        super(TipoDeMensagem.FIM_DE_ATIVIDADE, new TimestampEmissao(dataHora),maquinaID,ordem);
+	public MensagemFimDeAtividade(CodigoInternoMaquina maquinaID, Date dataHora, IdentificadorOrdemProducao ordem) {
+		super(TipoDeMensagem.FIM_DE_ATIVIDADE, new TimestampEmissao(dataHora), maquinaID, ordem);
 
-        if (dataHora == null) {
-            throw new IllegalArgumentException("Não pode haver parametros null no Fim de atividade mensagem"); //
-            // excepto o Ordem id que pode ser nulo
-        }
-    }
+		if (dataHora == null) {
+			throw new IllegalArgumentException("Não pode haver parametros null no Fim de atividade mensagem"); //
+			// excepto o Ordem id que pode ser nulo
+		}
+	}
 }

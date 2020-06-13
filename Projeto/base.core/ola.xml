@@ -51,7 +51,7 @@
             <numeroSerie>123</numeroSerie>
             <ordemLinhaProducao>1</ordemLinhaProducao>
             <identificadorProtocoloComunicacao>1</identificadorProtocoloComunicacao>
-            <dataInstalacao>11-06-2020</dataInstalacao>
+            <dataInstalacao>13-06-2020</dataInstalacao>
             <marca>Rage Against The Computer</marca>
             <modelo>XPTO</modelo>
             <descricaoMaquina>Maquina teste</descricaoMaquina>
@@ -68,6 +68,8 @@
             <dataPrevistaExecucao>15-10-2015</dataPrevistaExecucao>
             <estado>CONCLUIDA</estado>
             <produto>COD1</produto>
+            <tempoBrutoExecucao>2</tempoBrutoExecucao>
+            <tempoEfetivoExecucao>2</tempoEfetivoExecucao>
         </cdfab:ordemProducao>
     </cdfab:ordensDeProducao>
     <cdfab:notificacoesDeErroDeProcessamento>
@@ -77,5 +79,77 @@
             <estado>ATIVO</estado>
         </cdfab:notificacaoDeErroDeProcessamento>
     </cdfab:notificacoesDeErroDeProcessamento>
-    <cdfab:mensagens/>
+    <cdfab:mensagens>
+        <cdfab:mensagemDeConsumo>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755584</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <deposito>COD1</deposito>
+            <produto>COD1</produto>
+            <quantidadeDeMateriaPrima>10.0</quantidadeDeMateriaPrima>
+        </cdfab:mensagemDeConsumo>
+        <cdfab:mensagemDeEntregaDeProducao>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755586</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <deposito>COD1</deposito>
+            <lote>Lote1</lote>
+            <quantidade>10.0</quantidade>
+        </cdfab:mensagemDeEntregaDeProducao>
+        <cdfab:mensagemDeEstorno>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755588</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <deposito>COD1</deposito>
+            <produto>COD1</produto>
+            <quantidadeDeMateriaPrima>10.0</quantidadeDeMateriaPrima>
+        </cdfab:mensagemDeEstorno>
+        <cdfab:mensagemFimDeAtividade>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755590</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <ordemDeProducao>ORDEM1</ordemDeProducao>
+        </cdfab:mensagemFimDeAtividade>
+        <cdfab:mensagemInicioDeAtividade>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755591</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <ordemDeProducao>ORDEM1</ordemDeProducao>
+        </cdfab:mensagemInicioDeAtividade>
+        <cdfab:mensagemParagemForcada>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755592</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+        </cdfab:mensagemParagemForcada>
+        <cdfab:mensagemDeProducao>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755593</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <produto>COD1</produto>
+            <quantidade>10.0</quantidade>
+            <lote>Lote1</lote>
+        </cdfab:mensagemDeProducao>
+        <cdfab:mensagemRetomaDeAtividade>
+            <mensagemID>
+                <maquina>CODINT_1</maquina>
+                <timestampEmissaoEpochMilli>1592071755594</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <erro>erro</erro>
+        </cdfab:mensagemRetomaDeAtividade>
+    </cdfab:mensagens>
 </cdfab:chaoDeFabrica>

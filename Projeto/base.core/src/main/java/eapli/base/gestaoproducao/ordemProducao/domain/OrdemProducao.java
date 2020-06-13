@@ -74,6 +74,7 @@ public class OrdemProducao implements AggregateRoot<IdentificadorOrdemProducao> 
 
 	@XmlElement
 	@AttributeOverrides({
+			//Apesar de ele dizer que há erro no tempoExecucao, isto corre, é um problema do intellij
 			@AttributeOverride(name = "tempoExecucao", column = @Column(name = "tempoBrutoExecucao")),
 	})
 	public final TempoProducao tempoBrutoExecucao;

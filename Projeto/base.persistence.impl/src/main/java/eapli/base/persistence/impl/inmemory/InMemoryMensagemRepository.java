@@ -6,6 +6,7 @@ import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public class InMemoryMensagemRepository extends InMemoryDomainRepository<MensagemID, Mensagem> implements MensagemRepository {
@@ -17,5 +18,10 @@ public class InMemoryMensagemRepository extends InMemoryDomainRepository<Mensage
     @Override
     public List<Mensagem> findAllList() {
         return Lists.newArrayList(this.findAll());
+    }
+
+    @Override
+    public List<Mensagem> findAllWithDateAfter(Date dataAFiltrar) {
+        throw new UnsupportedOperationException("não necessário");
     }
 }

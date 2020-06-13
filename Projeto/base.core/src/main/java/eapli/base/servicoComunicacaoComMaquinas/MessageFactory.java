@@ -17,72 +17,72 @@ public class MessageFactory {
 
 
     public Mensagem getMessageType(String vec[]) throws IllegalDomainValueException, ParseException {
-        if ((vec.length<3 || vec.length>6 ))
+        if ((vec.length < 3 || vec.length > 6))
             return null;
-        Date date=verificarDataImportada(vec[2].trim());
-        CodigoInternoMaquina codigoInternoMaquina= new CodigoInternoMaquina(vec[0]);
-        CodigoDeposito codigoDeposito=null;
-        IdentificadorDeLote identificadorDeLote=null;
+        Date date = verificarDataImportada(vec[2].trim());
+        CodigoInternoMaquina codigoInternoMaquina = new CodigoInternoMaquina(vec[0]);
+        CodigoDeposito codigoDeposito = null;
+        IdentificadorDeLote identificadorDeLote = null;
         CodigoUnico codigoUnico;
         String idMateriaPrima;
-        OrdemProducao ordemPrd=null;
-        IdentificadorOrdemProducao ordemID=null;
+        OrdemProducao ordemPrd = null;
+        IdentificadorOrdemProducao ordemID = null;
         String erro;
-        int quantidade;
+        double quantidade;
         switch (vec[1]) {
             case "C0":
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
                 //CodigoDeposito opcional
-                quantidade = Integer.parseInt(vec[4]);
-                idMateriaPrima=vec[3].trim();
-                if (vec.length==6) //Caso seja empty fica null como foi inicializado
-                     codigoDeposito= new CodigoDeposito(vec[5].trim());
-                return new MensagemConsumo(codigoDeposito, codigoInternoMaquina, date, quantidade,idMateriaPrima);
+                idMateriaPrima = vec[3].trim();
+                quantidade = Double.parseDouble(vec[4]);
+                if (vec.length == 6) //Caso seja empty fica null como foi inicializado
+                    codigoDeposito = new CodigoDeposito(vec[5].trim());
+                return new MensagemConsumo(codigoDeposito, codigoInternoMaquina, date, quantidade, idMateriaPrima);
             case "C9":
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito;Lote
                 //Lote é opcional
-                codigoUnico= CodigoUnico.valueOf(vec[3],null);
-                codigoDeposito=new CodigoDeposito(vec[5]);
-                quantidade=Integer.parseInt(vec[4]);
-                if (vec.length==7)
-                    identificadorDeLote=new IdentificadorDeLote(vec[6]);
-                return new MensagemEntregaDeProducao(codigoDeposito,codigoInternoMaquina,date,quantidade,identificadorDeLote,codigoUnico);
+                codigoUnico = CodigoUnico.valueOf(vec[3], null);
+                codigoDeposito = new CodigoDeposito(vec[5]);
+                quantidade = Double.parseDouble((vec[4]));
+                if (vec.length == 7)
+                    identificadorDeLote = new IdentificadorDeLote(vec[6]);
+                return new MensagemEntregaDeProducao(codigoDeposito, codigoInternoMaquina, date, quantidade, identificadorDeLote, codigoUnico);
             case "P1":
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Lote
                 //Lote opc
-                codigoUnico=CodigoUnico.valueOf(vec[3],null);
-                quantidade=Integer.parseInt(vec[4]);
-                if (vec.length==6)
-                    identificadorDeLote=new IdentificadorDeLote(vec[5]);
-                return new MensagemProducao(codigoInternoMaquina,date,codigoUnico,quantidade,identificadorDeLote);
+                codigoUnico = CodigoUnico.valueOf(vec[3], null);
+                quantidade = Double.parseDouble((vec[4]));
+                if (vec.length == 6)
+                    identificadorDeLote = new IdentificadorDeLote(vec[5]);
+                return new MensagemProducao(codigoInternoMaquina, date, codigoUnico, quantidade, identificadorDeLote);
             case "P2":
                 //Máquina;TipoMsg;DataHora;Produto;Quantidade;Depósito
                 //Deposito opc
-                idMateriaPrima=vec[3].trim();
-                quantidade=Integer.parseInt(vec[4]);
+                idMateriaPrima = vec[3].trim();
+                quantidade = Double.parseDouble((vec[4]));
                 if (!vec[5].isEmpty()) //Caso seja empty fica null como foi inicializado
-                    codigoDeposito= new CodigoDeposito(vec[5].trim());
-                return  new MensagemEstorno(codigoDeposito,idMateriaPrima,codigoInternoMaquina,date,quantidade);
+                    codigoDeposito = new CodigoDeposito(vec[5].trim());
+                return new MensagemEstorno(codigoDeposito, idMateriaPrima, codigoInternoMaquina, date, quantidade);
             case "S0":
                 //Máquina;TipoMsg;DataHora;OrdemProducao
                 //Ordem opc
-                if (vec.length==4) {
+                if (vec.length == 4) {
                     ordemID = new IdentificadorOrdemProducao(vec[3].trim());
                 }
-                return new MensagemInicioDeAtividade(date,codigoInternoMaquina,ordemID);
+                return new MensagemInicioDeAtividade(date, codigoInternoMaquina, ordemID);
             case "S1":
                 //Máquina;TipoMsg;DataHora;Erro
-                erro=vec[3];
-                return new MensagemRetomoDeActividade(codigoInternoMaquina,date,erro);
+                erro = vec[3];
+                return new MensagemRetomoDeActividade(codigoInternoMaquina, date, erro);
             case "S8":
                 //Máquina;TipoMsg;DataHora
-                return new MensagemParagemForcada(codigoInternoMaquina,date);
+                return new MensagemParagemForcada(codigoInternoMaquina, date);
             case "S9":
                 //Máquina;TipoMsg;DataHora;OrdemProducao
-                if (vec.length==4) {
+                if (vec.length == 4) {
                     ordemID = new IdentificadorOrdemProducao(vec[3].trim());
                 }
-                return new MensagemFimDeAtividade(codigoInternoMaquina,date,ordemID);
+                return new MensagemFimDeAtividade(codigoInternoMaquina, date, ordemID);
             default:
                 throw new IllegalArgumentException("Nao foi encontrado o tipo de mensagem correspondente -> Tipo Mensagem nao encontrada: " + vec[0]);
         }

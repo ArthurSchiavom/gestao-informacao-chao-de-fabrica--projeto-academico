@@ -7,30 +7,38 @@ import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 
 @Entity
-@DiscriminatorValue(value=TipoDeMensagem.Values.ESTORNO)
+@DiscriminatorValue(value = TipoDeMensagem.Values.ESTORNO)
 public class MensagemEstorno extends Mensagem implements AggregateRoot<MensagemID> {
-    public final CodigoDeposito codigoDeposito;
+    @XmlElement(name = "materiaPrima")
     public final String idMateriaPrima;
-    private int quantidadeProduzir;
+    @XmlElement(name = "deposito")
+    public final CodigoDeposito codigoDeposito;
+
+    @XmlElement(name = "quantidadeDeMateriaPrima")
+    private double quantidadeProduzir;
 
     protected MensagemEstorno() {
         this.codigoDeposito = null;
         this.idMateriaPrima = null;
     }
 
-    public MensagemEstorno(CodigoDeposito codigoDeposito,String idMateriaPrima, CodigoInternoMaquina codigoInternoMaquina, Date dataHora, int quantidadeProduzir) {
+    public MensagemEstorno(CodigoDeposito codigoDeposito, String idMateriaPrima, CodigoInternoMaquina codigoInternoMaquina,
+                           Date dataHora, double quantidadeProduzir) {
         super(TipoDeMensagem.ESTORNO, new TimestampEmissao(dataHora), codigoInternoMaquina);
-        if (idMateriaPrima == null|| idMateriaPrima.isEmpty() || dataHora == null)
+        if (idMateriaPrima == null || idMateriaPrima.isEmpty() || dataHora == null)
             throw new IllegalArgumentException("Parametros dados incorrectos!");
         this.idMateriaPrima = idMateriaPrima;
         this.codigoDeposito = codigoDeposito;
         this.quantidadeProduzir = quantidadeProduzir;
     }
 
-    public int getQuantidadeProduzir() {
+    @XmlTransient
+    public double getQuantidadeProduzir() {
         return quantidadeProduzir;
     }
 }

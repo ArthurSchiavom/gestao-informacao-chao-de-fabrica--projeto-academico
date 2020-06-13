@@ -10,15 +10,14 @@ import java.util.Date;
 @Entity
 @DiscriminatorValue(value = TipoDeMensagem.Values.PARAGEM_FORCADA)
 public class MensagemParagemForcada extends Mensagem implements AggregateRoot<MensagemID> {
-    //S8 -> Máquina;TipoMsg;DataHora
+	//S8 -> Máquina;TipoMsg;DataHora
+
+	protected MensagemParagemForcada() {
+		super();
+	}
 
 
-    protected  MensagemParagemForcada(){
-        super();
-    }
-
-
-    public MensagemParagemForcada(CodigoInternoMaquina maquinaID, Date dataHora) {
-        super(TipoDeMensagem.PARAGEM_FORCADA,new TimestampEmissao(dataHora),maquinaID);
-    }
+	public MensagemParagemForcada(CodigoInternoMaquina maquinaID, Date dataHora) {
+		super(TipoDeMensagem.PARAGEM_FORCADA, new TimestampEmissao(dataHora), maquinaID);
+	}
 }

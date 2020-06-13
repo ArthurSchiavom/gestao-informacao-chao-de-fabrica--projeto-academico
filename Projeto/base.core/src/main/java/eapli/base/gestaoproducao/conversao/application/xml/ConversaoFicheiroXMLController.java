@@ -41,7 +41,7 @@ public class ConversaoFicheiroXMLController {
 	}
 
 	public boolean converter() {
-		ConversorXML conversor = new ConversorXMLFactory().getEstrategiaConversao(formato);
+		ConversorXML conversor = ConversorXMLFactory.getEstrategiaConversao(formato);
 		return conversor.converter(ficheiroXML);
 	}
 }

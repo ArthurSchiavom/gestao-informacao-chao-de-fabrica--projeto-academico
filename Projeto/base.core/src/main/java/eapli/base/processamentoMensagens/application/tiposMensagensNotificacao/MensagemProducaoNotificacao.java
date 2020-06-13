@@ -17,7 +17,7 @@ public class MensagemProducaoNotificacao implements ValidadorMensagem {
     public NotificacaoErro validarMensagem( LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemProducao mensagemProducao=(MensagemProducao)mensagem;
         Date dataEmissao=mensagemProducao.mensagemID.tempoEmissao.timestamp;
-        int quantidadeAProduzir=mensagemProducao.getQuantidade();
+        double quantidadeAProduzir=mensagemProducao.getQuantidade();
         Produto produto =validacao.getProdutoPorCodigoUnico(mensagemProducao.codigoUnico);
 
         TipoErroNotificacao DADOS_INVALIDOS=TipoErroNotificacao.DADOS_INVALIDOS;

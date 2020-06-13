@@ -5,11 +5,12 @@ import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlValue;
 
 @Embeddable
 public class IdentificadorDeLote implements ValueObject, Comparable<IdentificadorDeLote> {
     private static final long serialVersionUID = 1L;
-    @XmlElement
+    @XmlValue
     private String identificador;
 
     protected IdentificadorDeLote(){
