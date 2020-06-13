@@ -19,6 +19,7 @@ import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.processamentoMensagens.application.GerarNotificacoesDeErrosFactory;
 import eapli.base.processamentoMensagens.application.ValidacaoParametrosMensagensServico;
 import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.ValidadorMensagem;
 
@@ -44,7 +45,8 @@ public class ProcessadorDeMensagemDeProducao implements ProcessadorMensagem {
     }
 
     @Override
-    public NotificacaoErro processarMensagem(Mensagem mensagem, OrdemProducao ordemProducao, ValidadorMensagem validadorMensagem) {
+    public NotificacaoErro processarMensagem(Mensagem mensagem, OrdemProducao ordemProducao) {
+        ValidadorMensagem validadorMensagem= new GerarNotificacoesDeErrosFactory().getNotificacaoDeErro(mensagem);
         MensagemProducao mensagemProducao=(MensagemProducao)mensagem;
         CodigoInternoMaquina codigoInternoMaquina=mensagemProducao.mensagemID.codigoInternoMaquina;
         Maquina maquina=validacaoParametrosMensagensServico.getMaquinaPorIdentificador(codigoInternoMaquina);

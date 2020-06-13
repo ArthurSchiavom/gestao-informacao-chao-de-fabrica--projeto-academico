@@ -15,6 +15,7 @@ import eapli.base.indicarUsoDeMaquina.domain.PausaDeExecucao;
 import eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquina;
 import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.processamentoMensagens.application.GerarNotificacoesDeErrosFactory;
 import eapli.base.processamentoMensagens.application.ValidacaoParametrosMensagensServico;
 import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.ValidadorMensagem;
 
@@ -36,7 +37,8 @@ public class ProcessadorDeMensagemDeParagem implements ProcessadorMensagem {
     }
 
     @Override
-    public NotificacaoErro processarMensagem(Mensagem mensagem, OrdemProducao ordemProducao, ValidadorMensagem validadorMensagem) {
+    public NotificacaoErro processarMensagem(Mensagem mensagem, OrdemProducao ordemProducao) {
+        ValidadorMensagem validadorMensagem= new GerarNotificacoesDeErrosFactory().getNotificacaoDeErro(mensagem);
         MensagemParagemForcada mensagemParagemForcada=(MensagemParagemForcada)mensagem;
         CodigoInternoMaquina codigoInternoMaquina=mensagemParagemForcada.mensagemID.codigoInternoMaquina;
         Maquina maquina=validacaoParametrosMensagensServico.getMaquinaPorIdentificador(codigoInternoMaquina);
