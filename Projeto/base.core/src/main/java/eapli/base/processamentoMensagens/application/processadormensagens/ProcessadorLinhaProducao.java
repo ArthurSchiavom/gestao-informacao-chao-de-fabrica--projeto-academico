@@ -1,5 +1,7 @@
 package eapli.base.processamentoMensagens.application.processadormensagens;
 
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.EstadoProcessamentoMensagens;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
@@ -13,9 +15,11 @@ import static java.lang.Thread.sleep;
 public class ProcessadorLinhaProducao implements Runnable {
 
     private final LinhaProducao linhaProducao;
+    private final NotificacaoErroRepository notificacaoErroRepository;
 
     public ProcessadorLinhaProducao(LinhaProducao linhaProducao) {
         this.linhaProducao = linhaProducao;
+        this.notificacaoErroRepository=PersistenceContext.repositories().notificacoesErros();
     }
 
     @Override
@@ -39,6 +43,8 @@ public class ProcessadorLinhaProducao implements Runnable {
         if (mensagensAProcessar.isEmpty()){
             return;
         }
-        processadorBlocoMensagens.processar(mensagensAProcessar);
+        NotificacaoErro notificacaoErro=processadorBlocoMensagens.processar(mensagensAProcessar);
+        if (notificacaoErro!=null)
+            notificacaoErroRepository.save(notificacaoErro);
     }
 }
