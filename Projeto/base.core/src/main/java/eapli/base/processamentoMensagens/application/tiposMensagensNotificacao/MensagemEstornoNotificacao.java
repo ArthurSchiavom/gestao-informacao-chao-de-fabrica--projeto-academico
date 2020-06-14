@@ -16,8 +16,8 @@ import java.util.Date;
 public class MensagemEstornoNotificacao implements ValidadorMensagem {
 
     @Override
-    public NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
-        MensagemEstorno mensagemEstorno=(eapli.base.gestaoproducao.gestaomensagens.domain.MensagemEstorno) mensagem;
+    public NotificacaoErro validarMensagem(LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
+        MensagemEstorno mensagemEstorno=(MensagemEstorno) mensagem;
         double quantidadeAProduzir=mensagemEstorno.getQuantidadeProduzir();
         MateriaPrima materiaPrima=validacao.validarEObterMateriaPrima(mensagemEstorno.idMateriaPrima,mensagem.getIdentificadorOrdemDeProducao());
         CodigoDeposito codigoDeposito=mensagemEstorno.codigoDeposito;
@@ -28,14 +28,14 @@ public class MensagemEstornoNotificacao implements ValidadorMensagem {
 
         //DATA
         if (!validacao.validarData(dataEmissao)|| !validacao.validarQuantidade(quantidadeAProduzir))
-            return  NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,mensagemRepository,mensagem);
+            return  NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagem);
         //Materia Prima
         if (materiaPrima==null)
-            return  NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,mensagemRepository,mensagem);
+            return  NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagem);
         //CODIGO DEPOSITO
         if (codigoDeposito!=null){
             if(!codigoDeposito.validarDadosCodigoDeDeposito(mensagemEstorno.codigoDeposito.codigo))
-                return  NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,mensagemRepository,mensagem);
+                return  NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagem);
         }
       return null;
     }

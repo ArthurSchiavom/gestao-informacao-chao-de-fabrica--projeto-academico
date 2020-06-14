@@ -50,7 +50,7 @@ public class ProcessadorDeMensagemEntregaDeProducao implements ProcessadorMensag
         UsoDeMaquina usoDeMaquina=validacaoParametrosMensagensServico.verificarExistenciaDeUsoMaquina(ordemProducao.usoDeMaquinaList,codigoInternoMaquina);
         Maquina maquina=validacaoParametrosMensagensServico.getMaquinaPorIdentificador(codigoInternoMaquina);
         LinhaProducao linhaProducao=validacaoParametrosMensagensServico.getLinhaDeProducaoPorIdentificador(maquina.getLinhaProducao());
-        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(mensagemRepository,mensagemEntregaDeProducao,validacaoParametrosMensagensServico);
+        NotificacaoErro notificacaoErro=validadorMensagem.validarMensagem(linhaProducao, linhaProducaoRepository, mensagemRepository,mensagemEntregaDeProducao,validacaoParametrosMensagensServico);
         if (notificacaoErro!=null)
             return notificacaoErro;
         double quantidade=mensagemEntregaDeProducao.getQuantidadeATransferir();

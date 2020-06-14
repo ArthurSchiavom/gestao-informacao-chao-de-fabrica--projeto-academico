@@ -26,6 +26,9 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 	@XmlAttribute(name = "idNotificacao")
 	public final Long id;
 
+	@XmlElement(name = "linhaDeProducao")
+	public final IdentificadorLinhaProducao idLinhaProd;
+
 	@XmlElement(name = "mensagem")
 	public final MensagemID idMensagem;
 
@@ -40,22 +43,30 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 	/**
 	 * Cria uma nova notificação de erro
 	 *
+	 * @param idLinhaProd   o id da linha de produção cuja qual a notificação de erro pertence
 	 * @param tipoErro      o tipo de erro da notificação
 	 * @param idMensagem    o id da mensagem que tem um erro
+	 * @param linhaProdRepo o repositório das linhas de produção
 	 * @param msgRepo       o repositório das mensagens
 	 */
-	public NotificacaoErro(TipoErroNotificacao tipoErro, MensagemID idMensagem, MensagemRepository msgRepo) {
-		if (idMensagem == null || tipoErro == null) {
+	public NotificacaoErro(IdentificadorLinhaProducao idLinhaProd, TipoErroNotificacao tipoErro,
+	                       MensagemID idMensagem, LinhaProducaoRepository linhaProdRepo,
+	                       MensagemRepository msgRepo) {
+		if (idLinhaProd == null || idMensagem == null || tipoErro == null) {
 			throw new IllegalArgumentException("Values can't be null");
 		}
-		if (msgRepo == null) {
+		if (msgRepo == null || linhaProdRepo == null) {
 			throw new IllegalArgumentException("Repositories can't be null");
+		}
+		if (!linhaProdRepo.containsOfIdentity(idLinhaProd)) {
+			throw new IllegalArgumentException("Linha de produção introduzida não existe");
 		}
 		if (!msgRepo.containsOfIdentity(idMensagem)) {
 			throw new IllegalArgumentException("Mensagem introduzida não existe");
 		}
 
 		this.id = null;
+		this.idLinhaProd = idLinhaProd;
 		this.idMensagem = idMensagem;
 		this.tipoErroNotificacao = tipoErro;
 		this.estadoErro = EstadoErroNotificacao.ATIVO;
@@ -64,18 +75,18 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 	protected NotificacaoErro() {
 		//FOR ORM
 		this.id = null;
+		this.idLinhaProd = null;
 		this.idMensagem = null;
 		this.tipoErroNotificacao = null;
 		this.estadoErro = null;
 	}
 
-	public static NotificacaoErro gerarNotificacaoDeErro(TipoErroNotificacao tipoErroNotificacao,
-	                                                     MensagemRepository mensagemRepository, Mensagem mensagem) {
+	public static NotificacaoErro gerarNotificacaoDeErro(TipoErroNotificacao tipoErroNotificacao, LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem) {
 		switch (tipoErroNotificacao) {
 			case DADOS_INVALIDOS:
-				return new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mensagem.identity(), mensagemRepository);
+				return new NotificacaoErro(linhaProducao.identifier, TipoErroNotificacao.DADOS_INVALIDOS, mensagem.identity(), linhaProducaoRepository, mensagemRepository);
 			case ELEMENTOS_INEXISTENTES:
-				return new NotificacaoErro(TipoErroNotificacao.ELEMENTOS_INEXISTENTES, mensagem.identity(), mensagemRepository);
+				return new NotificacaoErro(linhaProducao.identifier, TipoErroNotificacao.ELEMENTOS_INEXISTENTES, mensagem.identity(), linhaProducaoRepository, mensagemRepository);
 		}
 		return null;
 	}
@@ -121,7 +132,7 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 
 	@Override
 	public NotificacaoErroDTO toDTO() {
-		return new NotificacaoErroDTO(id, tipoErroNotificacao.nomeDisplay,
+		return new NotificacaoErroDTO(id, idLinhaProd.toString(), tipoErroNotificacao.nomeDisplay,
 				estadoErro.nomeDisplay, idMensagem.tempoEmissao.timestamp,
 				idMensagem.tipoDeMensagem.nomeDisplay, idMensagem.codigoInternoMaquina.codigoInterno);
 	}

@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class MensagemConsumoNotificacao implements ValidadorMensagem {
     @Override
-    public NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
+    public NotificacaoErro validarMensagem(LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemConsumo mensagemConsumo=(MensagemConsumo)mensagem;
         double quantidadeAProduzir=mensagemConsumo.getQuantidadeProduzir();
         CodigoDeposito codigoDeposito=mensagemConsumo.codigoDeposito;
@@ -25,8 +25,9 @@ public class MensagemConsumoNotificacao implements ValidadorMensagem {
 
         TipoErroNotificacao DADOS_INVALIDOS=TipoErroNotificacao.DADOS_INVALIDOS;
         TipoErroNotificacao ELEMENTOS_INEXISTENTES=TipoErroNotificacao.ELEMENTOS_INEXISTENTES;
-        NotificacaoErro dados=NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,mensagemRepository,mensagemConsumo);
-        NotificacaoErro elementos=NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,mensagemRepository,mensagemConsumo);
+        IdentificadorLinhaProducao identificadorLinhaProducao=linhaProducao.identifier;
+        NotificacaoErro dados=NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemConsumo);
+        NotificacaoErro elementos=NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemConsumo);
 
         //DATA ou QUANTIDADE A PRODUZIR
         if (!validacao.validarData(dataEmissao)||!validacao.validarQuantidade(quantidadeAProduzir))

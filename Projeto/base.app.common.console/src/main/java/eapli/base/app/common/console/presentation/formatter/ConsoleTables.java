@@ -141,6 +141,7 @@ public class ConsoleTables {
             ArrayList<String> linha = new ArrayList<>();
             if (numerar)
                 linha.add(Integer.toString(nLinha++));
+            linha.add(notificacao.idLinhaProd);
             linha.add(notificacao.tipoErroNotificacao);
             linha.add(notificacao.estadoErro);
             linha.add(dateFormat.format(notificacao.dataEmissaoMensagem));
