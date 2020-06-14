@@ -39,6 +39,11 @@ public class MensagemEstorno extends Mensagem implements AggregateRoot<MensagemI
     }
 
     @XmlTransient
+    public String getIdMateriaPrima() {
+        return idMateriaPrima;
+    }
+
+    @XmlTransient
     public double getQuantidadeProduzir() {
         return quantidadeProduzir;
     }
