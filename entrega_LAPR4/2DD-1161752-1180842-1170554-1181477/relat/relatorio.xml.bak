@@ -2,7 +2,7 @@
 <relatório xmlns="http://www.dei.isep.ipp.pt/lprog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.dei.isep.ipp.pt/lprog Relatorio.xsd" id="id1">
-
+    
     <páginaRosto>
         <tema>Gestão de fábrica</tema>
         <disciplina>
@@ -39,48 +39,40 @@
     </páginaRosto>
     <corpo id="id5">
         <introdução tituloSecção="Introdução" id="SEC002">
-            <parágrafo> O objetivo deste relatório é demonstrar e descrever as UC's desenvolvidas do
-                projeto de LAPR4 que envolvem a disciplina de LPROG, nomeadamente o processo de
-                construção de XML, XSD, XSLT, XPATH no sistema. </parágrafo>
+            <parágrafo>
+                O objetivo deste relatório é demonstrar e descrever as UC's desenvolvidas do projeto de LAPR4 que envolvem a disciplina de LPROG, nomeadamente o processo de construção de XML, XSD, XSLT, XPATH no sistema.
+            </parágrafo>
         </introdução>
         <outrasSecções>
             <análise tituloSecção="Análise" id="SEC003">
-                <parágrafo> Exportar, para um ficheiro <negrito>XML</negrito>, toda a infomação
-                    subjacente ao chão de fábrica </parágrafo>
-                <figura descrição="SSD de exportação do chão de fábrica para XML"
-                    src="https://flic.kr/p/2jbNYvS"/>
-                <parágrafo> Especificar um documento <negrito>XSD</negrito> que possa ser,
-                    posteriormente, usado para
-                    <sublinhado>validar o conteúdo XML gerado pelo sistema</sublinhado>. Foi
-                    contemplada a possibilidade de para certas informação (e.g. consumos, estornos,
-                    produção) ser útil obter os agregados totais. </parágrafo>
+                <parágrafo>
+                    Exportar, para um ficheiro <negrito>XML</negrito>, toda a infomação subjacente ao chão de fábrica
+                </parágrafo>
+                <figura descrição="SSD de exportação do chão de fábrica para XML" src="https://flic.kr/p/2jbNYvS"></figura>
+                <parágrafo>
+                    Especificar um documento <negrito>XSD</negrito> que possa ser, posteriormente, usado para <sublinhado>validar o conteúdo XML gerado pelo sistema</sublinhado>. 
+                    Foi contemplada a possibilidade de para certas informação (e.g. consumos, estornos, produção) ser útil obter os agregados totais.
+                </parágrafo>
                 <listaItems>
                     <item>chaoDeFabrica.xml Ficheiro XML que contém a informação exportada e deve estar de acordo com o XSD que o valida.</item>
                     <item>chaoDeFabrica.xsd Ficheiro XSD que define keys, keyrefs e lista os elementos que representam entidades do domínio que estão definidas no schema2.xsd.</item>
-                    <item>schema2.xsd Define as entidades utilizadas pelo chaoDeFabrica.xsd.</item>
+                    <item>schema2.xsd Define as entidades utilizadas pelo chaoDeFabrica.xsd.</item>    
                 </listaItems>
-                <parágrafo> Aplicar uma visualização/transformação
-                    <itálico>(das várias disponiveis)</itálico> a um ficheiro <negrito>XML</negrito>
-                    anteriormente gerado/exportad <itálico>através do sistema</itálico>. 3
-                    visualizações/transformações são requeridas: para <negrito>HTML</negrito>, para
-                    <negrito>JSON</negrito> e <negrito>texto</negrito> sempre através de XSLT. Para
-                    o resultado/output foi criado outro ficheiro, mantendo o ficheiro original
-                    inalterado. </parágrafo>
-                <parágrafo> Elaboração de um relatório que descreva o uso de
-                    <sublinhado>XML, XSD, XSLT, XPATH</sublinhado> no sistema. O relatório final é
-                    um documento XML <itálico>(instância do XSD disponibilizado no moodle)</itálico>
-                    para o qual foi criado um XSLT que permite a sua transformação para XHTML.
+                <parágrafo>
+                    Aplicar uma visualização/transformação <itálico>(das várias disponiveis)</itálico> a um ficheiro <negrito>XML</negrito> anteriormente gerado/exportad <itálico>através do sistema</itálico>.
+                    3 visualizações/transformações são requeridas: para <negrito>HTML</negrito>, para <negrito>JSON</negrito> e <negrito>texto</negrito> sempre através de XSLT. 
+                    Para o resultado/output foi criado outro ficheiro, mantendo o ficheiro original inalterado.
+                </parágrafo>
+                <parágrafo>
+                    Elaboração de um relatório que descreva o uso de <sublinhado>XML, XSD, XSLT, XPATH</sublinhado> no sistema.
+                    O relatório final é um documento XML <itálico>(instância do XSD disponibilizado no moodle)</itálico>
+                    para o qual foi criado um XSLT que permite a sua transformação para XHTML. 
                 </parágrafo>
             </análise>
             <linguagem tituloSecção="Linguagem" id="SEC004">
-                <parágrafo> O Schema foi construído visando ser capaz de validar que o XML exportado
-                    pela aplicação tem uma estrutura bem definida e correta, bem como valores
-                    válidos. Seguidamente foi construído um ficheiro XML, que foi analisado e
-                    trabalhado juntamente com o XSD para garantir que o XML está corratemente
-                    formatado e que o XSD está a validar corretamente. Ou seja, nesta fase, as
-                    verificações do XSD foram testadas com o XML e o XML foi testado com o XSD.
-                    Finalmente, foi guardada uma versão final correta do XML para efeitos de
-                    demonstração. </parágrafo>
+                <parágrafo>
+                    O Schema foi construído visando ser capaz de validar que o XML exportado pela aplicação tem uma estrutura bem definida e correta, bem como valores válidos. Seguidamente foi construído um ficheiro XML, que foi analisado e trabalhado juntamente com o XSD para garantir que o XML está corratemente formatado e que o XSD está a validar corretamente. Ou seja, nesta fase, as verificações do XSD foram testadas com o XML e o XML foi testado com o XSD. Finalmente, foi guardada uma versão final correta do XML para efeitos de demonstração.
+                </parágrafo>
             </linguagem>
             <transformações tituloSecção="Transformações" id="SEC005">
                 <parágrafo>As seguintes exportação são</parágrafo>
@@ -108,8 +100,10 @@
                     <item>Informação completa (com um XSLT formatado de maneira diferente)</item>
                     <item>Número de itens por cada lista abaixo da root</item>
                 </listaItems>
-
-                <parágrafo> Exemplo JSON (Número de itens e lista de IDs, caso tal seja possível): </parágrafo>
+                
+                <parágrafo>
+                    Exemplo JSON (Número de itens e lista de IDs, caso tal seja possível):
+                </parágrafo>
                 <codigo>
                     <bloco>
                         <![CDATA[
@@ -160,14 +154,12 @@ ____________________________-->
             </transformações>
         </outrasSecções>
         <conclusão tituloSecção="Conclusão" id="SEC006">
-            <parágrafo> No que toca a realização de objetivos, conclui-se que todos os objetivos
-                foram alcançados com sucesso, como estipulado inicialmente. Em apreciação ao
-                trabalho realizado e à sua dinâmica conclui-se que houve um dinamismo apurado pelos
-                membros do grupo, que trabalharam de forma a ajudar-se mutuamente e coerentemente de
-                modo a concluir assim o trabalho estipulado para este relatório. Mais se acrescenta
-                a atividade constante do git e “commits” que verificam o dinamismo referido. Desta
-                forma, a apreciação deste trabalho é bastante satisfatória perante o que foi
-                alcançado sobre as UC's propostas. </parágrafo>
+            <parágrafo>
+                No que toca a realização de objetivos, conclui-se que todos os objetivos foram alcançados com sucesso, como estipulado inicialmente.
+                Em apreciação ao trabalho realizado e à sua dinâmica conclui-se que houve um dinamismo apurado pelos membros do grupo, que trabalharam de forma a ajudar-se mutuamente e coerentemente de modo a concluir assim o trabalho estipulado para este relatório. 
+                Mais se acrescenta a atividade constante do git e “commits” que verificam o dinamismo referido.
+                Desta forma, a apreciação deste trabalho é bastante satisfatória perante o que foi alcançado sobre as UC's propostas.
+            </parágrafo>
         </conclusão>
         <referências tituloSecção="tituloSecção11" id="SEC007">
             <refWeb idRef="RefW_xslt">

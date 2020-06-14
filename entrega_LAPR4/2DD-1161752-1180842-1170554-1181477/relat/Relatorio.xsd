@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.dei.isep.ipp.pt/lprog" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.dei.isep.ipp.pt/lprog" elementFormDefault="qualified">
+
+  <xs:include schemaLocation="RelatorioSimpleTypes.xsd"/>
+  <xs:include schemaLocation="RelatorioComplexTypes.xsd"/>
+
+  <xs:element name="relatório" type="TRelatorio"/>
+  <xs:complexType name="TRelatorio">
+    <xs:annotation>
+      <xs:documentation> Este é o tipo do elemento raiz, define três blocos do relatório -pagina de
+        rosto: informação sobre os grupos e docentes -corpo: corpo do relatório que contém as várias
+        secções do relatório -anexos: informação extra que não se enquadra no corpo do relatório
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="páginaRosto" type="TpaginaRosto"/>
+      <xs:element name="corpo" type="TCorpo"/>
+      <xs:element name="anexos" type="TSeccao" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:token" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="TpaginaRosto">
+    <xs:annotation>
+      <xs:documentation> Este tipo é usado para a página de rosto do relatório, deve conter a
+        informação sobre os grupos, docentes (T, TP e PL), etc. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tema" type="xs:string"/>
+      <xs:element name="disciplina" type="TDisciplina"/>
+      <xs:element name="autor" type="TAluno" maxOccurs="5"/>
+      <xs:element name="turma" type="TTurma"/>
+      <xs:element name="professor" type="TProfessor" minOccurs="3" maxOccurs="3"/>
+      <xs:element name="logotipoDEI" type="xs:anyURI"/>
+      <xs:element name="data" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TCorpo">
+    <xs:annotation>
+      <xs:documentation> Este tipo é usado para o corpo do relatório, contém as secções com ordem
+        obrigatória e com ordem facultativas que ficam dentro do elemento secções. Introdução –
+        Identificação e descrição do trabalho e objectivos propostos. Análise (outrasSecções) –
+        Especificação da análise do domínio do problema proposto. A Linguagem (outrasSecções) -
+        Definição da sintaxe da linguagem proposta através de um XMLSchema e criação de um documento
+        XML instância válida dessa linguagem. Transformações (outrasSecções) – Descrição de
+        StyleSheets (XSLT) adequadas à transformação da informação do documento XML em novos
+        formatos. Conclusão Anexos Nota: Estas secções devem aparecer no índice do relatório a ser
+        gerado (o índice deve ser gerado automaticamente) </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="introdução" type="TSeccao"/>
+      <xs:element name="outrasSecções" type="TOutrasSeccoes"/>
+      <xs:element name="conclusão" type="TSeccao"/>
+      <xs:element name="referências" type="TReferencias"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="TOutrasSeccoes">
+    <xs:annotation>
+      <xs:documentation> Este tipo é usado para o corpo do relatório, contém as secções obrigatórias
+        e as facultativas que ficam dentro do elemento secções. </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="análise" type="TSeccao"/>
+      <xs:element name="linguagem" type="TSeccao"/>
+      <xs:element name="transformações" type="TSeccao"/>
+    </xs:all>
+  </xs:complexType>
+</xs:schema>
