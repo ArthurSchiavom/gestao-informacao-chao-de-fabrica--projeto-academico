@@ -203,7 +203,8 @@ public class ExportadorXMLJABXTest {
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);
 
 		List<NotificacaoErro> listaNotificacoesErro = new ArrayList<>();
-		NotificacaoErro notifErro = new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, msgRepo);
+		NotificacaoErro notifErro = new NotificacaoErro(new IdentificadorLinhaProducao("LINHAPROD_1"),
+				TipoErroNotificacao.DADOS_INVALIDOS, mid, lProdRepo, msgRepo);
 		listaNotificacoesErro.add(notifErro);
 
 		List<Mensagem> listaMensagens = new ArrayList<>();

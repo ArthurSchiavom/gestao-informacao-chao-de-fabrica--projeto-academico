@@ -1,21 +1,15 @@
 package eapli.base.gestaoproducao.gestaoerrosnotificacao.application.consultar;
 
-import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.EstadoErroNotificacao;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.EstadoNotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.EstadoNotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.NotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.TipoNotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
-import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
-import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
-import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
-import eapli.base.gestaoproducao.gestaomensagens.domain.TimestampEmissao;
-import eapli.base.gestaoproducao.gestaomensagens.domain.TipoDeMensagem;
-import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.infrastructure.application.DTOUtils;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
@@ -29,7 +23,7 @@ public class ConsultarErrosProcessamentoController {
 
     private final List<String> idsLinhasProducaoSelecionadas;
     private final List<TipoErroNotificacao> tiposNotificaoErroSelecionados;
-    private final List<EstadoErroNotificacao> estadoErroNotificacaosSelecionados;
+    private final List<EstadoNotificacaoErro> estadoErroNotificacaosSelecionados;
 
     private final RepositoryFactory repositoryFactory;
 
@@ -45,7 +39,7 @@ public class ConsultarErrosProcessamentoController {
 
         linhasProducaoDTO = Collections.unmodifiableList(DTOUtils.toDTOList(linhasDeProducao));
         tiposNotificaoErroDTO = Collections.unmodifiableList(DTOUtils.toDTOList(TipoErroNotificacao.values()));
-        estadosNotificacaoErroDTO = Collections.unmodifiableList(DTOUtils.toDTOList(EstadoErroNotificacao.values()));
+        estadosNotificacaoErroDTO = Collections.unmodifiableList(DTOUtils.toDTOList(EstadoNotificacaoErro.values()));
     }
 
     /**
@@ -86,7 +80,7 @@ public class ConsultarErrosProcessamentoController {
 
     private void selecionarEstadosNotificacao(Collection<EstadoNotificacaoErroDTO> selecao) {
         for (EstadoNotificacaoErroDTO e : selecao) {
-            estadoErroNotificacaosSelecionados.add(EstadoErroNotificacao.actualValueOf(e.estado));
+            estadoErroNotificacaosSelecionados.add(EstadoNotificacaoErro.actualValueOf(e.estado));
         }
     }
 
@@ -118,10 +112,10 @@ public class ConsultarErrosProcessamentoController {
     }
 
     public void selecionarEstadoArquivado() {
-        estadoErroNotificacaosSelecionados.add(EstadoErroNotificacao.ARQUIVADO);
+        estadoErroNotificacaosSelecionados.add(EstadoNotificacaoErro.ARQUIVADO);
     }
 
     public void selecionarEstadoAtivo() {
-        estadoErroNotificacaosSelecionados.add(EstadoErroNotificacao.ATIVO);
+        estadoErroNotificacaosSelecionados.add(EstadoNotificacaoErro.ATIVO);
     }
 }

@@ -22,32 +22,49 @@ public class NotificacaoErroTest {
 	MensagemID mid = new MensagemID(TipoDeMensagem.CONSUMO,new TimestampEmissao(new Date()),new CodigoInternoMaquina("123"));
 
 	@Test(expected = IllegalArgumentException.class)
+	public void garantirQueNotificacaoDeErroTemLinhaProducao() {
+		new NotificacaoErro(null, TipoErroNotificacao.DADOS_INVALIDOS, mid, lProdRepo, msgRepo);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void garantirQueNotificacaoDeErroTemTipoErro() {
-		new NotificacaoErro(null, mid, msgRepo);
+		new NotificacaoErro(idDummy, null, mid, lProdRepo, msgRepo);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void garantirQueNotificacaoDeErroTemIdMensagem() {
-		new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, null, msgRepo);
+		new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, null, lProdRepo, msgRepo);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void garantirQueNotificacaoDeErroTemRepoLProd() {
+		new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid, null, msgRepo);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void garantirQueNotificacaoDeErroTemRepoMensagens() {
-		new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, null);
+		new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid, lProdRepo, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void garantirQueIDLinhaProdExiste() {
+		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(false);
+		new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid, lProdRepo, msgRepo);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void garantirQueIDMensagemExiste() {
 		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(false);
-		new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, msgRepo);
+		new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid, lProdRepo, msgRepo);
 	}
 
 	@Test
 	public void garantirQueNaoSePodeArquivarNotificacoesArquivadas() {
 		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);
-		NotificacaoErro notifErro = new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, msgRepo);
+		NotificacaoErro notifErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid,
+				lProdRepo, msgRepo);
 		assertTrue(notifErro.arquivar());
 		assertFalse(notifErro.arquivar());
 	}
@@ -56,7 +73,8 @@ public class NotificacaoErroTest {
 	public void garantirQueOEstadoFicaArquivado() {
 		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);
-		NotificacaoErro notifErro = new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, msgRepo);
+		NotificacaoErro notifErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid,
+				lProdRepo, msgRepo);
 		notifErro.arquivar();
 		assertTrue(notifErro.isArquivado());
 	}
@@ -65,9 +83,11 @@ public class NotificacaoErroTest {
 	public void garantirEqualsNaoUsaOEstado() {
 		Mockito.when(lProdRepo.containsOfIdentity(idDummy)).thenReturn(true);
 		Mockito.when(msgRepo.containsOfIdentity(mid)).thenReturn(true);
-		NotificacaoErro notifErro = new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, msgRepo);
+		NotificacaoErro notifErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid,
+				lProdRepo, msgRepo);
 		notifErro.arquivar();
-		NotificacaoErro notificacaoErro = new NotificacaoErro(TipoErroNotificacao.DADOS_INVALIDOS, mid, msgRepo);
+		NotificacaoErro notificacaoErro = new NotificacaoErro(idDummy, TipoErroNotificacao.DADOS_INVALIDOS, mid,
+				lProdRepo, msgRepo);
 		assertTrue(notifErro.equals(notificacaoErro));
 	}
 }

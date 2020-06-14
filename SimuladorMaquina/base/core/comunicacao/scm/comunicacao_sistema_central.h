@@ -35,6 +35,11 @@ int handshake_sistema_central();
  */
 int handshake_sistema_central_ate_sucesso();
 
+/**
+ *
+ * @return (1) A última resposta do servidor se uma resposta foi recebida ou
+ * (2) NULL caso a última tentativa de conexão ao servidor tenha falhado
+ */
 Payload *ler_ultimo_resultado_handshake_scm();
 
 #endif //SIMULADORMAQUINA_COMUNICACAO_SISTEMA_CENTRAL_H

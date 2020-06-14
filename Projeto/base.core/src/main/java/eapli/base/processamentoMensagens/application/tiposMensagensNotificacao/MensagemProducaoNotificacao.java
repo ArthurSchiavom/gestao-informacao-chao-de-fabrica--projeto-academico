@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class MensagemProducaoNotificacao implements ValidadorMensagem {
     @Override
-    public NotificacaoErro validarMensagem(MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
+    public NotificacaoErro validarMensagem( LinhaProducao linhaProducao, LinhaProducaoRepository linhaProducaoRepository, MensagemRepository mensagemRepository, Mensagem mensagem, ValidacaoParametrosMensagensServico validacao) {
         MensagemProducao mensagemProducao=(MensagemProducao)mensagem;
         Date dataEmissao=mensagemProducao.mensagemID.tempoEmissao.timestamp;
         double quantidadeAProduzir=mensagemProducao.getQuantidade();
@@ -22,13 +22,14 @@ public class MensagemProducaoNotificacao implements ValidadorMensagem {
 
         TipoErroNotificacao DADOS_INVALIDOS=TipoErroNotificacao.DADOS_INVALIDOS;
         TipoErroNotificacao ELEMENTOS_INEXISTENTES=TipoErroNotificacao.ELEMENTOS_INEXISTENTES;
+        IdentificadorLinhaProducao identificadorLinhaProducao=linhaProducao.identifier;
 
         //DATA ou QUANTIDADE A PRODUZIR
         if (!validacao.validarData(dataEmissao)|| !validacao.validarQuantidade(quantidadeAProduzir))
-            return NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,mensagemRepository,mensagemProducao);
+            return NotificacaoErro.gerarNotificacaoDeErro(DADOS_INVALIDOS,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemProducao);
         //CODIGO UNICO
         if (produto==null)
-            return NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,mensagemRepository,mensagemProducao);
+            return NotificacaoErro.gerarNotificacaoDeErro(ELEMENTOS_INEXISTENTES,linhaProducao,linhaProducaoRepository,mensagemRepository,mensagemProducao);
         return null;
     }
 }

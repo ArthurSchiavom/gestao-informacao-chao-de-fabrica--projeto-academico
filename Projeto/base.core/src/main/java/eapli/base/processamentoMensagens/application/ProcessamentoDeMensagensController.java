@@ -119,7 +119,7 @@ public class ProcessamentoDeMensagensController {
             listaDeMensagensDeCadaLinhaDeProducao.put(linhaProducaoAlvo.get(i).identifier, new ArrayList<>());
         }
         List<Mensagem> listaMensagensDentroDosLimites = new ArrayList<>();
-        List<Mensagem> listaMensagensNaoProcessadasBaseDados = mensagemRepository.obterListaMensagensNaoProcessadas();
+        List<Mensagem> listaMensagensNaoProcessadasBaseDados = mensagemRepository.listaMensagensNaoProcessadas();
         if (listaMensagensNaoProcessadasBaseDados.isEmpty())
             throw new IllegalArgumentException("Sem mensagens registadas na base de dados");
         Date dataInicio = agendamentoDeProcessamento.inicioDeProcessamento.dataTempoInicio;

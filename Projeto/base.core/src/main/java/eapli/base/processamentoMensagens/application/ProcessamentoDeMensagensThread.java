@@ -13,7 +13,6 @@ import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.ValidadorMensagem;
 
 import java.util.*;
 import java.util.List;

@@ -2,6 +2,7 @@ package eapli.base.persistence.impl.jpa;
 
 import com.google.common.collect.Lists;
 import eapli.base.Application;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomensagens.domain.EstadoProcessamento;
 import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
@@ -37,15 +38,27 @@ public class JpaMensagemRepository extends JpaAutoTxRepository<Mensagem, Mensage
     @Override
     public List<Mensagem> findAllWithDateAfter(Date dataAFiltrar) {
         TypedQuery<Mensagem> tq = this.createQuery(
-                "SELECT e FROM Mensagem e WHERE e.mensagemID.tempoEmissao.timestamp >= ?0", Mensagem.class);
-        tq.setParameter(0, dataAFiltrar);
+                "SELECT e FROM Mensagem e WHERE e.mensagemID.tempoEmissao.timestamp >= ?1", Mensagem.class);
+        tq.setParameter(1, dataAFiltrar);
         return tq.getResultList();
     }
 
     @Override
-    public List<Mensagem> obterListaMensagensNaoProcessadas() {
-        TypedQuery<Mensagem> tq = this.createQuery("SELECT m FROM Mensagem m WHERE m.estadoProcessamento = ?0", Mensagem.class);
-        tq.setParameter(0,EstadoProcessamento.NAO_PROCESSADO );
+    public List<Mensagem> listaMensagensNaoProcessadas() {
+        TypedQuery<Mensagem> tq = this.createQuery("SELECT m FROM Mensagem m WHERE m.estadoProcessamento = ?1", Mensagem.class);
+        tq.setParameter(1, EstadoProcessamento.NAO_PROCESSADO);
         return tq.getResultList();
     }
+
+    @Override
+    public void enriquecerMensagensComLinhaProducao() {
+        TypedQuery<Mensagem> tq = this.createQuery(
+                " UPDATE Mensagem " +
+                        " SET identificadorLinhaProducao = (SELECT m.linhaProducao FROM Maquina m " +
+                        " WHERE identificadorLinhaProducao IS NULL " +
+                        " AND mensagemID.codigoInternoMaquina = m.codigoInternoMaquina) "
+                , Mensagem.class);
+        tq.executeUpdate();
+    }
+
 }

@@ -1,12 +1,13 @@
 package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
-import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.EstadoErroNotificacao;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.EstadoNotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoErroRepository;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
+import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
@@ -40,7 +41,7 @@ public class JpaNotificacoesErroRepository
 				"e.estadoErro = :estado", NotificacaoErro.class);
 		tq.setParameter("erro", tipo);
 		tq.setParameter("idLinha", idLinhaProd);
-		tq.setParameter("estado", EstadoErroNotificacao.ATIVO);
+		tq.setParameter("estado", EstadoNotificacaoErro.ATIVO);
 		return tq.getResultList();
 	}
 
@@ -48,12 +49,12 @@ public class JpaNotificacoesErroRepository
 	public List<NotificacaoErro> findAllNaoArquivados() {
 		TypedQuery<NotificacaoErro> tq = this.createQuery("SELECT e FROM NotificacaoErro e " +
 				"WHERE e.estadoErro = :estado", NotificacaoErro.class);
-		tq.setParameter("estado", EstadoErroNotificacao.ARQUIVADO);
+		tq.setParameter("estado", EstadoNotificacaoErro.ARQUIVADO);
 		return tq.getResultList();
 	}
 
 	@Override
-	public List<NotificacaoErro> findAll(List<String> idsLinhasProducaoSelecionadas, List<TipoErroNotificacao> tiposNotificaoErroSelecionados, List<EstadoErroNotificacao> estadoErroNotificacaosSelecionados) {
+	public List<NotificacaoErro> findAll(List<String> idsLinhasProducaoSelecionadas, List<TipoErroNotificacao> tiposNotificaoErroSelecionados, List<EstadoNotificacaoErro> estadoErroNotificacaosSelecionados) {
 		// Pode ser facilmente melhorado com a Spring Data API
 		int lengthLinhasDeProducao = idsLinhasProducaoSelecionadas.size();
 		int lengthTipos = tiposNotificaoErroSelecionados.size();
@@ -124,5 +125,18 @@ public class JpaNotificacoesErroRepository
 		}
 
 		return tq.getResultList();
+	}
+
+	@Override
+	public boolean mensagemTemErroPorTratar(MensagemID mensagemID) {
+		TypedQuery<NotificacaoErro> tq = this.createQuery(" SELECT n FROM NotificacaoErro n, Mensagem m " +
+				" WHERE m.mensagemID = :idmsg1 " +
+				" AND n.idMensagem = :idmsg2 " +
+				" AND n.estadoErro = :estado ", NotificacaoErro.class);
+		tq.setParameter("idmsg1", mensagemID);
+		tq.setParameter("idmsg2", mensagemID);
+		tq.setParameter("estado", EstadoNotificacaoErro.ATIVO);
+		List<NotificacaoErro> resultado = tq.getResultList();
+		return !resultado.isEmpty();
 	}
 }

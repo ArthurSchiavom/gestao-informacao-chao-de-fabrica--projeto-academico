@@ -39,6 +39,6 @@ public class ProcessadorDeMensagemDeFimDeAtividade implements ProcessadorMensage
         CodigoInternoMaquina codigoInternoMaquina=mensagemFimDeAtividade.mensagemID.codigoInternoMaquina;
         Maquina maquina=validacaoParametrosMensagensServico.getMaquinaPorIdentificador(codigoInternoMaquina);
         LinhaProducao linhaProducao=validacaoParametrosMensagensServico.getLinhaDeProducaoPorIdentificador(maquina.getLinhaProducao());
-        return validadorMensagem.validarMensagem(mensagemRepository,mensagemFimDeAtividade,validacaoParametrosMensagensServico);
+        return validadorMensagem.validarMensagem(linhaProducao, linhaProducaoRepository, mensagemRepository,mensagemFimDeAtividade,validacaoParametrosMensagensServico);
     }
 }

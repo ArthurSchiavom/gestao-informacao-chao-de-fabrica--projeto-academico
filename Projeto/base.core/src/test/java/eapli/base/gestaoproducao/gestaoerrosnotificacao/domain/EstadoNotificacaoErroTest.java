@@ -2,8 +2,6 @@ package eapli.base.gestaoproducao.gestaoerrosnotificacao.domain;
 
 
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.EstadoNotificacaoErroDTO;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,10 +13,10 @@ import static org.junit.Assert.assertEquals;
  * @version 1.0
  * @since <pre>mai 31, 2020</pre>
  */
-public class EstadoErroNotificacaoTest {
+public class EstadoNotificacaoErroTest {
 
-    EstadoErroNotificacao instance1 = EstadoErroNotificacao.ARQUIVADO;
-    EstadoErroNotificacao instance2 = EstadoErroNotificacao.ATIVO;
+    EstadoNotificacaoErro instance1 = EstadoNotificacaoErro.ARQUIVADO;
+    EstadoNotificacaoErro instance2 = EstadoNotificacaoErro.ATIVO;
 
     /**
      * Method: toDTO()
@@ -37,8 +35,8 @@ public class EstadoErroNotificacaoTest {
      */
     @Test
     public void testActualValueOf() throws Exception {
-        assertEquals(instance1, EstadoErroNotificacao.actualValueOf(instance1.nomeDisplay));
-        assertEquals(instance2, EstadoErroNotificacao.actualValueOf(instance2.nomeDisplay));
+        assertEquals(instance1, EstadoNotificacaoErro.actualValueOf(instance1.nomeDisplay));
+        assertEquals(instance2, EstadoNotificacaoErro.actualValueOf(instance2.nomeDisplay));
     }
 
 } 

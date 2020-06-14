@@ -1,9 +1,10 @@
 package eapli.base.gestaoproducao.gestaoerrosnotificacao.repository;
 
-import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.EstadoErroNotificacao;
+import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.EstadoNotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.TipoErroNotificacao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.IdentificadorLinhaProducao;
+import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.framework.domain.repositories.DomainRepository;
 
 import java.util.List;
@@ -28,5 +29,7 @@ public interface NotificacaoErroRepository extends DomainRepository<Long, Notifi
 	 */
 	List<NotificacaoErro> findAllNaoArquivados();
 
-    List<NotificacaoErro> findAll(List<String> idsLinhasProducaoSelecionadas, List<TipoErroNotificacao> tiposNotificaoErroSelecionados, List<EstadoErroNotificacao> estadoErroNotificacaosSelecionados);
+    List<NotificacaoErro> findAll(List<String> idsLinhasProducaoSelecionadas, List<TipoErroNotificacao> tiposNotificaoErroSelecionados, List<EstadoNotificacaoErro> estadoErroNotificacaosSelecionados);
+
+	boolean mensagemTemErroPorTratar(MensagemID mensagemID);
 }

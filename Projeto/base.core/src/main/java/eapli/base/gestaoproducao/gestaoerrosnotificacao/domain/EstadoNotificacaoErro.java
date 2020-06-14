@@ -8,12 +8,12 @@ import eapli.base.infrastructure.application.ConvertableToDTO;
  * POR_TRATAR significa que ainda não foi resolvido
  * ARQUIVADO significa que foi resolvido
  */
-public enum EstadoErroNotificacao implements ConvertableToDTO<EstadoNotificacaoErroDTO> {
+public enum EstadoNotificacaoErro implements ConvertableToDTO<EstadoNotificacaoErroDTO> {
 	ATIVO("ativo"), ARQUIVADO("arquivado");
 
 	public final String nomeDisplay;
 
-	EstadoErroNotificacao(String nomeDisplay) {
+	EstadoNotificacaoErro(String nomeDisplay) {
 		this.nomeDisplay = nomeDisplay;
 	}
 
@@ -22,8 +22,8 @@ public enum EstadoErroNotificacao implements ConvertableToDTO<EstadoNotificacaoE
 		return new EstadoNotificacaoErroDTO(nomeDisplay);
 	}
 
-	public static EstadoErroNotificacao actualValueOf(String nome) {
-		for (EstadoErroNotificacao estado : values()) {
+	public static EstadoNotificacaoErro actualValueOf(String nome) {
+		for (EstadoNotificacaoErro estado : values()) {
 			if (estado.nomeDisplay.equalsIgnoreCase(nome))
 				return estado;
 		}
