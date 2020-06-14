@@ -1,12 +1,35 @@
 #include "comunicar.h"
 #include "scm/certificado.h"
+#include "scm/comunicacao_sistema_central.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <netdb.h>
+#include <string.h>
+#include <pthread.h>
 
 #define TIMEOUT_SECONDS 3
+#define UDP_BUFFER_SIZE 512
 
-short reverse_bytes_short(short num) {
-    short swapped = ((num<<8)&0xff00) | ((num>>8)&0x00ff);
+unsigned short reverse_bytes_short(unsigned short num) {
+    char *a;
+    unsigned short resultado;
+    a = (char *) (&(num));
+    resultado = (*a) * 256;
+    a = (char *) (&(num) + 1);
+    resultado = resultado + (*a);
+    return resultado;
+}
+
+
+int reverse_bytes_int(int num) {
+    int swapped = ((num >> 24) & 0xff) | // move byte 3 to byte 0
+                  ((num << 8) & 0xff0000) | // move byte 1 to byte 2
+                  ((num >> 8) & 0xff00) | // move byte 2 to byte 1
+                  ((num << 24) & 0xff000000); // byte 0 to byte 3
     return swapped;
 }
+
 
 Built_Payload build_payload(Payload payload, short inverterBytesDeNumeros) {
     Built_Payload resultado;
@@ -73,6 +96,140 @@ int start_tcp_connection(char *target, char *porta) {
     return sock;
 }
 
+
+
+
+Packet_udp processamento_de_pedido_udp(unsigned char code) {
+    Packet_udp reply;
+    Payload *replySistemaCentral;
+    int status;
+    int tamanho = strlen(id_linha_producao) + 1;
+    unsigned short *helper_short = &id_maquina;
+    unsigned short *helper_int = &tamanho;
+    switch (code) {
+        case REQUEST_CODE_HELLO:
+            replySistemaCentral = ler_ultimo_resultado_handshake_scm();
+            reply.payload.data = malloc(strlen(id_linha_producao) + 1);
+            reply.payload.version = CURRENT_PROTOCOL_VERSION;
+            if (replySistemaCentral == NULL) {
+                reply.payload.code = REQUEST_CODE_NACK;
+            } else {
+                reply.payload.code = replySistemaCentral->code;
+            }
+            reply.payload.id = *helper_short;
+            strcpy(reply.payload.data, id_linha_producao);
+            reply.payload.data_length = *helper_int;
+            return reply;
+        case REQUEST_CODE_RESET:
+            status = handshake_sistema_central();
+            if (status == TRUE) {
+                replySistemaCentral = ler_ultimo_resultado_handshake_scm();
+                if (replySistemaCentral == NULL) {
+                    reply.payload.code = REQUEST_CODE_NACK;
+                } else {
+                    reply.payload.code = replySistemaCentral->code;
+                }
+            } else {
+                printf("\nNao foi possivel a conexao com o sistema central,resposta sera NACK!\n");
+                reply.payload.code = REQUEST_CODE_NACK;
+            }
+            reply.payload.data = malloc(strlen(id_linha_producao) + 1);
+            reply.payload.version = replySistemaCentral->version;
+            reply.payload.id = *helper_short;
+            strcpy(reply.payload.data, id_linha_producao);
+            reply.payload.data_length = *helper_int;
+            return reply;
+        default:
+            printf("Codigo nao permitido!");
+            break;
+    }
+}
+
+_Noreturn void start_udp_server() {
+    struct sockaddr_storage client;
+    int err, sock;
+    unsigned int adl;
+    struct addrinfo req, *list;
+    char cliIPtext[UDP_BUFFER_SIZE], cliPortText[UDP_BUFFER_SIZE];
+
+
+    bzero((char *) &req, sizeof(req));
+// request a IPv6 local address will allow both IPv4 and IPv6 clients to use it
+    req.ai_family = AF_INET6;
+    req.ai_socktype = SOCK_DGRAM;
+    req.ai_flags = AI_PASSIVE;
+
+// Retorna um ou mais addrinfo structs
+    err = getaddrinfo(NULL, PORTA_SMM, &req, &list);
+    if (err) {
+        printf("Failed to get local address, error: %s\n", gai_strerror(err));
+        exit(1);
+    }
+
+//Cria um unbound socket e retorna um file descriptor
+    sock = socket(list->ai_family, list->ai_socktype, list->ai_protocol);
+    if (sock == -1) {
+        perror("Failed to open socket");
+        freeaddrinfo(list);
+        exit(1);
+    }
+
+//Associa um endereco de socket a um socket identificado pelo descriptor que nao possui um endereco atribuido
+    if (bind(sock, (struct sockaddr *) list->ai_addr, list->ai_addrlen) == -1) {
+        perror("Bind failed");
+        close(sock);
+        freeaddrinfo(list); //Liberta a memoria que foi alocada dinamincamente
+        exit(1);
+    }
+
+    freeaddrinfo(list);
+
+//Escreve uma string para o output
+    adl = sizeof(client);
+    Packet_udp resposta;
+
+//Function shall receive a message from a connection-mode or connectionless-mode socket
+//Returna o tamanho da mensagem em bytes,0 caso nao haja mensagens e -1 caso de erro.
+//Receber pacote:
+    while (1) {
+        char *buffer = malloc(UDP_BUFFER_SIZE);
+        recvfrom(sock, buffer, UDP_BUFFER_SIZE, 0, (struct sockaddr *) &client, &adl);
+        resposta.payload.version = buffer[0];
+        resposta.payload.code = buffer[1];
+        unsigned short *helper_short = &(buffer[2]);
+        resposta.payload.id = reverse_bytes_short(*helper_short);
+        unsigned int *helper_int = &(buffer[4]);
+        resposta.payload.data_length = reverse_bytes_int(*helper_int);
+        resposta.payload.data = malloc(resposta.payload.data_length);
+        strcpy(resposta.payload.data, buffer + 8);
+
+        printf("Pedido recebido: %d, %d, %d, %d\n", resposta.payload.version, resposta.payload.code,
+               resposta.payload.id, resposta.payload.data_length);
+
+        Packet_udp reply = processamento_de_pedido_udp(resposta.payload.code);
+        //Esta funcao faz a traducao do endereco do socket para um nome de um no e um servico de localizacao
+        if (!getnameinfo((struct sockaddr *) &client, adl, cliIPtext, UDP_BUFFER_SIZE, cliPortText, UDP_BUFFER_SIZE,
+                         NI_NUMERICHOST | NI_NUMERICSERV)) {
+            printf("Request from node %s, port number %s\n", cliIPtext, cliPortText);
+            Built_Payload built_payload = build_payload(reply.payload, FALSE);
+            int value = sendto(sock, built_payload.content, built_payload.size, 0, (struct sockaddr *) &client,
+                               adl);
+            if (value < 0)
+                printf("Falha ao enviar o reply");
+        } else printf("Got request, but failed to get client address\n");
+        free(buffer);
+
+    }
+
+}
+int iniciar_servidor_udp(pthread_t *t) {
+    int success = pthread_create(t, NULL, start_udp_server, NULL);
+    if (success != 0) {
+        return FALSE;
+    }
+    return TRUE;
+}
+
 int send_packet_tcp_on_open_socket(Packet_tcp packet, short inverterBytesDeNumeros) {
     Built_Payload payload = build_payload(packet.payload, inverterBytesDeNumeros);
     int success = write(packet.socket, payload.content, payload.size);
@@ -92,10 +249,10 @@ int receive_packet_tcp_on_open_socket(int socket, Payload *resultado) {
     sucesso = read(socket, &(resultado->code), 1);
     if (sucesso == -1) {
         return FALSE;
-    }else{
-        ultimo_estado_pedido=resultado->code;
+    } else {
+        ultimo_estado_pedido = resultado->code;
     }
-    ultimo_estado_pedido=sucesso;
+    ultimo_estado_pedido = sucesso;
     sucesso = read(socket, &(resultado->id), 2);
     if (sucesso == -1)
         return FALSE;
@@ -252,24 +409,24 @@ int receive_packet_tcp_on_open_ssl_con(SSL *con, Payload *resultado) {
     resultado->code = 0;
 
     int sucesso = SSL_read(con, &(resultado->version), 1);
-    if (sucesso <= 0){
+    if (sucesso <= 0) {
         return FALSE;
     }
     sucesso = SSL_read(con, &(resultado->code), 1);
-    if (sucesso <= 0){
+    if (sucesso <= 0) {
         return FALSE;
     }
     sucesso = SSL_read(con, &(resultado->id), 1);
-    if (sucesso <= 0){
+    if (sucesso <= 0) {
         return FALSE;
     }
     resultado->id = resultado->id * 256;
     sucesso = SSL_read(con, &(resultado->id), 1);
-    if (sucesso <= 0){
+    if (sucesso <= 0) {
         return FALSE;
     }
     sucesso = SSL_read(con, &(resultado->data_length), 1);
-    if (sucesso <= 0){
+    if (sucesso <= 0) {
         return FALSE;
     }
     resultado->data_length = resultado->data_length * 256;
@@ -336,7 +493,8 @@ int handshake_ssl(char *target, char *porta, Payload *resultado, short inverterB
     return TRUE;
 }
 
-int enviar_packet_tcp_tls(char *target, char *porta, Payload payload, Payload *resultado, short inverterBytesDeNumeros) {
+int
+enviar_packet_tcp_tls(char *target, char *porta, Payload payload, Payload *resultado, short inverterBytesDeNumeros) {
     int sock;
     SSL *ssl_con = start_tls_tcp_connection(target, porta, &sock);
     if (ssl_con == NULL) {
