@@ -12,12 +12,15 @@
 #define UDP_BUFFER_SIZE 512
 
 unsigned short reverse_bytes_short(unsigned short num) {
-    char *a;
+    unsigned char *a;
     unsigned short resultado;
-    a = (char *) (&(num));
+
+    a = (unsigned char *) (&(num));
     resultado = (*a) * 256;
-    a = (char *) (&(num) + 1);
+
+    a = ((unsigned char *) (&(num))) + 1;
     resultado = resultado + (*a);
+
     return resultado;
 }
 

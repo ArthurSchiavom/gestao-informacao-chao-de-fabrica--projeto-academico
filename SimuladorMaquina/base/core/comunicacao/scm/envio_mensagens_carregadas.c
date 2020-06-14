@@ -11,8 +11,6 @@ void tentar_enviar_mensagem(Payload payload) {
         limpar_data_resultado = TRUE;
         sucesso = enviar_packet_tcp_tls(endereco_sistema_central, PORTA_SISTEMA_CENTRAL, payload, &resultado, TRUE);
         if (sucesso == FALSE || resultado.code != REQUEST_CODE_ACK) {
-            //TODO - REMOVE
-            printf("RECONNECT REASON - suc: %d, code: %hu\n", sucesso, resultado.code);
             limpar_data_resultado = FALSE;
             reconectar_sistema_central();
             resultado.code = REQUEST_CODE__INTERNO_SEM_SIGNIFICADO;
