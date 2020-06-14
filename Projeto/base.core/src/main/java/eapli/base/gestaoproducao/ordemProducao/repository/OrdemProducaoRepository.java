@@ -18,7 +18,7 @@ public interface OrdemProducaoRepository  extends DomainRepository<Identificador
      */
     Optional<OrdemProducao> findByIdentifier(IdentificadorOrdemProducao identifier);
 
-    public OrdemProducao findOrdemProducaoByEncomenda(String id);
+    public Iterable<OrdemProducao> findOrdemProducaoByEncomenda(String id);
 
     public Iterable<OrdemProducao> findOrdemProducaoByEstado(Estado estado);
 
