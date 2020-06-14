@@ -19,8 +19,14 @@ class ConversorXMLFactory {
 				return new EstrategiaConversaoXMLcomUsoXSLT(EXTENSAO_HTML, "HTML_A.xsl");
 			case HTML_B:
 				return new EstrategiaConversaoXMLcomUsoXSLT(EXTENSAO_HTML, "HTML_B.xslt");
+			case HTML_C:
+				return new EstrategiaConversaoXMLcomUsoXSLT(EXTENSAO_HTML, "HTML_C.xsl");
 			case TXT_A:
 				return new EstrategiaConversaoXMLcomUsoXSLT(EXTENSAO_TXT, "TXT_A.xsl");
+			case TXT_B:
+				return new EstrategiaConversaoXMLcomUsoXSLT(EXTENSAO_TXT, "TXT_B.xsl");
+			case TXT_C:
+				return new EstrategiaConversaoXMLcomUsoXSLT(EXTENSAO_TXT, "TXT_C.xsl");
 			case JSON_A:
 				return new EstrategiaConversaoXMLcomUsoXSLT(EXTENSAO_JSON, "JSON_A.xsl");
 			case JSON_B:

@@ -17,7 +17,7 @@ abstract class MensagemUDP{
 		if(version == null || codigo == null || idMaquina == null || data == null || address == null) {
 			throw new IllegalArgumentException("nenhum valor pode ser null");
 		}
-		byte[] dados = new byte[6 + data.length()];
+		byte[] dados = new byte[508];//508 é o tamanho máximo seguro para um pacote de UDP
 		dados[0] = version.byteValue();
 		dados[1] = codigo.byteVal();
 		dados[2] = idMaquina.leastSignificativeByte();

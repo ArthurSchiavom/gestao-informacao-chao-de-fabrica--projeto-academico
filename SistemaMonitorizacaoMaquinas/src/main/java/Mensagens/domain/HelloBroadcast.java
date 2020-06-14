@@ -10,4 +10,8 @@ public class HelloBroadcast extends MensagemUDP {
 		super(version, Codigos.HELLO, new IdMaquina(0), new MessageData(new RawData("")),
 				InetAddress.getByName("255.255.255.255"), port);
 	}
+
+	public static int tamanhoMaxHelloBroadcast() {
+		return 6;
+	}
 }

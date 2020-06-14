@@ -2,6 +2,7 @@ package Mensagens.application.broadcast;
 
 import Mensagens.application.Port;
 import Mensagens.application.ReceiveAcknowledgmentService;
+import Mensagens.domain.BroadcastAcknowledge;
 import Mensagens.domain.HelloBroadcast;
 import Mensagens.domain.Version;
 
@@ -14,7 +15,7 @@ import java.net.*;
  */
 public class BroadcastHelloService implements Runnable {
 	private static final int TIMEOUT = 100; //em milisegundos
-	private static final int SLEEP = 3; //em segundos
+	private static final int SLEEP = 30; //em segundos
 	private boolean canKeepGoing = true;
 
 	@Override
@@ -40,6 +41,7 @@ public class BroadcastHelloService implements Runnable {
 			}
 			assert helloMsg != null;
 			try {
+				helloMsg.getUdpPacket().setLength(HelloBroadcast.tamanhoMaxHelloBroadcast());
 				socket.send(helloMsg.getUdpPacket());
 			} catch (IOException e) {
 				System.out.println("Falha a enviar pacote de HELLO broadcast");
@@ -48,9 +50,11 @@ public class BroadcastHelloService implements Runnable {
 			//Cria X threads até dar timeout de espera de receber respostas
 			while (true) {
 				try {
+					helloMsg.getUdpPacket().setLength(BroadcastAcknowledge.tamanhoMaxBroadcastAcknowledge());
 					socket.setSoTimeout(TIMEOUT);
 					try {
 						socket.receive(helloMsg.getUdpPacket());
+						helloMsg.getUdpPacket().setLength(helloMsg.getUdpPacket().getLength());
 						System.out.println("Resposta recebida de " + helloMsg.getUdpPacket().getAddress());
 
 						ReceiveAcknowledgmentService acknowledgmentService = new ReceiveAcknowledgmentService(helloMsg.getUdpPacket());

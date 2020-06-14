@@ -21,4 +21,8 @@ public class BroadcastAcknowledge extends MensagemUDP {
 	public final InetAddress getIp() {
 		return getUdpPacket().getAddress();
 	}
+
+	public static int tamanhoMaxBroadcastAcknowledge() {
+		return 508;
+	}
 }

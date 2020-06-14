@@ -7,4 +7,8 @@ public class ResetRequest extends MensagemUDP {
 		super(version, Codigos.RESET, maquina.identity(), new MessageData(new RawData(String.valueOf(idLinhaProducao))),
 				maquina.address(), port);
 	}
+
+	public static int tamanhoMaxResetRequest() {
+		return 6;
+	}
 }
