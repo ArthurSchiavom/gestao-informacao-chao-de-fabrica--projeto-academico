@@ -63,6 +63,10 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
         this.mensagemID = null;
     }
 
+    public IdentificadorLinhaProducao getIdentificadorLinhaProducao() {
+        return identificadorLinhaProducao;
+    }
+
     public void setLinhaProducao(IdentificadorLinhaProducao linhaProducao) {
         this.identificadorLinhaProducao = linhaProducao;
     }
@@ -76,6 +80,11 @@ public abstract class Mensagem implements AggregateRoot<MensagemID> {
 
     public void setIdentificadorOrdemDeProducao(IdentificadorOrdemProducao identificadorOrdemDeProducao) {
         this.identificadorOrdemDeProducao = identificadorOrdemDeProducao;
+    }
+
+    @XmlTransient
+    public EstadoProcessamento getEstadoProcessamento() {
+        return estadoProcessamento;
     }
 
     public void setEstadoProcessamento(EstadoProcessamento estadoProcessamento) {

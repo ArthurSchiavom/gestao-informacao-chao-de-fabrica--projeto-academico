@@ -30,6 +30,7 @@ import eapli.base.clientusermanagement.application.eventhandlers.NewUserRegister
 import eapli.base.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.processamentoMensagens.application.processadormensagens.BootstrapProcessamento;
 import eapli.base.tcp.TcpSrvRecolherMensagensGeradasPelasMaquinas;
 import eapli.base.usermanagement.application.eventhandlers.SignupAcceptedWatchDog;
 import eapli.base.usermanagement.domain.BasePasswordPolicy;
@@ -66,6 +67,7 @@ public final class BaseBackoffice extends BaseApplication {
     protected void doMain(final String[] args) {
         // login and go to main menu
         new Thread(new TcpSrvRecolherMensagensGeradasPelasMaquinas()).start();
+        BootstrapProcessamento.boot();
 
         try {
             Thread.sleep(1); // para nao aparecer a meio do login

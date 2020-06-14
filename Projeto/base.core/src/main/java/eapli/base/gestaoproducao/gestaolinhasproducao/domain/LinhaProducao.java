@@ -52,6 +52,10 @@ public class LinhaProducao
 		return null;
 	}
 
+	public EstadoProcessamentoMensagens estado() {
+		return estado;
+	}
+
 	/**
 	 * Altera o estado da linha de produção para o estado pretendido
 	 * @param estadoPretendido o novo estado

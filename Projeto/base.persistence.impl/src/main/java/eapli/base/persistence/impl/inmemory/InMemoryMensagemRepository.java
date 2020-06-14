@@ -11,7 +11,7 @@ import java.util.List;
 
 public class InMemoryMensagemRepository extends InMemoryDomainRepository<MensagemID, Mensagem> implements MensagemRepository {
     @Override
-    public List<Mensagem> obterListaMensagensNaoProcessadas() {
+    public List<Mensagem> listaMensagensNaoProcessadas() {
         return null;
     }
 
@@ -22,6 +22,11 @@ public class InMemoryMensagemRepository extends InMemoryDomainRepository<Mensage
 
     @Override
     public List<Mensagem> findAllWithDateAfter(Date dataAFiltrar) {
+        throw new UnsupportedOperationException("não necessário");
+    }
+
+    @Override
+    public void enriquecerMensagensComLinhaProducao() {
         throw new UnsupportedOperationException("não necessário");
     }
 }

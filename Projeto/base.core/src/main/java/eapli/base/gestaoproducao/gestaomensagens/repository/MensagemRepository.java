@@ -10,8 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface MensagemRepository extends DomainRepository<MensagemID, Mensagem> {
-    List<Mensagem> obterListaMensagensNaoProcessadas();
+    List<Mensagem> listaMensagensNaoProcessadas();
     List<Mensagem> findAllList() ;
 
 	List<Mensagem> findAllWithDateAfter(Date dataAFiltrar);
+	void enriquecerMensagensComLinhaProducao();
 }

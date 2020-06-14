@@ -38,7 +38,7 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 
 	@XmlElement(name = "estado")
 	@Enumerated(EnumType.STRING)
-	private EstadoErroNotificacao estadoErro;
+	private EstadoNotificacaoErro estadoErro;
 
 	/**
 	 * Cria uma nova notificação de erro
@@ -69,7 +69,7 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 		this.idLinhaProd = idLinhaProd;
 		this.idMensagem = idMensagem;
 		this.tipoErroNotificacao = tipoErro;
-		this.estadoErro = EstadoErroNotificacao.ATIVO;
+		this.estadoErro = EstadoNotificacaoErro.ATIVO;
 	}
 
 	protected NotificacaoErro() {
@@ -96,15 +96,15 @@ public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<No
 	}
 
 	boolean arquivar() {
-		if(estadoErro == EstadoErroNotificacao.ARQUIVADO) {
+		if(estadoErro == EstadoNotificacaoErro.ARQUIVADO) {
 			return false; //Não se pode arquivar se já estiver arquivado
 		}
-		estadoErro = EstadoErroNotificacao.ARQUIVADO;
+		estadoErro = EstadoNotificacaoErro.ARQUIVADO;
 		return true;
 	}
 
 	boolean isArquivado() {
-		if(estadoErro == EstadoErroNotificacao.ARQUIVADO) {
+		if(estadoErro == EstadoNotificacaoErro.ARQUIVADO) {
 			return true;
 		}
 		return false;
