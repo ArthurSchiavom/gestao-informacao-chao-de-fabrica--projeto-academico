@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<relatório xmlns="http://www.dei.isep.ipp.pt/lprog"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.dei.isep.ipp.pt/lprog file:/C:/Users/diogo/OneDrive/Ambiente%20de%20Trabalho/Relatorio.xsd" id="id1">
+    <páginaRosto>
+        <tema>Gestão de fábrica</tema>
+        <disciplina>
+            <designação>Linguagens e Programação</designação>
+            <anoCurricular>2</anoCurricular>
+            <sigla>LPROG</sigla>
+        </disciplina>
+        <autor>
+            <nome>Diogo Almeida</nome>
+            <número>1161752</número>
+            <mail>1161752@isep.ipp.pt</mail>
+        </autor>
+        <autor>
+            <nome>Francisco Andrade</nome>
+            <número>1181477</número>
+            <mail>1181477@isep.ipp.pt</mail>
+        </autor>
+        <autor>
+            <nome>Pedro Carneiro</nome>
+            <número>1170554</número>
+            <mail>1170554@isep.ipp.pt</mail>
+        </autor>
+        <autor>
+            <nome>Arthur Silva</nome>
+            <número>1180842</número>
+            <mail>1180842@isep.ipp.pt</mail>
+        </autor>
+        <turma>2DD</turma>
+        <professor sigla="AMD" tipoAula="T">Ana Madureira</professor>
+        <professor sigla="RGB" tipoAula="PL">Rosa Barroso</professor>
+        <professor sigla="ASS" tipoAula="TP">António Silva</professor>
+        <logotipoDEI>https://flic.kr/p/2jbxhWi</logotipoDEI>
+        <data>2020-06-13</data>
+    </páginaRosto>
+    <corpo id="id5">
+        <introdução tituloSecção="Introdução" id="ANX003">
+            <parágrafo>
+                O objetivo deste relatório é demonstrar e descrever as UC's desenvolvidas do projeto de LAPR4 que envolvem a disciplina de LPROG, nomeadamente o processo de construção de XML, XSD, XSLT, XPATH no sistema.
+            </parágrafo>
+        </introdução>
+        <outrasSecções>
+            <análise tituloSecção="Análise" id="SEC015">
+                <parágrafo>
+                    Exportar, para um ficheiro <negrito>XML</negrito>, toda a infomação subjacente ao chão de fábrica
+                </parágrafo>
+                <figura descrição="SSD de exportação do chão de fábrica para XML" src="https://flic.kr/p/2jbNYvS"></figura>
+                <parágrafo>
+                    Especificar um documento <negrito>XSD</negrito> que possa ser, posteriormente, usado para <sublinhado>validar o conteúdo XML gerado pelo sistema</sublinhado>. 
+                    Foi contemplada a possibilidade de para certas informação (e.g. consumos, estornos, produção) ser útil obter os agregados totais.
+                </parágrafo>
+                <listaItems>
+                    <item>chaoDeFabrica.xml Ficheiro XML que contém a informação exportada e deve estar de acordo com o XSD que o valida.</item>
+                    <item>chaoDeFabrica.xsd Ficheiro XSD que define keys, keyrefs e lista os elementos que representam entidades do domínio que estão definidas no schema2.xsd.</item>
+                    <item>schema2.xsd Define as entidades utilizadas pelo chaoDeFabrica.xsd.</item>    
+                </listaItems>
+                <parágrafo>
+                    Aplicar uma visualização/transformação <itálico>(das várias disponiveis)</itálico> a um ficheiro <negrito>XML</negrito> anteriormente gerado/exportad <itálico>através do sistema</itálico>.
+                    3 visualizações/transformações são requeridas: para <negrito>HTML</negrito>, para <negrito>JSON</negrito> e <negrito>texto</negrito> sempre através de XSLT. 
+                    Para o resultado/output foi criado outro ficheiro, mantendo o ficheiro original inalterado.
+                </parágrafo>
+                <parágrafo>
+                    Elaboração de um relatório que descreva o uso de <sublinhado>XML, XSD, XSLT, XPATH</sublinhado> no sistema.
+                    O relatório final é um documento XML <itálico>(instância do XSD disponibilizado no moodle)</itálico>
+                    para o qual foi criado um XSLT que permite a sua transformação para XHTML. 
+                </parágrafo>
+            </análise>
+            <linguagem tituloSecção="Linguagem" id="SEC019">
+                <parágrafo>XSLT json</parágrafo>
+                <codigo>
+                    <bloco>
+                        <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    version="3.0">
+    
+<!--___________________________
+    &#x9; = Tab
+    &#x10; = New Line
+____________________________-->
+    
+    <xsl:output method="text"/>
+    
+    <xsl:template match="/">{
+    <xsl:for-each select="./*">"<xsl:value-of select="local-name()"/>": 
+    {
+    <xsl:apply-templates select="*"/></xsl:for-each>}
+}
+    </xsl:template>
+
+    <xsl:template match="*">
+        <xsl:text>&#x9;</xsl:text>"<xsl:value-of select="local-name()"/>": <xsl:call-template name="list"/>
+    </xsl:template>
+    
+    <xsl:template name="list">
+        {
+        <xsl:call-template name="count"></xsl:call-template>
+        <xsl:call-template name="ids"></xsl:call-template>
+        }
+    </xsl:template>
+    
+    <xsl:template name="count">    "numero" = "<xsl:value-of select="count(./*)"/>"</xsl:template>
+    
+    <xsl:template name="ids">
+        <xsl:if test="count(./*/@*) > 0">
+            "IDs": [<xsl:for-each select="./*">
+                   <text></text>"<xsl:value-of select="attribute::*"/>"<xsl:if test="count(following-sibling::*) > 0">, </xsl:if>
+                </xsl:for-each>]</xsl:if>
+    </xsl:template>
+    
+</xsl:stylesheet>]]> 
+                    </bloco>
+                </codigo>
+            </linguagem>
+            <transformações tituloSecção="Transformações" id="SEC023">
+                <figura/>
+                <subsecção id="SUBSEC027">subsecção2</subsecção>
+            </transformações>
+        </outrasSecções>
+        <conclusão tituloSecção="Conclusão" id="SEC031">
+            <parágrafo>
+                No que toca a realização de objetivos, conclui-se que todos os objetivos foram alcançados com sucesso, como estipulado inicialmente.
+                Em apreciação ao trabalho realizado e à sua dinâmica conclui-se que houve um dinamismo apurado pelos membros do grupo, que trabalharam de forma a ajudar-se mutuamente e coerentemente de modo a concluir assim o trabalho estipulado para este relatório. 
+                Mais se acrescenta a atividade constante do git e “commits” que verificam o dinamismo referido.
+                Desta forma, a apreciação deste trabalho é bastante satisfatória perante o que foi alcançado sobre as UC's propostas.
+            </parágrafo>
+        </conclusão>
+        <referências tituloSecção="tituloSecção11" id="ANX035">
+            <refWeb idRef="RefW_xslt">
+                <URL>https://www.w3schools.com/xml/xsl_intro.asp</URL>
+                <descrição>XSLT Introduction</descrição>
+                <consultadoEm>2020-06-02</consultadoEm>
+                <URL>http://xsltransform.net/</URL>
+                <descrição>XSL Transform</descrição>
+                <consultadoEm>2020-06-03</consultadoEm>
+                <URL>https://www.w3schools.com/xml/xpath_intro.asp</URL>
+                <descrição>XPath Tutorial</descrição>
+                <consultadoEm>2020-05-24</consultadoEm>
+                <URL>https://www.xmlvalidation.com/</URL>
+                <descrição>XML Validation</descrição>
+                <consultadoEm>2020-05-23</consultadoEm>
+            </refWeb>
+            <refBibliográfica idRef="RefB_livros">
+                <título>An Introduction to XML and Web Technologies</título>
+                <dataPublicação>2006</dataPublicação>
+                <autor>Anders Møller</autor>
+            </refBibliográfica>
+        </referências>
+    </corpo>
+</relatório>
