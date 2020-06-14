@@ -41,4 +41,9 @@ public class MensagemConsumo extends Mensagem implements AggregateRoot<MensagemI
     public double getQuantidadeProduzir() {
         return quantidadeProduzir;
     }
+
+    @XmlTransient
+    public String getIdMateriaPrima() {
+        return idMateriaPrima;
+    }
 }
