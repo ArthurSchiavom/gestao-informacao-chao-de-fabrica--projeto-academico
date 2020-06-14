@@ -20,9 +20,9 @@ public class ConsultarOrdensProducaoController {
     /**
      * Consulta as ordens pela encomenda ID
      */
-    public OrdemProducaoDTO getOrdemProducaoPorEncomenda(String idEncomenda) {
+    public List<OrdemProducaoDTO> getOrdemProducaoPorEncomenda(String idEncomenda) {
         try {
-            OrdemProducao ordem = repository.findOrdemProducaoByEncomenda(idEncomenda);
+            List<OrdemProducao> ordem = (List<OrdemProducao>) repository.findOrdemProducaoByEncomenda(idEncomenda);
 
             if (ordem != null) {
                 return OrdemProducao.gerarOrdensProducaoDTO(ordem);

@@ -70,7 +70,7 @@ public class EspecificarMaterialUI extends AbstractUI {
             Material teste = especificarMaterialController.obterMaterialPorCodigoInterno(codigoInterno);
             System.out.println("O codigo interno ja inserido ja existe!\n");
             return true;
-        }catch(NoSuchElementException e){
+        }catch(Exception e){
             return false;
         }
     }

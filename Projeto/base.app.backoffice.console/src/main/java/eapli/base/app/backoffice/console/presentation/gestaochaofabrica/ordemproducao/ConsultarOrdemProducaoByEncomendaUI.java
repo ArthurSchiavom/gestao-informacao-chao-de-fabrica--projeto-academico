@@ -6,6 +6,8 @@ import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
+import java.util.List;
+
 public class ConsultarOrdemProducaoByEncomendaUI extends AbstractUI {
     ConsultarOrdensProducaoController controller = new ConsultarOrdensProducaoController();
 
@@ -15,10 +17,13 @@ public class ConsultarOrdemProducaoByEncomendaUI extends AbstractUI {
         final String idEncomenda = Console.readNonEmptyLine("Insira o identificador da encomenda",
                 "O identificador da encomenda não pode ser vazio");
 
-        OrdemProducaoDTO ordem = controller.getOrdemProducaoPorEncomenda(idEncomenda);
+        List<OrdemProducaoDTO> ordem = controller.getOrdemProducaoPorEncomenda(idEncomenda);
 
         if(ordem != null){
-            System.out.println("Encontrado: " + ordem.information + "\n" + SEPARADOR);
+            for(OrdemProducaoDTO dto : ordem){
+                System.out.println("Encontrado: " + dto.information + "\n" + SEPARADOR);
+
+            }
         }else{
             System.out.println("Não foi encontrado nenhuma ordem de produção com esse identificador de encomenda.");
         }

@@ -36,13 +36,12 @@ public class JpaOrdemProducaoRepository extends JpaAutoTxRepository<OrdemProduca
 	}
 
 	@Override
-	public OrdemProducao findOrdemProducaoByEncomenda(String id) {
+	public Iterable<OrdemProducao> findOrdemProducaoByEncomenda(String id) {
 		TypedQuery<OrdemProducao> tq = this.createQuery("SELECT distinct e FROM OrdemProducao e JOIN " +
 				"e.identificadorEncomendaList ef where ef.identificador = ?0", OrdemProducao.class);
 		tq.setParameter(0, id);
 
-		return tq.getSingleResult();
-
+		return tq.getResultList();
 	}
 
 	@Override

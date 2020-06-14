@@ -40,9 +40,13 @@ public class EspecificarMaterialController {
      * @return
      */
     public boolean removerMaterialPorCodigoInterno(String codigoInterno){
-        Material antigo = obterMaterialPorCodigoInterno(codigoInterno);
-        materialRepository.remove(antigo);
-        return true;
+        try {
+            Material antigo = obterMaterialPorCodigoInterno(codigoInterno);
+            materialRepository.remove(antigo);
+            return true;
+        }catch(Exception e){
+            return true;
+        }
     }
 
     /**
