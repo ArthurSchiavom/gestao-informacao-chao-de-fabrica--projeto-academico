@@ -5,16 +5,16 @@
     <xsl:template match="/">
         <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xa;</xsl:text>
         <html>
+            <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+                <!-- de https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css -->
+                <script src="https://code.jquery.com/jquery-1.11.3.min.js"/>
+                <!-- de https://code.jquery.com/jquery-1.11.3.min.js -->
+                <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"/>
+                <!-- de https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js -->
+            </head>
             <body>
-                <head>
-                    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
-                    <!-- de https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css -->
-                    <script src="https://code.jquery.com/jquery-1.11.3.min.js"/>
-                    <!-- de https://code.jquery.com/jquery-1.11.3.min.js -->
-                    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"/>
-                    <!-- de https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js -->
-                </head>
                 <div data-role="main" class="ui-content">
                     <xsl:apply-templates select="*"/>
                 </div>

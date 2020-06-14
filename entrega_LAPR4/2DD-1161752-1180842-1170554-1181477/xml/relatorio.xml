@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="stylesheet"
+            href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+   </head>
+   <body>
+      <h1>Relatório</h1>
+      <h2>Indice</h2>
+      <ol>	
+         <li>Tema</li>	
+         <li>Disciplina</li>
+         <ol>
+            <li>Designação</li>
+            <li>AnoCurricular</li>
+            <li>Sigla</li>
+         </ol>	
+         <li>Autor</li>
+         <ol>
+            <li>Nome</li>
+            <li>Número</li>
+            <li>Mail</li>
+         </ol>	
+         <li>Autor</li>
+         <ol>
+            <li>Nome</li>
+            <li>Número</li>
+            <li>Mail</li>
+         </ol>	
+         <li>Autor</li>
+         <ol>
+            <li>Nome</li>
+            <li>Número</li>
+            <li>Mail</li>
+         </ol>	
+         <li>Autor</li>
+         <ol>
+            <li>Nome</li>
+            <li>Número</li>
+            <li>Mail</li>
+         </ol>	
+         <li>Turma</li>	
+         <li>Professor</li>	
+         <li>Professor</li>	
+         <li>Professor</li>	
+         <li>LogotipoDEI</li>	
+         <li>Data</li>	
+         <li>Introdução</li>
+         <ol>
+            <li>Parágrafo</li>
+         </ol>	
+         <li>OutrasSecções</li>
+         <ol>
+            <li>Análise</li>
+            <li>Linguagem</li>
+            <li>Transformações</li>
+         </ol>	
+         <li>Conclusão</li>
+         <ol>
+            <li>Parágrafo</li>
+         </ol>	
+         <li>Referências</li>
+         <ol>
+            <li>RefWeb</li>
+            <li>RefBibliográfica</li>
+         </ol>
+      </ol>
+      <h2>Corpo</h2>	
+      <h3>Tema</h3>
+      <li>Gestão de fábrica</li>	
+      <h3>Disciplina</h3>
+      <ul>	
+         <li>Designação - Linguagens e Programação</li>	
+         <li>AnoCurricular - 2</li>	
+         <li>Sigla - LPROG</li>
+      </ul>	
+      <h3>Autor</h3>
+      <ul>	
+         <li>Nome - Diogo Almeida</li>	
+         <li>Número - 1161752</li>	
+         <li>Mail - 1161752@isep.ipp.pt</li>
+      </ul>	
+      <h3>Autor</h3>
+      <ul>	
+         <li>Nome - Francisco Andrade</li>	
+         <li>Número - 1181477</li>	
+         <li>Mail - 1181477@isep.ipp.pt</li>
+      </ul>	
+      <h3>Autor</h3>
+      <ul>	
+         <li>Nome - Pedro Carneiro</li>	
+         <li>Número - 1170554</li>	
+         <li>Mail - 1170554@isep.ipp.pt</li>
+      </ul>	
+      <h3>Autor</h3>
+      <ul>	
+         <li>Nome - Arthur Silva</li>	
+         <li>Número - 1180842</li>	
+         <li>Mail - 1180842@isep.ipp.pt</li>
+      </ul>	
+      <h3>Turma</h3>
+      <li>2DD</li>	
+      <h3>Professor</h3>
+      <ul>
+         <li>Sigla - AMD</li>
+         <li>TipoAula - T</li>
+      </ul>
+      <li>Ana Madureira</li>	
+      <h3>Professor</h3>
+      <ul>
+         <li>Sigla - RGB</li>
+         <li>TipoAula - PL</li>
+      </ul>
+      <li>Rosa Barroso</li>	
+      <h3>Professor</h3>
+      <ul>
+         <li>Sigla - ASS</li>
+         <li>TipoAula - TP</li>
+      </ul>
+      <li>António Silva</li>	
+      <h3>LogotipoDEI</h3>
+      <li>https://flic.kr/p/2jbxhWi</li>	
+      <h3>Data</h3>
+      <li>2020-06-13</li>	
+      <h3>Introdução</h3>
+      <ul>
+         <li>TituloSecção - Introdução</li>
+         <li>Id - ANX003</li>
+      </ul>
+      <ul>	
+         <li>Parágrafo - 
+                O objetivo deste relatório é demonstrar e descrever as UC's desenvolvidas do projeto de LAPR4 que envolvem a disciplina de LPROG, nomeadamente o processo de construção de XML, XSD, XSLT, XPATH no sistema.
+            </li>
+      </ul>	
+      <h3>OutrasSecções</h3>
+      <ul>	
+         <li>Análise</li>
+         <ul>	
+            <li>Parágrafo</li>
+            <ul>	
+               <li>Negrito - XML</li>
+            </ul>	
+            <li>Figura - </li>	
+            <li>Parágrafo</li>
+            <ul>	
+               <li>Negrito - XSD</li>	
+               <li>Sublinhado - validar o conteúdo XML gerado pelo sistema</li>
+            </ul>	
+            <li>ListaItems</li>
+            <ul>	
+               <li>Item - chaoDeFabrica.xml Ficheiro XML que contém a informação exportada e deve estar de acordo com o XSD que o valida.</li>	
+               <li>Item - chaoDeFabrica.xsd Ficheiro XSD que define keys, keyrefs e lista os elementos que representam entidades do domínio que estão definidas no schema2.xsd.</li>	
+               <li>Item - schema2.xsd Define as entidades utilizadas pelo chaoDeFabrica.xsd.</li>
+            </ul>	
+            <li>Parágrafo</li>
+            <ul>	
+               <li>Itálico - (das várias disponiveis)</li>	
+               <li>Negrito - XML</li>	
+               <li>Itálico - através do sistema</li>	
+               <li>Negrito - HTML</li>	
+               <li>Negrito - JSON</li>	
+               <li>Negrito - texto</li>
+            </ul>	
+            <li>Parágrafo</li>
+            <ul>	
+               <li>Sublinhado - XML, XSD, XSLT, XPATH</li>	
+               <li>Itálico - (instância do XSD disponibilizado no moodle)</li>
+            </ul>
+         </ul>	
+         <li>Linguagem</li>
+         <ul>	
+            <li>Parágrafo - XSLT json</li>	
+            <li>Codigo</li>
+            <ul>	
+               <li>Bloco - 
+                        &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    version="3.0"&gt;
+    
+&lt;!--___________________________
+    &amp;#x9; = Tab
+    &amp;#x10; = New Line
+____________________________--&gt;
+    
+    &lt;xsl:output method="text"/&gt;
+    
+    &lt;xsl:template match="/"&gt;{
+    &lt;xsl:for-each select="./*"&gt;"&lt;xsl:value-of select="local-name()"/&gt;": 
+    {
+    &lt;xsl:apply-templates select="*"/&gt;&lt;/xsl:for-each&gt;}
+}
+    &lt;/xsl:template&gt;
+
+    &lt;xsl:template match="*"&gt;
+        &lt;xsl:text&gt;&amp;#x9;&lt;/xsl:text&gt;"&lt;xsl:value-of select="local-name()"/&gt;": &lt;xsl:call-template name="list"/&gt;
+    &lt;/xsl:template&gt;
+    
+    &lt;xsl:template name="list"&gt;
+        {
+        &lt;xsl:call-template name="count"&gt;&lt;/xsl:call-template&gt;
+        &lt;xsl:call-template name="ids"&gt;&lt;/xsl:call-template&gt;
+        }
+    &lt;/xsl:template&gt;
+    
+    &lt;xsl:template name="count"&gt;    "numero" = "&lt;xsl:value-of select="count(./*)"/&gt;"&lt;/xsl:template&gt;
+    
+    &lt;xsl:template name="ids"&gt;
+        &lt;xsl:if test="count(./*/@*) &gt; 0"&gt;
+            "IDs": [&lt;xsl:for-each select="./*"&gt;
+                   &lt;text&gt;&lt;/text&gt;"&lt;xsl:value-of select="attribute::*"/&gt;"&lt;xsl:if test="count(following-sibling::*) &gt; 0"&gt;, &lt;/xsl:if&gt;
+                &lt;/xsl:for-each&gt;]&lt;/xsl:if&gt;
+    &lt;/xsl:template&gt;
+    
+&lt;/xsl:stylesheet&gt; 
+                    </li>
+            </ul>
+         </ul>	
+         <li>Transformações</li>
+         <ul>	
+            <li>Figura - </li>	
+            <li>Subsecção - subsecção2</li>
+         </ul>
+      </ul>	
+      <h3>Conclusão</h3>
+      <ul>
+         <li>TituloSecção - Conclusão</li>
+         <li>Id - SEC031</li>
+      </ul>
+      <ul>	
+         <li>Parágrafo - 
+                No que toca a realização de objetivos, conclui-se que todos os objetivos foram alcançados com sucesso, como estipulado inicialmente.
+                Em apreciação ao trabalho realizado e à sua dinâmica conclui-se que houve um dinamismo apurado pelos membros do grupo, que trabalharam de forma a ajudar-se mutuamente e coerentemente de modo a concluir assim o trabalho estipulado para este relatório. 
+                Mais se acrescenta a atividade constante do git e “commits” que verificam o dinamismo referido.
+                Desta forma, a apreciação deste trabalho é bastante satisfatória perante o que foi alcançado sobre as UC's propostas.
+            </li>
+      </ul>	
+      <h3>Referências</h3>
+      <ul>
+         <li>TituloSecção - tituloSecção11</li>
+         <li>Id - ANX035</li>
+      </ul>
+      <ul>	
+         <li>RefWeb</li>
+         <ul>	
+            <li>URL - https://www.w3schools.com/xml/xsl_intro.asp</li>	
+            <li>Descrição - XSLT Introduction</li>	
+            <li>ConsultadoEm - 2020-06-02</li>	
+            <li>URL - http://xsltransform.net/</li>	
+            <li>Descrição - XSL Transform</li>	
+            <li>ConsultadoEm - 2020-06-03</li>	
+            <li>URL - https://www.w3schools.com/xml/xpath_intro.asp</li>	
+            <li>Descrição - XPath Tutorial</li>	
+            <li>ConsultadoEm - 2020-05-24</li>	
+            <li>URL - https://www.xmlvalidation.com/</li>	
+            <li>Descrição - XML Validation</li>	
+            <li>ConsultadoEm - 2020-05-23</li>
+         </ul>	
+         <li>RefBibliográfica</li>
+         <ul>	
+            <li>Título - An Introduction to XML and Web Technologies</li>	
+            <li>DataPublicação - 2006</li>	
+            <li>Autor - Anders Møller</li>
+         </ul>
+      </ul>
+   </body>
+</html>
