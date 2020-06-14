@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns="http://www.dei.isep.ipp.pt/lprog"
+           targetNamespace="http://www.dei.isep.ipp.pt/lprog"
+           elementFormDefault="qualified">
+
+    <xs:include schemaLocation="RelatorioSimpleTypes.xsd"/>
+
+    <xs:attributeGroup name="Gseccoes">
+        <xs:attribute name="tituloSecção" type="xs:string" use="required"/>
+        <xs:attribute name="id" type="TidSec" use="required"/>
+    </xs:attributeGroup>
+
+    <xs:complexType name="TAluno">
+        <xs:sequence>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="número" type="TNum"/>
+            <xs:element name="mail" type="TEMail"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TDisciplina">
+        <xs:sequence>
+            <xs:element name="designação" type="xs:string" fixed="Linguagens e Programação"/>
+            <xs:element name="anoCurricular" type="xs:int" fixed="2"/>
+            <xs:element name="sigla" type="xs:string" fixed="LPROG"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="TProfessor">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                    <xs:attribute name="sigla" type="TSigla"/>
+                    <xs:attribute name="tipoAula" type="TTiposAulas"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="TSeccao">
+        <xs:annotation>
+            <xs:documentation>
+                Uma secção pode ter:
+                  subseccao - contém informação sobre as várias subseccoes do relatório
+                  parágrafos - contém o texto do relatório (pode conter formatação e citações)
+                  listaItems - lista de items (bullets, númerados ou com definições)
+                  figura - links para imagens que devem ser includas no relatório
+                  código - bloco com código exemplo, para incluir código xml de ver usado um
+                      elemento CDATA
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="subsecção" type="Tsubseccao"/>
+            <xs:element name="parágrafo" type="Tparagrafo" />
+            <xs:element name="listaItems" type="TListaItems"/>
+            <xs:element name="figura" type="TFigura"/>
+            <xs:element name="codigo" type="TCodigo"/>
+        </xs:choice>
+        <xs:attributeGroup ref="Gseccoes"/>
+    </xs:complexType>
+
+    <xs:complexType name="Tsubseccao">
+        <xs:annotation>
+            <xs:documentation>
+                Elemento para fazer a divisão lógica de uma secção em subsecções, só inclui
+                o titulo da subsecção (como conteúdo) e o identificador da subsecção (como atributo)
+
+                Nota: Estes elementos devem aparecer no índice do relatório a ser gerado (o índice deve ser gerado
+                automaticamente)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="TidSubSec" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="Tparagrafo" mixed="true">
+        <xs:annotation>
+            <xs:documentation>
+                Este elemento "misto" contém o texto dos parágrafos, o texto pode ser
+                formatado usando os elementos negrito, itálico e sublinhado. Devem também
+                ser adicionadas citações para os elementos que aparecem na bibliografia
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="citação" type="RefRB"/>
+            <xs:element name="negrito" type="xs:string"/>
+            <xs:element name="itálico" type="xs:string"/>
+            <xs:element name="sublinhado" type="xs:string"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="TListaItems">
+        <xs:annotation>
+            <xs:documentation>
+                Este elemento serve para realizar listas de items, se o item tiver o
+                atributo label, será uma lista de definições
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="item" type="Titem" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Titem">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="label" type="xs:normalizedString" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="TFigura">
+        <xs:annotation>
+            <xs:documentation>
+                Este elemento serve para incluir links para imagens a serem adicionadas ao
+                relatório, a descrição será usada no relatório para a legenda da imagem
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="src" type="xs:anyURI"/>
+        <xs:attribute name="descrição" type="xs:string"/>
+    </xs:complexType>
+    
+    <xs:complexType name="TCodigo">
+        <xs:annotation>
+            <xs:documentation>
+                Este elemento serve incluir extratos de código no relatório, caso o código posso
+                conter simbolos reservados, ou se um extrato de um documento xml, deve ser
+                encapsulado num elemento CDATA
+
+                Os extratos podem ser divididos em blocos ou usarem um único bloco
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="bloco" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TReferencias">
+        <xs:annotation>
+            <xs:documentation>
+                Este elemento é usado nas referências bibliográficas, podem conter referências
+                de dois tipos:
+                   Bibliográficas - para livros, artigos, documentos, etc.
+                   Web - Para informação obtida em páginas Web.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="refBibliográfica" type="TRBib"/>
+            <xs:element name="refWeb" type="TRWeb"/>
+        </xs:choice>
+        <xs:attributeGroup ref="Gseccoes"/>
+    </xs:complexType>
+    
+    <xs:complexType name="TRBib">
+        <xs:annotation>
+            <xs:documentation>
+                Para referências bibliográficas, deve ser incluido o titulo do artigo/livro
+                a data de publicação e a lista de autores.
+                O atributo idRef, é o código com que será referenciada no texto.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence maxOccurs="unbounded">
+             <xs:element name="título" type="xs:string"/>
+            <xs:element name="dataPublicação" type="xs:string"/>
+            <xs:element name="autor" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="idRef" type="TIdRefB" use="required"/>
+    </xs:complexType>
+    
+    <xs:complexType name="TRWeb">
+        <xs:annotation>
+            <xs:documentation>
+                Para referências Web, deve ser incluido o url da página, uma descrição (ex. titulo)
+                que permita chegar à página e a data de consulta.
+                O atributo idRef, é o código com que será referenciada no texto.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence maxOccurs="unbounded">
+            <xs:element name="URL" type="xs:anyURI"/>
+            <xs:element name="descrição" type="xs:string"/>
+            <xs:element name="consultadoEm" type="xs:date"/>
+        </xs:sequence>
+        <xs:attribute name="idRef" type="TIdRefW" use="required"/>
+    </xs:complexType>
+</xs:schema>

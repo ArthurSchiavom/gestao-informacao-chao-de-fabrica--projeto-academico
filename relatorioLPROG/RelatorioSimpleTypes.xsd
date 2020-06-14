@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.dei.isep.ipp.pt/lprog" targetNamespace="http://www.dei.isep.ipp.pt/lprog" elementFormDefault="qualified">
+	<xs:simpleType name="TTurma">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="2D[A-NX]"/>
+			<xs:pattern value="2N[A-C]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="TSigla">
+		<xs:restriction base="xs:token">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="ACM"/>
+			<xs:enumeration value="AMD"/>
+			<xs:enumeration value="ASS"/>
+			<xs:enumeration value="JSM"/>
+			<xs:enumeration value="JRT"/>
+			<xs:enumeration value="PDF"/>
+			<xs:enumeration value="RGB"/>
+			<xs:enumeration value="CUN"/>
+			<xs:enumeration value="JHS"/>
+			<xs:enumeration value="PSM"/>
+			<xs:enumeration value="TIP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TTiposAulas">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="TP?|PL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TNum">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1000000"/>
+			<xs:maxInclusive value="1999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TEMail">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="\w+([-.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIdRefB">
+		<xs:restriction base="xs:ID">
+			<xs:pattern value="RefB_\w+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIdRefW">
+		<xs:restriction base="xs:ID">
+			<xs:pattern value="RefW_\w+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefRB">
+		<xs:restriction base="xs:IDREF">
+			<xs:pattern value="RefB_\w+"/>
+			<xs:pattern value="RefW_\w+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TidSec">
+		<xs:restriction base="xs:ID">
+			<xs:pattern value="SEC[0-9]{3}"/>
+			<xs:pattern value="ANX[0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TidSubSec">
+		<xs:restriction base="xs:ID">
+			<xs:pattern value="SUBSEC[0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
