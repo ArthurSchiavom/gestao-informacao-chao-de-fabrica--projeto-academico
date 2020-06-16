@@ -1,379 +1,469 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cdfab:chaoDeFabrica
-	xmlns:cdfab="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica chaoDeFabrica.xsd">
-	
-	<cdfab:mensagens>
-        <cdfab:mensagemDeConsumo>
-            <mensagemID>
-                <maquina>CODINT_1</maquina>
-                <timestampEmissaoEpochMilli>1592071755584</timestampEmissaoEpochMilli>
-            </mensagemID>
-            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
-            <deposito>deposito 1</deposito>
-            <produto>1100001a</produto>
-            <quantidadeDeMateriaPrima>10.0</quantidadeDeMateriaPrima>
-        </cdfab:mensagemDeConsumo>
-        <cdfab:mensagemDeEntregaDeProducao>
-            <mensagemID>
-                <maquina>CODINT_1</maquina>
-                <timestampEmissaoEpochMilli>1592071755586</timestampEmissaoEpochMilli>
-            </mensagemID>
-            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
-            <deposito>deposito 1</deposito>
-            <lote>Lote1</lote>
-            <quantidade>10.0</quantidade>
-        </cdfab:mensagemDeEntregaDeProducao>
-        <cdfab:mensagemDeEstorno>
-            <mensagemID>
-                <maquina>CODINT_1</maquina>
-                <timestampEmissaoEpochMilli>1592071755588</timestampEmissaoEpochMilli>
-            </mensagemID>
-            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
-            <deposito>deposito 1</deposito>
-            <produto>1100001a</produto>
-            <quantidadeDeMateriaPrima>10.0</quantidadeDeMateriaPrima>
-        </cdfab:mensagemDeEstorno>
-        <cdfab:mensagemFimDeAtividade>
-            <mensagemID>
-                <maquina>CODINT_1</maquina>
-                <timestampEmissaoEpochMilli>1592071755590</timestampEmissaoEpochMilli>
-            </mensagemID>
-            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
-            <ordemDeProducao>ordem 1</ordemDeProducao>
-        </cdfab:mensagemFimDeAtividade>
-        <cdfab:mensagemInicioDeAtividade>
-            <mensagemID>
-                <maquina>CODINT_1</maquina>
-                <timestampEmissaoEpochMilli>1592071755591</timestampEmissaoEpochMilli>
-            </mensagemID>
-            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
-            <ordemDeProducao>ordem 1</ordemDeProducao>
-        </cdfab:mensagemInicioDeAtividade>
-        <cdfab:mensagemParagemForcada>
-            <mensagemID>
-                <maquina>CODINT_1</maquina>
-                <timestampEmissaoEpochMilli>1592071755592</timestampEmissaoEpochMilli>
-            </mensagemID>
-            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
-        </cdfab:mensagemParagemForcada>
-        <cdfab:mensagemDeProducao>
-            <mensagemID>
-                <maquina>CODINT_1</maquina>
-                <timestampEmissaoEpochMilli>1592071755593</timestampEmissaoEpochMilli>
-            </mensagemID>
-            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
-            <produto>1100001a</produto>
-            <quantidade>10.0</quantidade>
-            <lote>Lote1</lote>
-        </cdfab:mensagemDeProducao>
+<cdfab:chaoDeFabrica xmlns:cdfab="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="https://bitbucket.org/1180842/lei_isep_2019_20_sem4_2dd_1180842_1161752_1170554_1181477/issues/38/p1-user-story-como-gestor-de-projeto-eu/ns/chaofabrica ../xsd/main.xsd">
+    <cdfab:mensagens>
         <cdfab:mensagemRetomaDeAtividade>
             <mensagemID>
-                <maquina>CODINT_1</maquina>
-                <timestampEmissaoEpochMilli>1592071755594</timestampEmissaoEpochMilli>
+                <maquina>Maquina 500</maquina>
+                <timestampEmissaoEpochMilli>662842203</timestampEmissaoEpochMilli>
             </mensagemID>
             <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
-            <erro>erro</erro>
+            <ordemDeProducao>ordem 1</ordemDeProducao>
+            <linhaDeProducao>linha prod 1</linhaDeProducao>
+            <erro>Máquina não existente</erro>
         </cdfab:mensagemRetomaDeAtividade>
+        <cdfab:mensagemRetomaDeAtividade>
+            <mensagemID>
+                <maquina>Maquina 2</maquina>
+                <timestampEmissaoEpochMilli>1830547208</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>NAO_PROCESSADO</estadoProcessamento>
+            <ordemDeProducao>ordem 1</ordemDeProducao>
+            <linhaDeProducao>linha prod 1</linhaDeProducao>
+            <erro>Máquina não existente</erro>
+        </cdfab:mensagemRetomaDeAtividade>
+        <cdfab:mensagemParagemForcada>
+            <mensagemID>
+                <maquina>Maquina 1</maquina>
+                <timestampEmissaoEpochMilli>884512037</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>PROCESSADO</estadoProcessamento>
+            <ordemDeProducao>ordem 1</ordemDeProducao>
+            <linhaDeProducao>linha prod 1</linhaDeProducao>
+        </cdfab:mensagemParagemForcada>
+        <cdfab:mensagemParagemForcada>
+            <mensagemID>
+                <maquina>Maquina 1</maquina>
+                <timestampEmissaoEpochMilli>1582199416</timestampEmissaoEpochMilli>
+            </mensagemID>
+            <estadoProcessamento>PROCESSADO</estadoProcessamento>
+            <ordemDeProducao>ordem 1</ordemDeProducao>
+            <linhaDeProducao>linha prod 2</linhaDeProducao>
+        </cdfab:mensagemParagemForcada>
     </cdfab:mensagens>
-	<cdfab:movimentosStock>
-		<cdfab:movimentoStock id="10">
-			<quantidadeDeMateriaPrima>
-				<quantidade>123</quantidade>
-				<materiaPrima>
-					<tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
-					<idMateria>material 1</idMateria>
-				</materiaPrima>
-			</quantidadeDeMateriaPrima>
-			<deposito>deposito 1</deposito>
-		</cdfab:movimentoStock>
-		<cdfab:movimentoStock id="12">
-			<quantidadeDeMateriaPrima>
-				<quantidade>123</quantidade>
-				<materiaPrima>
-					<tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
-					<idMateria>material 1</idMateria>
-				</materiaPrima>
-			</quantidadeDeMateriaPrima>
-			<deposito>deposito 1</deposito>
-		</cdfab:movimentoStock>
-	</cdfab:movimentosStock>
-	<cdfab:agendamentosDeProcessamento>
-		<cdfab:agendamentoDeProcessamento>
-			<linhaDeProducao>linha 2</linhaDeProducao>
-			<fimTimestampEpochMili>1700000000</fimTimestampEpochMili>
-			<inicioTimestampEpochMili>1600000000</inicioTimestampEpochMili>
-		</cdfab:agendamentoDeProcessamento>
-	</cdfab:agendamentosDeProcessamento>
-	<cdfab:notificacoesDeErroDeProcessamento>
-		<cdfab:notificacaoDeErroDeProcessamento>
-			<linhaDeProducao>linha 2</linhaDeProducao>
-			<tipo>ELEMENTOS_INEXISTENTES</tipo>
-			<estado>ARQUIVADO</estado>
-		</cdfab:notificacaoDeErroDeProcessamento>
-	</cdfab:notificacoesDeErroDeProcessamento>
-	<cdfab:linhasDeProducao>
-		<cdfab:linhaDeProducao identificador="Linha 5">
-			<estado>SUSPENSO</estado>
-		</cdfab:linhaDeProducao>
-		<cdfab:linhaDeProducao identificador="Linha 6">
-			<estado>SUSPENSO</estado>
-		</cdfab:linhaDeProducao>
-		<cdfab:linhaDeProducao identificador="Linha de Produção 1">
-			<estado>SUSPENSO</estado>
-		</cdfab:linhaDeProducao>
-		<cdfab:linhaDeProducao identificador="Linha de Produção 2">
-			<estado>SUSPENSO</estado>
-		</cdfab:linhaDeProducao>
-		<cdfab:linhaDeProducao identificador="linha 1">
-			<estado>ATIVO</estado>
-		</cdfab:linhaDeProducao>
-		<cdfab:linhaDeProducao identificador="linha 2">
-			<estado>ATIVO</estado>
-		</cdfab:linhaDeProducao>
-	</cdfab:linhasDeProducao>
-	<cdfab:depositos>
-		<cdfab:deposito codigo="DEP001">
-			<descricao>Deposito de Madeira</descricao>
-		</cdfab:deposito>
-		<cdfab:deposito codigo="DEP002">
-			<descricao>Deposito de Ferro</descricao>
-		</cdfab:deposito>
-		<cdfab:deposito codigo="DEP003">
-			<descricao>Deposito de Aço</descricao>
-		</cdfab:deposito>
-		<cdfab:deposito codigo="deposito 1">
-			<descricao>sunny</descricao>
-		</cdfab:deposito>
-	</cdfab:depositos>
-	<cdfab:categorias>
-		<cdfab:categoria codigoAlfanumericoCategoria="ID-123">
-			<descricao>Metal</descricao>
-		</cdfab:categoria>
-		<cdfab:categoria codigoAlfanumericoCategoria="ID-122">
-			<descricao>Madeira</descricao>
-		</cdfab:categoria>
-		<cdfab:categoria codigoAlfanumericoCategoria="ID-121">
-			<descricao>Plástico</descricao>
-		</cdfab:categoria>
-		<cdfab:categoria codigoAlfanumericoCategoria="123456">
-			<descricao>metais</descricao>
-		</cdfab:categoria>
-		<cdfab:categoria codigoAlfanumericoCategoria="1234567">
-			<descricao>metais</descricao>
-		</cdfab:categoria>
-		<cdfab:categoria codigoAlfanumericoCategoria="1212344">
-			<descricao>metais</descricao>
-		</cdfab:categoria>
-		<cdfab:categoria codigoAlfanumericoCategoria="categoria 1">
-			<descricao>sunny</descricao>
-		</cdfab:categoria>
-	</cdfab:categorias>
-	<cdfab:produtos>
-		<cdfab:produto codigoUnico="1100001a">
-			<codigoComercial>320030000002a</codigoComercial>
-			<categoriaDeProduto>ME-AP</categoriaDeProduto>
-			<descricaoBreve>Aparas</descricaoBreve>
-			<descricaoCompleta>Aparas</descricaoCompleta>
-			<unidadeDeMedida>UNIDADES</unidadeDeMedida>
-		</cdfab:produto>
-		<cdfab:produto codigoUnico="1200001b">
-			<codigoComercial>320030000003b</codigoComercial>
-			<categoriaDeProduto>ME-BR</categoriaDeProduto>
-			<descricaoBreve>Amostras</descricaoBreve>
-			<descricaoCompleta>Amostras</descricaoCompleta>
-			<unidadeDeMedida>UNIDADES</unidadeDeMedida>
-		</cdfab:produto>
-		<cdfab:produto codigoUnico="1200002c">
-			<codigoComercial>320030000004c</codigoComercial>
-			<categoriaDeProduto>ME-BR</categoriaDeProduto>
-			<descricaoBreve>Blocos</descricaoBreve>
-			<descricaoCompleta>Blocos</descricaoCompleta>
-			<unidadeDeMedida>UNIDADES</unidadeDeMedida>
-		</cdfab:produto>
-		<cdfab:produto codigoUnico="1200003d">
-			<codigoComercial>320030000005d</codigoComercial>
-			<categoriaDeProduto>ME-BR</categoriaDeProduto>
-			<descricaoBreve>Blocos Borracha</descricaoBreve>
-			<descricaoCompleta>Blocos Borracha</descricaoCompleta>
-			<unidadeDeMedida>UNIDADES</unidadeDeMedida>
-		</cdfab:produto>
-		<cdfab:produto codigoUnico="produto 1">
-			<codigoComercial>sunny</codigoComercial>
-			<fichaDeProducao uniqueVal="123">
-				<quantidadesDeMateriaPrima>
-					<quantidade>123</quantidade>
-					<materiaPrima>
-						<tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
-						<idMateria>material 1</idMateria>
-					</materiaPrima>
-				</quantidadesDeMateriaPrima>
-			</fichaDeProducao>
-			<categoriaDeProduto>sunny</categoriaDeProduto>
-			<descricaoBreve>sunny</descricaoBreve>
-			<descricaoCompleta>sunny</descricaoCompleta>
-			<unidadeDeMedida>CENTIMETRO</unidadeDeMedida>
-		</cdfab:produto>
-	</cdfab:produtos>
-	<cdfab:materiais>
-		<cdfab:material codigoInternoMaterial="531213">
-			<unidadeDeMedida>KILOGRAMA</unidadeDeMedida>
-			<descricao> É um elemento químico, símbolo Fe, de número atômico 26</descricao>
-			<fichaTecnicaPDF>
-				<nome>Ferro</nome>
-			</fichaTecnicaPDF>
-			<categoria>123456</categoria>
-		</cdfab:material>
-		<cdfab:material codigoInternoMaterial="213455">
-			<unidadeDeMedida>KILOGRAMA</unidadeDeMedida>
-			<descricao> O aço é uma liga metálica formada essencialmente por ferro e carbono, com percentagens deste último variando entre 0,008 e 2,11%</descricao>
-			<fichaTecnicaPDF>
-				<nome>Aco</nome>
-			</fichaTecnicaPDF>
-			<categoria>1234567</categoria>
-		</cdfab:material>
-		<cdfab:material codigoInternoMaterial="325611">
-			<unidadeDeMedida>KILOGRAMA</unidadeDeMedida>
-			<descricao> O cobre é um elemento químico de símbolo Cu (do latim cuprum), número atômico 29 (29 prótons e 29 elétrons) e de massa atómica 63,54 u.</descricao>
-			<fichaTecnicaPDF>
-				<nome>Cobre</nome>
-			</fichaTecnicaPDF>
-			<categoria>1212344</categoria>
-		</cdfab:material>
-		<cdfab:material codigoInternoMaterial="material 1">
-			<unidadeDeMedida>KILOGRAMA</unidadeDeMedida>
-			<descricao>sunny</descricao>
-			<fichaTecnicaPDF>
-				<path>sunny</path>
-				<nome>sunny</nome>
-			</fichaTecnicaPDF>
-			<categoria>sunny</categoria>
-		</cdfab:material>
-	</cdfab:materiais>
-	<cdfab:fichasDeProducao>
-		<cdfab:fichaProducao uniqueVal="12">
-			<quantidadesDeMateriaPrima>
-				<quantidade>123</quantidade>
-				<materiaPrima>
-					<tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
-					<idMateria>material 1</idMateria>
-				</materiaPrima>
-			</quantidadesDeMateriaPrima>
-		</cdfab:fichaProducao>
-	</cdfab:fichasDeProducao>
-	<cdfab:maquinas>
-		<cdfab:maquina codigoInterno="123">
-			<numeroSerie>Num 1234</numeroSerie>
-			<ordemLinhaProducao>1</ordemLinhaProducao>
-			<identificadorProtocoloComunicacao>1</identificadorProtocoloComunicacao>
-			<dataInstalacao>26-05-2020</dataInstalacao>
-			<marca>sony</marca>
-			<modelo>HC-A</modelo>
-			<descricaoMaquina>DP-420</descricaoMaquina>
-			<linhaProducao>Linha 5</linhaProducao>
-		</cdfab:maquina>
-		<cdfab:maquina codigoInterno="1234">
-			<numeroSerie>Num 1235</numeroSerie>
-			<ordemLinhaProducao>2</ordemLinhaProducao>
-			<identificadorProtocoloComunicacao>64931</identificadorProtocoloComunicacao>
-			<dataInstalacao>26-05-2020</dataInstalacao>
-			<marca>apple</marca>
-			<modelo>HC-B</modelo>
-			<descricaoMaquina>BJ-420</descricaoMaquina>
-			<linhaProducao>Linha 5</linhaProducao>
-		</cdfab:maquina>
-		<cdfab:maquina codigoInterno="1235">
-			<numeroSerie>Num 1000</numeroSerie>
-			<ordemLinhaProducao>2</ordemLinhaProducao>
-			<identificadorProtocoloComunicacao>234</identificadorProtocoloComunicacao>
-			<dataInstalacao>26-05-2020</dataInstalacao>
-			<marca>samsung</marca>
-			<modelo>HC-S</modelo>
-			<descricaoMaquina>K-9</descricaoMaquina>
-			<linhaProducao>Linha 6</linhaProducao>
-		</cdfab:maquina>
-		<cdfab:maquina codigoInterno="maquina 1">
-			<numeroSerie>sunny</numeroSerie>
-			<ordemLinhaProducao>1</ordemLinhaProducao>
-			<ficheiroConfiguracao>sunny</ficheiroConfiguracao>
-			<identificadorProtocoloComunicacao>0</identificadorProtocoloComunicacao>
-			<dataInstalacao>01-06-2020</dataInstalacao>
-			<marca>sunny</marca>
-			<modelo>sunny</modelo>
-			<descricaoMaquina>sunny</descricaoMaquina>
-			<linhaProducao>linha 1</linhaProducao>
-		</cdfab:maquina>
-	</cdfab:maquinas>
-	<cdfab:ordensDeProducao>
-		<cdfab:ordemProducao identificador="ordem 1">
-			<quantidadeAProduzir>1</quantidadeAProduzir>
-			<encomendas>
-				<idEncomenda>sunny</idEncomenda>
-			</encomendas>
-			<dataEmissao>01-06-2020</dataEmissao>
-			<dataPrevistaExecucao>01-06-2020</dataPrevistaExecucao>
-			<fimExecucao>01-06-2020</fimExecucao>
-			<inicioExecucao>01-06-2020</inicioExecucao>
-			<estado>CONCLUIDA</estado>
-			<produto>produto 1</produto>
-			<produtosProduzidos>
-				<produtoProduzido>
-					<identificadorLote>sunny</identificadorLote>
-					<quantidadeProduto>sunny</quantidadeProduto>
-					<codigoUnicoProduto>sunny</codigoUnicoProduto>
-				</produtoProduzido>
-			</produtosProduzidos>
-			<dadosCalculados>
-				<consumosReais>
-					<consumoReal>
-						<quantidade>123</quantidade>
-						<materiaPrima>
-							<tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
-							<idMateria>produto 1</idMateria>
-						</materiaPrima>
-					</consumoReal>
-				</consumosReais>
-				<consumosEsperados>
-					<consumoEsperado>
-						<quantidade>123</quantidade>
-						<materiaPrima>
-							<tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
-							<idMateria>produto 1</idMateria>
-						</materiaPrima>
-					</consumoEsperado>
-				</consumosEsperados>
-				<estornos>
-					<estorno>
-						<quantidade>123</quantidade>
-						<materiaPrima>
-							<tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
-							<idMateria>material 1</idMateria>
-						</materiaPrima>
-					</estorno>
-				</estornos>
-				<desviosDeConsumo>
-					<desvioDeConsumo>
-						<quantidade>12</quantidade>
-						<materiaPrima>
-							<tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
-							<idMateria>material 1</idMateria>
-						</materiaPrima>
-					</desvioDeConsumo>
-				</desviosDeConsumo>
-				<tempoBrutoExecucao>0</tempoBrutoExecucao>
-				<tempoEfetivoExecucao>0</tempoEfetivoExecucao>
-			</dadosCalculados>
-			<usosDeMaquina>
-				<usoDeMaquina>
-					<inicioExecucao>0</inicioExecucao>
-					<fimExecucao>0</fimExecucao>
-					<pausaExecucao>0</pausaExecucao>
-					<retomaExecucao>0</retomaExecucao>
-					<movimentoStock>0</movimentoStock>
-					<maquina>maquina 1</maquina>
-				</usoDeMaquina>
-			</usosDeMaquina>
-		</cdfab:ordemProducao>
-	</cdfab:ordensDeProducao>
+    <cdfab:movimentosStock>
+        <cdfab:movimentoStock id="1075145524">
+            <quantidadeDeMateriaPrima>
+                <quantidade>62162375.997</quantidade>
+                <materiaPrima>
+                    <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                    <idMateria>materia 2</idMateria>
+                </materiaPrima>
+            </quantidadeDeMateriaPrima>
+            <deposito>Deposito 1</deposito>
+        </cdfab:movimentoStock>
+        <cdfab:movimentoStock id="1356150116">
+            <quantidadeDeMateriaPrima>
+                <quantidade>1903011746.246</quantidade>
+                <materiaPrima>
+                    <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                    <idMateria>materia 2</idMateria>
+                </materiaPrima>
+            </quantidadeDeMateriaPrima>
+            <deposito>Deposito 1</deposito>
+        </cdfab:movimentoStock>
+    </cdfab:movimentosStock>
+    <cdfab:agendamentosDeProcessamento>
+        <cdfab:agendamentoDeProcessamento>
+            <linhaDeProducao>linha prod 2</linhaDeProducao>
+            <fimTimestampEpochMili>871567000</fimTimestampEpochMili>
+            <inicioTimestampEpochMili>893010228</inicioTimestampEpochMili>
+        </cdfab:agendamentoDeProcessamento>
+        <cdfab:agendamentoDeProcessamento>
+            <linhaDeProducao>linha prod 2</linhaDeProducao>
+            <fimTimestampEpochMili>1128195975</fimTimestampEpochMili>
+            <inicioTimestampEpochMili>284685020</inicioTimestampEpochMili>
+        </cdfab:agendamentoDeProcessamento>
+    </cdfab:agendamentosDeProcessamento>
+    <cdfab:notificacoesDeErroDeProcessamento>
+        <cdfab:notificacaoDeErroDeProcessamento>
+            <mensagem>
+                <maquina>Maquina 1</maquina>
+                <timestampEmissaoEpochMilli>556110588</timestampEmissaoEpochMilli>
+            </mensagem>
+            <linhaDeProducao>linha prod 2</linhaDeProducao>
+            <tipo>ELEMENTOS_INEXISTENTES</tipo>
+            <estado>ATIVO</estado>
+        </cdfab:notificacaoDeErroDeProcessamento>
+        <cdfab:notificacaoDeErroDeProcessamento>
+            <mensagem>
+                <maquina>Maquina 1</maquina>
+                <timestampEmissaoEpochMilli>269936699</timestampEmissaoEpochMilli>
+            </mensagem>
+            <linhaDeProducao>linha prod 2</linhaDeProducao>
+            <tipo>ELEMENTOS_INEXISTENTES</tipo>
+            <estado>ARQUIVADO</estado>
+        </cdfab:notificacaoDeErroDeProcessamento>
+    </cdfab:notificacoesDeErroDeProcessamento>
+    <cdfab:linhasDeProducao>
+        <cdfab:linhaDeProducao identificador="linha prod 1">
+            <estado>ATIVO</estado>
+        </cdfab:linhaDeProducao>
+        <cdfab:linhaDeProducao identificador="linha prod 2">
+            <estado>ATIVO</estado>
+        </cdfab:linhaDeProducao>
+    </cdfab:linhasDeProducao>
+    <cdfab:depositos>
+        <cdfab:deposito codigo="Deposito 1">
+            <descricao>Depósito ferro</descricao>
+        </cdfab:deposito>
+        <cdfab:deposito codigo="Deposito 2">
+            <descricao>Depósito madeira</descricao>
+        </cdfab:deposito>
+    </cdfab:depositos>
+    <cdfab:categorias>
+        <cdfab:categoria codigoAlfanumericoCategoria="L354aBlzZCCckH0eEiuFBpMK">
+            <descricao>Descrição</descricao>
+        </cdfab:categoria>
+        <cdfab:categoria codigoAlfanumericoCategoria="J1yTmnEoUIyxTp6YRdDZxgdt">
+            <descricao>Descrição</descricao>
+        </cdfab:categoria>
+    </cdfab:categorias>
+    <cdfab:produtos>
+        <cdfab:produto codigoUnico="Produto 1">
+            <codigoComercial>ocpO6SwdrImKgX</codigoComercial>
+            <fichaDeProducao uniqueVal="123">
+                <quantidadesDeMateriaPrima>
+                    <quantidade>1861383110.046</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>produto 1</idMateria>
+                    </materiaPrima>
+                </quantidadesDeMateriaPrima>
+                <quantidadesDeMateriaPrima>
+                    <quantidade>1852644649.77</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>BAiR</idMateria>
+                    </materiaPrima>
+                </quantidadesDeMateriaPrima>
+            </fichaDeProducao>
+            <categoriaDeProduto>rqBJ7Kk.fIBzSdyL</categoriaDeProduto>
+            <descricaoBreve>H3.xJ_P3TSv1</descricaoBreve>
+            <descricaoCompleta>z.PLEy0r2pbc1HVI7k</descricaoCompleta>
+            <unidadeDeMedida>KILOGRAMA</unidadeDeMedida>
+        </cdfab:produto>
+        <cdfab:produto codigoUnico="M">
+            <codigoComercial>vnP2KrgAigC</codigoComercial>
+            <fichaDeProducao uniqueVal="-83718557">
+                <quantidadesDeMateriaPrima>
+                    <quantidade>190978700.059</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>DyH</idMateria>
+                    </materiaPrima>
+                </quantidadesDeMateriaPrima>
+                <quantidadesDeMateriaPrima>
+                    <quantidade>1998676145.324</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>wOeZ3-ucqFs1XTayStC2Axr</idMateria>
+                    </materiaPrima>
+                </quantidadesDeMateriaPrima>
+            </fichaDeProducao>
+            <categoriaDeProduto>KywPsFMBjbWwy5c4KZ_dqobQ5Nben</categoriaDeProduto>
+            <descricaoBreve>KXOwcJb3oX6HXsx4RmBeGH</descricaoBreve>
+            <descricaoCompleta>_5BQzY76-Vz_XNlL_XKztX</descricaoCompleta>
+            <unidadeDeMedida>CENTILITRO</unidadeDeMedida>
+        </cdfab:produto>
+    </cdfab:produtos>
+    <cdfab:materiais>
+        <cdfab:material codigoInternoMaterial="A9_aPJO_.B">
+            <unidadeDeMedida>GRAMA</unidadeDeMedida>
+            <descricao>Hg9jnvQ67nrjWXpCZa</descricao>
+            <fichaTecnicaPDF>
+                <path>yU</path>
+                <nome>lm</nome>
+            </fichaTecnicaPDF>
+            <categoria>rCAPUT-j-z3vlhbvgekL1Xz</categoria>
+        </cdfab:material>
+        <cdfab:material codigoInternoMaterial="uysxR26">
+            <unidadeDeMedida>UNIDADES</unidadeDeMedida>
+            <descricao>ZKMNmflOYIyyYk7SXv2nNyE</descricao>
+            <fichaTecnicaPDF>
+                <path>ko5euL7M4</path>
+                <nome>hO-zT1VcZFvzoxif</nome>
+            </fichaTecnicaPDF>
+            <categoria>WNbt910km8</categoria>
+        </cdfab:material>
+    </cdfab:materiais>
+    <cdfab:fichasDeProducao>
+        <cdfab:fichaProducao uniqueVal="-461079991">
+            <quantidadesDeMateriaPrima>
+                <quantidade>705233431.826</quantidade>
+                <materiaPrima>
+                    <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                    <idMateria>j</idMateria>
+                </materiaPrima>
+            </quantidadesDeMateriaPrima>
+            <quantidadesDeMateriaPrima>
+                <quantidade>632577557.619</quantidade>
+                <materiaPrima>
+                    <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                    <idMateria>FcNYTfm</idMateria>
+                </materiaPrima>
+            </quantidadesDeMateriaPrima>
+        </cdfab:fichaProducao>
+        <cdfab:fichaProducao uniqueVal="-1433413047">
+            <quantidadesDeMateriaPrima>
+                <quantidade>1367078227.713</quantidade>
+                <materiaPrima>
+                    <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                    <idMateria>Zb1lo3C-I84So1jRCaTgygtRVZi</idMateria>
+                </materiaPrima>
+            </quantidadesDeMateriaPrima>
+            <quantidadesDeMateriaPrima>
+                <quantidade>177067517.193</quantidade>
+                <materiaPrima>
+                    <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                    <idMateria>rtKS24gfidVghUSRm_IaT</idMateria>
+                </materiaPrima>
+            </quantidadesDeMateriaPrima>
+        </cdfab:fichaProducao>
+    </cdfab:fichasDeProducao>
+    <cdfab:maquinas>
+        <cdfab:maquina codigoInterno="Or4rLAV">
+            <numeroSerie>YLroCHU.MpgbPVZDGCkj</numeroSerie>
+            <ordemLinhaProducao>565029992</ordemLinhaProducao>
+            <ficheiroConfiguracao>z42sYwkVaiR</ficheiroConfiguracao>
+            <identificadorProtocoloComunicacao>-1267481939</identificadorProtocoloComunicacao>
+            <dataInstalacao>24-03-0624</dataInstalacao>
+            <marca>FGqcoy</marca>
+            <modelo>aaGXf.JwZlot2</modelo>
+            <descricaoMaquina>gBRel6jd295aYgOBV8z7U4sNHOv</descricaoMaquina>
+            <linhaProducao>linha prod 1</linhaProducao>
+        </cdfab:maquina>
+        <cdfab:maquina codigoInterno="Maquina 1">
+            <numeroSerie>jbJ</numeroSerie>
+            <ordemLinhaProducao>332455865</ordemLinhaProducao>
+            <ficheiroConfiguracao>VvqZpcOw3X8p3Me3Vjz2jpK</ficheiroConfiguracao>
+            <identificadorProtocoloComunicacao>-1387044916</identificadorProtocoloComunicacao>
+            <dataInstalacao>14-02-1042</dataInstalacao>
+            <marca>Rm1xXRgE0MegO4RBcglR</marca>
+            <modelo>SgHQ5T9aowsiLeIu1L4iNlPVyHgz</modelo>
+            <descricaoMaquina>r91h-RuqT_51r</descricaoMaquina>
+            <linhaProducao>linha prod 1</linhaProducao>
+        </cdfab:maquina>
+    </cdfab:maquinas>
+    <cdfab:ordensDeProducao>
+        <cdfab:ordemProducao identificador="m8DshY8DeLnDRlh-WvrhNc">
+            <quantidadeAProduzir>215538040.635</quantidadeAProduzir>
+            <encomendas>
+                <idEncomenda>i1ligoUY8XEvhuNWVYMNwyjtIi</idEncomenda>
+                <idEncomenda>Pj2zXWji</idEncomenda>
+            </encomendas>
+            <dataEmissao>16-02-0771</dataEmissao>
+            <dataPrevistaExecucao>06-06-6951</dataPrevistaExecucao>
+            <fimExecucao>30-09-7187</fimExecucao>
+            <inicioExecucao>25-03-9390</inicioExecucao>
+            <estado>EXECUCAO_PARADA_TEMPORARIAMENTE</estado>
+            <produto>Produto 1</produto>
+            <produtosProduzidos>
+                <produtoProduzido>
+                    <identificadorLote>lcJ0Q_F2etPvLFnTm</identificadorLote>
+                    <quantidadeProduto>OkiFY87zy1Nt9u</quantidadeProduto>
+                    <codigoUnicoProduto>Produto 1</codigoUnicoProduto>
+                </produtoProduzido>
+                <produtoProduzido>
+                    <identificadorLote>nOBjLaFh6ekyH.XusbrqlEc2Kwk</identificadorLote>
+                    <quantidadeProduto>d5flH6QYP</quantidadeProduto>
+                    <codigoUnicoProduto>Produto 1</codigoUnicoProduto>
+                </produtoProduzido>
+            </produtosProduzidos>
+            <consumosReais>
+                <consumoReal>
+                    <quantidade>459551861.732</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>XvO6cTJSRftvekLuCZWJsX71</idMateria>
+                    </materiaPrima>
+                </consumoReal>
+                <consumoReal>
+                    <quantidade>245314943.686</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>sNufFgOw3Od8p_RYQ_f4O71</idMateria>
+                    </materiaPrima>
+                </consumoReal>
+            </consumosReais>
+            <consumosEsperados>
+                <consumoEsperado>
+                    <quantidade>1763347374.854</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>kn4UzS3V</idMateria>
+                    </materiaPrima>
+                </consumoEsperado>
+                <consumoEsperado>
+                    <quantidade>442458940.445</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>e</idMateria>
+                    </materiaPrima>
+                </consumoEsperado>
+            </consumosEsperados>
+            <estornos>
+                <estorno>
+                    <quantidade>1038498327.449</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>HxGVRe_EO_kvijpCq9-RJyc</idMateria>
+                    </materiaPrima>
+                </estorno>
+                <estorno>
+                    <quantidade>425597420.884</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>H8jvAuebJUjAnJj9wl0dEbQMCABw</idMateria>
+                    </materiaPrima>
+                </estorno>
+            </estornos>
+            <desviosDeConsumo>
+                <desvioDeConsumo>
+                    <quantidade>838668259.732</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>JV4W6zGC4zTarQCqQTEc</idMateria>
+                    </materiaPrima>
+                </desvioDeConsumo>
+                <desvioDeConsumo>
+                    <quantidade>151273111.605</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>f1SEDD1BXpjQG4NePk1i</idMateria>
+                    </materiaPrima>
+                </desvioDeConsumo>
+            </desviosDeConsumo>
+            <tempoBrutoExecucao>2081625773</tempoBrutoExecucao>
+            <tempoEfetivoExecucao>421257372</tempoEfetivoExecucao>
+            <usosDeMaquina>
+                <usoDeMaquina>
+                    <inicioExecucao>896240055</inicioExecucao>
+                    <fimExecucao>458259619</fimExecucao>
+                    <pausaExecucao>1004814653</pausaExecucao>
+                    <retomaExecucao>1382316407</retomaExecucao>
+                    <movimentoStock>-1122436685</movimentoStock>
+                    <maquina>Maquina 1</maquina>
+                </usoDeMaquina>
+                <usoDeMaquina>
+                    <inicioExecucao>1916322278</inicioExecucao>
+                    <fimExecucao>1904421371</fimExecucao>
+                    <pausaExecucao>451202286</pausaExecucao>
+                    <retomaExecucao>668285988</retomaExecucao>
+                    <movimentoStock>326148428</movimentoStock>
+                    <maquina>Maquina 1</maquina>
+                </usoDeMaquina>
+            </usosDeMaquina>
+        </cdfab:ordemProducao>
+        <cdfab:ordemProducao identificador="q2aa6NCggwfL">
+            <quantidadeAProduzir>243215005.705</quantidadeAProduzir>
+            <encomendas>
+                <idEncomenda>vkq2S-fdoK</idEncomenda>
+                <idEncomenda>Q4QaqFWeQVkrWJ4CnjU2j3</idEncomenda>
+            </encomendas>
+            <dataEmissao>22-02-8120</dataEmissao>
+            <dataPrevistaExecucao>30-12-5735</dataPrevistaExecucao>
+            <fimExecucao>30-08-9706</fimExecucao>
+            <inicioExecucao>01-02-2943</inicioExecucao>
+            <estado>EXECUCAO_PARADA_TEMPORARIAMENTE</estado>
+            <produto>Produto 1</produto>
+            <produtosProduzidos>
+                <produtoProduzido>
+                    <identificadorLote>dalgx3EBuGxEy3TDoSHC9Gkgy2juQT</identificadorLote>
+                    <quantidadeProduto>BKrrcM0YfLVBC6lMkd</quantidadeProduto>
+                    <codigoUnicoProduto>Produto 1</codigoUnicoProduto>
+                </produtoProduzido>
+                <produtoProduzido>
+                    <identificadorLote>eFYnH</identificadorLote>
+                    <quantidadeProduto>X_3WhXiw55e</quantidadeProduto>
+                    <codigoUnicoProduto>Produto 1</codigoUnicoProduto>
+                </produtoProduzido>
+            </produtosProduzidos>
+            <consumosReais>
+                <consumoReal>
+                    <quantidade>1843606060.86</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>BQA.R</idMateria>
+                    </materiaPrima>
+                </consumoReal>
+                <consumoReal>
+                    <quantidade>353537958.339</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>OFXd0kFWgbiV</idMateria>
+                    </materiaPrima>
+                </consumoReal>
+            </consumosReais>
+            <consumosEsperados>
+                <consumoEsperado>
+                    <quantidade>1874173617.863</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>NjIpNQ_UXy2o0lRFQ5xxG_jECUhRp</idMateria>
+                    </materiaPrima>
+                </consumoEsperado>
+                <consumoEsperado>
+                    <quantidade>137911215.329</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>Ka973CCZqg8D5Bfq.AtVj56F.2O</idMateria>
+                    </materiaPrima>
+                </consumoEsperado>
+            </consumosEsperados>
+            <estornos>
+                <estorno>
+                    <quantidade>817674706.98</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>K.b96</idMateria>
+                    </materiaPrima>
+                </estorno>
+                <estorno>
+                    <quantidade>849622094.978</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>MATERIAL</tipoDeMateriaPrima>
+                        <idMateria>Y</idMateria>
+                    </materiaPrima>
+                </estorno>
+            </estornos>
+            <desviosDeConsumo>
+                <desvioDeConsumo>
+                    <quantidade>182806768.091</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>ROTbHNYQe4p6b-.NM7uDv</idMateria>
+                    </materiaPrima>
+                </desvioDeConsumo>
+                <desvioDeConsumo>
+                    <quantidade>944737513.165</quantidade>
+                    <materiaPrima>
+                        <tipoDeMateriaPrima>PRODUTO</tipoDeMateriaPrima>
+                        <idMateria>GDYPKpZfQLYD7BY9TKk</idMateria>
+                    </materiaPrima>
+                </desvioDeConsumo>
+            </desviosDeConsumo>
+            <tempoBrutoExecucao>1408311506</tempoBrutoExecucao>
+            <tempoEfetivoExecucao>1782111817</tempoEfetivoExecucao>
+            <usosDeMaquina>
+                <usoDeMaquina>
+                    <inicioExecucao>117504829</inicioExecucao>
+                    <fimExecucao>1095774708</fimExecucao>
+                    <pausaExecucao>284241904</pausaExecucao>
+                    <retomaExecucao>1511699123</retomaExecucao>
+                    <movimentoStock>645997795</movimentoStock>
+                    <maquina>Maquina 1</maquina>
+                </usoDeMaquina>
+                <usoDeMaquina>
+                    <inicioExecucao>1541642631</inicioExecucao>
+                    <fimExecucao>1464145928</fimExecucao>
+                    <pausaExecucao>1593689804</pausaExecucao>
+                    <retomaExecucao>1801403380</retomaExecucao>
+                    <movimentoStock>-1648637796</movimentoStock>
+                    <maquina>Maquina 1</maquina>
+                </usoDeMaquina>
+            </usosDeMaquina>
+        </cdfab:ordemProducao>
+    </cdfab:ordensDeProducao>
 </cdfab:chaoDeFabrica>
