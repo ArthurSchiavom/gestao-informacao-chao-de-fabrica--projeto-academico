@@ -1,4 +1,4 @@
-# Gestão de Informação de Chão de Fábrica
+# Gestão de Informação de Chão de Fábrica - 2020
 
 ## Na secção [Wiki](https://github.com/ArthurSchiavom/gestao-informacao-chao-de-fabrica--projeto-academico/wiki) do GitHub, pode encontrar a documentação deste projeto
 
