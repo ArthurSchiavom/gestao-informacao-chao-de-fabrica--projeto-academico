@@ -1,4 +1,4 @@
-# gestao-informacao-chao-de-fabrica--projeto-academico
+# Gestão de Informação de Chão de Fábrica
 
 ## Requesitos do Sistema a Desenvolver (PDF)
 [Aqui](README_assets/LAPR4-SistemaDesenvolver.pdf)
@@ -12,14 +12,14 @@
 
 ## User Stories - Documentos Microsoft Excel
 
-# Sprint A
+### Sprint A
 [Aqui](README_assets/US_SprintA.xlsx)
 
-## Sprint B
+### Sprint B
 [Aqui](README_assets/US_SprintB.xlsx)
 
-## Sprint C
+### Sprint C
 [Aqui](README_assets/US_SprintC.xlsx)
 
-## Sprint D
+### Sprint D
 [Aqui](README_assets/US_SprintD.xlsx)
