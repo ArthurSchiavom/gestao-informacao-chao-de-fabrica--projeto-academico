@@ -1,5 +1,7 @@
 # Gestão de Informação de Chão de Fábrica
 
+## Na secção [Wiki](https://github.com/ArthurSchiavom/gestao-informacao-chao-de-fabrica--projeto-academico/wiki) do GitHub, pode encontrar a documentação deste projeto
+
 ## Requesitos do Sistema a Desenvolver (PDF)
 [Aqui](README_assets/LAPR4-SistemaDesenvolver.pdf)
 
