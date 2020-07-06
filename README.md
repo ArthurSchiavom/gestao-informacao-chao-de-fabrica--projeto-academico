@@ -2,26 +2,20 @@
 
 ## Na secção [Wiki](https://github.com/ArthurSchiavom/gestao-informacao-chao-de-fabrica--projeto-academico/wiki) do GitHub, pode encontrar a documentação deste projeto
 
-## Requesitos do Sistema a Desenvolver (PDF)
-[Aqui](README_assets/LAPR4-SistemaDesenvolver.pdf)
+## Requesitos
 
-## Descrição do Protocolo de Comunicação (PDF)
-[Aqui](README_assets/LAPR4-ProtocoloComunicacao.pdf)
+### [Requesitos do Sistema a Desenvolver (PDF)](README_assets/LAPR4-SistemaDesenvolver.pdf)
 
-## Diagrama Ilustrativo dos Módulos do Sistema
-[Aqui](README_assets/Aplications.png)
+### [Descrição do Protocolo de Comunicação (PDF)](README_assets/LAPR4-ProtocoloComunicacao.pdf)
 
+### [Diagrama Ilustrativo dos Módulos do Sistema (PNG)](README_assets/Aplications.png)
 
 ## User Stories - Documentos Microsoft Excel
 
-### Sprint A
-[Aqui](README_assets/US_SprintA.xlsx)
+### [Sprint A](README_assets/US_SprintA.xlsx)
 
-### Sprint B
-[Aqui](README_assets/US_SprintB.xlsx)
+### [Sprint B](README_assets/US_SprintB.xlsx)
 
-### Sprint C
-[Aqui](README_assets/US_SprintC.xlsx)
+### [Sprint C](README_assets/US_SprintC.xlsx)
 
-### Sprint D
-[Aqui](README_assets/US_SprintD.xlsx)
+### [Sprint D](README_assets/US_SprintD.xlsx)
