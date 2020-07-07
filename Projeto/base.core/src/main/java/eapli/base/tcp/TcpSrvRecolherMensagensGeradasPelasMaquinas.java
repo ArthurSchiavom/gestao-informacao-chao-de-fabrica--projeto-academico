@@ -3,7 +3,9 @@ package eapli.base.tcp;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import java.io.IOException;
-import java.net.*;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.Socket;
 
 public class TcpSrvRecolherMensagensGeradasPelasMaquinas implements Runnable {
 

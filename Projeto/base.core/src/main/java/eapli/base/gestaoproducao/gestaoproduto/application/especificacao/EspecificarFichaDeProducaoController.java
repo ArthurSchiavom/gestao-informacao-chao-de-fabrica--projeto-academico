@@ -1,5 +1,6 @@
 package eapli.base.gestaoproducao.gestaoproduto.application.especificacao;
 
+import eapli.base.comum.domain.medicao.QuantidadePositiva;
 import eapli.base.gestaoproducao.gestaomaterial.application.dto.MaterialDTO;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
@@ -9,7 +10,6 @@ import eapli.base.gestaoproducao.gestaomateriaprima.domain.TipoDeMateriaPrima;
 import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 import eapli.base.gestaoproducao.gestaoproduto.domain.FichaDeProducao;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
-import eapli.base.comum.domain.medicao.QuantidadePositiva;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.FichaDeProducaoRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.infrastructure.application.DTOUtils;

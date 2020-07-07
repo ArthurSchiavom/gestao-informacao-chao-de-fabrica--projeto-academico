@@ -5,7 +5,8 @@ import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import org.junit.Test;
 
 import static eapli.base.Utils.assertUtils;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * MateriaPrima Tester.

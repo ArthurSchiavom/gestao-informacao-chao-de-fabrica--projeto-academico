@@ -3,7 +3,6 @@ package eapli.base.gestaoproducao.gestaolinhasproducao.domain;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 

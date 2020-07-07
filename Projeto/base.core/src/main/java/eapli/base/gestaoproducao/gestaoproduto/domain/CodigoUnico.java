@@ -6,7 +6,6 @@ import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.framework.domain.model.ValueObject;
-import eapli.framework.domain.repositories.TransactionalContext;
 
 import javax.annotation.Nullable;
 import javax.persistence.Embeddable;

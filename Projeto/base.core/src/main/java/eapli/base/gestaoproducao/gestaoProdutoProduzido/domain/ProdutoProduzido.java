@@ -4,7 +4,10 @@ import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ProdutoProduzido implements AggregateRoot<Long> {

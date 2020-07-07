@@ -1,7 +1,6 @@
 package eapli.base.gestaoproducao.movimentos.domain;
 
 import eapli.base.gestaoproducao.gestaodeposito.domain.CodigoDeposito;
-import eapli.base.gestaoproducao.gestaodeposito.domain.Deposito;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.QuantidadeDeMateriaPrima;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
@@ -9,7 +8,6 @@ import eapli.framework.domain.model.AggregateRoot;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 

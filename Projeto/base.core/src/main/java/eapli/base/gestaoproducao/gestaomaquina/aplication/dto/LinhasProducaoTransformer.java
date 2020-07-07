@@ -4,7 +4,6 @@ import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.dto.LinhaProducaoDTO;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

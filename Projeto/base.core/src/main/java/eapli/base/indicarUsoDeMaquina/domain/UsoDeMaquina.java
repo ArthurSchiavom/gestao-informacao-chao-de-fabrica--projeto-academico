@@ -1,8 +1,8 @@
 package eapli.base.indicarUsoDeMaquina.domain;
 
 
-import eapli.base.gestaoproducao.movimentos.domain.MovimentoStock;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
+import eapli.base.gestaoproducao.movimentos.domain.MovimentoStock;
 import eapli.base.utilities.Reflection;
 import eapli.framework.domain.model.AggregateRoot;
 

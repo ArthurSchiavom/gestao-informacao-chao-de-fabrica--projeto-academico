@@ -1,10 +1,7 @@
 package eapli.base.gestaoproducao.gestaoerrosnotificacao.domain;
 
-import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.EstadoNotificacaoErroDTO;
 import eapli.base.gestaoproducao.gestaoerrosnotificacao.dto.TipoNotificacaoErroDTO;
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
 
 import static org.junit.Assert.assertEquals;
 

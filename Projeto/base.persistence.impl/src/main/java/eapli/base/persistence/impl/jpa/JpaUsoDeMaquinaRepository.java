@@ -2,8 +2,8 @@ package eapli.base.persistence.impl.jpa;
 
 import com.google.common.collect.Lists;
 import eapli.base.Application;
-import eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquinaID;
 import eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquina;
+import eapli.base.indicarUsoDeMaquina.domain.UsoDeMaquinaID;
 import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;

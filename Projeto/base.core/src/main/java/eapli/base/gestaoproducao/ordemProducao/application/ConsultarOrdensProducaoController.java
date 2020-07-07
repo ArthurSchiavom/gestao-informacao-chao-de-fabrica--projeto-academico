@@ -1,14 +1,12 @@
 package eapli.base.gestaoproducao.ordemProducao.application;
 
 import eapli.base.gestaoproducao.ordemProducao.domain.Estado;
-import eapli.base.gestaoproducao.ordemProducao.domain.IdentificadorEncomenda;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
 import javax.persistence.NoResultException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Controller para consultar ordens de produçao

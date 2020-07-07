@@ -14,7 +14,6 @@ import eapli.framework.domain.model.DomainEntities;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class NotificacaoErro implements AggregateRoot<Long>, ConvertableToDTO<NotificacaoErroDTO> {

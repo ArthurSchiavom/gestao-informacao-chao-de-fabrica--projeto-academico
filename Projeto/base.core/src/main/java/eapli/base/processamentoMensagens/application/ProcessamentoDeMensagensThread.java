@@ -6,7 +6,8 @@ import eapli.base.gestaoproducao.gestaoerrosnotificacao.repository.NotificacaoEr
 import eapli.base.gestaoproducao.gestaolinhasproducao.domain.LinhaProducao;
 import eapli.base.gestaoproducao.gestaolinhasproducao.repository.LinhaProducaoRepository;
 import eapli.base.gestaoproducao.gestaomateriaprima.domain.MateriaPrima;
-import eapli.base.gestaoproducao.gestaomensagens.domain.*;
+import eapli.base.gestaoproducao.gestaomensagens.domain.EstadoProcessamento;
+import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.persistence.ProdutoRepository;
 import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
@@ -14,7 +15,7 @@ import eapli.base.gestaoproducao.ordemProducao.repository.OrdemProducaoRepositor
 import eapli.base.indicarUsoDeMaquina.repositories.UsoDeMaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessamentoDeMensagensThread implements Runnable {

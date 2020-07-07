@@ -1,7 +1,6 @@
 package eapli.base.definircategoriamaterial.domain;
 
 
-import com.itextpdf.text.DocumentException;
 import eapli.base.gestaoproducao.gestaomaterial.domain.FichaTecnicaPDF;
 import org.junit.Test;
 

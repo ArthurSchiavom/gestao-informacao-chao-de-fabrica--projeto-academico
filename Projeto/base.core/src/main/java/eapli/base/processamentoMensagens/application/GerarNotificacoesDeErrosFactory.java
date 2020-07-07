@@ -1,6 +1,6 @@
 package eapli.base.processamentoMensagens.application;
 
-import eapli.base.gestaoproducao.gestaomensagens.domain.*;
+import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.processamentoMensagens.application.tiposMensagensNotificacao.*;
 
 public class GerarNotificacoesDeErrosFactory {

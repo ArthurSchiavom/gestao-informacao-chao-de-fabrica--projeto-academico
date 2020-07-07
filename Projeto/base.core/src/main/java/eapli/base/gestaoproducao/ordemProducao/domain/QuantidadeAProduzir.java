@@ -5,7 +5,6 @@ import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.domain.IllegalDomainValueType;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 import java.util.Objects;
 

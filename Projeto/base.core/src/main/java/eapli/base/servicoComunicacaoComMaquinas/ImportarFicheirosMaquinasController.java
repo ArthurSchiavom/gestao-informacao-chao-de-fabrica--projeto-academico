@@ -1,12 +1,8 @@
 package eapli.base.servicoComunicacaoComMaquinas;
 
-import eapli.base.infrastructure.application.files.EmptyFileException;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class ImportarFicheirosMaquinasController {
     private static final String SEPARADOR = ";";

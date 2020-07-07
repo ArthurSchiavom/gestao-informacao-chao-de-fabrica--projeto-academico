@@ -4,10 +4,13 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.tcp.domain.MensagemProtocoloCodes;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import eapli.base.tcp.processamento.ProcessarMensagensProtocolosStrategy;
+
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
-import java.io.*;
-import java.net.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 
 public class EnviarConfiguracaoMaquinaTcp {

@@ -4,7 +4,6 @@ package eapli.base.servicoComunicacaoComMaquinas;
 import eapli.base.gestaoproducao.gestaodeposito.repository.DepositoRepository;
 import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
-import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
 import java.io.File;
@@ -12,8 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.util.NoSuchElementException;
 
 
 public class ImportarFicheirosMaquinasThread implements Runnable {

@@ -1,12 +1,9 @@
 package eapli.base.app.backoffice.console.servicoComunicacaoComMaquinas;
 
-import eapli.base.infrastructure.application.files.EmptyFileException;
 import eapli.base.servicoComunicacaoComMaquinas.ImportarFicheirosMaquinasController;
 import eapli.framework.presentation.console.AbstractUI;
 
-import java.io.FileNotFoundException;
 import java.time.DateTimeException;
-import java.util.Date;
 import java.util.NoSuchElementException;
 
 

@@ -5,7 +5,9 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
-import java.net.*;
+
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.Optional;
 
 /**

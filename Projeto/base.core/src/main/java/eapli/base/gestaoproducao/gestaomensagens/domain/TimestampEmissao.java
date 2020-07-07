@@ -1,16 +1,13 @@
 package eapli.base.gestaoproducao.gestaomensagens.domain;
 
 
-import eapli.base.gestaoproducao.exportacao.application.xml.DateAdapter;
 import eapli.framework.domain.model.ValueObject;
+
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 import java.util.Objects;
 

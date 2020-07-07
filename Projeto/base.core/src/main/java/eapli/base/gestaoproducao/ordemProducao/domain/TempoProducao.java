@@ -1,7 +1,5 @@
 package eapli.base.gestaoproducao.ordemProducao.domain;
 
-import eapli.framework.domain.model.ValueObject;
-
 import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.XmlValue;
 

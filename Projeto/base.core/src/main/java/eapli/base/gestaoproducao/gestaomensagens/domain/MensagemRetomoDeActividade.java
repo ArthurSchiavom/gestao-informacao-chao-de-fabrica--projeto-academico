@@ -3,7 +3,6 @@ package eapli.base.gestaoproducao.gestaomensagens.domain;
 import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlElement;

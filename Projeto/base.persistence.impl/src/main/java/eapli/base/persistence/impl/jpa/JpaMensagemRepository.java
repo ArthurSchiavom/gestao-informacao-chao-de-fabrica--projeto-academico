@@ -2,14 +2,10 @@ package eapli.base.persistence.impl.jpa;
 
 import com.google.common.collect.Lists;
 import eapli.base.Application;
-import eapli.base.gestaoproducao.gestaoerrosnotificacao.domain.NotificacaoErro;
-import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomensagens.domain.EstadoProcessamento;
 import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemID;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
-import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
-import eapli.base.processamentoMensagens.domain.AgendamentoDeProcessamento;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 

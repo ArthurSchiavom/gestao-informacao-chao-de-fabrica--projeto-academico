@@ -1,7 +1,7 @@
 package eapli.base.gestaoproducao.gestaoproduto.domain;
 
-import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 import eapli.base.comum.domain.medicao.UnidadeDeMedida;
+import eapli.base.gestaoproducao.gestaoproduto.application.dto.ProdutoDTO;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;

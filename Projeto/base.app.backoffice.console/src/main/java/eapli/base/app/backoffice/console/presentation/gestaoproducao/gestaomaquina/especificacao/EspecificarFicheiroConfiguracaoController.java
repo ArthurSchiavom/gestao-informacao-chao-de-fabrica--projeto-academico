@@ -1,7 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.gestaoproducao.gestaomaquina.especificacao;
 
 import eapli.base.gestaoproducao.gestaomaquina.aplication.dto.MaquinaDTO;
-import eapli.base.gestaoproducao.gestaomaquina.domain.CodigoInternoMaquina;
 import eapli.base.gestaoproducao.gestaomaquina.domain.FicheiroConfiguracao;
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;

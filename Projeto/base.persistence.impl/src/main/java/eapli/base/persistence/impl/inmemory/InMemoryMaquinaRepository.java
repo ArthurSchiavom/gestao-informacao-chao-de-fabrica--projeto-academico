@@ -7,6 +7,7 @@ import eapli.base.gestaoproducao.gestaomaquina.domain.IdentificadorProtocoloComu
 import eapli.base.gestaoproducao.gestaomaquina.domain.Maquina;
 import eapli.base.gestaoproducao.gestaomaquina.repository.MaquinaRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
+
 import java.util.List;
 import java.util.Optional;
 

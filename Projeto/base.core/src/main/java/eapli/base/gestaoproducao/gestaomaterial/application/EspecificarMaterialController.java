@@ -1,11 +1,11 @@
 package eapli.base.gestaoproducao.gestaomaterial.application;
 
+import eapli.base.comum.domain.medicao.UnidadeDeMedida;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Categoria;
 import eapli.base.gestaoproducao.gestaomaterial.domain.CodigoInternoMaterial;
 import eapli.base.gestaoproducao.gestaomaterial.domain.FichaTecnicaPDF;
 import eapli.base.gestaoproducao.gestaomaterial.domain.Material;
 import eapli.base.gestaoproducao.gestaomaterial.repository.MaterialRepository;
-import eapli.base.comum.domain.medicao.UnidadeDeMedida;
 import eapli.base.infrastructure.domain.IllegalDomainValueException;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 

@@ -10,6 +10,7 @@ import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemProducao;
 import eapli.base.gestaoproducao.gestaomensagens.repository.MensagemRepository;
 import eapli.base.gestaoproducao.gestaoproduto.domain.Produto;
 import eapli.base.processamentoMensagens.application.ValidacaoParametrosMensagensServico;
+
 import java.util.Date;
 
 public class MensagemProducaoNotificacao implements ValidadorMensagem {

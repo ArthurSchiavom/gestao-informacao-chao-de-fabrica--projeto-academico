@@ -5,15 +5,12 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.tcp.domain.MensagemProtocoloCodes;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
 import eapli.base.tcp.processamento.ProcessarMensagemProtocoloFactory;
-import eapli.base.tcp.processamento.ProcessarMensagemProtocoloMSG;
 import eapli.base.tcp.processamento.ProcessarMensagensProtocolosStrategy;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 
 public class TcpSrvRecolherMensagensGeradasPelasMaquinasThread implements Runnable {

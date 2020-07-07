@@ -1,6 +1,7 @@
 package eapli.base.app.common.console.presentation.files;
 
 import eapli.base.gestaoproducao.gestaoproduto.application.especificacao.ResultadoImportacaoLinhaALinha;
+
 import java.util.Map;
 
 public class ResultadoImportacaoFicheiroPresentationUtils {

@@ -4,7 +4,6 @@ package eapli.base.gestaoproducao.gestaoProdutoProduzido.domain;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlValue;
 
 @Embeddable

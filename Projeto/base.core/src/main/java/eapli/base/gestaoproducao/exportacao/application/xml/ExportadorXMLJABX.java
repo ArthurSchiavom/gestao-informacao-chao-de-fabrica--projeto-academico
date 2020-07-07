@@ -11,8 +11,6 @@ import javax.xml.bind.*;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 public class ExportadorXMLJABX implements Exportador {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExportadorXMLJABX.class);

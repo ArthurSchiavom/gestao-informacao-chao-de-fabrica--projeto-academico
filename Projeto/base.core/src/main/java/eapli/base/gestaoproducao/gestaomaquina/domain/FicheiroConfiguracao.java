@@ -4,12 +4,10 @@ import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Lob;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
 

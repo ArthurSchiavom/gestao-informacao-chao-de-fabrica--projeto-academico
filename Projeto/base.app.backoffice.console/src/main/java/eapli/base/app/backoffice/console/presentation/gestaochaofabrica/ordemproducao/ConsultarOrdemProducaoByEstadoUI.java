@@ -6,6 +6,7 @@ import eapli.base.gestaoproducao.ordemProducao.application.OrdemProducaoDTO;
 import eapli.base.gestaoproducao.ordemProducao.domain.Estado;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
+
 import java.util.List;
 
 public class ConsultarOrdemProducaoByEstadoUI extends AbstractUI {

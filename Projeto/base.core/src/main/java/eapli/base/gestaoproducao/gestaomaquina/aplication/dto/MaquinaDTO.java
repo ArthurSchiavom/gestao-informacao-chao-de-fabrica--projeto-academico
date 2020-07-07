@@ -1,7 +1,5 @@
 package eapli.base.gestaoproducao.gestaomaquina.aplication.dto;
 
-import java.io.File;
-
 public class MaquinaDTO {
     public final String numeroSerie;
     public final String codigoInterno;

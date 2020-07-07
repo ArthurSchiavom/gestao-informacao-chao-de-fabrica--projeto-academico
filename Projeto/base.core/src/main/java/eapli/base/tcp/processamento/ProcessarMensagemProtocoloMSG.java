@@ -7,8 +7,6 @@ import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicoComunicacaoComMaquinas.MessageFactory;
 import eapli.base.tcp.domain.MensagemProtocoloComunicacao;
-import eapli.framework.domain.repositories.ConcurrencyException;
-import eapli.framework.domain.repositories.IntegrityViolationException;
 
 import java.net.InetAddress;
 import java.net.Socket;

@@ -14,7 +14,10 @@ import eapli.base.infrastructure.application.DTOUtils;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class ConsultarErrosProcessamentoController {
     private final List<LinhaProducaoDTO> linhasProducaoDTO;

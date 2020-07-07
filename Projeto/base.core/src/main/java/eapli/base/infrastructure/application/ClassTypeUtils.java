@@ -1,9 +1,5 @@
 package eapli.base.infrastructure.application;
 
-import eapli.base.gestaoproducao.gestaomensagens.domain.Mensagem;
-import eapli.base.gestaoproducao.gestaomensagens.domain.MensagemInicioDeAtividade;
-import org.springframework.cglib.core.ClassesKey;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

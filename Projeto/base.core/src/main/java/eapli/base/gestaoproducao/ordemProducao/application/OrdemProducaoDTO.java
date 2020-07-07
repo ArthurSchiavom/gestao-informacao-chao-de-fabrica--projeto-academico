@@ -1,6 +1,6 @@
 package eapli.base.gestaoproducao.ordemProducao.application;
 
-import eapli.base.gestaoproducao.ordemProducao.domain.*;
+import eapli.base.gestaoproducao.ordemProducao.domain.OrdemProducao;
 
 public class OrdemProducaoDTO {
 

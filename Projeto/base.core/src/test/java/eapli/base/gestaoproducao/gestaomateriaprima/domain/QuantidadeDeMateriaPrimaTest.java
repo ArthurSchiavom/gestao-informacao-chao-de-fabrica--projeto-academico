@@ -1,11 +1,12 @@
 package eapli.base.gestaoproducao.gestaomateriaprima.domain;
 
-import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMateriaPrimaDTO;
 import eapli.base.comum.domain.medicao.QuantidadePositiva;
+import eapli.base.gestaoproducao.gestaoproduto.application.dto.QuantidadeDeMateriaPrimaDTO;
 import org.junit.Test;
 
 import static eapli.base.Utils.assertUtils;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * QuantidadeDeMateriaPrima Tester.
