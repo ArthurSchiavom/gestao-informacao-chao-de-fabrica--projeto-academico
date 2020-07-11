@@ -2,6 +2,22 @@
 
 ## Na secção [Wiki](https://github.com/ArthurSchiavom/gestao-informacao-chao-de-fabrica--projeto-academico/wiki) do GitHub, pode encontrar a documentação deste projeto
 
+## Descrição
+
+Este projeto tem como objetivo processar informação proveniente de uma chão de fábrica, ou seja, de conjuntos de máquinas indrustriais.
+
+Foram desenvolvidas 3 aplicações no total: Sistema Central de Processamento (Java), Sistema de Monitorização de Máquinas (Java) e Simulador de Máquina (C), de acordo com o seguinte diagrama: [Diagrama Ilustrativo dos Módulos do Sistema (PNG)](README_assets/Aplications.png)
+
+## Tecnologias/Frameworks/Ferramentas
+
+O Sistema Central e Sistema de Monitorização de Máquinas foram desenvolvidos em Java. O Sistema Central é suportado por uma base de dados relacional H2, que é acessada através da API JPA. Foi utilizado o JAXB para exportação em formato XML.
+
+Para a implementação de testes unitários foi utilizado JUnit, Mockito e ReflectionUtils (da framework Spring).
+
+Para controlo de versões foi utilizado o Git. A gestão de dependências foi efetuada através do Maven.
+
+Como ferramenta de colaboração de trabalho em equipa foram utilizados os issues do BitBucket.
+
 ## Requesitos
 
 ### [Requesitos do Sistema a Desenvolver (PDF)](README_assets/LAPR4-SistemaDesenvolver.pdf)
